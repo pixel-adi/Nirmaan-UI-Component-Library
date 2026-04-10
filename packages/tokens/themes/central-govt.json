@@ -1,0 +1,62 @@
+{
+  "$description": "Nirman Theme — Central Government of India. Class A: Minimal override. National blue + saffron identity. GIGW 3.0 compliant.",
+  "$class": "A",
+  "$scope": "Central Government portals — DigiLocker, UMANG, GeM, MeriPehchaan, API Setu, all ministry websites",
+
+  "meta": {
+    "name": "Central Government",
+    "code": "GOI",
+    "primary-language": "hi",
+    "secondary-languages": ["en"],
+    "emblem": "assets/emblems/india-emblem.svg",
+    "header-variant": "nir-b-header-govt"
+  },
+
+  "light": {
+    "color": {
+      "primary": {
+        "default":    { "$value": "#0B3D91", "$description": "National blue — deeper than Nirman base for authority" },
+        "hover":      { "$value": "#092F73" },
+        "active":     { "$value": "#072459" },
+        "subtle":     { "$value": "#E8EDF6" },
+        "muted":      { "$value": "#C5D0E3" },
+        "on-primary": { "$value": "#FFFFFF" }
+      },
+      "accent": {
+        "default":    { "$value": "#FF9933", "$description": "Indian saffron — from national flag" },
+        "hover":      { "$value": "#E68A2E" },
+        "subtle":     { "$value": "#FFF3E0" },
+        "on-accent":  { "$value": "#FFFFFF" }
+      },
+      "secondary": {
+        "default":    { "$value": "#FFFFFF" },
+        "stroke":     { "$value": "#0B3D91" },
+        "on-secondary": { "$value": "#0B3D91" }
+      }
+    }
+  },
+
+  "dark": {
+    "color": {
+      "primary": {
+        "default":    { "$value": "#5B8DD9" },
+        "hover":      { "$value": "#7BA3E3" },
+        "active":     { "$value": "#9BBAED" },
+        "subtle":     { "$value": "#0A1A33" },
+        "muted":      { "$value": "#112244" },
+        "on-primary": { "$value": "#0A1A33" }
+      },
+      "accent": {
+        "default":    { "$value": "#FFB366" },
+        "hover":      { "$value": "#FFC98A" },
+        "subtle":     { "$value": "#331F0D" },
+        "on-accent":  { "$value": "#1A0D00" }
+      },
+      "secondary": {
+        "default":    { "$value": "#1A2233" },
+        "stroke":     { "$value": "#5B8DD9" },
+        "on-secondary": { "$value": "#D0DFEF" }
+      }
+    }
+  }
+}

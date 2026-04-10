@@ -1,0 +1,70 @@
+{
+  "$description": "Nirman Theme — Government of Tamil Nadu. Class B: Brand colors reflecting state political identity (red-black).",
+  "$class": "B",
+  "$scope": "Tamil Nadu state portals — edistrict, Service Plus TN, TNPSC, state department websites",
+
+  "meta": {
+    "name": "Tamil Nadu",
+    "code": "TN",
+    "primary-language": "ta",
+    "secondary-languages": ["en", "hi"],
+    "emblem": "assets/emblems/tamilnadu.svg",
+    "header-variant": "nir-b-header-state"
+  },
+
+  "light": {
+    "color": {
+      "primary": {
+        "default":    { "$value": "#B71C1C", "$description": "Tamil Nadu red" },
+        "hover":      { "$value": "#9A1616" },
+        "active":     { "$value": "#7D1111" },
+        "subtle":     { "$value": "#FDEAEA" },
+        "muted":      { "$value": "#F5CDCD" },
+        "on-primary": { "$value": "#FFFFFF" }
+      },
+      "accent": {
+        "default":    { "$value": "#1A1A1A", "$description": "Black — secondary identity color" },
+        "hover":      { "$value": "#333333" },
+        "subtle":     { "$value": "#F0F0F0" },
+        "on-accent":  { "$value": "#FFFFFF" }
+      },
+      "secondary": {
+        "default":    { "$value": "#FFFFFF" },
+        "stroke":     { "$value": "#B71C1C" },
+        "on-secondary": { "$value": "#B71C1C" }
+      },
+      "surface": {
+        "default":    { "$value": "#FFFBF9", "$description": "Warm-tinted surface" },
+        "container":  { "$value": "#FFFFFF" }
+      }
+    }
+  },
+
+  "dark": {
+    "color": {
+      "primary": {
+        "default":    { "$value": "#EF5350" },
+        "hover":      { "$value": "#F57573" },
+        "active":     { "$value": "#FB9896" },
+        "subtle":     { "$value": "#1F0A0A" },
+        "muted":      { "$value": "#2E1111" },
+        "on-primary": { "$value": "#1F0A0A" }
+      },
+      "accent": {
+        "default":    { "$value": "#E0E0E0" },
+        "hover":      { "$value": "#F0F0F0" },
+        "subtle":     { "$value": "#1A1A1A" },
+        "on-accent":  { "$value": "#1A1A1A" }
+      },
+      "secondary": {
+        "default":    { "$value": "#2E1111" },
+        "stroke":     { "$value": "#EF5350" },
+        "on-secondary": { "$value": "#F5CDCD" }
+      },
+      "surface": {
+        "default":    { "$value": "#1A0D0B" },
+        "container":  { "$value": "#241412" }
+      }
+    }
+  }
+}

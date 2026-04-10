@@ -1,0 +1,17 @@
+{
+  "name": "Nirmaan UI Component Library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0",
+  "devDependencies": {
+    "style-dictionary": "^4.4.0",
+    "tsup": "^8.5.1"
+  }
+}

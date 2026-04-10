@@ -1,0 +1,70 @@
+{
+  "$description": "Nirman Theme — Government of Kerala. Class B: Brand colors + surface tint. Green-gold identity reflecting state heritage.",
+  "$class": "B",
+  "$scope": "Kerala state portals — edistrict.kerala.gov.in, Kerala Service Plus, K-SWIFT, state department websites",
+
+  "meta": {
+    "name": "Kerala",
+    "code": "KL",
+    "primary-language": "ml",
+    "secondary-languages": ["en", "hi"],
+    "emblem": "assets/emblems/kerala.svg",
+    "header-variant": "nir-b-header-state"
+  },
+
+  "light": {
+    "color": {
+      "primary": {
+        "default":    { "$value": "#006B3F", "$description": "Kerala green — from state identity" },
+        "hover":      { "$value": "#005A35" },
+        "active":     { "$value": "#00492B" },
+        "subtle":     { "$value": "#E6F5EE" },
+        "muted":      { "$value": "#C0E5D3" },
+        "on-primary": { "$value": "#FFFFFF" }
+      },
+      "accent": {
+        "default":    { "$value": "#C5A600", "$description": "Gold — Kerala heritage, temple architecture" },
+        "hover":      { "$value": "#A68B00" },
+        "subtle":     { "$value": "#FFF9E0" },
+        "on-accent":  { "$value": "#1A1500" }
+      },
+      "secondary": {
+        "default":    { "$value": "#FFFFFF" },
+        "stroke":     { "$value": "#006B3F" },
+        "on-secondary": { "$value": "#006B3F" }
+      },
+      "surface": {
+        "default":    { "$value": "#F7FBF9", "$description": "Very subtle green-tinted surface" },
+        "container":  { "$value": "#FFFFFF" }
+      }
+    }
+  },
+
+  "dark": {
+    "color": {
+      "primary": {
+        "default":    { "$value": "#4ADE80" },
+        "hover":      { "$value": "#6AE89A" },
+        "active":     { "$value": "#8AF2B4" },
+        "subtle":     { "$value": "#0A1F14" },
+        "muted":      { "$value": "#0F2E1D" },
+        "on-primary": { "$value": "#0A1F14" }
+      },
+      "accent": {
+        "default":    { "$value": "#FFD700" },
+        "hover":      { "$value": "#FFE14D" },
+        "subtle":     { "$value": "#1A1500" },
+        "on-accent":  { "$value": "#1A1500" }
+      },
+      "secondary": {
+        "default":    { "$value": "#1A2E1D" },
+        "stroke":     { "$value": "#4ADE80" },
+        "on-secondary": { "$value": "#C0E5D3" }
+      },
+      "surface": {
+        "default":    { "$value": "#0A1A10" },
+        "container":  { "$value": "#0F2418" }
+      }
+    }
+  }
+}

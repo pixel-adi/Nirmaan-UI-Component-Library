@@ -1,0 +1,32 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-brand="goi"] {
+  --nir-light-color-primary-default: #0B3D91; /** National blue — deeper than Nirman base for authority */
+  --nir-light-color-primary-hover: #092F73;
+  --nir-light-color-primary-active: #072459;
+  --nir-light-color-primary-subtle: #E8EDF6;
+  --nir-light-color-primary-muted: #C5D0E3;
+  --nir-light-color-primary-on-primary: #FFFFFF;
+  --nir-light-color-accent-default: #FF9933; /** Indian saffron — from national flag */
+  --nir-light-color-accent-hover: #E68A2E;
+  --nir-light-color-accent-subtle: #FFF3E0;
+  --nir-light-color-accent-on-accent: #FFFFFF;
+  --nir-light-color-secondary-default: #FFFFFF;
+  --nir-light-color-secondary-stroke: #0B3D91;
+  --nir-light-color-secondary-on-secondary: #0B3D91;
+  --nir-dark-color-primary-default: #5B8DD9;
+  --nir-dark-color-primary-hover: #7BA3E3;
+  --nir-dark-color-primary-active: #9BBAED;
+  --nir-dark-color-primary-subtle: #0A1A33;
+  --nir-dark-color-primary-muted: #112244;
+  --nir-dark-color-primary-on-primary: #0A1A33;
+  --nir-dark-color-accent-default: #FFB366;
+  --nir-dark-color-accent-hover: #FFC98A;
+  --nir-dark-color-accent-subtle: #331F0D;
+  --nir-dark-color-accent-on-accent: #1A0D00;
+  --nir-dark-color-secondary-default: #1A2233;
+  --nir-dark-color-secondary-stroke: #5B8DD9;
+  --nir-dark-color-secondary-on-secondary: #D0DFEF;
+}

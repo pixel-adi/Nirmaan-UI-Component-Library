@@ -1,0 +1,142 @@
+/* ═══════════════════════════════════════════
+   nir-e-input v2
+   Typography tokens + multi-script support.
+   ═══════════════════════════════════════════ */
+
+.nir-e-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-stack-xs, 4px);
+  font-family: var(--nir-font-family-body);
+}
+
+.nir-e-input--full { width: 100%; }
+
+/* ── Label ── */
+.nir-e-input__label {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-label, 500);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+}
+
+/* ── Field wrapper ── */
+.nir-e-input__field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Field ── */
+.nir-e-input__field {
+  width: 100%;
+  font-family: var(--nir-font-family-body);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+  background: var(--nir-color-surface-default);
+  border: 1px solid var(--nir-color-border-default);
+  transition:
+    border-color var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease),
+    box-shadow var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease);
+}
+
+.nir-e-input__field::placeholder {
+  color: var(--nir-color-text-placeholder);
+  font-family: inherit;
+}
+
+/* ── Sizes ── */
+.nir-e-input--sm .nir-e-input__field {
+  min-height: 36px;
+  padding: var(--nir-spacing-component-padding-xs, 6px) var(--nir-spacing-component-padding-sm, 12px);
+  font-size: var(--nir-font-size-sm, 14px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+.nir-e-input--md .nir-e-input__field {
+  min-height: 44px;
+  padding: var(--nir-spacing-component-padding-sm, 10px) var(--nir-spacing-component-padding-md, 16px);
+  font-size: var(--nir-font-size-base, 16px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+.nir-e-input--lg .nir-e-input__field {
+  min-height: 52px;
+  padding: var(--nir-spacing-component-padding-md, 14px) var(--nir-spacing-component-padding-lg, 24px);
+  font-size: var(--nir-font-size-lg, 18px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+
+/* ── RTL support for Urdu/Sindhi ── */
+.nir-e-input__field:lang(ur),
+.nir-e-input__field:lang(sd) {
+  text-align: right;
+}
+
+/* ── Icons ── */
+.nir-e-input__icon {
+  position: absolute;
+  display: inline-flex;
+  width: 1.25em;
+  height: 1.25em;
+  color: var(--nir-color-icon-secondary);
+  pointer-events: none;
+}
+.nir-e-input__icon--left { left: var(--nir-spacing-component-padding-sm, 12px); }
+.nir-e-input__icon--right { right: var(--nir-spacing-component-padding-sm, 12px); }
+
+.nir-e-input__field-wrapper:has(.nir-e-input__icon--left) .nir-e-input__field {
+  padding-left: calc(var(--nir-spacing-component-padding-sm, 12px) + 1.25em + var(--nir-spacing-inline-xs, 4px));
+}
+.nir-e-input__field-wrapper:has(.nir-e-input__icon--right) .nir-e-input__field {
+  padding-right: calc(var(--nir-spacing-component-padding-sm, 12px) + 1.25em + var(--nir-spacing-inline-xs, 4px));
+}
+
+/* ── States ── */
+.nir-e-input__field:hover:not(:disabled) {
+  border-color: var(--nir-color-border-strong);
+}
+
+.nir-e-input__field:focus {
+  outline: 2px solid var(--nir-color-interaction-focus-ring);
+  outline-offset: 2px;
+  border-color: var(--nir-color-primary-default);
+}
+
+.nir-e-input--error .nir-e-input__field {
+  border-color: var(--nir-color-feedback-error-default);
+}
+.nir-e-input--error .nir-e-input__field:focus {
+  outline-color: var(--nir-color-feedback-error-default);
+}
+.nir-e-input--error .nir-e-input__label {
+  color: var(--nir-color-feedback-error-text);
+}
+
+.nir-e-input--disabled .nir-e-input__field {
+  opacity: var(--nir-opacity-disabled, 0.38);
+  cursor: not-allowed;
+  background: var(--nir-color-interaction-disabled-bg);
+}
+.nir-e-input--disabled .nir-e-input__label {
+  opacity: var(--nir-opacity-disabled, 0.38);
+}
+
+/* ── Helper & Error ── */
+.nir-e-input__helper {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-secondary);
+  margin: 0;
+}
+
+.nir-e-input__error {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-feedback-error-text);
+  margin: 0;
+}

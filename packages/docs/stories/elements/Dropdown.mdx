@@ -1,0 +1,190 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as DropdownStories from './Dropdown.stories';
+
+<Meta of={DropdownStories} />
+
+# Dropdown
+
+A single-select menu that reveals a list of options when activated. Use when users pick one option from a known set of 5–20 items.
+
+---
+
+## Live Example
+
+<Canvas of={DropdownStories.WithDescriptions} />
+
+---
+
+## When to Use
+
+| Situation | Component |
+|---|---|
+| Pick one from 2–4 options | **Radio group** |
+| Pick one from 5–20 options | **Dropdown** (this) |
+| Pick one from 20+ options (searchable) | **Autocomplete** |
+| Pick multiple options | **Multiselect** (coming soon) |
+| Always show selected value with actions | **Tabs** |
+
+---
+
+## Anatomy
+
+```
+┌───────────────────────────────────────┐
+│  Certificate Type                     │  ← 1. Label
+│  ┌─────────────────────────────────┐  │
+│  │ Income Certificate         ▼    │  │  ← 2. Trigger
+│  └─────────────────────────────────┘  │
+│  Select the document type             │  ← 3. Helper text
+│                                       │
+│  ── when open ──                      │
+│  ┌─────────────────────────────────┐  │
+│  │ ● Income Certificate         ✓  │  │  ← 4. Selected option
+│  │   Domicile Certificate          │  │
+│  │   Caste Certificate             │  │  ← 5. Option list
+│  │   Birth Certificate             │  │
+│  │   Death Certificate  (disabled) │  │  ← 6. Disabled option
+│  └─────────────────────────────────┘  │
+└───────────────────────────────────────┘
+```
+
+---
+
+## Options with Descriptions
+
+<Canvas of={DropdownStories.WithDescriptions} />
+
+Each option can have a `description` that shows as secondary text. Useful when option labels alone are ambiguous.
+
+```tsx
+const options = [
+  {
+    value: 'income',
+    label: 'Income Certificate',
+    description: 'For income-based schemes and benefits'
+  },
+  // ...
+];
+```
+
+---
+
+## Sizes
+
+<Canvas of={DropdownStories.Sizes} />
+
+| Size | Height | Use case |
+|---|---|---|
+| `sm` | 36px | Compact forms, data tables |
+| `md` | 44px | **Default** — meets WCAG touch target |
+| `lg` | 52px | Hero forms, prominent selection |
+
+---
+
+## Error State
+
+<Canvas of={DropdownStories.WithError} />
+
+Error messages are announced to screen readers via `role="alert"` when they appear.
+
+---
+
+## Keyboard Interaction
+
+| Key | When closed | When open |
+|---|---|---|
+| `Enter` / `Space` | Opens menu | Selects active option |
+| `↓` Arrow Down | Opens menu, focuses first | Moves to next option |
+| `↑` Arrow Up | Opens menu, focuses last | Moves to previous option |
+| `Home` | — | Jumps to first option |
+| `End` | — | Jumps to last option |
+| `Escape` | — | Closes menu |
+| `Tab` | Moves focus away | Closes menu, moves focus |
+
+Disabled options are automatically skipped during keyboard navigation.
+
+---
+
+## Accessibility
+
+| Requirement | Implementation |
+|---|---|
+| Role | `combobox` with `aria-haspopup="listbox"` |
+| State | `aria-expanded`, `aria-activedescendant` |
+| Label | Linked via `aria-labelledby` |
+| Description | Linked via `aria-describedby` |
+| Error | `role="alert"`, `aria-invalid="true"` |
+| Selected | `aria-selected="true"` on chosen option |
+
+### Screen Reader Announcements
+
+```
+Closed:    "Certificate Type, combobox, Income Certificate, collapsed"
+Opened:    "Certificate Type, combobox, expanded, 5 options"
+Navigate:  "Domicile Certificate, 2 of 5"
+Selected:  "Caste Certificate, 3 of 5, selected"
+Disabled:  "Death Certificate, 5 of 5, dimmed"
+```
+
+---
+
+## Multilingual Support
+
+<Canvas of={DropdownStories.HindiLabel} />
+<Canvas of={DropdownStories.TamilLabel} />
+
+Wrap in a parent with `lang` attribute. Fonts and line-height automatically adjust per script.
+
+---
+
+## Do's and Don'ts
+
+✅ **Do**
+- Use for 5–20 options
+- Sort options logically (alphabetical, frequency, or importance)
+- Provide descriptive placeholder text
+- Use descriptions for ambiguous labels
+
+❌ **Don't**
+- Use for fewer than 5 options (use Radio instead)
+- Use for 20+ options (use Autocomplete)
+- Use for multi-select (use dedicated Multiselect)
+- Hide the label — always visible, not placeholder-as-label
+
+---
+
+## Code Usage
+
+```tsx
+import { Dropdown } from '@nirman/components';
+import { useState } from 'react';
+
+function MyForm() {
+  const [state, setState] = useState<string>('');
+
+  const stateOptions = [
+    { value: 'up', label: 'Uttar Pradesh' },
+    { value: 'mh', label: 'Maharashtra' },
+    { value: 'tn', label: 'Tamil Nadu' },
+  ];
+
+  return (
+    <Dropdown
+      label="State"
+      options={stateOptions}
+      value={state}
+      onChange={setState}
+      placeholder="Select a state"
+      helperText="Choose your state of residence"
+    />
+  );
+}
+```
+
+---
+
+## Figma
+
+- **Component name:** `nir-e-dropdown`
+- **Variants:** size × state (closed/open) × has-error (true/false)
+- **Variables:** radius-interactive, spacing-component-padding-*, color-primary-*

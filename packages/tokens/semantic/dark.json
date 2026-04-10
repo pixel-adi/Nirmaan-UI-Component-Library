@@ -1,0 +1,103 @@
+{
+  "$description": "Nirman Design System — Semantic Tokens: DARK MODE. All gaps fixed. CSS prefix: --nir-",
+
+  "color": {
+    "primary": {
+      "default":      { "$value": "{color.navy.300}",   "$type": "color" },
+      "hover":        { "$value": "{color.navy.200}",   "$type": "color" },
+      "active":       { "$value": "{color.navy.100}",   "$type": "color" },
+      "subtle":       { "$value": "{color.navy.900}",   "$type": "color" },
+      "muted":        { "$value": "{color.navy.800}",   "$type": "color" },
+      "on-primary":   { "$value": "{color.navy.900}",   "$type": "color" }
+    },
+    "secondary": {
+      "default":      { "$value": "{color.neutral.800}", "$type": "color" },
+      "stroke":       { "$value": "{color.navy.300}",   "$type": "color" },
+      "on-secondary": { "$value": "{color.cream.100}",  "$type": "color" }
+    },
+    "surface": {
+      "default":      { "$value": "{color.navy.900}",   "$type": "color" },
+      "container":    { "$value": "{color.navy.800}",   "$type": "color" },
+      "container-stroke": { "$value": "{color.navy.700}", "$type": "color" },
+      "container-light":  { "$value": "{color.navy.400}", "$type": "color" },
+      "overlay":      { "$value": "rgba(0, 0, 0, 0.7)",  "$type": "color" }
+    },
+    "text": {
+      "default":      { "$value": "{color.cream.100}",  "$type": "color" },
+      "secondary":    { "$value": "{color.cream.500}",  "$type": "color" },
+      "tertiary":     { "$value": "{color.cream.600}",  "$type": "color" },
+      "placeholder":  { "$value": "{color.navy.400}",   "$type": "color" },
+      "disabled":     { "$value": "{color.navy.400}",   "$type": "color" },
+      "inverse":      { "$value": "{color.navy.900}",   "$type": "color" },
+      "on-color":     { "$value": "{color.navy.900}",   "$type": "color" },
+      "link":         { "$value": "{color.blue-link.300}", "$type": "color" },
+      "link-visited": { "$value": "#C084FC",              "$type": "color" }
+    },
+    "border": {
+      "default":      { "$value": "{color.navy.700}",   "$type": "color" },
+      "strong":       { "$value": "{color.navy.400}",   "$type": "color" },
+      "focus":        { "$value": "{color.navy.300}",   "$type": "color" },
+      "disabled":     { "$value": "{color.navy.800}",   "$type": "color" },
+      "error":        { "$value": "{color.red.300}",    "$type": "color" },
+      "success":      { "$value": "{color.green.300}",  "$type": "color" },
+      "warning":      { "$value": "{color.amber.300}",  "$type": "color" }
+    },
+    "icon": {
+      "default":      { "$value": "{color.cream.500}",  "$type": "color" },
+      "secondary":    { "$value": "{color.navy.300}",   "$type": "color" },
+      "disabled":     { "$value": "{color.navy.400}",   "$type": "color" },
+      "inverse":      { "$value": "{color.navy.900}",   "$type": "color" },
+      "on-color":     { "$value": "{color.navy.900}",   "$type": "color" }
+    },
+    "feedback": {
+      "error": {
+        "default":    { "$value": "{color.red.300}",    "$type": "color" },
+        "subtle":     { "$value": "{color.red.900}",    "$type": "color" },
+        "text":       { "$value": "{color.red.200}",    "$type": "color" },
+        "border":     { "$value": "{color.red.800}",    "$type": "color" },
+        "on":         { "$value": "{color.neutral.900}", "$type": "color" }
+      },
+      "success": {
+        "default":    { "$value": "{color.green.300}",  "$type": "color" },
+        "subtle":     { "$value": "{color.green.900}",  "$type": "color" },
+        "text":       { "$value": "{color.green.200}",  "$type": "color" },
+        "border":     { "$value": "{color.green.800}",  "$type": "color" },
+        "on":         { "$value": "{color.neutral.900}", "$type": "color" }
+      },
+      "warning": {
+        "default":    { "$value": "{color.amber.300}",  "$type": "color" },
+        "subtle":     { "$value": "{color.amber.900}",  "$type": "color" },
+        "text":       { "$value": "{color.amber.200}",  "$type": "color" },
+        "border":     { "$value": "{color.amber.800}",  "$type": "color" },
+        "on":         { "$value": "{color.neutral.900}", "$type": "color" }
+      },
+      "info": {
+        "default":    { "$value": "{color.navy.300}",   "$type": "color" },
+        "subtle":     { "$value": "{color.navy.950}",   "$type": "color" },
+        "text":       { "$value": "{color.navy.200}",   "$type": "color" },
+        "border":     { "$value": "{color.navy.800}",   "$type": "color" },
+        "on":         { "$value": "{color.neutral.900}", "$type": "color" }
+      }
+    },
+    "interaction": {
+      "focus-ring":     { "$value": "{color.navy.300}",    "$type": "color" },
+      "selected-bg":    { "$value": "{color.navy.800}",    "$type": "color" },
+      "hover-overlay":  { "$value": "rgba(255, 255, 255, 0.06)", "$type": "color" },
+      "active-overlay": { "$value": "rgba(255, 255, 255, 0.1)",  "$type": "color" },
+      "disabled-bg":    { "$value": "{color.navy.800}",    "$type": "color" },
+      "disabled-text":  { "$value": "{color.navy.400}",    "$type": "color" }
+    }
+  },
+
+  "elevation": {
+    "$description": "FIX: Dark mode uses lighter shadows with subtle white border for depth perception",
+    "none":           { "$value": "{elevation.0}",      "$type": "shadow" },
+    "raised":         { "$value": "{elevation.dark-2}",  "$type": "shadow" },
+    "overlay":        { "$value": "{elevation.dark-4}",  "$type": "shadow" },
+    "modal":          { "$value": "{elevation.dark-5}",  "$type": "shadow" }
+  },
+
+  "focus": {
+    "ring-color":     { "$value": "{color.navy.300}", "$type": "color" }
+  }
+}

@@ -1,0 +1,888 @@
+{
+  "$description": "Nirman Design System — Semantic Tokens: Light Mode (default). All constitutional gaps fixed. CSS prefix: --nir-",
+  "color": {
+    "primary": {
+      "$description": "Maps to existing primary/* tokens",
+      "default": {
+        "$value": "{color.navy.600}",
+        "$type": "color",
+        "$description": "#083459"
+      },
+      "hover": {
+        "$value": "{color.navy.700}",
+        "$type": "color"
+      },
+      "active": {
+        "$value": "{color.navy.800}",
+        "$type": "color"
+      },
+      "subtle": {
+        "$value": "{color.navy.50}",
+        "$type": "color"
+      },
+      "muted": {
+        "$value": "{color.navy.100}",
+        "$type": "color",
+        "$description": "#CED6DE"
+      },
+      "on-primary": {
+        "$value": "{color.cream.100}",
+        "$type": "color",
+        "$description": "#FCFCFC"
+      }
+    },
+    "secondary": {
+      "default": {
+        "$value": "{color.cream.100}",
+        "$type": "color",
+        "$description": "#FCFCFC"
+      },
+      "stroke": {
+        "$value": "{color.navy.600}",
+        "$type": "color",
+        "$description": "#083459"
+      },
+      "on-secondary": {
+        "$value": "{color.navy.600}",
+        "$type": "color",
+        "$description": "#083459"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{color.cream.50}",
+        "$type": "color",
+        "$description": "#FEF6EE"
+      },
+      "container": {
+        "$value": "{color.cream.100}",
+        "$type": "color",
+        "$description": "#FCFCFC"
+      },
+      "container-stroke": {
+        "$value": "{color.cream.400}",
+        "$type": "color",
+        "$description": "#E6E2DE"
+      },
+      "container-light": {
+        "$value": "{color.navy.200}",
+        "$type": "color",
+        "$description": "#8298AA"
+      },
+      "overlay": {
+        "$value": "rgba(0, 0, 0, 0.5)",
+        "$type": "color"
+      }
+    },
+    "text": {
+      "default": {
+        "$value": "{color.navy.900}",
+        "$type": "color",
+        "$description": "#010F2A"
+      },
+      "secondary": {
+        "$value": "{color.ink.600}",
+        "$type": "color",
+        "$description": "#23313C"
+      },
+      "tertiary": {
+        "$value": "{color.ink.400}",
+        "$type": "color"
+      },
+      "placeholder": {
+        "$value": "{color.navy.200}",
+        "$type": "color",
+        "$description": "#8298AA"
+      },
+      "disabled": {
+        "$value": "{color.cream.600}",
+        "$type": "color"
+      },
+      "inverse": {
+        "$value": "{color.cream.100}",
+        "$type": "color"
+      },
+      "on-color": {
+        "$value": "{color.cream.100}",
+        "$type": "color"
+      },
+      "link": {
+        "$value": "{color.blue-link.500}",
+        "$type": "color",
+        "$description": "#092DE2"
+      },
+      "link-visited": {
+        "$value": "#6B21A8",
+        "$type": "color"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.cream.400}",
+        "$type": "color",
+        "$description": "#E6E2DE"
+      },
+      "strong": {
+        "$value": "{color.navy.200}",
+        "$type": "color",
+        "$description": "#8298AA"
+      },
+      "focus": {
+        "$value": "{color.navy.600}",
+        "$type": "color",
+        "$description": "#083459"
+      },
+      "disabled": {
+        "$value": "{color.cream.400}",
+        "$type": "color"
+      },
+      "error": {
+        "$value": "{color.red.500}",
+        "$type": "color",
+        "$description": "FIX: Input error border — #BC3737"
+      },
+      "success": {
+        "$value": "{color.green.500}",
+        "$type": "color",
+        "$description": "FIX: Input success border — #18941C"
+      },
+      "warning": {
+        "$value": "{color.amber.500}",
+        "$type": "color",
+        "$description": "FIX: Input warning border — #FAB401"
+      }
+    },
+    "icon": {
+      "default": {
+        "$value": "{color.ink.600}",
+        "$type": "color"
+      },
+      "secondary": {
+        "$value": "{color.navy.200}",
+        "$type": "color"
+      },
+      "disabled": {
+        "$value": "{color.cream.600}",
+        "$type": "color"
+      },
+      "inverse": {
+        "$value": "{color.cream.100}",
+        "$type": "color"
+      },
+      "on-color": {
+        "$value": "{color.cream.100}",
+        "$type": "color"
+      }
+    },
+    "feedback": {
+      "error": {
+        "default": {
+          "$value": "{color.red.500}",
+          "$type": "color",
+          "$description": "#BC3737"
+        },
+        "subtle": {
+          "$value": "{color.red.100}",
+          "$type": "color",
+          "$description": "#EFD5D5"
+        },
+        "text": {
+          "$value": "{color.red.500}",
+          "$type": "color",
+          "$description": "#BC3737"
+        },
+        "border": {
+          "$value": "{color.red.200}",
+          "$type": "color"
+        },
+        "on": {
+          "$value": "{color.cream.100}",
+          "$type": "color"
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{color.green.500}",
+          "$type": "color",
+          "$description": "#18941C"
+        },
+        "subtle": {
+          "$value": "{color.green.100}",
+          "$type": "color",
+          "$description": "#CEE7CF"
+        },
+        "text": {
+          "$value": "{color.green.700}",
+          "$type": "color",
+          "$description": "#005A03"
+        },
+        "border": {
+          "$value": "{color.green.200}",
+          "$type": "color"
+        },
+        "on": {
+          "$value": "{color.cream.100}",
+          "$type": "color"
+        }
+      },
+      "warning": {
+        "default": {
+          "$value": "{color.amber.500}",
+          "$type": "color",
+          "$description": "#FAB401"
+        },
+        "subtle": {
+          "$value": "{color.amber.100}",
+          "$type": "color",
+          "$description": "#FFEFC6"
+        },
+        "text": {
+          "$value": "{color.amber.600}",
+          "$type": "color",
+          "$description": "#D18F00"
+        },
+        "border": {
+          "$value": "{color.amber.200}",
+          "$type": "color"
+        },
+        "on": {
+          "$value": "{color.cream.100}",
+          "$type": "color"
+        }
+      },
+      "info": {
+        "default": {
+          "$value": "{color.navy.600}",
+          "$type": "color",
+          "$description": "#083459"
+        },
+        "subtle": {
+          "$value": "#CCD4DC",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "{color.navy.600}",
+          "$type": "color"
+        },
+        "border": {
+          "$value": "{color.navy.100}",
+          "$type": "color"
+        },
+        "on": {
+          "$value": "{color.cream.100}",
+          "$type": "color"
+        }
+      }
+    },
+    "interaction": {
+      "focus-ring": {
+        "$value": "{color.navy.600}",
+        "$type": "color"
+      },
+      "selected-bg": {
+        "$value": "{color.navy.50}",
+        "$type": "color"
+      },
+      "hover-overlay": {
+        "$value": "rgba(0, 0, 0, 0.04)",
+        "$type": "color"
+      },
+      "active-overlay": {
+        "$value": "rgba(0, 0, 0, 0.08)",
+        "$type": "color"
+      },
+      "disabled-bg": {
+        "$value": "{color.cream.300}",
+        "$type": "color"
+      },
+      "disabled-text": {
+        "$value": "{color.cream.600}",
+        "$type": "color"
+      }
+    }
+  },
+  "opacity": {
+    "$description": "Semantic opacity tokens. Lives in Semantic/Number collection.",
+    "disabled": {
+      "$value": "{opacity.38}",
+      "$type": "number",
+      "$description": "Consistent disabled state opacity across all components"
+    }
+  },
+  "font": {
+    "family": {
+      "heading": {
+        "$value": "{font.family.latin-sans}",
+        "$type": "fontFamily"
+      },
+      "body": {
+        "$value": "{font.family.latin-sans}",
+        "$type": "fontFamily"
+      },
+      "mono": {
+        "$value": "{font.family.latin-mono}",
+        "$type": "fontFamily"
+      }
+    },
+    "size": {
+      "body-xs": {
+        "$value": "{font.size.xs}",
+        "$type": "dimension"
+      },
+      "body-sm": {
+        "$value": "{font.size.sm}",
+        "$type": "dimension"
+      },
+      "body-md": {
+        "$value": "{font.size.base}",
+        "$type": "dimension"
+      },
+      "body-lg": {
+        "$value": "{font.size.lg}",
+        "$type": "dimension"
+      },
+      "heading-sm": {
+        "$value": "{font.size.xl}",
+        "$type": "dimension"
+      },
+      "heading-md": {
+        "$value": "{font.size.2xl}",
+        "$type": "dimension"
+      },
+      "heading-lg": {
+        "$value": "{font.size.3xl}",
+        "$type": "dimension"
+      },
+      "heading-xl": {
+        "$value": "{font.size.4xl}",
+        "$type": "dimension"
+      },
+      "display": {
+        "$value": "{font.size.5xl}",
+        "$type": "dimension"
+      }
+    },
+    "weight": {
+      "body": {
+        "$value": "{font.weight.regular}",
+        "$type": "fontWeight"
+      },
+      "label": {
+        "$value": "{font.weight.medium}",
+        "$type": "fontWeight"
+      },
+      "heading": {
+        "$value": "{font.weight.semibold}",
+        "$type": "fontWeight"
+      },
+      "emphasis": {
+        "$value": "{font.weight.bold}",
+        "$type": "fontWeight"
+      }
+    },
+    "line-height": {
+      "$description": "FIX §I.2.1: Per-script line-height semantic tokens. These resolve via :lang() in CSS and script modes in Figma.",
+      "body": {
+        "$value": "{font.line-height.normal}",
+        "$type": "number",
+        "$description": "Latin default: 1.5"
+      },
+      "body-devanagari": {
+        "$value": "{font.line-height.loose}",
+        "$type": "number",
+        "$description": "Hindi/Marathi/Sanskrit: 1.7 — shirorekha + matras"
+      },
+      "body-tamil": {
+        "$value": "{font.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Tamil: 1.625 — round forms"
+      },
+      "body-bengali": {
+        "$value": "{font.line-height.loose}",
+        "$type": "number",
+        "$description": "Bengali/Assamese: 1.7 — similar to Devanagari"
+      },
+      "body-telugu": {
+        "$value": "{font.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Telugu: 1.625 — wide glyphs"
+      },
+      "body-kannada": {
+        "$value": "{font.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Kannada: 1.625"
+      },
+      "body-malayalam": {
+        "$value": "{font.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Malayalam: 1.625 — dense conjuncts"
+      },
+      "body-gujarati": {
+        "$value": "{font.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Gujarati: 1.625 — no headline bar"
+      },
+      "body-gurmukhi": {
+        "$value": "{font.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Gurmukhi: 1.625 — shorter matras than Devanagari"
+      },
+      "body-odia": {
+        "$value": "{font.line-height.relaxed}",
+        "$type": "number",
+        "$description": "Odia: 1.625 — curved forms"
+      },
+      "body-urdu": {
+        "$value": "{font.line-height.looser}",
+        "$type": "number",
+        "$description": "Urdu Nastaliq: 1.8 — tallest script, RTL"
+      },
+      "heading": {
+        "$value": "{font.line-height.tight}",
+        "$type": "number"
+      },
+      "display": {
+        "$value": "{font.line-height.none}",
+        "$type": "number"
+      }
+    },
+    "letter-spacing": {
+      "$description": "FIX §I.2.1: Per-script letter-spacing where needed",
+      "body": {
+        "$value": "{font.letter-spacing.normal}",
+        "$type": "dimension"
+      },
+      "body-tamil": {
+        "$value": "{font.letter-spacing.wide}",
+        "$type": "dimension",
+        "$description": "Tamil: +0.01em — aids readability"
+      },
+      "body-malayalam": {
+        "$value": "{font.letter-spacing.wide}",
+        "$type": "dimension",
+        "$description": "Malayalam: +0.01em — dense conjuncts need room"
+      },
+      "heading": {
+        "$value": "{font.letter-spacing.tight}",
+        "$type": "dimension"
+      }
+    },
+    "direction": {
+      "$description": "FIX §I.2.1: Text direction per script. Default LTR, Urdu/Sindhi override to RTL.",
+      "default": {
+        "$value": "{direction.ltr}",
+        "$type": "string"
+      },
+      "urdu": {
+        "$value": "{direction.rtl}",
+        "$type": "string"
+      },
+      "sindhi": {
+        "$value": "{direction.rtl}",
+        "$type": "string"
+      }
+    },
+    "composite": {
+      "$description": "FIX: Type composite tokens combining size + weight + line-height + letter-spacing. These are the tokens designers and devs actually use.",
+      "display": {
+        "size": {
+          "$value": "{font.size.5xl}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.bold}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.none}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.tight}",
+          "$type": "dimension"
+        }
+      },
+      "heading-xl": {
+        "size": {
+          "$value": "{font.size.4xl}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.semibold}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.tight}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.tight}",
+          "$type": "dimension"
+        }
+      },
+      "heading-lg": {
+        "size": {
+          "$value": "{font.size.3xl}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.semibold}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.tight}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.tight}",
+          "$type": "dimension"
+        }
+      },
+      "heading-md": {
+        "size": {
+          "$value": "{font.size.2xl}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.semibold}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.snug}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.tight}",
+          "$type": "dimension"
+        }
+      },
+      "heading-sm": {
+        "size": {
+          "$value": "{font.size.xl}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.semibold}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.snug}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.normal}",
+          "$type": "dimension"
+        }
+      },
+      "body-lg": {
+        "size": {
+          "$value": "{font.size.lg}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.regular}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.normal}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.normal}",
+          "$type": "dimension"
+        }
+      },
+      "body-md": {
+        "size": {
+          "$value": "{font.size.base}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.regular}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.normal}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.normal}",
+          "$type": "dimension"
+        }
+      },
+      "body-sm": {
+        "size": {
+          "$value": "{font.size.sm}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.regular}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.normal}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.normal}",
+          "$type": "dimension"
+        }
+      },
+      "label-lg": {
+        "size": {
+          "$value": "{font.size.base}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.medium}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.normal}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.normal}",
+          "$type": "dimension"
+        }
+      },
+      "label-md": {
+        "size": {
+          "$value": "{font.size.sm}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.medium}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.normal}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.normal}",
+          "$type": "dimension"
+        }
+      },
+      "label-sm": {
+        "size": {
+          "$value": "{font.size.xs}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.medium}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.normal}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.wider}",
+          "$type": "dimension"
+        }
+      },
+      "caption": {
+        "size": {
+          "$value": "{font.size.xs}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.regular}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.normal}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.normal}",
+          "$type": "dimension"
+        }
+      },
+      "overline": {
+        "size": {
+          "$value": "{font.size.2xs}",
+          "$type": "dimension"
+        },
+        "weight": {
+          "$value": "{font.weight.semibold}",
+          "$type": "fontWeight"
+        },
+        "line-height": {
+          "$value": "{font.line-height.normal}",
+          "$type": "number"
+        },
+        "letter-spacing": {
+          "$value": "{font.letter-spacing.widest}",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "spacing": {
+    "inline-xs": {
+      "$value": "{spacing.1}",
+      "$type": "dimension"
+    },
+    "inline-sm": {
+      "$value": "{spacing.2}",
+      "$type": "dimension"
+    },
+    "inline-md": {
+      "$value": "{spacing.3}",
+      "$type": "dimension"
+    },
+    "inline-lg": {
+      "$value": "{spacing.4}",
+      "$type": "dimension"
+    },
+    "stack-xs": {
+      "$value": "{spacing.1}",
+      "$type": "dimension"
+    },
+    "stack-sm": {
+      "$value": "{spacing.2}",
+      "$type": "dimension"
+    },
+    "stack-md": {
+      "$value": "{spacing.4}",
+      "$type": "dimension"
+    },
+    "stack-lg": {
+      "$value": "{spacing.6}",
+      "$type": "dimension"
+    },
+    "stack-xl": {
+      "$value": "{spacing.8}",
+      "$type": "dimension"
+    },
+    "component-padding-xs": {
+      "$value": "{spacing.2}",
+      "$type": "dimension"
+    },
+    "component-padding-sm": {
+      "$value": "{spacing.3}",
+      "$type": "dimension"
+    },
+    "component-padding-md": {
+      "$value": "{spacing.4}",
+      "$type": "dimension"
+    },
+    "component-padding-lg": {
+      "$value": "{spacing.6}",
+      "$type": "dimension"
+    },
+    "section-gap": {
+      "$value": "{spacing.8}",
+      "$type": "dimension"
+    },
+    "page-margin": {
+      "$value": "{spacing.4}",
+      "$type": "dimension"
+    },
+    "touch-target": {
+      "$value": "{spacing.11}",
+      "$type": "dimension",
+      "$description": "44px — WCAG 2.5.8 minimum"
+    },
+    "touch-target-compact": {
+      "$value": "{spacing.11}",
+      "$type": "dimension",
+      "$description": "FIX: 44px even in compact density — WCAG compliance is non-negotiable regardless of density mode"
+    }
+  },
+  "radius": {
+    "interactive": {
+      "$value": "{radius.md}",
+      "$type": "dimension"
+    },
+    "container": {
+      "$value": "{radius.lg}",
+      "$type": "dimension"
+    },
+    "pill": {
+      "$value": "{radius.full}",
+      "$type": "dimension"
+    }
+  },
+  "elevation": {
+    "none": {
+      "$value": "{elevation.0}",
+      "$type": "shadow"
+    },
+    "raised": {
+      "$value": "{elevation.2}",
+      "$type": "shadow"
+    },
+    "overlay": {
+      "$value": "{elevation.4}",
+      "$type": "shadow"
+    },
+    "modal": {
+      "$value": "{elevation.5}",
+      "$type": "shadow"
+    }
+  },
+  "motion": {
+    "duration-fast": {
+      "$value": "{duration.100}",
+      "$type": "duration"
+    },
+    "duration-normal": {
+      "$value": "{duration.200}",
+      "$type": "duration"
+    },
+    "duration-slow": {
+      "$value": "{duration.300}",
+      "$type": "duration"
+    },
+    "duration-enter": {
+      "$value": "{duration.200}",
+      "$type": "duration"
+    },
+    "duration-exit": {
+      "$value": "{duration.150}",
+      "$type": "duration"
+    },
+    "duration-reduced": {
+      "$value": "{duration.0}",
+      "$type": "duration",
+      "$description": "FIX §I.2.2: Applied when prefers-reduced-motion is active. All transitions become instant."
+    },
+    "easing-standard": {
+      "$value": "{easing.standard}",
+      "$type": "cubicBezier"
+    },
+    "easing-enter": {
+      "$value": "{easing.decelerate}",
+      "$type": "cubicBezier"
+    },
+    "easing-exit": {
+      "$value": "{easing.accelerate}",
+      "$type": "cubicBezier"
+    }
+  },
+  "focus": {
+    "ring-width": {
+      "$value": "2px",
+      "$type": "dimension"
+    },
+    "ring-offset": {
+      "$value": "2px",
+      "$type": "dimension"
+    },
+    "ring-color": {
+      "$value": "{color.navy.600}",
+      "$type": "color"
+    }
+  },
+  "number-format": {
+    "$description": "FIX §IV.1 Dim 3.10: Default number format. Resolved per locale.",
+    "default": {
+      "$value": "{number-format.indian}",
+      "$type": "string",
+      "$description": "Indian numbering (12,34,567) as default for all portals"
+    }
+  }
+}

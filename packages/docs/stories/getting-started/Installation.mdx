@@ -1,0 +1,126 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started/Installation" />
+
+# Installation
+
+## For Developers
+
+### Install packages
+
+```bash
+npm install @nirman/tokens @nirman/components
+```
+
+### Import tokens in your app entry point
+
+```tsx
+// main.tsx or App.tsx — import ONCE at the top level
+import '@nirman/tokens/css/primitives';
+import '@nirman/tokens/css/light';
+
+// Optional: dark mode and high contrast support
+import '@nirman/tokens/css/dark';
+import '@nirman/tokens/css/high-contrast';
+```
+
+### Use components
+
+```tsx
+import { Button } from '@nirman/components';
+
+function MyPage() {
+  return (
+    <Button variant="primary" onClick={handleSubmit}>
+      Submit Application
+    </Button>
+  );
+}
+```
+
+### Theme switching
+
+Wrap your app in `NirmanProvider` for runtime theme/density/brand switching:
+
+```tsx
+import { NirmanProvider } from '@nirman/components';
+
+function App() {
+  return (
+    <NirmanProvider defaultTheme="light" defaultBrand="central-govt">
+      <MyPage />
+    </NirmanProvider>
+  );
+}
+```
+
+Switch themes programmatically:
+
+```tsx
+import { useNirman } from '@nirman/components';
+
+function ThemeToggle() {
+  const { theme, setTheme } = useNirman();
+
+  return (
+    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+    </button>
+  );
+}
+```
+
+### Using tokens directly in your CSS
+
+All tokens are available as CSS custom properties with the `--nir-` prefix:
+
+```css
+.my-custom-element {
+  background: var(--nir-color-surface-default);
+  color: var(--nir-color-text-default);
+  padding: var(--nir-spacing-component-padding-md);
+  border-radius: var(--nir-radius-interactive);
+  border: 1px solid var(--nir-color-border-default);
+}
+```
+
+**Rule:** Always use `--nir-` semantic tokens. Never use primitive tokens (`--nir-color-navy-600`) or hardcoded values (`#083459`) in your code.
+
+---
+
+## For Designers
+
+### 1. Enable the Figma libraries
+
+1. Open any Figma file
+2. Click the **Assets** panel (left sidebar)
+3. Click the **book icon** (Team Library)
+4. Enable these libraries:
+   - ✅ **[NIR] 00 — Foundations** (variables and styles)
+   - ✅ **[NIR] 01 — Elements** (Button, Input, etc.)
+   - ✅ **[NIR] 02 — Patterns** (FormField, Alert, etc.)
+   - ✅ **[NIR] 03 — Blocks** (Header, Footer, etc.)
+
+### 2. Use variables
+
+All design values come from variables — never hardcode colors, spacing, or radius:
+
+1. Select an element
+2. Click the fill/stroke/padding property
+3. Click the **variable icon** (hexagon)
+4. Browse `Semantic/Color` for colors, `Semantic/Number` for spacing
+
+### 3. Switch modes
+
+To preview dark mode or different densities:
+
+1. Select a frame
+2. In the right sidebar, find the **variable collection** section
+3. **Semantic/Color** → switch between Light / Dark / High-Contrast
+4. **Semantic/Number** → switch between Default / Compact / Spacious
+
+### 4. Key rules
+
+- **Always use variables**, never hardcode hex values or pixel numbers
+- **Never detach** a component from the library — if you need a variant that doesn't exist, request it
+- **Use semantic variables** (e.g., `color/primary/default`), not primitives (e.g., `color/navy/600`)

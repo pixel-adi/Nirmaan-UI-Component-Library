@@ -1,0 +1,74 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-theme="high-contrast"] {
+  --nir-color-primary-hover: #fde047;
+  --nir-color-primary-active: #fef08a;
+  --nir-color-primary-subtle: #1a1a00;
+  --nir-color-primary-muted: #2a2a00;
+  --nir-color-surface-container: #0a0a0a;
+  --nir-color-surface-container-light: #cccccc;
+  --nir-color-surface-overlay: rgba(0, 0, 0, 0.9);
+  --nir-color-text-secondary: #e5e5e5;
+  --nir-color-text-tertiary: #cccccc;
+  --nir-color-text-placeholder: #999999;
+  --nir-color-text-disabled: #666666;
+  --nir-color-text-link-visited: #ff80ab;
+  --nir-color-border-disabled: #666666;
+  --nir-color-border-error: #ff6b6b;
+  --nir-color-border-success: #69f0ae;
+  --nir-color-border-warning: #ffd54f;
+  --nir-color-icon-secondary: #cccccc;
+  --nir-color-icon-disabled: #666666;
+  --nir-color-feedback-error-default: #ff6b6b;
+  --nir-color-feedback-error-subtle: #1a0000;
+  --nir-color-feedback-error-text: #ff8a8a;
+  --nir-color-feedback-error-border: #ff6b6b;
+  --nir-color-feedback-success-default: #69f0ae;
+  --nir-color-feedback-success-subtle: #001a0d;
+  --nir-color-feedback-success-text: #69f0ae;
+  --nir-color-feedback-success-border: #69f0ae;
+  --nir-color-feedback-warning-default: #ffd54f;
+  --nir-color-feedback-warning-subtle: #1a1400;
+  --nir-color-feedback-warning-text: #ffd54f;
+  --nir-color-feedback-warning-border: #ffd54f;
+  --nir-color-feedback-info-default: #40c4ff;
+  --nir-color-feedback-info-subtle: #001a26;
+  --nir-color-feedback-info-text: #40c4ff;
+  --nir-color-feedback-info-border: #40c4ff;
+  --nir-color-interaction-selected-bg: #1a1a00;
+  --nir-color-interaction-hover-overlay: rgba(255, 255, 255, 0.1);
+  --nir-color-interaction-active-overlay: rgba(255, 255, 255, 0.15);
+  --nir-color-interaction-disabled-bg: #1a1a1a;
+  --nir-color-interaction-disabled-text: #666666;
+  --nir-elevation-none: none;
+  --nir-elevation-raised: 0 0 0 1px #FFFFFF;
+  --nir-elevation-overlay: 0 0 0 2px #FFFFFF;
+  --nir-elevation-modal: 0 0 0 3px #FFFFFF, 0 0 0 6px rgba(255,255,255,0.3);
+  --nir-focus-ring-width: 3px;
+  --nir-focus-ring-offset: 2px;
+  --nir-color-primary-default: var(--nir-color-yellow-400);
+  --nir-color-primary-on-primary: var(--nir-color-neutral-1000);
+  --nir-color-secondary-default: var(--nir-color-neutral-1000);
+  --nir-color-secondary-stroke: var(--nir-color-neutral-0);
+  --nir-color-secondary-on-secondary: var(--nir-color-neutral-0);
+  --nir-color-surface-default: var(--nir-color-neutral-1000);
+  --nir-color-surface-container-stroke: var(--nir-color-neutral-0);
+  --nir-color-text-default: var(--nir-color-neutral-0);
+  --nir-color-text-inverse: var(--nir-color-neutral-1000);
+  --nir-color-text-on-color: var(--nir-color-neutral-1000);
+  --nir-color-text-link: var(--nir-color-yellow-400);
+  --nir-color-border-default: var(--nir-color-neutral-0);
+  --nir-color-border-strong: var(--nir-color-neutral-0);
+  --nir-color-border-focus: var(--nir-color-yellow-400);
+  --nir-color-icon-default: var(--nir-color-neutral-0);
+  --nir-color-icon-inverse: var(--nir-color-neutral-1000);
+  --nir-color-icon-on-color: var(--nir-color-neutral-1000);
+  --nir-color-feedback-error-on: var(--nir-color-neutral-1000);
+  --nir-color-feedback-success-on: var(--nir-color-neutral-1000);
+  --nir-color-feedback-warning-on: var(--nir-color-neutral-1000);
+  --nir-color-feedback-info-on: var(--nir-color-neutral-1000);
+  --nir-color-interaction-focus-ring: var(--nir-color-yellow-400);
+  --nir-focus-ring-color: var(--nir-color-yellow-400);
+}

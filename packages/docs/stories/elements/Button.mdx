@@ -1,0 +1,146 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Buttons trigger actions. Use them for form submissions, confirmations, and primary calls-to-action across all government service portals.
+
+## Live Example
+
+<Canvas of={ButtonStories.Primary} />
+<Controls of={ButtonStories.Primary} />
+
+## When to Use
+
+| Variant | Use for | Example |
+|---|---|---|
+| **Primary** | Main action on page. One per section. | Submit Application, Save, Continue |
+| **Secondary** | Supporting action alongside primary. | Cancel, Go Back, Reset |
+| **Tertiary** | Low-emphasis action. | Learn More, View Details |
+| **Danger** | Destructive/irreversible action. Always confirm first. | Delete Account, Remove |
+| **Ghost** | Inline action within content or toolbars. | Skip, Dismiss |
+
+## When NOT to Use
+
+- For navigation → use **Link** component instead
+- For toggling state on/off → use **Toggle** instead
+- For selecting from options → use **Radio** or **Checkbox**
+- For opening a menu → use **Select** or **Menu** instead
+
+## Sizes
+
+<Canvas of={ButtonStories.Sizes} />
+
+| Size | Height | Use case |
+|---|---|---|
+| **sm** (36px) | Compact contexts, data tables, toolbars |
+| **md** (44px) | Default. Meets WCAG 2.5.8 touch target. Use for all public-facing forms. |
+| **lg** (52px) | Hero sections, kiosk displays, high-emphasis CTAs |
+
+**Rule:** Never use `sm` for primary actions on mobile. Always use `md` or `lg`.
+
+## All Variants
+
+<Canvas of={ButtonStories.AllVariants} />
+
+## States
+
+| State | Behavior |
+|---|---|
+| **Default** | Ready for interaction |
+| **Hover** | Background darkens slightly |
+| **Active** | Background darkens further on press |
+| **Focus** | 2px solid outline, 2px offset, ≥3:1 contrast |
+| **Disabled** | 38% opacity, cursor not-allowed, no click |
+| **Loading** | Spinner replaces icon, aria-busy="true", click disabled |
+
+## Accessibility
+
+| Requirement | Implementation |
+|---|---|
+| Role | Native `<button>` element (no `div` or `span`) |
+| Keyboard | Enter or Space to activate |
+| Focus ring | 2px solid `--nir-color-interaction-focus-ring`, 2px offset |
+| Touch target | ≥44×44px at `md` size (WCAG 2.5.8) |
+| Disabled | `aria-disabled="true"` — keeps element focusable for SR |
+| Loading | `aria-busy="true"` + hidden text "Loading, please wait" |
+| Color | Never rely on color alone — disabled state uses opacity, not just gray |
+
+### Screen Reader Announcements
+
+```
+Default:  "Submit Application, button"
+Disabled: "Submit Application, button, dimmed"
+Loading:  "Submit Application, button, busy. Loading, please wait"
+```
+
+### Hindi SR Announcement
+
+```
+"आवेदन जमा करें, बटन"
+```
+
+## Vernacular Testing
+
+<Canvas of={ButtonStories.HindiLabel} />
+<Canvas of={ButtonStories.TamilLabel} />
+
+Buttons must render correctly in all 12 launch scripts. Check:
+- Text is not clipped
+- Padding accommodates longer labels
+- Line-height follows script profile tokens
+
+## Do's and Don'ts
+
+✅ **Do**
+- Use sentence case: "Submit application"
+- Start with a verb: "Save", "Delete", "Continue"
+- Keep labels under 3 words
+- Use `fullWidth` for single-action mobile forms
+- Pair Primary with Secondary (Submit + Cancel)
+
+❌ **Don't**
+- Use ALL CAPS: "SUBMIT APPLICATION"
+- Use vague labels: "Click here", "OK", "Yes"
+- Put two Primary buttons side by side
+- Use Ghost variant for critical actions
+- Disable without explaining why (add helper text)
+
+## Code Usage
+
+```tsx
+import { Button } from '@nirman/components';
+
+// Basic
+<Button variant="primary">Submit Application</Button>
+
+// With loading state
+<Button variant="primary" loading>Saving...</Button>
+
+// Full width on mobile
+<Button variant="primary" fullWidth>Continue</Button>
+
+// Danger with confirmation
+<Button variant="danger" onClick={handleDelete}>Delete Account</Button>
+```
+
+## Figma
+
+- **Component name:** `nir-e-button`
+- **Location:** [NIR] 01 — Elements → Button page
+- **Variants:** variant × size × state = 5 × 3 × 6 = 90 combinations
+- **Variables used:** `--nir-color-primary-*`, `--nir-spacing-component-padding-*`, `--nir-radius-interactive`
+
+## Related Components
+
+- **Link** — For navigation, not actions
+- **Toggle** — For on/off states
+- **Icon** — Can be placed inside Button via `iconLeft` / `iconRight` props
+
+## Changelog
+
+| Version | Change |
+|---|---|
+| 0.1.0 | Initial release — all variants, sizes, states |

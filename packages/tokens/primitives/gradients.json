@@ -1,0 +1,165 @@
+{
+  "$description": "Nirman Design System — Primitive Tokens: Gradients. Structured for Figma Paint Style creation with variable-bound stops.",
+
+  "gradient": {
+    "brand-navy": {
+      "$type": "gradient",
+      "$description": "Primary brand gradient. Deep navy sweep.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 135,
+        "stops": [
+          { "position": 0, "colorRef": "color/navy/600" },
+          { "position": 1, "colorRef": "color/navy/900" }
+        ]
+      },
+      "css": "linear-gradient(135deg, #083459 0%, #010F2A 100%)"
+    },
+    "brand-navy-light": {
+      "$type": "gradient",
+      "$description": "Lighter brand gradient for secondary surfaces.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 135,
+        "stops": [
+          { "position": 0, "colorRef": "color/navy/300" },
+          { "position": 1, "colorRef": "color/navy/600" }
+        ]
+      },
+      "css": "linear-gradient(135deg, #5B7A94 0%, #083459 100%)"
+    },
+    "brand-tricolor": {
+      "$type": "gradient",
+      "$description": "Indian tricolor gradient. National occasions only.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 180,
+        "stops": [
+          { "position": 0,    "colorRef": "color/saffron/600" },
+          { "position": 0.33, "color": "#FFFFFF" },
+          { "position": 0.66, "color": "#FFFFFF" },
+          { "position": 1,    "colorRef": "color/tricolor-green/500" }
+        ]
+      },
+      "css": "linear-gradient(180deg, #FF6F00 0%, #FFFFFF 33%, #FFFFFF 66%, #16A34A 100%)"
+    },
+    "brand-saffron": {
+      "$type": "gradient",
+      "$description": "Saffron accent gradient. Occasion and national use.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 135,
+        "stops": [
+          { "position": 0, "colorRef": "color/saffron/500" },
+          { "position": 1, "colorRef": "color/saffron/600" }
+        ]
+      },
+      "css": "linear-gradient(135deg, #FF9800 0%, #FF6F00 100%)"
+    },
+    "surface-cream": {
+      "$type": "gradient",
+      "$description": "Warm cream surface gradient. Light mode.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 180,
+        "stops": [
+          { "position": 0, "colorRef": "color/cream/50" },
+          { "position": 1, "colorRef": "color/cream/100" }
+        ]
+      },
+      "css": "linear-gradient(180deg, #FEF6EE 0%, #FCFCFC 100%)"
+    },
+    "surface-cool": {
+      "$type": "gradient",
+      "$description": "Cool navy-tinted surface gradient. Light mode.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 180,
+        "stops": [
+          { "position": 0, "colorRef": "color/navy/50" },
+          { "position": 1, "colorRef": "color/cream/100" }
+        ]
+      },
+      "css": "linear-gradient(180deg, #E6EDF3 0%, #FCFCFC 100%)"
+    },
+    "surface-cream-dark": {
+      "$type": "gradient",
+      "$description": "Warm surface gradient. Dark mode equivalent.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 180,
+        "stops": [
+          { "position": 0, "colorRef": "color/navy/800" },
+          { "position": 1, "colorRef": "color/navy/900" }
+        ]
+      },
+      "css": "linear-gradient(180deg, #041E34 0%, #010F2A 100%)"
+    },
+    "surface-cool-dark": {
+      "$type": "gradient",
+      "$description": "Cool surface gradient. Dark mode equivalent.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 180,
+        "stops": [
+          { "position": 0, "colorRef": "color/navy/700" },
+          { "position": 1, "colorRef": "color/navy/900" }
+        ]
+      },
+      "css": "linear-gradient(180deg, #062A48 0%, #010F2A 100%)"
+    },
+    "overlay-scrim": {
+      "$type": "gradient",
+      "$description": "Bottom-fading scrim for text on images.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 180,
+        "stops": [
+          { "position": 0, "color": "rgba(0,0,0,0)" },
+          { "position": 1, "color": "rgba(0,0,0,0.6)" }
+        ]
+      },
+      "css": "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)"
+    },
+    "overlay-top-scrim": {
+      "$type": "gradient",
+      "$description": "Top-fading scrim for header overlays on hero images.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 0,
+        "stops": [
+          { "position": 0, "color": "rgba(0,0,0,0)" },
+          { "position": 1, "color": "rgba(0,0,0,0.4)" }
+        ]
+      },
+      "css": "linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%)"
+    },
+    "overlay-navy": {
+      "$type": "gradient",
+      "$description": "Brand-tinted overlay scrim using primary navy.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 180,
+        "stops": [
+          { "position": 0, "color": "rgba(8,52,89,0)" },
+          { "position": 1, "color": "rgba(8,52,89,0.8)" }
+        ]
+      },
+      "css": "linear-gradient(180deg, rgba(8,52,89,0) 0%, rgba(8,52,89,0.8) 100%)"
+    },
+    "skeleton-shimmer": {
+      "$type": "gradient",
+      "$description": "Skeleton loading shimmer animation.",
+      "figma": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 90,
+        "stops": [
+          { "position": 0,   "color": "rgba(255,255,255,0)" },
+          { "position": 0.5, "color": "rgba(255,255,255,0.4)" },
+          { "position": 1,   "color": "rgba(255,255,255,0)" }
+        ]
+      },
+      "css": "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)"
+    }
+  }
+}

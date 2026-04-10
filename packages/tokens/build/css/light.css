@@ -1,0 +1,193 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-theme="light"] {
+  --nir-color-surface-overlay: rgba(0, 0, 0, 0.5);
+  --nir-color-text-link-visited: #6b21a8;
+  --nir-color-feedback-info-subtle: #ccd4dc;
+  --nir-color-interaction-hover-overlay: rgba(0, 0, 0, 0.04);
+  --nir-color-interaction-active-overlay: rgba(0, 0, 0, 0.08);
+  --nir-focus-ring-width: 2px;
+  --nir-focus-ring-offset: 2px;
+  --nir-color-primary-default: var(--nir-color-navy-600); /** #083459 */
+  --nir-color-primary-hover: var(--nir-color-navy-700);
+  --nir-color-primary-active: var(--nir-color-navy-800);
+  --nir-color-primary-subtle: var(--nir-color-navy-50);
+  --nir-color-primary-muted: var(--nir-color-navy-100); /** #CED6DE */
+  --nir-color-primary-on-primary: var(--nir-color-cream-100); /** #FCFCFC */
+  --nir-color-secondary-default: var(--nir-color-cream-100); /** #FCFCFC */
+  --nir-color-secondary-stroke: var(--nir-color-navy-600); /** #083459 */
+  --nir-color-secondary-on-secondary: var(--nir-color-navy-600); /** #083459 */
+  --nir-color-surface-default: var(--nir-color-cream-50); /** #FEF6EE */
+  --nir-color-surface-container: var(--nir-color-cream-100); /** #FCFCFC */
+  --nir-color-surface-container-stroke: var(--nir-color-cream-400); /** #E6E2DE */
+  --nir-color-surface-container-light: var(--nir-color-navy-200); /** #8298AA */
+  --nir-color-text-default: var(--nir-color-navy-900); /** #010F2A */
+  --nir-color-text-secondary: var(--nir-color-ink-600); /** #23313C */
+  --nir-color-text-tertiary: var(--nir-color-ink-400);
+  --nir-color-text-placeholder: var(--nir-color-navy-200); /** #8298AA */
+  --nir-color-text-disabled: var(--nir-color-cream-600);
+  --nir-color-text-inverse: var(--nir-color-cream-100);
+  --nir-color-text-on-color: var(--nir-color-cream-100);
+  --nir-color-text-link: var(--nir-color-blue-link-500); /** #092DE2 */
+  --nir-color-border-default: var(--nir-color-cream-400); /** #E6E2DE */
+  --nir-color-border-strong: var(--nir-color-navy-200); /** #8298AA */
+  --nir-color-border-focus: var(--nir-color-navy-600); /** #083459 */
+  --nir-color-border-disabled: var(--nir-color-cream-400);
+  --nir-color-border-error: var(--nir-color-red-500); /** FIX: Input error border — #BC3737 */
+  --nir-color-border-success: var(--nir-color-green-500); /** FIX: Input success border — #18941C */
+  --nir-color-border-warning: var(--nir-color-amber-500); /** FIX: Input warning border — #FAB401 */
+  --nir-color-icon-default: var(--nir-color-ink-600);
+  --nir-color-icon-secondary: var(--nir-color-navy-200);
+  --nir-color-icon-disabled: var(--nir-color-cream-600);
+  --nir-color-icon-inverse: var(--nir-color-cream-100);
+  --nir-color-icon-on-color: var(--nir-color-cream-100);
+  --nir-color-feedback-error-default: var(--nir-color-red-500); /** #BC3737 */
+  --nir-color-feedback-error-subtle: var(--nir-color-red-100); /** #EFD5D5 */
+  --nir-color-feedback-error-text: var(--nir-color-red-500); /** #BC3737 */
+  --nir-color-feedback-error-border: var(--nir-color-red-200);
+  --nir-color-feedback-error-on: var(--nir-color-cream-100);
+  --nir-color-feedback-success-default: var(--nir-color-green-500); /** #18941C */
+  --nir-color-feedback-success-subtle: var(--nir-color-green-100); /** #CEE7CF */
+  --nir-color-feedback-success-text: var(--nir-color-green-700); /** #005A03 */
+  --nir-color-feedback-success-border: var(--nir-color-green-200);
+  --nir-color-feedback-success-on: var(--nir-color-cream-100);
+  --nir-color-feedback-warning-default: var(--nir-color-amber-500); /** #FAB401 */
+  --nir-color-feedback-warning-subtle: var(--nir-color-amber-100); /** #FFEFC6 */
+  --nir-color-feedback-warning-text: var(--nir-color-amber-600); /** #D18F00 */
+  --nir-color-feedback-warning-border: var(--nir-color-amber-200);
+  --nir-color-feedback-warning-on: var(--nir-color-cream-100);
+  --nir-color-feedback-info-default: var(--nir-color-navy-600); /** #083459 */
+  --nir-color-feedback-info-text: var(--nir-color-navy-600);
+  --nir-color-feedback-info-border: var(--nir-color-navy-100);
+  --nir-color-feedback-info-on: var(--nir-color-cream-100);
+  --nir-color-interaction-focus-ring: var(--nir-color-navy-600);
+  --nir-color-interaction-selected-bg: var(--nir-color-navy-50);
+  --nir-color-interaction-disabled-bg: var(--nir-color-cream-300);
+  --nir-color-interaction-disabled-text: var(--nir-color-cream-600);
+  --nir-spacing-inline-xs: var(--nir-spacing-1);
+  --nir-spacing-inline-sm: var(--nir-spacing-2);
+  --nir-spacing-inline-md: var(--nir-spacing-3);
+  --nir-spacing-inline-lg: var(--nir-spacing-4);
+  --nir-spacing-stack-xs: var(--nir-spacing-1);
+  --nir-spacing-stack-sm: var(--nir-spacing-2);
+  --nir-spacing-stack-md: var(--nir-spacing-4);
+  --nir-spacing-stack-lg: var(--nir-spacing-6);
+  --nir-spacing-stack-xl: var(--nir-spacing-8);
+  --nir-spacing-component-padding-xs: var(--nir-spacing-2);
+  --nir-spacing-component-padding-sm: var(--nir-spacing-3);
+  --nir-spacing-component-padding-md: var(--nir-spacing-4);
+  --nir-spacing-component-padding-lg: var(--nir-spacing-6);
+  --nir-spacing-section-gap: var(--nir-spacing-8);
+  --nir-spacing-page-margin: var(--nir-spacing-4);
+  --nir-spacing-touch-target: var(--nir-spacing-11); /** 44px — WCAG 2.5.8 minimum */
+  --nir-spacing-touch-target-compact: var(--nir-spacing-11); /** FIX: 44px even in compact density — WCAG compliance is non-negotiable regardless of density mode */
+  --nir-radius-interactive: var(--nir-radius-md);
+  --nir-radius-container: var(--nir-radius-lg);
+  --nir-radius-pill: var(--nir-radius-full);
+  --nir-font-family-heading: var(--nir-font-family-latin-sans);
+  --nir-font-family-body: var(--nir-font-family-latin-sans);
+  --nir-font-family-mono: var(--nir-font-family-latin-mono);
+  --nir-font-size-body-xs: var(--nir-font-size-xs);
+  --nir-font-size-body-sm: var(--nir-font-size-sm);
+  --nir-font-size-body-md: var(--nir-font-size-base);
+  --nir-font-size-body-lg: var(--nir-font-size-lg);
+  --nir-font-size-heading-sm: var(--nir-font-size-xl);
+  --nir-font-size-heading-md: var(--nir-font-size-2xl);
+  --nir-font-size-heading-lg: var(--nir-font-size-3xl);
+  --nir-font-size-heading-xl: var(--nir-font-size-4xl);
+  --nir-font-size-display: var(--nir-font-size-5xl);
+  --nir-font-weight-body: var(--nir-font-weight-regular);
+  --nir-font-weight-label: var(--nir-font-weight-medium);
+  --nir-font-weight-heading: var(--nir-font-weight-semibold);
+  --nir-font-weight-emphasis: var(--nir-font-weight-bold);
+  --nir-font-line-height-body: var(--nir-font-line-height-normal); /** Latin default: 1.5 */
+  --nir-font-line-height-body-devanagari: var(--nir-font-line-height-loose); /** Hindi/Marathi/Sanskrit: 1.7 — shirorekha + matras */
+  --nir-font-line-height-body-tamil: var(--nir-font-line-height-relaxed); /** Tamil: 1.625 — round forms */
+  --nir-font-line-height-body-bengali: var(--nir-font-line-height-loose); /** Bengali/Assamese: 1.7 — similar to Devanagari */
+  --nir-font-line-height-body-telugu: var(--nir-font-line-height-relaxed); /** Telugu: 1.625 — wide glyphs */
+  --nir-font-line-height-body-kannada: var(--nir-font-line-height-relaxed); /** Kannada: 1.625 */
+  --nir-font-line-height-body-malayalam: var(--nir-font-line-height-relaxed); /** Malayalam: 1.625 — dense conjuncts */
+  --nir-font-line-height-body-gujarati: var(--nir-font-line-height-relaxed); /** Gujarati: 1.625 — no headline bar */
+  --nir-font-line-height-body-gurmukhi: var(--nir-font-line-height-relaxed); /** Gurmukhi: 1.625 — shorter matras than Devanagari */
+  --nir-font-line-height-body-odia: var(--nir-font-line-height-relaxed); /** Odia: 1.625 — curved forms */
+  --nir-font-line-height-body-urdu: var(--nir-font-line-height-looser); /** Urdu Nastaliq: 1.8 — tallest script, RTL */
+  --nir-font-line-height-heading: var(--nir-font-line-height-tight);
+  --nir-font-line-height-display: var(--nir-font-line-height-none);
+  --nir-font-letter-spacing-body: var(--nir-font-letter-spacing-normal);
+  --nir-font-letter-spacing-body-tamil: var(--nir-font-letter-spacing-wide); /** Tamil: +0.01em — aids readability */
+  --nir-font-letter-spacing-body-malayalam: var(--nir-font-letter-spacing-wide); /** Malayalam: +0.01em — dense conjuncts need room */
+  --nir-font-letter-spacing-heading: var(--nir-font-letter-spacing-tight);
+  --nir-font-direction-default: var(--nir-direction-ltr);
+  --nir-font-direction-urdu: var(--nir-direction-rtl);
+  --nir-font-direction-sindhi: var(--nir-direction-rtl);
+  --nir-font-composite-display-size: var(--nir-font-size-5xl);
+  --nir-font-composite-display-weight: var(--nir-font-weight-bold);
+  --nir-font-composite-display-line-height: var(--nir-font-line-height-none);
+  --nir-font-composite-display-letter-spacing: var(--nir-font-letter-spacing-tight);
+  --nir-font-composite-heading-xl-size: var(--nir-font-size-4xl);
+  --nir-font-composite-heading-xl-weight: var(--nir-font-weight-semibold);
+  --nir-font-composite-heading-xl-line-height: var(--nir-font-line-height-tight);
+  --nir-font-composite-heading-xl-letter-spacing: var(--nir-font-letter-spacing-tight);
+  --nir-font-composite-heading-lg-size: var(--nir-font-size-3xl);
+  --nir-font-composite-heading-lg-weight: var(--nir-font-weight-semibold);
+  --nir-font-composite-heading-lg-line-height: var(--nir-font-line-height-tight);
+  --nir-font-composite-heading-lg-letter-spacing: var(--nir-font-letter-spacing-tight);
+  --nir-font-composite-heading-md-size: var(--nir-font-size-2xl);
+  --nir-font-composite-heading-md-weight: var(--nir-font-weight-semibold);
+  --nir-font-composite-heading-md-line-height: var(--nir-font-line-height-snug);
+  --nir-font-composite-heading-md-letter-spacing: var(--nir-font-letter-spacing-tight);
+  --nir-font-composite-heading-sm-size: var(--nir-font-size-xl);
+  --nir-font-composite-heading-sm-weight: var(--nir-font-weight-semibold);
+  --nir-font-composite-heading-sm-line-height: var(--nir-font-line-height-snug);
+  --nir-font-composite-heading-sm-letter-spacing: var(--nir-font-letter-spacing-normal);
+  --nir-font-composite-body-lg-size: var(--nir-font-size-lg);
+  --nir-font-composite-body-lg-weight: var(--nir-font-weight-regular);
+  --nir-font-composite-body-lg-line-height: var(--nir-font-line-height-normal);
+  --nir-font-composite-body-lg-letter-spacing: var(--nir-font-letter-spacing-normal);
+  --nir-font-composite-body-md-size: var(--nir-font-size-base);
+  --nir-font-composite-body-md-weight: var(--nir-font-weight-regular);
+  --nir-font-composite-body-md-line-height: var(--nir-font-line-height-normal);
+  --nir-font-composite-body-md-letter-spacing: var(--nir-font-letter-spacing-normal);
+  --nir-font-composite-body-sm-size: var(--nir-font-size-sm);
+  --nir-font-composite-body-sm-weight: var(--nir-font-weight-regular);
+  --nir-font-composite-body-sm-line-height: var(--nir-font-line-height-normal);
+  --nir-font-composite-body-sm-letter-spacing: var(--nir-font-letter-spacing-normal);
+  --nir-font-composite-label-lg-size: var(--nir-font-size-base);
+  --nir-font-composite-label-lg-weight: var(--nir-font-weight-medium);
+  --nir-font-composite-label-lg-line-height: var(--nir-font-line-height-normal);
+  --nir-font-composite-label-lg-letter-spacing: var(--nir-font-letter-spacing-normal);
+  --nir-font-composite-label-md-size: var(--nir-font-size-sm);
+  --nir-font-composite-label-md-weight: var(--nir-font-weight-medium);
+  --nir-font-composite-label-md-line-height: var(--nir-font-line-height-normal);
+  --nir-font-composite-label-md-letter-spacing: var(--nir-font-letter-spacing-normal);
+  --nir-font-composite-label-sm-size: var(--nir-font-size-xs);
+  --nir-font-composite-label-sm-weight: var(--nir-font-weight-medium);
+  --nir-font-composite-label-sm-line-height: var(--nir-font-line-height-normal);
+  --nir-font-composite-label-sm-letter-spacing: var(--nir-font-letter-spacing-wider);
+  --nir-font-composite-caption-size: var(--nir-font-size-xs);
+  --nir-font-composite-caption-weight: var(--nir-font-weight-regular);
+  --nir-font-composite-caption-line-height: var(--nir-font-line-height-normal);
+  --nir-font-composite-caption-letter-spacing: var(--nir-font-letter-spacing-normal);
+  --nir-font-composite-overline-size: var(--nir-font-size-2xs);
+  --nir-font-composite-overline-weight: var(--nir-font-weight-semibold);
+  --nir-font-composite-overline-line-height: var(--nir-font-line-height-normal);
+  --nir-font-composite-overline-letter-spacing: var(--nir-font-letter-spacing-widest);
+  --nir-elevation-none: var(--nir-elevation-0);
+  --nir-elevation-raised: var(--nir-elevation-2);
+  --nir-elevation-overlay: var(--nir-elevation-4);
+  --nir-elevation-modal: var(--nir-elevation-5);
+  --nir-opacity-disabled: var(--nir-opacity-38); /** Consistent disabled state opacity across all components */
+  --nir-number-format-default: var(--nir-number-format-indian); /** Indian numbering (12,34,567) as default for all portals */
+  --nir-motion-duration-fast: var(--nir-duration-100);
+  --nir-motion-duration-normal: var(--nir-duration-200);
+  --nir-motion-duration-slow: var(--nir-duration-300);
+  --nir-motion-duration-enter: var(--nir-duration-200);
+  --nir-motion-duration-exit: var(--nir-duration-150);
+  --nir-motion-duration-reduced: var(--nir-duration-0); /** FIX §I.2.2: Applied when prefers-reduced-motion is active. All transitions become instant. */
+  --nir-motion-easing-standard: var(--nir-easing-standard);
+  --nir-motion-easing-enter: var(--nir-easing-decelerate);
+  --nir-motion-easing-exit: var(--nir-easing-accelerate);
+  --nir-focus-ring-color: var(--nir-color-navy-600);
+}

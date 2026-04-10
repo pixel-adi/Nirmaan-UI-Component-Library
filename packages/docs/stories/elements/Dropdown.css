@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════
+   nir-e-dropdown — Single-select dropdown
+   ═══════════════════════════════════════════ */
+
+.nir-e-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-stack-xs, 4px);
+  font-family: var(--nir-font-family-body);
+  position: relative;
+}
+
+.nir-e-dropdown--full { width: 100%; }
+
+/* ── Label ── */
+.nir-e-dropdown__label {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-label, 500);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+}
+
+/* ── Wrapper ── */
+.nir-e-dropdown__wrapper {
+  position: relative;
+}
+
+/* ── Trigger button ── */
+.nir-e-dropdown__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nir-spacing-inline-sm, 8px);
+  font-family: var(--nir-font-family-body);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+  background: var(--nir-color-surface-default);
+  border: 1px solid var(--nir-color-border-default);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease),
+    box-shadow var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease);
+}
+
+/* ── Sizes ── */
+.nir-e-dropdown--sm .nir-e-dropdown__trigger {
+  min-height: 36px;
+  padding: var(--nir-spacing-component-padding-xs, 6px) var(--nir-spacing-component-padding-sm, 12px);
+  font-size: var(--nir-font-size-sm, 14px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+.nir-e-dropdown--md .nir-e-dropdown__trigger {
+  min-height: 44px;
+  padding: var(--nir-spacing-component-padding-sm, 10px) var(--nir-spacing-component-padding-md, 16px);
+  font-size: var(--nir-font-size-base, 16px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+.nir-e-dropdown--lg .nir-e-dropdown__trigger {
+  min-height: 52px;
+  padding: var(--nir-spacing-component-padding-md, 14px) var(--nir-spacing-component-padding-lg, 24px);
+  font-size: var(--nir-font-size-lg, 18px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+
+/* ── Hover ── */
+.nir-e-dropdown__trigger:hover:not(:disabled) {
+  border-color: var(--nir-color-border-strong);
+}
+
+/* ── Focus ── */
+.nir-e-dropdown__trigger:focus-visible {
+  outline: 2px solid var(--nir-color-interaction-focus-ring);
+  outline-offset: 2px;
+  border-color: var(--nir-color-primary-default);
+}
+
+/* ── Open state ── */
+.nir-e-dropdown--open .nir-e-dropdown__trigger {
+  border-color: var(--nir-color-primary-default);
+}
+
+/* ── Value / Placeholder ── */
+.nir-e-dropdown__value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nir-e-dropdown__placeholder {
+  color: var(--nir-color-text-placeholder);
+}
+
+/* ── Chevron ── */
+.nir-e-dropdown__chevron {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease);
+  color: var(--nir-color-icon-secondary);
+}
+.nir-e-dropdown--open .nir-e-dropdown__chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Menu ── */
+.nir-e-dropdown__menu {
+  position: absolute;
+  top: calc(100% + var(--nir-spacing-stack-xs, 4px));
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  list-style: none;
+  margin: 0;
+  padding: var(--nir-spacing-component-padding-xs, 4px);
+  background: var(--nir-color-surface-raised, var(--nir-color-surface-default));
+  border: 1px solid var(--nir-color-border-default);
+  border-radius: var(--nir-radius-container, 8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* ── Option ── */
+.nir-e-dropdown__option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--nir-spacing-component-padding-sm, 10px) var(--nir-spacing-component-padding-md, 16px);
+  font-size: var(--nir-font-size-base, 16px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+  cursor: pointer;
+  border-radius: var(--nir-radius-interactive, 6px);
+  position: relative;
+  padding-right: 36px;
+}
+
+.nir-e-dropdown--sm .nir-e-dropdown__option {
+  padding: var(--nir-spacing-component-padding-xs, 6px) var(--nir-spacing-component-padding-sm, 12px);
+  padding-right: 32px;
+  font-size: var(--nir-font-size-sm, 14px);
+}
+
+/* ── Option active (hover/keyboard) ── */
+.nir-e-dropdown__option--active {
+  background: var(--nir-color-primary-subtle);
+}
+
+/* ── Option selected ── */
+.nir-e-dropdown__option--selected {
+  font-weight: var(--nir-font-weight-label, 500);
+  color: var(--nir-color-primary-default);
+}
+
+/* ── Option disabled ── */
+.nir-e-dropdown__option--disabled {
+  opacity: var(--nir-opacity-disabled, 0.38);
+  cursor: not-allowed;
+}
+
+.nir-e-dropdown__option-label {
+  display: block;
+}
+
+.nir-e-dropdown__option-description {
+  display: block;
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary);
+  font-weight: var(--nir-font-weight-body, 400);
+}
+
+.nir-e-dropdown__check {
+  position: absolute;
+  right: var(--nir-spacing-component-padding-md, 16px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--nir-color-primary-default);
+}
+
+/* ── Error state ── */
+.nir-e-dropdown--error .nir-e-dropdown__trigger {
+  border-color: var(--nir-color-feedback-error-default);
+}
+.nir-e-dropdown--error .nir-e-dropdown__trigger:focus-visible {
+  outline-color: var(--nir-color-feedback-error-default);
+}
+.nir-e-dropdown--error .nir-e-dropdown__label {
+  color: var(--nir-color-feedback-error-text);
+}
+
+/* ── Disabled ── */
+.nir-e-dropdown--disabled .nir-e-dropdown__trigger {
+  opacity: var(--nir-opacity-disabled, 0.38);
+  cursor: not-allowed;
+  background: var(--nir-color-interaction-disabled-bg);
+}
+.nir-e-dropdown--disabled .nir-e-dropdown__label {
+  opacity: var(--nir-opacity-disabled, 0.38);
+}
+
+/* ── Helper & Error text ── */
+.nir-e-dropdown__helper,
+.nir-e-dropdown__error {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  margin: 0;
+}
+.nir-e-dropdown__helper { color: var(--nir-color-text-secondary); }
+.nir-e-dropdown__error { color: var(--nir-color-feedback-error-text); }

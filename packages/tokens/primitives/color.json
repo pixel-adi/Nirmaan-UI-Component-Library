@@ -1,0 +1,154 @@
+{
+  "$description": "Nirman Design System — Primitive Tokens: Color. Raw values derived from the existing design language. Never used directly by components. Prefix: nir-",
+  "color": {
+    "$description": "Complete color palette. Source: existing Figma global variables, extended with tint/shade ramps for theming and accessibility modes.",
+
+    "navy": {
+      "$description": "Primary brand range. Base: #083459",
+      "50":  { "$value": "#E6EDF3", "$type": "color" },
+      "100": { "$value": "#CED6DE", "$type": "color", "$description": "Matches existing primary/very-light" },
+      "200": { "$value": "#8298AA", "$type": "color", "$description": "Matches existing surface/container-light" },
+      "300": { "$value": "#5B7A94", "$type": "color" },
+      "400": { "$value": "#3A5D7A", "$type": "color" },
+      "500": { "$value": "#0B4A78", "$type": "color" },
+      "600": { "$value": "#083459", "$type": "color", "$description": "PRIMARY BASE — matches existing primary/base" },
+      "700": { "$value": "#062A48", "$type": "color" },
+      "800": { "$value": "#041E34", "$type": "color" },
+      "900": { "$value": "#010F2A", "$type": "color", "$description": "Matches existing surface/on-base" },
+      "950": { "$value": "#010A1C", "$type": "color" }
+    },
+
+    "ink": {
+      "$description": "Text and content color range. Base: #23313C",
+      "50":  { "$value": "#F4F5F7", "$type": "color" },
+      "100": { "$value": "#E2E5E8", "$type": "color" },
+      "200": { "$value": "#B8C0C7", "$type": "color" },
+      "300": { "$value": "#8E9BA6", "$type": "color" },
+      "400": { "$value": "#647685", "$type": "color" },
+      "500": { "$value": "#3F5161", "$type": "color" },
+      "600": { "$value": "#23313C", "$type": "color", "$description": "Matches existing surface/on-container" },
+      "700": { "$value": "#1A252E", "$type": "color" },
+      "800": { "$value": "#111A21", "$type": "color" },
+      "900": { "$value": "#0A1015", "$type": "color" }
+    },
+
+    "cream": {
+      "$description": "Surface and background range. Base: #FEF6EE",
+      "50":  { "$value": "#FEF6EE", "$type": "color", "$description": "Matches existing surface/base" },
+      "100": { "$value": "#FCFCFC", "$type": "color", "$description": "Matches existing surface/container + secondary/base" },
+      "200": { "$value": "#F7F3EF", "$type": "color" },
+      "300": { "$value": "#F0EBE5", "$type": "color" },
+      "400": { "$value": "#E6E2DE", "$type": "color", "$description": "Matches existing surface/container-stroke" },
+      "500": { "$value": "#D4CFC9", "$type": "color" },
+      "600": { "$value": "#B8B2AB", "$type": "color" },
+      "700": { "$value": "#8A847E", "$type": "color" },
+      "800": { "$value": "#5C5854", "$type": "color" },
+      "900": { "$value": "#2E2C2A", "$type": "color" }
+    },
+
+    "neutral": {
+      "$description": "Pure grayscale for absolute values",
+      "0":    { "$value": "#FFFFFF", "$type": "color", "$description": "Pure white" },
+      "50":   { "$value": "#FCFCFC", "$type": "color" },
+      "100":  { "$value": "#F5F5F5", "$type": "color" },
+      "200":  { "$value": "#E5E5E5", "$type": "color" },
+      "300":  { "$value": "#D4D4D4", "$type": "color" },
+      "400":  { "$value": "#A3A3A3", "$type": "color" },
+      "500":  { "$value": "#737373", "$type": "color" },
+      "600":  { "$value": "#525252", "$type": "color" },
+      "700":  { "$value": "#404040", "$type": "color" },
+      "800":  { "$value": "#262626", "$type": "color" },
+      "900":  { "$value": "#171717", "$type": "color" },
+      "950":  { "$value": "#0A0A0A", "$type": "color" },
+      "1000": { "$value": "#000000", "$type": "color", "$description": "Pure black" }
+    },
+
+    "red": {
+      "$description": "Error / negative states. Base: #BC3737",
+      "50":  { "$value": "#FEF2F2", "$type": "color" },
+      "100": { "$value": "#EFD5D5", "$type": "color", "$description": "Matches existing status/negative/container" },
+      "200": { "$value": "#E5ABAB", "$type": "color" },
+      "300": { "$value": "#D47070", "$type": "color" },
+      "400": { "$value": "#C94D4D", "$type": "color" },
+      "500": { "$value": "#BC3737", "$type": "color", "$description": "Matches existing status/negative/base" },
+      "600": { "$value": "#A32F2F", "$type": "color" },
+      "700": { "$value": "#882727", "$type": "color" },
+      "800": { "$value": "#6E1F1F", "$type": "color" },
+      "900": { "$value": "#541818", "$type": "color" }
+    },
+
+    "green": {
+      "$description": "Success / positive states. Base: #18941C",
+      "50":  { "$value": "#F0FDF4", "$type": "color" },
+      "100": { "$value": "#CEE7CF", "$type": "color", "$description": "Matches existing status/positive/container" },
+      "200": { "$value": "#9DD09F", "$type": "color" },
+      "300": { "$value": "#5DB861", "$type": "color" },
+      "400": { "$value": "#30A635", "$type": "color" },
+      "500": { "$value": "#18941C", "$type": "color", "$description": "Matches existing status/positive/base" },
+      "600": { "$value": "#137A17", "$type": "color" },
+      "700": { "$value": "#005A03", "$type": "color", "$description": "Matches existing status/positive/on-container" },
+      "800": { "$value": "#004A03", "$type": "color" },
+      "900": { "$value": "#003502", "$type": "color" }
+    },
+
+    "amber": {
+      "$description": "Warning states. Base: #FAB401",
+      "50":  { "$value": "#FFFBEB", "$type": "color" },
+      "100": { "$value": "#FFEFC6", "$type": "color", "$description": "Matches existing status/warning/container" },
+      "200": { "$value": "#FFE082", "$type": "color" },
+      "300": { "$value": "#FFD54F", "$type": "color" },
+      "400": { "$value": "#FCC41A", "$type": "color" },
+      "500": { "$value": "#FAB401", "$type": "color", "$description": "Matches existing status/warning/base" },
+      "600": { "$value": "#D18F00", "$type": "color", "$description": "Matches existing status/warning/on-container" },
+      "700": { "$value": "#A87300", "$type": "color" },
+      "800": { "$value": "#7F5700", "$type": "color" },
+      "900": { "$value": "#563A00", "$type": "color" }
+    },
+
+    "blue-link": {
+      "$description": "Link color range. Base: #092DE2",
+      "50":  { "$value": "#EEF0FD", "$type": "color" },
+      "100": { "$value": "#C8CFFA", "$type": "color" },
+      "200": { "$value": "#8B98F3", "$type": "color" },
+      "300": { "$value": "#4F61EC", "$type": "color" },
+      "400": { "$value": "#2040E7", "$type": "color" },
+      "500": { "$value": "#092DE2", "$type": "color", "$description": "Matches existing surface/text-link" },
+      "600": { "$value": "#0724B5", "$type": "color" },
+      "700": { "$value": "#051B88", "$type": "color" },
+      "800": { "$value": "#03125B", "$type": "color" },
+      "900": { "$value": "#020A33", "$type": "color" }
+    },
+
+    "saffron": {
+      "$description": "Indian national identity accent. For tricolor and occasion use.",
+      "50":  { "$value": "#FFF8E1", "$type": "color" },
+      "100": { "$value": "#FFECB3", "$type": "color" },
+      "200": { "$value": "#FFE082", "$type": "color" },
+      "300": { "$value": "#FFD54F", "$type": "color" },
+      "400": { "$value": "#FFCA28", "$type": "color" },
+      "500": { "$value": "#FF9800", "$type": "color" },
+      "600": { "$value": "#FF6F00", "$type": "color" },
+      "700": { "$value": "#E65100", "$type": "color" },
+      "800": { "$value": "#BF360C", "$type": "color" }
+    },
+
+    "tricolor-green": {
+      "$description": "Indian flag green. For tricolor and occasion use only.",
+      "500": { "$value": "#16A34A", "$type": "color" },
+      "600": { "$value": "#138840", "$type": "color" },
+      "700": { "$value": "#0F6D33", "$type": "color" }
+    },
+
+    "gold": {
+      "$description": "Accent for state themes requiring gold",
+      "400": { "$value": "#FFD700", "$type": "color" },
+      "500": { "$value": "#C5A600", "$type": "color" },
+      "600": { "$value": "#A68B00", "$type": "color" }
+    },
+
+    "yellow": {
+      "$description": "High-contrast mode focus/primary override",
+      "400": { "$value": "#FACC15", "$type": "color" }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@nirman/tokens",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "build/js/tokens.mjs",
+  "exports": {
+    "./css/primitives": "./build/css/primitives.css",
+    "./css/light": "./build/css/light.css",
+    "./css/dark": "./build/css/dark.css",
+    "./css/high-contrast": "./build/css/high-contrast.css",
+    "./js": "./build/js/tokens.mjs",
+    "./scss": "./build/scss/_variables.scss"
+  },
+  "scripts": {
+    "build": "node sd.config.mjs"
+  },
+  "devDependencies": {
+    "style-dictionary": "^4.4.0"
+  }
+}

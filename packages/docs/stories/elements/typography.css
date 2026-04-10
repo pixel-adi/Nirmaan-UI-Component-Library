@@ -1,0 +1,265 @@
+/* ═══════════════════════════════════════════════════════
+   Nirman Typography Foundation v2
+   
+   Complete typescale with multi-script support.
+   Requires: primitives.css + light.css loaded first.
+   ═══════════════════════════════════════════════════════ */
+
+/* ── 1. Base ── */
+html {
+  font-size: var(--nir-font-size-base, 16px);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--nir-font-family-body, 'Noto Sans', sans-serif);
+  font-weight: var(--nir-font-weight-body, 400);
+  font-size: var(--nir-font-size-body-md, 16px);
+  line-height: var(--nir-font-line-height-body, 1.5);
+  letter-spacing: var(--nir-font-letter-spacing-body, 0);
+  color: var(--nir-color-text-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. COMPLETE TYPESCALE
+   Named tokens with explicit size, weight, line-height, and tracking.
+   Each scale token is usable via utility class OR CSS variable.
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Display — Hero/splash only ── */
+.nir-type-display-xl {
+  font-family: var(--nir-font-family-heading);
+  font-size: var(--nir-font-size-6xl, 60px);
+  font-weight: var(--nir-font-weight-emphasis, 700);
+  line-height: var(--nir-font-line-height-none, 1);
+  letter-spacing: var(--nir-font-letter-spacing-tight, -0.01em);
+}
+
+.nir-type-display-lg {
+  font-family: var(--nir-font-family-heading);
+  font-size: var(--nir-font-size-5xl, 48px);
+  font-weight: var(--nir-font-weight-emphasis, 700);
+  line-height: var(--nir-font-line-height-tight, 1.25);
+  letter-spacing: var(--nir-font-letter-spacing-tight, -0.01em);
+}
+
+/* ── Headings — h1 through h6 ── */
+h1, .nir-type-h1 {
+  font-family: var(--nir-font-family-heading);
+  font-size: var(--nir-font-size-4xl, 36px);
+  font-weight: var(--nir-font-weight-heading, 600);
+  line-height: var(--nir-font-line-height-tight, 1.25);
+  letter-spacing: var(--nir-font-letter-spacing-tight, -0.01em);
+  margin: 0 0 var(--nir-spacing-stack-md, 16px) 0;
+  color: var(--nir-color-text-default);
+}
+
+h2, .nir-type-h2 {
+  font-family: var(--nir-font-family-heading);
+  font-size: var(--nir-font-size-3xl, 30px);
+  font-weight: var(--nir-font-weight-heading, 600);
+  line-height: var(--nir-font-line-height-tight, 1.25);
+  letter-spacing: var(--nir-font-letter-spacing-tight, -0.01em);
+  margin: 0 0 var(--nir-spacing-stack-md, 16px) 0;
+  color: var(--nir-color-text-default);
+}
+
+h3, .nir-type-h3 {
+  font-family: var(--nir-font-family-heading);
+  font-size: var(--nir-font-size-2xl, 24px);
+  font-weight: var(--nir-font-weight-heading, 600);
+  line-height: var(--nir-font-line-height-snug, 1.375);
+  margin: 0 0 var(--nir-spacing-stack-sm, 8px) 0;
+  color: var(--nir-color-text-default);
+}
+
+h4, .nir-type-h4 {
+  font-family: var(--nir-font-family-heading);
+  font-size: var(--nir-font-size-xl, 20px);
+  font-weight: var(--nir-font-weight-heading, 600);
+  line-height: var(--nir-font-line-height-snug, 1.375);
+  margin: 0 0 var(--nir-spacing-stack-sm, 8px) 0;
+  color: var(--nir-color-text-default);
+}
+
+h5, .nir-type-h5 {
+  font-family: var(--nir-font-family-heading);
+  font-size: var(--nir-font-size-lg, 18px);
+  font-weight: var(--nir-font-weight-heading, 600);
+  line-height: var(--nir-font-line-height-snug, 1.375);
+  margin: 0 0 var(--nir-spacing-stack-xs, 4px) 0;
+  color: var(--nir-color-text-default);
+}
+
+h6, .nir-type-h6 {
+  font-family: var(--nir-font-family-heading);
+  font-size: var(--nir-font-size-base, 16px);
+  font-weight: var(--nir-font-weight-heading, 600);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  margin: 0 0 var(--nir-spacing-stack-xs, 4px) 0;
+  color: var(--nir-color-text-default);
+}
+
+/* ── Body — Paragraph text ── */
+.nir-type-body-lg {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-lg, 18px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-body, 1.5);
+}
+
+p, .nir-type-body-md {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-base, 16px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-body, 1.5);
+  margin: 0 0 var(--nir-spacing-stack-sm, 8px) 0;
+}
+
+.nir-type-body-sm {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-body, 1.5);
+}
+
+/* ── Label — Form labels, button text, nav items ── */
+.nir-type-label-lg {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-base, 16px);
+  font-weight: var(--nir-font-weight-label, 500);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  letter-spacing: var(--nir-font-letter-spacing-normal, 0);
+}
+
+.nir-type-label-md {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-label, 500);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  letter-spacing: var(--nir-font-letter-spacing-normal, 0);
+}
+
+.nir-type-label-sm {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-label, 500);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  letter-spacing: var(--nir-font-letter-spacing-wide, 0.01em);
+}
+
+/* ── Caption — Helper text, footnotes, metadata ── */
+.nir-type-caption {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-secondary);
+}
+
+/* ── Mono — Code, IDs, reference numbers ── */
+code, .nir-type-mono {
+  font-family: var(--nir-font-family-mono);
+  font-size: var(--nir-font-size-sm, 14px);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. PER-SCRIPT OVERRIDES via :lang()
+   Automatically applies correct font + line-height + spacing
+   based on the `lang` attribute.
+   ═══════════════════════════════════════════════════════ */
+
+/* Devanagari — Hindi, Marathi, Sanskrit, Nepali */
+:lang(hi), :lang(mr), :lang(sa), :lang(ne) {
+  font-family: var(--nir-font-family-devanagari-sans, 'Noto Sans Devanagari'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-devanagari, 1.7);
+}
+:lang(hi) h1, :lang(mr) h1, :lang(hi) h2, :lang(mr) h2,
+:lang(hi) .nir-type-h1, :lang(mr) .nir-type-h1,
+:lang(hi) .nir-type-h2, :lang(mr) .nir-type-h2,
+:lang(hi) .nir-type-h3, :lang(mr) .nir-type-h3,
+:lang(hi) .nir-type-display-lg, :lang(mr) .nir-type-display-lg {
+  line-height: var(--nir-font-line-height-snug, 1.375);
+}
+
+/* Tamil */
+:lang(ta) {
+  font-family: var(--nir-font-family-tamil-sans, 'Noto Sans Tamil'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-tamil, 1.625);
+  letter-spacing: var(--nir-font-letter-spacing-body-tamil, 0.01em);
+}
+
+/* Bengali, Assamese */
+:lang(bn), :lang(as) {
+  font-family: var(--nir-font-family-bengali-sans, 'Noto Sans Bengali'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-bengali, 1.7);
+}
+
+/* Telugu */
+:lang(te) {
+  font-family: var(--nir-font-family-telugu-sans, 'Noto Sans Telugu'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-telugu, 1.625);
+}
+
+/* Kannada */
+:lang(kn) {
+  font-family: var(--nir-font-family-kannada-sans, 'Noto Sans Kannada'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-kannada, 1.625);
+}
+
+/* Malayalam */
+:lang(ml) {
+  font-family: var(--nir-font-family-malayalam-sans, 'Noto Sans Malayalam'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-malayalam, 1.625);
+  letter-spacing: var(--nir-font-letter-spacing-body-malayalam, 0.01em);
+}
+
+/* Gujarati */
+:lang(gu) {
+  font-family: var(--nir-font-family-gujarati-sans, 'Noto Sans Gujarati'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-gujarati, 1.625);
+}
+
+/* Punjabi / Gurmukhi */
+:lang(pa) {
+  font-family: var(--nir-font-family-gurmukhi-sans, 'Noto Sans Gurmukhi'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-gurmukhi, 1.625);
+}
+
+/* Odia */
+:lang(or) {
+  font-family: var(--nir-font-family-odia-sans, 'Noto Sans Oriya'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-odia, 1.625);
+}
+
+/* Urdu — RTL + Nastaliq */
+:lang(ur) {
+  font-family: var(--nir-font-family-urdu-nastaliq, 'Noto Nastaliq Urdu'), var(--nir-font-family-body);
+  line-height: var(--nir-font-line-height-body-urdu, 1.8);
+  direction: rtl;
+}
+
+/* Sindhi — RTL */
+:lang(sd) {
+  direction: rtl;
+}
+
+/* ── Auto-sized input inherits correct font ── */
+input, button, select, textarea {
+  font-family: inherit;
+  line-height: inherit;
+}
+
+/* ── Link reset ── */
+a {
+  color: var(--nir-color-interaction-link, var(--nir-color-primary-default));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}

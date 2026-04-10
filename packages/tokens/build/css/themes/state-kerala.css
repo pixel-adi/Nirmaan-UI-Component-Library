@@ -1,0 +1,36 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-brand="kl"] {
+  --nir-light-color-primary-default: #006B3F; /** Kerala green — from state identity */
+  --nir-light-color-primary-hover: #005A35;
+  --nir-light-color-primary-active: #00492B;
+  --nir-light-color-primary-subtle: #E6F5EE;
+  --nir-light-color-primary-muted: #C0E5D3;
+  --nir-light-color-primary-on-primary: #FFFFFF;
+  --nir-light-color-accent-default: #C5A600; /** Gold — Kerala heritage, temple architecture */
+  --nir-light-color-accent-hover: #A68B00;
+  --nir-light-color-accent-subtle: #FFF9E0;
+  --nir-light-color-accent-on-accent: #1A1500;
+  --nir-light-color-secondary-default: #FFFFFF;
+  --nir-light-color-secondary-stroke: #006B3F;
+  --nir-light-color-secondary-on-secondary: #006B3F;
+  --nir-light-color-surface-default: #F7FBF9; /** Very subtle green-tinted surface */
+  --nir-light-color-surface-container: #FFFFFF;
+  --nir-dark-color-primary-default: #4ADE80;
+  --nir-dark-color-primary-hover: #6AE89A;
+  --nir-dark-color-primary-active: #8AF2B4;
+  --nir-dark-color-primary-subtle: #0A1F14;
+  --nir-dark-color-primary-muted: #0F2E1D;
+  --nir-dark-color-primary-on-primary: #0A1F14;
+  --nir-dark-color-accent-default: #FFD700;
+  --nir-dark-color-accent-hover: #FFE14D;
+  --nir-dark-color-accent-subtle: #1A1500;
+  --nir-dark-color-accent-on-accent: #1A1500;
+  --nir-dark-color-secondary-default: #1A2E1D;
+  --nir-dark-color-secondary-stroke: #4ADE80;
+  --nir-dark-color-secondary-on-secondary: #C0E5D3;
+  --nir-dark-color-surface-default: #0A1A10;
+  --nir-dark-color-surface-container: #0F2418;
+}

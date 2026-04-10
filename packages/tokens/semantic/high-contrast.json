@@ -1,0 +1,105 @@
+{
+  "$description": "Nirman Design System — Semantic Tokens: HIGH CONTRAST MODE. All text ≥7:1 (AAA). All gaps fixed. CSS prefix: --nir-",
+
+  "color": {
+    "primary": {
+      "default":      { "$value": "{color.yellow.400}",  "$type": "color" },
+      "hover":        { "$value": "#FDE047",              "$type": "color" },
+      "active":       { "$value": "#FEF08A",              "$type": "color" },
+      "subtle":       { "$value": "#1A1A00",              "$type": "color" },
+      "muted":        { "$value": "#2A2A00",              "$type": "color" },
+      "on-primary":   { "$value": "{color.neutral.1000}", "$type": "color" }
+    },
+    "secondary": {
+      "default":      { "$value": "{color.neutral.1000}", "$type": "color" },
+      "stroke":       { "$value": "{color.neutral.0}",   "$type": "color" },
+      "on-secondary": { "$value": "{color.neutral.0}",   "$type": "color" }
+    },
+    "surface": {
+      "default":      { "$value": "{color.neutral.1000}", "$type": "color" },
+      "container":    { "$value": "#0A0A0A",              "$type": "color" },
+      "container-stroke": { "$value": "{color.neutral.0}","$type": "color" },
+      "container-light":  { "$value": "#CCCCCC",          "$type": "color" },
+      "overlay":      { "$value": "rgba(0, 0, 0, 0.9)",   "$type": "color" }
+    },
+    "text": {
+      "default":      { "$value": "{color.neutral.0}",   "$type": "color" },
+      "secondary":    { "$value": "#E5E5E5",              "$type": "color" },
+      "tertiary":     { "$value": "#CCCCCC",              "$type": "color" },
+      "placeholder":  { "$value": "#999999",              "$type": "color" },
+      "disabled":     { "$value": "#666666",              "$type": "color" },
+      "inverse":      { "$value": "{color.neutral.1000}", "$type": "color" },
+      "on-color":     { "$value": "{color.neutral.1000}", "$type": "color" },
+      "link":         { "$value": "{color.yellow.400}",   "$type": "color" },
+      "link-visited": { "$value": "#FF80AB",               "$type": "color" }
+    },
+    "border": {
+      "default":      { "$value": "{color.neutral.0}",   "$type": "color" },
+      "strong":       { "$value": "{color.neutral.0}",   "$type": "color" },
+      "focus":        { "$value": "{color.yellow.400}",   "$type": "color" },
+      "disabled":     { "$value": "#666666",              "$type": "color" },
+      "error":        { "$value": "#FF6B6B",              "$type": "color" },
+      "success":      { "$value": "#69F0AE",              "$type": "color" },
+      "warning":      { "$value": "#FFD54F",              "$type": "color" }
+    },
+    "icon": {
+      "default":      { "$value": "{color.neutral.0}",   "$type": "color" },
+      "secondary":    { "$value": "#CCCCCC",              "$type": "color" },
+      "disabled":     { "$value": "#666666",              "$type": "color" },
+      "inverse":      { "$value": "{color.neutral.1000}", "$type": "color" },
+      "on-color":     { "$value": "{color.neutral.1000}", "$type": "color" }
+    },
+    "feedback": {
+      "error": {
+        "default":    { "$value": "#FF6B6B",              "$type": "color" },
+        "subtle":     { "$value": "#1A0000",              "$type": "color" },
+        "text":       { "$value": "#FF8A8A",              "$type": "color" },
+        "border":     { "$value": "#FF6B6B",              "$type": "color" },
+        "on":         { "$value": "{color.neutral.1000}", "$type": "color" }
+      },
+      "success": {
+        "default":    { "$value": "#69F0AE",              "$type": "color" },
+        "subtle":     { "$value": "#001A0D",              "$type": "color" },
+        "text":       { "$value": "#69F0AE",              "$type": "color" },
+        "border":     { "$value": "#69F0AE",              "$type": "color" },
+        "on":         { "$value": "{color.neutral.1000}", "$type": "color" }
+      },
+      "warning": {
+        "default":    { "$value": "#FFD54F",              "$type": "color" },
+        "subtle":     { "$value": "#1A1400",              "$type": "color" },
+        "text":       { "$value": "#FFD54F",              "$type": "color" },
+        "border":     { "$value": "#FFD54F",              "$type": "color" },
+        "on":         { "$value": "{color.neutral.1000}", "$type": "color" }
+      },
+      "info": {
+        "default":    { "$value": "#40C4FF",              "$type": "color" },
+        "subtle":     { "$value": "#001A26",              "$type": "color" },
+        "text":       { "$value": "#40C4FF",              "$type": "color" },
+        "border":     { "$value": "#40C4FF",              "$type": "color" },
+        "on":         { "$value": "{color.neutral.1000}", "$type": "color" }
+      }
+    },
+    "interaction": {
+      "focus-ring":     { "$value": "{color.yellow.400}",   "$type": "color" },
+      "selected-bg":    { "$value": "#1A1A00",              "$type": "color" },
+      "hover-overlay":  { "$value": "rgba(255, 255, 255, 0.1)",  "$type": "color" },
+      "active-overlay": { "$value": "rgba(255, 255, 255, 0.15)", "$type": "color" },
+      "disabled-bg":    { "$value": "#1A1A1A",              "$type": "color" },
+      "disabled-text":  { "$value": "#666666",              "$type": "color" }
+    }
+  },
+
+  "elevation": {
+    "$description": "HC mode uses solid borders instead of shadows for maximum clarity",
+    "none":           { "$value": "none",                                              "$type": "shadow" },
+    "raised":         { "$value": "0 0 0 1px #FFFFFF",                                "$type": "shadow" },
+    "overlay":        { "$value": "0 0 0 2px #FFFFFF",                                "$type": "shadow" },
+    "modal":          { "$value": "0 0 0 3px #FFFFFF, 0 0 0 6px rgba(255,255,255,0.3)", "$type": "shadow" }
+  },
+
+  "focus": {
+    "ring-width":     { "$value": "3px",  "$type": "dimension" },
+    "ring-offset":    { "$value": "2px",  "$type": "dimension" },
+    "ring-color":     { "$value": "{color.yellow.400}", "$type": "color" }
+  }
+}

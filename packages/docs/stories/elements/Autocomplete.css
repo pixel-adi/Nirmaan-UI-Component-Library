@@ -1,0 +1,193 @@
+/* ═══════════════════════════════════════════
+   nir-e-autocomplete — Type-to-search
+   ═══════════════════════════════════════════ */
+
+.nir-e-autocomplete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-stack-xs, 4px);
+  font-family: var(--nir-font-family-body);
+  position: relative;
+}
+
+.nir-e-autocomplete--full { width: 100%; }
+
+/* ── Label ── */
+.nir-e-autocomplete__label {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-label, 500);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+}
+
+/* ── Wrapper ── */
+.nir-e-autocomplete__wrapper {
+  position: relative;
+}
+
+/* ── Input ── */
+.nir-e-autocomplete__input {
+  width: 100%;
+  font-family: var(--nir-font-family-body);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+  background: var(--nir-color-surface-default);
+  border: 1px solid var(--nir-color-border-default);
+  transition:
+    border-color var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease),
+    box-shadow var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease);
+}
+.nir-e-autocomplete__input::placeholder {
+  color: var(--nir-color-text-placeholder);
+}
+
+/* ── Sizes (input includes left padding for search icon) ── */
+.nir-e-autocomplete--sm .nir-e-autocomplete__input {
+  min-height: 36px;
+  padding: var(--nir-spacing-component-padding-xs, 6px) var(--nir-spacing-component-padding-sm, 12px);
+  padding-left: 36px;
+  font-size: var(--nir-font-size-sm, 14px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+.nir-e-autocomplete--md .nir-e-autocomplete__input {
+  min-height: 44px;
+  padding: var(--nir-spacing-component-padding-sm, 10px) var(--nir-spacing-component-padding-md, 16px);
+  padding-left: 44px;
+  font-size: var(--nir-font-size-base, 16px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+.nir-e-autocomplete--lg .nir-e-autocomplete__input {
+  min-height: 52px;
+  padding: var(--nir-spacing-component-padding-md, 14px) var(--nir-spacing-component-padding-lg, 24px);
+  padding-left: 52px;
+  font-size: var(--nir-font-size-lg, 18px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+
+/* ── Search icon ── */
+.nir-e-autocomplete__icon {
+  position: absolute;
+  left: var(--nir-spacing-component-padding-md, 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--nir-color-icon-secondary);
+  pointer-events: none;
+}
+
+/* ── Focus/Hover ── */
+.nir-e-autocomplete__input:hover:not(:disabled) {
+  border-color: var(--nir-color-border-strong);
+}
+.nir-e-autocomplete__input:focus-visible {
+  outline: 2px solid var(--nir-color-interaction-focus-ring);
+  outline-offset: 2px;
+  border-color: var(--nir-color-primary-default);
+}
+
+/* ── Menu ── */
+.nir-e-autocomplete__menu {
+  position: absolute;
+  top: calc(100% + var(--nir-spacing-stack-xs, 4px));
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  list-style: none;
+  margin: 0;
+  padding: var(--nir-spacing-component-padding-xs, 4px);
+  background: var(--nir-color-surface-raised, var(--nir-color-surface-default));
+  border: 1px solid var(--nir-color-border-default);
+  border-radius: var(--nir-radius-container, 8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* ── Option ── */
+.nir-e-autocomplete__option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--nir-spacing-component-padding-sm, 10px) var(--nir-spacing-component-padding-md, 16px);
+  font-size: var(--nir-font-size-base, 16px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+  cursor: pointer;
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+
+.nir-e-autocomplete--sm .nir-e-autocomplete__option {
+  padding: var(--nir-spacing-component-padding-xs, 6px) var(--nir-spacing-component-padding-sm, 12px);
+  font-size: var(--nir-font-size-sm, 14px);
+}
+
+.nir-e-autocomplete__option--active {
+  background: var(--nir-color-primary-subtle);
+}
+
+.nir-e-autocomplete__option--selected {
+  font-weight: var(--nir-font-weight-label, 500);
+  color: var(--nir-color-primary-default);
+}
+
+.nir-e-autocomplete__option-label { display: block; }
+
+.nir-e-autocomplete__option-description {
+  display: block;
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary);
+  font-weight: var(--nir-font-weight-body, 400);
+}
+
+/* ── Match highlight ── */
+.nir-e-autocomplete__match {
+  background: var(--nir-color-primary-subtle);
+  color: var(--nir-color-primary-default);
+  font-weight: var(--nir-font-weight-label, 500);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* ── No results ── */
+.nir-e-autocomplete__no-results {
+  padding: var(--nir-spacing-component-padding-md, 16px);
+  font-size: var(--nir-font-size-sm, 14px);
+  color: var(--nir-color-text-secondary);
+  text-align: center;
+}
+
+/* ── Error state ── */
+.nir-e-autocomplete--error .nir-e-autocomplete__input {
+  border-color: var(--nir-color-feedback-error-default);
+}
+.nir-e-autocomplete--error .nir-e-autocomplete__input:focus-visible {
+  outline-color: var(--nir-color-feedback-error-default);
+}
+.nir-e-autocomplete--error .nir-e-autocomplete__label {
+  color: var(--nir-color-feedback-error-text);
+}
+
+/* ── Disabled ── */
+.nir-e-autocomplete--disabled .nir-e-autocomplete__input {
+  opacity: var(--nir-opacity-disabled, 0.38);
+  cursor: not-allowed;
+  background: var(--nir-color-interaction-disabled-bg);
+}
+.nir-e-autocomplete--disabled .nir-e-autocomplete__label {
+  opacity: var(--nir-opacity-disabled, 0.38);
+}
+
+/* ── Helper & Error text ── */
+.nir-e-autocomplete__helper,
+.nir-e-autocomplete__error {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-xs, 12px);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  margin: 0;
+}
+.nir-e-autocomplete__helper { color: var(--nir-color-text-secondary); }
+.nir-e-autocomplete__error { color: var(--nir-color-feedback-error-text); }

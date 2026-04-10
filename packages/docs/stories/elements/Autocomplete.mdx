@@ -1,0 +1,192 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as AutocompleteStories from './Autocomplete.stories';
+
+<Meta of={AutocompleteStories} />
+
+# Autocomplete
+
+Type-to-search input that filters a large list and suggests matching results. Use when users need to pick one item from 20+ options.
+
+---
+
+## Live Example
+
+<Canvas of={AutocompleteStories.Default} />
+
+---
+
+## When to Use
+
+| Option count | Component |
+|---|---|
+| 2–4 options | Radio group |
+| 5–20 options | Dropdown |
+| **20+ options, known set** | **Autocomplete** (this) |
+| Free-text suggestions | Combobox |
+
+Use Autocomplete when:
+- The list is too long to scroll (cities, districts, schemes, product codes)
+- Users likely know what they're looking for
+- Typing is faster than scrolling
+
+---
+
+## Anatomy
+
+```
+┌───────────────────────────────────────┐
+│  City                                 │  ← 1. Label
+│  ┌─────────────────────────────────┐  │
+│  │ 🔍  mum                          │  │  ← 2. Input with search icon
+│  └─────────────────────────────────┘  │
+│                                       │
+│  ── dropdown appears on type ──       │
+│  ┌─────────────────────────────────┐  │
+│  │ Mumbai                          │  │  ← 3. Matched option
+│  │ Maharashtra                     │  │     (match highlighted)
+│  │                                 │  │
+│  │ Mumbra                          │  │
+│  │ Maharashtra                     │  │
+│  └─────────────────────────────────┘  │
+│  Enter the city from your address     │  ← 4. Helper text
+└───────────────────────────────────────┘
+```
+
+---
+
+## Match Highlighting
+
+Typed query is highlighted in matched results automatically:
+
+```
+Query: "mum"
+┌────────────────────┐
+│ [Mum]bai           │  ← "Mum" highlighted
+│ [Mum]bra           │
+└────────────────────┘
+```
+
+Uses `<mark>` for semantic highlighting (accessible to screen readers as emphasized).
+
+---
+
+## Large Datasets
+
+<Canvas of={AutocompleteStories.LargeList} />
+
+For lists over 100 items, set `maxResults` to limit visible matches (default: 10). This keeps the menu performant and scannable.
+
+```tsx
+<Autocomplete
+  label="Search 10,000 schemes"
+  options={allSchemes}
+  maxResults={15}
+  minChars={2}  // don't show results until 2 characters typed
+/>
+```
+
+---
+
+## Keyboard Interaction
+
+| Key | Behavior |
+|---|---|
+| `Type` | Filters options |
+| `↓` / `↑` | Navigate through filtered results |
+| `Enter` | Selects active result |
+| `Escape` | Closes menu, keeps typed value |
+| `Tab` | Closes menu, moves focus |
+
+---
+
+## Accessibility
+
+| Requirement | Implementation |
+|---|---|
+| Role | `combobox` with `aria-autocomplete="list"` |
+| Menu | `role="listbox"` with `aria-expanded` |
+| Active | `aria-activedescendant` points to current highlight |
+| No results | `role="option"` announcement |
+| Error | `role="alert"`, `aria-invalid="true"` |
+
+### Screen Reader Announcements
+
+```
+Typing:     "City, combobox, expanded, 3 results"
+Navigate:   "Mumbai, 1 of 3"
+Selected:   "Mumbai, selected"
+No match:   "No matches found"
+Empty:      "City, combobox, collapsed"
+```
+
+---
+
+## Multilingual Support
+
+<Canvas of={AutocompleteStories.HindiLabel} />
+<Canvas of={AutocompleteStories.TamilLabel} />
+
+The search also works with the user's language — typing Hindi characters filters Hindi labels. Set `lang="hi"` on a parent for font/line-height adjustments.
+
+Common "no results" messages per language:
+- English: `"No matches found"`
+- Hindi: `"कोई परिणाम नहीं मिला"`
+- Tamil: `"முடிவுகள் இல்லை"`
+
+---
+
+## Do's and Don'ts
+
+✅ **Do**
+- Use for 20+ options
+- Show helpful descriptions in options (e.g., "Mumbai — Maharashtra")
+- Set `minChars` to 2+ for very large datasets
+- Provide clear `noResultsText` in the user's language
+- Let users clear the selection by deleting the input
+
+❌ **Don't**
+- Use for small lists (use Dropdown or Radio)
+- Require exact-match typing (fuzzy match is built in)
+- Hide the selected value after selection
+- Use as a replacement for Select — Autocomplete is for searching
+
+---
+
+## Code Usage
+
+```tsx
+import { Autocomplete } from '@nirman/components';
+import { useState } from 'react';
+
+function AddressForm() {
+  const [city, setCity] = useState<string | null>(null);
+
+  const cities = [
+    { value: 'mumbai', label: 'Mumbai', description: 'Maharashtra' },
+    { value: 'delhi', label: 'New Delhi', description: 'Delhi' },
+    { value: 'bangalore', label: 'Bangalore', description: 'Karnataka' },
+    // ... 500+ more
+  ];
+
+  return (
+    <Autocomplete
+      label="City"
+      options={cities}
+      value={city ?? undefined}
+      onChange={setCity}
+      placeholder="Start typing..."
+      helperText="Enter the city from your Aadhaar address"
+      minChars={1}
+      maxResults={10}
+    />
+  );
+}
+```
+
+---
+
+## Figma
+
+- **Component name:** `nir-e-autocomplete`
+- **Variants:** size × state (empty/typing/open/selected) × has-error
+- **Variables:** radius-interactive, color-primary-subtle (match highlight)

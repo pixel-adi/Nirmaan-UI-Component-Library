@@ -1,0 +1,204 @@
+{
+  "$description": "Nirman Design System — Primitive Tokens: Foundations. Spacing, radius, typography, motion, elevation, opacity, breakpoints, z-index, safe areas, direction. Prefix: nir-",
+
+  "spacing": {
+    "$description": "4px base unit scale. All spacing derives from multiples of 4.",
+    "0":  { "$value": "0px",   "$type": "dimension" },
+    "px": { "$value": "1px",   "$type": "dimension", "$description": "Hairline borders only" },
+    "0_5":{ "$value": "2px",   "$type": "dimension" },
+    "1":  { "$value": "4px",   "$type": "dimension" },
+    "1_5":{ "$value": "6px",   "$type": "dimension" },
+    "2":  { "$value": "8px",   "$type": "dimension" },
+    "2_5":{ "$value": "10px",  "$type": "dimension" },
+    "3":  { "$value": "12px",  "$type": "dimension" },
+    "3_5":{ "$value": "14px",  "$type": "dimension" },
+    "4":  { "$value": "16px",  "$type": "dimension" },
+    "5":  { "$value": "20px",  "$type": "dimension" },
+    "6":  { "$value": "24px",  "$type": "dimension" },
+    "7":  { "$value": "28px",  "$type": "dimension" },
+    "8":  { "$value": "32px",  "$type": "dimension" },
+    "9":  { "$value": "36px",  "$type": "dimension" },
+    "10": { "$value": "40px",  "$type": "dimension" },
+    "11": { "$value": "44px",  "$type": "dimension", "$description": "WCAG min touch target" },
+    "12": { "$value": "48px",  "$type": "dimension" },
+    "14": { "$value": "56px",  "$type": "dimension" },
+    "16": { "$value": "64px",  "$type": "dimension" },
+    "20": { "$value": "80px",  "$type": "dimension" },
+    "24": { "$value": "96px",  "$type": "dimension" },
+    "32": { "$value": "128px", "$type": "dimension" },
+    "40": { "$value": "160px", "$type": "dimension" },
+    "48": { "$value": "192px", "$type": "dimension" },
+    "56": { "$value": "224px", "$type": "dimension" },
+    "64": { "$value": "256px", "$type": "dimension" },
+
+    "safe-area-top":    { "$value": "env(safe-area-inset-top, 0px)",    "$type": "dimension", "$description": "FIX §V.8: Mobile notch / Dynamic Island. Falls back to 0px on non-notched devices." },
+    "safe-area-bottom": { "$value": "env(safe-area-inset-bottom, 0px)", "$type": "dimension", "$description": "FIX §V.8: Mobile home indicator. Falls back to 0px on devices without home bar." },
+    "safe-area-left":   { "$value": "env(safe-area-inset-left, 0px)",   "$type": "dimension", "$description": "Landscape mode safe area" },
+    "safe-area-right":  { "$value": "env(safe-area-inset-right, 0px)",  "$type": "dimension", "$description": "Landscape mode safe area" }
+  },
+
+  "radius": {
+    "$description": "Border radius scale",
+    "none":  { "$value": "0px",    "$type": "dimension" },
+    "xs":    { "$value": "2px",    "$type": "dimension" },
+    "sm":    { "$value": "4px",    "$type": "dimension" },
+    "md":    { "$value": "6px",    "$type": "dimension" },
+    "lg":    { "$value": "8px",    "$type": "dimension" },
+    "xl":    { "$value": "12px",   "$type": "dimension" },
+    "2xl":   { "$value": "16px",   "$type": "dimension" },
+    "3xl":   { "$value": "24px",   "$type": "dimension" },
+    "full":  { "$value": "9999px", "$type": "dimension", "$description": "Pill shape" }
+  },
+
+  "font": {
+    "family": {
+      "$description": "Font family primitives. One entry per script + functional role.",
+      "latin-sans":       { "$value": "Noto Sans",              "$type": "fontFamily" },
+      "latin-mono":       { "$value": "Noto Sans Mono",         "$type": "fontFamily" },
+      "devanagari-sans":  { "$value": "Noto Sans Devanagari",   "$type": "fontFamily" },
+      "tamil-sans":       { "$value": "Noto Sans Tamil",        "$type": "fontFamily" },
+      "bengali-sans":     { "$value": "Noto Sans Bengali",      "$type": "fontFamily" },
+      "telugu-sans":      { "$value": "Noto Sans Telugu",       "$type": "fontFamily" },
+      "kannada-sans":     { "$value": "Noto Sans Kannada",      "$type": "fontFamily" },
+      "malayalam-sans":   { "$value": "Noto Sans Malayalam",    "$type": "fontFamily" },
+      "gujarati-sans":    { "$value": "Noto Sans Gujarati",     "$type": "fontFamily" },
+      "gurmukhi-sans":    { "$value": "Noto Sans Gurmukhi",     "$type": "fontFamily" },
+      "odia-sans":        { "$value": "Noto Sans Oriya",        "$type": "fontFamily" },
+      "urdu-nastaliq":    { "$value": "Noto Nastaliq Urdu",     "$type": "fontFamily" }
+    },
+    "size": {
+      "$description": "Type scale. Based on 16px base with modular scale ~1.2",
+      "2xs":   { "$value": "10px", "$type": "dimension" },
+      "xs":    { "$value": "12px", "$type": "dimension" },
+      "sm":    { "$value": "14px", "$type": "dimension" },
+      "base":  { "$value": "16px", "$type": "dimension", "$description": "Body text default" },
+      "lg":    { "$value": "18px", "$type": "dimension" },
+      "xl":    { "$value": "20px", "$type": "dimension" },
+      "2xl":   { "$value": "24px", "$type": "dimension" },
+      "3xl":   { "$value": "30px", "$type": "dimension" },
+      "4xl":   { "$value": "36px", "$type": "dimension" },
+      "5xl":   { "$value": "48px", "$type": "dimension" },
+      "6xl":   { "$value": "60px", "$type": "dimension" }
+    },
+    "weight": {
+      "regular":  { "$value": "400", "$type": "fontWeight" },
+      "medium":   { "$value": "500", "$type": "fontWeight" },
+      "semibold": { "$value": "600", "$type": "fontWeight" },
+      "bold":     { "$value": "700", "$type": "fontWeight" }
+    },
+    "line-height": {
+      "$description": "Line-height primitives. Script profiles reference these.",
+      "none":    { "$value": "1",     "$type": "number" },
+      "tight":   { "$value": "1.25",  "$type": "number" },
+      "snug":    { "$value": "1.375", "$type": "number" },
+      "normal":  { "$value": "1.5",   "$type": "number", "$description": "Latin default" },
+      "relaxed": { "$value": "1.625", "$type": "number" },
+      "loose":   { "$value": "1.7",   "$type": "number", "$description": "Devanagari/Bengali default" },
+      "looser":  { "$value": "1.8",   "$type": "number", "$description": "Urdu Nastaliq default" }
+    },
+    "letter-spacing": {
+      "tighter":  { "$value": "-0.02em", "$type": "dimension" },
+      "tight":    { "$value": "-0.01em", "$type": "dimension" },
+      "normal":   { "$value": "0em",     "$type": "dimension" },
+      "wide":     { "$value": "0.01em",  "$type": "dimension", "$description": "Tamil/Malayalam" },
+      "wider":    { "$value": "0.02em",  "$type": "dimension" },
+      "widest":   { "$value": "0.05em",  "$type": "dimension" }
+    }
+  },
+
+  "elevation": {
+    "$description": "Box shadow primitives for depth levels",
+    "0":  { "$value": "none", "$type": "shadow" },
+    "1":  { "$value": "0 1px 2px 0 rgba(0, 0, 0, 0.05)", "$type": "shadow" },
+    "2":  { "$value": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)", "$type": "shadow" },
+    "3":  { "$value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)", "$type": "shadow" },
+    "4":  { "$value": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)", "$type": "shadow" },
+    "5":  { "$value": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)", "$type": "shadow" },
+    "6":  { "$value": "0 25px 50px -12px rgba(0, 0, 0, 0.25)", "$type": "shadow" },
+
+    "$description-dark": "FIX: Dark mode elevation — lighter shadows + subtle border for visibility on dark surfaces",
+    "dark-1": { "$value": "0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05)", "$type": "shadow" },
+    "dark-2": { "$value": "0 2px 4px 0 rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06)", "$type": "shadow" },
+    "dark-3": { "$value": "0 4px 8px -2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06)", "$type": "shadow" },
+    "dark-4": { "$value": "0 8px 16px -4px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08)", "$type": "shadow" },
+    "dark-5": { "$value": "0 16px 32px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08)", "$type": "shadow" }
+  },
+
+  "opacity": {
+    "$description": "Opacity scale for disabled states, overlays, etc.",
+    "0":   { "$value": "0",    "$type": "number" },
+    "5":   { "$value": "0.05", "$type": "number" },
+    "10":  { "$value": "0.1",  "$type": "number" },
+    "20":  { "$value": "0.2",  "$type": "number" },
+    "25":  { "$value": "0.25", "$type": "number" },
+    "30":  { "$value": "0.3",  "$type": "number" },
+    "38":  { "$value": "0.38", "$type": "number", "$description": "Disabled state opacity" },
+    "40":  { "$value": "0.4",  "$type": "number" },
+    "50":  { "$value": "0.5",  "$type": "number" },
+    "60":  { "$value": "0.6",  "$type": "number" },
+    "70":  { "$value": "0.7",  "$type": "number" },
+    "75":  { "$value": "0.75", "$type": "number" },
+    "80":  { "$value": "0.8",  "$type": "number" },
+    "90":  { "$value": "0.9",  "$type": "number" },
+    "95":  { "$value": "0.95", "$type": "number" },
+    "100": { "$value": "1",    "$type": "number" }
+  },
+
+  "duration": {
+    "$description": "Animation timing primitives",
+    "0":    { "$value": "0ms",   "$type": "duration", "$description": "FIX §I.2.2: Used for prefers-reduced-motion override" },
+    "75":   { "$value": "75ms",  "$type": "duration" },
+    "100":  { "$value": "100ms", "$type": "duration" },
+    "150":  { "$value": "150ms", "$type": "duration" },
+    "200":  { "$value": "200ms", "$type": "duration" },
+    "300":  { "$value": "300ms", "$type": "duration" },
+    "500":  { "$value": "500ms", "$type": "duration" },
+    "700":  { "$value": "700ms", "$type": "duration" },
+    "1000": { "$value": "1000ms","$type": "duration" }
+  },
+
+  "easing": {
+    "$description": "Cubic bezier curves for animation",
+    "linear":     { "$value": "cubic-bezier(0, 0, 1, 1)",       "$type": "cubicBezier" },
+    "standard":   { "$value": "cubic-bezier(0.4, 0, 0.2, 1)",   "$type": "cubicBezier" },
+    "decelerate": { "$value": "cubic-bezier(0.0, 0, 0.2, 1)",   "$type": "cubicBezier" },
+    "accelerate": { "$value": "cubic-bezier(0.4, 0, 1, 1)",     "$type": "cubicBezier" },
+    "spring":     { "$value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)", "$type": "cubicBezier" }
+  },
+
+  "breakpoint": {
+    "$description": "Viewport breakpoints for responsive design",
+    "xs":  { "$value": "320px",  "$type": "dimension", "$description": "Small phone (min supported)" },
+    "sm":  { "$value": "375px",  "$type": "dimension", "$description": "Standard phone" },
+    "md":  { "$value": "768px",  "$type": "dimension", "$description": "Tablet" },
+    "lg":  { "$value": "1024px", "$type": "dimension", "$description": "Small desktop / landscape tablet" },
+    "xl":  { "$value": "1280px", "$type": "dimension", "$description": "Desktop" },
+    "2xl": { "$value": "1440px", "$type": "dimension", "$description": "Large desktop" },
+    "3xl": { "$value": "1920px", "$type": "dimension", "$description": "Full HD" }
+  },
+
+  "z-index": {
+    "$description": "Stacking order",
+    "base":     { "$value": "0",     "$type": "number" },
+    "raised":   { "$value": "1",     "$type": "number" },
+    "dropdown": { "$value": "1000",  "$type": "number" },
+    "sticky":   { "$value": "1100",  "$type": "number" },
+    "overlay":  { "$value": "1300",  "$type": "number" },
+    "modal":    { "$value": "1400",  "$type": "number" },
+    "popover":  { "$value": "1500",  "$type": "number" },
+    "toast":    { "$value": "1700",  "$type": "number" },
+    "tooltip":  { "$value": "1800",  "$type": "number" }
+  },
+
+  "direction": {
+    "$description": "FIX §I.2.1: Text direction tokens for RTL script support (Urdu, Sindhi)",
+    "ltr": { "$value": "ltr", "$type": "string" },
+    "rtl": { "$value": "rtl", "$type": "string" }
+  },
+
+  "number-format": {
+    "$description": "FIX §IV.1 Dim 3.10: Indian number formatting patterns",
+    "indian": { "$value": "##,##,###", "$type": "string", "$description": "Indian numbering: 12,34,567 (lakhs/crores)" },
+    "international": { "$value": "#,###,###", "$type": "string", "$description": "International: 1,234,567" }
+  }
+}

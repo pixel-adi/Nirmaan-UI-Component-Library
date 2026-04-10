@@ -1,0 +1,32 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-brand="up"] {
+  --nir-light-color-primary-default: #1565C0; /** UP blue */
+  --nir-light-color-primary-hover: #0D47A1;
+  --nir-light-color-primary-active: #0A3880;
+  --nir-light-color-primary-subtle: #E3F2FD;
+  --nir-light-color-primary-muted: #BBDEFB;
+  --nir-light-color-primary-on-primary: #FFFFFF;
+  --nir-light-color-accent-default: #FF6F00; /** Saffron accent */
+  --nir-light-color-accent-hover: #E65100;
+  --nir-light-color-accent-subtle: #FFF3E0;
+  --nir-light-color-accent-on-accent: #FFFFFF;
+  --nir-light-color-secondary-default: #FFFFFF;
+  --nir-light-color-secondary-stroke: #1565C0;
+  --nir-light-color-secondary-on-secondary: #1565C0;
+  --nir-dark-color-primary-default: #64B5F6;
+  --nir-dark-color-primary-hover: #90CAF9;
+  --nir-dark-color-primary-active: #BBDEFB;
+  --nir-dark-color-primary-subtle: #0A1929;
+  --nir-dark-color-primary-muted: #0D2137;
+  --nir-dark-color-primary-on-primary: #0A1929;
+  --nir-dark-color-accent-default: #FFB74D;
+  --nir-dark-color-accent-hover: #FFCC80;
+  --nir-dark-color-accent-subtle: #1A1000;
+  --nir-dark-color-accent-on-accent: #1A0D00;
+  --nir-dark-color-secondary-default: #0D2137;
+  --nir-dark-color-secondary-stroke: #64B5F6;
+  --nir-dark-color-secondary-on-secondary: #BBDEFB;
+}

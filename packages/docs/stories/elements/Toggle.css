@@ -1,0 +1,146 @@
+/* ═══════════════════════════════════════════
+   nir-e-toggle — Switch component
+   ═══════════════════════════════════════════ */
+
+.nir-e-toggle {
+  font-family: var(--nir-font-family-body);
+  display: inline-block;
+}
+
+/* ── Control (wrapping label) ── */
+.nir-e-toggle__control {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--nir-spacing-inline-sm, 8px);
+  cursor: pointer;
+  min-height: 44px;
+  padding: var(--nir-spacing-stack-xs, 4px) 0;
+}
+
+.nir-e-toggle--label-left .nir-e-toggle__control {
+  flex-direction: row;
+}
+
+/* ── Hidden native input ── */
+.nir-e-toggle__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ── Switch container ── */
+.nir-e-toggle__switch {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+/* ── Track ── */
+.nir-e-toggle__track {
+  display: block;
+  background: var(--nir-color-border-default);
+  border-radius: var(--nir-radius-full, 9999px);
+  transition: background-color var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease);
+  position: relative;
+}
+
+.nir-e-toggle--sm .nir-e-toggle__track {
+  width: 32px;
+  height: 18px;
+}
+
+.nir-e-toggle--md .nir-e-toggle__track {
+  width: 44px;
+  height: 24px;
+}
+
+/* ── Thumb ── */
+.nir-e-toggle__thumb {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+  background: var(--nir-color-primary-on-primary, #fff);
+  border-radius: var(--nir-radius-full, 9999px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease);
+}
+
+.nir-e-toggle--sm .nir-e-toggle__thumb {
+  width: 14px;
+  height: 14px;
+}
+
+.nir-e-toggle--md .nir-e-toggle__thumb {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Checked state ── */
+.nir-e-toggle__input:checked ~ .nir-e-toggle__track {
+  background: var(--nir-color-primary-default);
+}
+
+.nir-e-toggle--sm .nir-e-toggle__input:checked ~ .nir-e-toggle__track .nir-e-toggle__thumb {
+  transform: translate(14px, -50%);
+}
+
+.nir-e-toggle--md .nir-e-toggle__input:checked ~ .nir-e-toggle__track .nir-e-toggle__thumb {
+  transform: translate(20px, -50%);
+}
+
+/* ── Hover ── */
+.nir-e-toggle__control:hover .nir-e-toggle__track {
+  background: var(--nir-color-border-strong);
+}
+.nir-e-toggle__control:hover .nir-e-toggle__input:checked ~ .nir-e-toggle__track {
+  background: var(--nir-color-primary-hover);
+}
+
+/* ── Focus ── */
+.nir-e-toggle__input:focus-visible ~ .nir-e-toggle__track {
+  outline: 2px solid var(--nir-color-interaction-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Text (label + description) ── */
+.nir-e-toggle__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.nir-e-toggle__label {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-base, 16px);
+  font-weight: var(--nir-font-weight-label, 500);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-default);
+}
+
+.nir-e-toggle--sm .nir-e-toggle__label {
+  font-size: var(--nir-font-size-sm, 14px);
+}
+
+.nir-e-toggle__description {
+  font-family: var(--nir-font-family-body);
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-body, 400);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+  color: var(--nir-color-text-secondary);
+}
+
+/* ── Disabled ── */
+.nir-e-toggle--disabled .nir-e-toggle__control {
+  cursor: not-allowed;
+}
+.nir-e-toggle--disabled .nir-e-toggle__switch,
+.nir-e-toggle--disabled .nir-e-toggle__label,
+.nir-e-toggle--disabled .nir-e-toggle__description {
+  opacity: var(--nir-opacity-disabled, 0.38);
+}

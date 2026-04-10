@@ -1,0 +1,72 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-theme="dark"] {
+  --nir-color-surface-overlay: rgba(0, 0, 0, 0.7);
+  --nir-color-text-link-visited: #c084fc;
+  --nir-color-interaction-hover-overlay: rgba(255, 255, 255, 0.06);
+  --nir-color-interaction-active-overlay: rgba(255, 255, 255, 0.1);
+  --nir-color-primary-default: var(--nir-color-navy-300);
+  --nir-color-primary-hover: var(--nir-color-navy-200);
+  --nir-color-primary-active: var(--nir-color-navy-100);
+  --nir-color-primary-subtle: var(--nir-color-navy-900);
+  --nir-color-primary-muted: var(--nir-color-navy-800);
+  --nir-color-primary-on-primary: var(--nir-color-navy-900);
+  --nir-color-secondary-default: var(--nir-color-neutral-800);
+  --nir-color-secondary-stroke: var(--nir-color-navy-300);
+  --nir-color-secondary-on-secondary: var(--nir-color-cream-100);
+  --nir-color-surface-default: var(--nir-color-navy-900);
+  --nir-color-surface-container: var(--nir-color-navy-800);
+  --nir-color-surface-container-stroke: var(--nir-color-navy-700);
+  --nir-color-surface-container-light: var(--nir-color-navy-400);
+  --nir-color-text-default: var(--nir-color-cream-100);
+  --nir-color-text-secondary: var(--nir-color-cream-500);
+  --nir-color-text-tertiary: var(--nir-color-cream-600);
+  --nir-color-text-placeholder: var(--nir-color-navy-400);
+  --nir-color-text-disabled: var(--nir-color-navy-400);
+  --nir-color-text-inverse: var(--nir-color-navy-900);
+  --nir-color-text-on-color: var(--nir-color-navy-900);
+  --nir-color-text-link: var(--nir-color-blue-link-300);
+  --nir-color-border-default: var(--nir-color-navy-700);
+  --nir-color-border-strong: var(--nir-color-navy-400);
+  --nir-color-border-focus: var(--nir-color-navy-300);
+  --nir-color-border-disabled: var(--nir-color-navy-800);
+  --nir-color-border-error: var(--nir-color-red-300);
+  --nir-color-border-success: var(--nir-color-green-300);
+  --nir-color-border-warning: var(--nir-color-amber-300);
+  --nir-color-icon-default: var(--nir-color-cream-500);
+  --nir-color-icon-secondary: var(--nir-color-navy-300);
+  --nir-color-icon-disabled: var(--nir-color-navy-400);
+  --nir-color-icon-inverse: var(--nir-color-navy-900);
+  --nir-color-icon-on-color: var(--nir-color-navy-900);
+  --nir-color-feedback-error-default: var(--nir-color-red-300);
+  --nir-color-feedback-error-subtle: var(--nir-color-red-900);
+  --nir-color-feedback-error-text: var(--nir-color-red-200);
+  --nir-color-feedback-error-border: var(--nir-color-red-800);
+  --nir-color-feedback-error-on: var(--nir-color-neutral-900);
+  --nir-color-feedback-success-default: var(--nir-color-green-300);
+  --nir-color-feedback-success-subtle: var(--nir-color-green-900);
+  --nir-color-feedback-success-text: var(--nir-color-green-200);
+  --nir-color-feedback-success-border: var(--nir-color-green-800);
+  --nir-color-feedback-success-on: var(--nir-color-neutral-900);
+  --nir-color-feedback-warning-default: var(--nir-color-amber-300);
+  --nir-color-feedback-warning-subtle: var(--nir-color-amber-900);
+  --nir-color-feedback-warning-text: var(--nir-color-amber-200);
+  --nir-color-feedback-warning-border: var(--nir-color-amber-800);
+  --nir-color-feedback-warning-on: var(--nir-color-neutral-900);
+  --nir-color-feedback-info-default: var(--nir-color-navy-300);
+  --nir-color-feedback-info-subtle: var(--nir-color-navy-950);
+  --nir-color-feedback-info-text: var(--nir-color-navy-200);
+  --nir-color-feedback-info-border: var(--nir-color-navy-800);
+  --nir-color-feedback-info-on: var(--nir-color-neutral-900);
+  --nir-color-interaction-focus-ring: var(--nir-color-navy-300);
+  --nir-color-interaction-selected-bg: var(--nir-color-navy-800);
+  --nir-color-interaction-disabled-bg: var(--nir-color-navy-800);
+  --nir-color-interaction-disabled-text: var(--nir-color-navy-400);
+  --nir-elevation-none: var(--nir-elevation-0);
+  --nir-elevation-raised: var(--nir-elevation-dark-2);
+  --nir-elevation-overlay: var(--nir-elevation-dark-4);
+  --nir-elevation-modal: var(--nir-elevation-dark-5);
+  --nir-focus-ring-color: var(--nir-color-navy-300);
+}

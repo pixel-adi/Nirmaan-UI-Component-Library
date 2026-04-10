@@ -1,0 +1,36 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-brand="tn"] {
+  --nir-light-color-primary-default: #B71C1C; /** Tamil Nadu red */
+  --nir-light-color-primary-hover: #9A1616;
+  --nir-light-color-primary-active: #7D1111;
+  --nir-light-color-primary-subtle: #FDEAEA;
+  --nir-light-color-primary-muted: #F5CDCD;
+  --nir-light-color-primary-on-primary: #FFFFFF;
+  --nir-light-color-accent-default: #1A1A1A; /** Black — secondary identity color */
+  --nir-light-color-accent-hover: #333333;
+  --nir-light-color-accent-subtle: #F0F0F0;
+  --nir-light-color-accent-on-accent: #FFFFFF;
+  --nir-light-color-secondary-default: #FFFFFF;
+  --nir-light-color-secondary-stroke: #B71C1C;
+  --nir-light-color-secondary-on-secondary: #B71C1C;
+  --nir-light-color-surface-default: #FFFBF9; /** Warm-tinted surface */
+  --nir-light-color-surface-container: #FFFFFF;
+  --nir-dark-color-primary-default: #EF5350;
+  --nir-dark-color-primary-hover: #F57573;
+  --nir-dark-color-primary-active: #FB9896;
+  --nir-dark-color-primary-subtle: #1F0A0A;
+  --nir-dark-color-primary-muted: #2E1111;
+  --nir-dark-color-primary-on-primary: #1F0A0A;
+  --nir-dark-color-accent-default: #E0E0E0;
+  --nir-dark-color-accent-hover: #F0F0F0;
+  --nir-dark-color-accent-subtle: #1A1A1A;
+  --nir-dark-color-accent-on-accent: #1A1A1A;
+  --nir-dark-color-secondary-default: #2E1111;
+  --nir-dark-color-secondary-stroke: #EF5350;
+  --nir-dark-color-secondary-on-secondary: #F5CDCD;
+  --nir-dark-color-surface-default: #1A0D0B;
+  --nir-dark-color-surface-container: #241412;
+}

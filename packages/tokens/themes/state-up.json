@@ -1,0 +1,62 @@
+{
+  "$description": "Nirman Theme — Government of Uttar Pradesh. Class B: Blue-saffron identity.",
+  "$class": "B",
+  "$scope": "UP state portals — edistrict.up.gov.in, UP Service Plus, UPPCL, state department websites",
+
+  "meta": {
+    "name": "Uttar Pradesh",
+    "code": "UP",
+    "primary-language": "hi",
+    "secondary-languages": ["en", "ur"],
+    "emblem": "assets/emblems/up.svg",
+    "header-variant": "nir-b-header-state"
+  },
+
+  "light": {
+    "color": {
+      "primary": {
+        "default":    { "$value": "#1565C0", "$description": "UP blue" },
+        "hover":      { "$value": "#0D47A1" },
+        "active":     { "$value": "#0A3880" },
+        "subtle":     { "$value": "#E3F2FD" },
+        "muted":      { "$value": "#BBDEFB" },
+        "on-primary": { "$value": "#FFFFFF" }
+      },
+      "accent": {
+        "default":    { "$value": "#FF6F00", "$description": "Saffron accent" },
+        "hover":      { "$value": "#E65100" },
+        "subtle":     { "$value": "#FFF3E0" },
+        "on-accent":  { "$value": "#FFFFFF" }
+      },
+      "secondary": {
+        "default":    { "$value": "#FFFFFF" },
+        "stroke":     { "$value": "#1565C0" },
+        "on-secondary": { "$value": "#1565C0" }
+      }
+    }
+  },
+
+  "dark": {
+    "color": {
+      "primary": {
+        "default":    { "$value": "#64B5F6" },
+        "hover":      { "$value": "#90CAF9" },
+        "active":     { "$value": "#BBDEFB" },
+        "subtle":     { "$value": "#0A1929" },
+        "muted":      { "$value": "#0D2137" },
+        "on-primary": { "$value": "#0A1929" }
+      },
+      "accent": {
+        "default":    { "$value": "#FFB74D" },
+        "hover":      { "$value": "#FFCC80" },
+        "subtle":     { "$value": "#1A1000" },
+        "on-accent":  { "$value": "#1A0D00" }
+      },
+      "secondary": {
+        "default":    { "$value": "#0D2137" },
+        "stroke":     { "$value": "#64B5F6" },
+        "on-secondary": { "$value": "#BBDEFB" }
+      }
+    }
+  }
+}

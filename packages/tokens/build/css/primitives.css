@@ -1,0 +1,248 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --nir-color-navy-50: #e6edf3;
+  --nir-color-navy-100: #ced6de; /** Matches existing primary/very-light */
+  --nir-color-navy-200: #8298aa; /** Matches existing surface/container-light */
+  --nir-color-navy-300: #5b7a94;
+  --nir-color-navy-400: #3a5d7a;
+  --nir-color-navy-500: #0b4a78;
+  --nir-color-navy-600: #083459; /** PRIMARY BASE — matches existing primary/base */
+  --nir-color-navy-700: #062a48;
+  --nir-color-navy-800: #041e34;
+  --nir-color-navy-900: #010f2a; /** Matches existing surface/on-base */
+  --nir-color-navy-950: #010a1c;
+  --nir-color-ink-50: #f4f5f7;
+  --nir-color-ink-100: #e2e5e8;
+  --nir-color-ink-200: #b8c0c7;
+  --nir-color-ink-300: #8e9ba6;
+  --nir-color-ink-400: #647685;
+  --nir-color-ink-500: #3f5161;
+  --nir-color-ink-600: #23313c; /** Matches existing surface/on-container */
+  --nir-color-ink-700: #1a252e;
+  --nir-color-ink-800: #111a21;
+  --nir-color-ink-900: #0a1015;
+  --nir-color-cream-50: #fef6ee; /** Matches existing surface/base */
+  --nir-color-cream-100: #fcfcfc; /** Matches existing surface/container + secondary/base */
+  --nir-color-cream-200: #f7f3ef;
+  --nir-color-cream-300: #f0ebe5;
+  --nir-color-cream-400: #e6e2de; /** Matches existing surface/container-stroke */
+  --nir-color-cream-500: #d4cfc9;
+  --nir-color-cream-600: #b8b2ab;
+  --nir-color-cream-700: #8a847e;
+  --nir-color-cream-800: #5c5854;
+  --nir-color-cream-900: #2e2c2a;
+  --nir-color-neutral-0: #ffffff; /** Pure white */
+  --nir-color-neutral-50: #fcfcfc;
+  --nir-color-neutral-100: #f5f5f5;
+  --nir-color-neutral-200: #e5e5e5;
+  --nir-color-neutral-300: #d4d4d4;
+  --nir-color-neutral-400: #a3a3a3;
+  --nir-color-neutral-500: #737373;
+  --nir-color-neutral-600: #525252;
+  --nir-color-neutral-700: #404040;
+  --nir-color-neutral-800: #262626;
+  --nir-color-neutral-900: #171717;
+  --nir-color-neutral-950: #0a0a0a;
+  --nir-color-neutral-1000: #000000; /** Pure black */
+  --nir-color-red-50: #fef2f2;
+  --nir-color-red-100: #efd5d5; /** Matches existing status/negative/container */
+  --nir-color-red-200: #e5abab;
+  --nir-color-red-300: #d47070;
+  --nir-color-red-400: #c94d4d;
+  --nir-color-red-500: #bc3737; /** Matches existing status/negative/base */
+  --nir-color-red-600: #a32f2f;
+  --nir-color-red-700: #882727;
+  --nir-color-red-800: #6e1f1f;
+  --nir-color-red-900: #541818;
+  --nir-color-green-50: #f0fdf4;
+  --nir-color-green-100: #cee7cf; /** Matches existing status/positive/container */
+  --nir-color-green-200: #9dd09f;
+  --nir-color-green-300: #5db861;
+  --nir-color-green-400: #30a635;
+  --nir-color-green-500: #18941c; /** Matches existing status/positive/base */
+  --nir-color-green-600: #137a17;
+  --nir-color-green-700: #005a03; /** Matches existing status/positive/on-container */
+  --nir-color-green-800: #004a03;
+  --nir-color-green-900: #003502;
+  --nir-color-amber-50: #fffbeb;
+  --nir-color-amber-100: #ffefc6; /** Matches existing status/warning/container */
+  --nir-color-amber-200: #ffe082;
+  --nir-color-amber-300: #ffd54f;
+  --nir-color-amber-400: #fcc41a;
+  --nir-color-amber-500: #fab401; /** Matches existing status/warning/base */
+  --nir-color-amber-600: #d18f00; /** Matches existing status/warning/on-container */
+  --nir-color-amber-700: #a87300;
+  --nir-color-amber-800: #7f5700;
+  --nir-color-amber-900: #563a00;
+  --nir-color-blue-link-50: #eef0fd;
+  --nir-color-blue-link-100: #c8cffa;
+  --nir-color-blue-link-200: #8b98f3;
+  --nir-color-blue-link-300: #4f61ec;
+  --nir-color-blue-link-400: #2040e7;
+  --nir-color-blue-link-500: #092de2; /** Matches existing surface/text-link */
+  --nir-color-blue-link-600: #0724b5;
+  --nir-color-blue-link-700: #051b88;
+  --nir-color-blue-link-800: #03125b;
+  --nir-color-blue-link-900: #020a33;
+  --nir-color-saffron-50: #fff8e1;
+  --nir-color-saffron-100: #ffecb3;
+  --nir-color-saffron-200: #ffe082;
+  --nir-color-saffron-300: #ffd54f;
+  --nir-color-saffron-400: #ffca28;
+  --nir-color-saffron-500: #ff9800;
+  --nir-color-saffron-600: #ff6f00;
+  --nir-color-saffron-700: #e65100;
+  --nir-color-saffron-800: #bf360c;
+  --nir-color-tricolor-green-500: #16a34a;
+  --nir-color-tricolor-green-600: #138840;
+  --nir-color-tricolor-green-700: #0f6d33;
+  --nir-color-gold-400: #ffd700;
+  --nir-color-gold-500: #c5a600;
+  --nir-color-gold-600: #a68b00;
+  --nir-color-yellow-400: #facc15;
+  --nir-spacing-0: 0px;
+  --nir-spacing-1: 4px;
+  --nir-spacing-2: 8px;
+  --nir-spacing-3: 12px;
+  --nir-spacing-4: 16px;
+  --nir-spacing-5: 20px;
+  --nir-spacing-6: 24px;
+  --nir-spacing-7: 28px;
+  --nir-spacing-8: 32px;
+  --nir-spacing-9: 36px;
+  --nir-spacing-10: 40px;
+  --nir-spacing-11: 44px; /** WCAG min touch target */
+  --nir-spacing-12: 48px;
+  --nir-spacing-14: 56px;
+  --nir-spacing-16: 64px;
+  --nir-spacing-20: 80px;
+  --nir-spacing-24: 96px;
+  --nir-spacing-32: 128px;
+  --nir-spacing-40: 160px;
+  --nir-spacing-48: 192px;
+  --nir-spacing-56: 224px;
+  --nir-spacing-64: 256px;
+  --nir-spacing-px: 1px; /** Hairline borders only */
+  --nir-spacing-0-5: 2px;
+  --nir-spacing-1-5: 6px;
+  --nir-spacing-2-5: 10px;
+  --nir-spacing-3-5: 14px;
+  --nir-spacing-safe-area-top: env(safe-area-inset-top, 0px); /** FIX §V.8: Mobile notch / Dynamic Island. Falls back to 0px on non-notched devices. */
+  --nir-spacing-safe-area-bottom: env(safe-area-inset-bottom, 0px); /** FIX §V.8: Mobile home indicator. Falls back to 0px on devices without home bar. */
+  --nir-spacing-safe-area-left: env(safe-area-inset-left, 0px); /** Landscape mode safe area */
+  --nir-spacing-safe-area-right: env(safe-area-inset-right, 0px); /** Landscape mode safe area */
+  --nir-radius-none: 0px;
+  --nir-radius-xs: 2px;
+  --nir-radius-sm: 4px;
+  --nir-radius-md: 6px;
+  --nir-radius-lg: 8px;
+  --nir-radius-xl: 12px;
+  --nir-radius-2xl: 16px;
+  --nir-radius-3xl: 24px;
+  --nir-radius-full: 9999px; /** Pill shape */
+  --nir-font-family-latin-sans: 'Noto Sans';
+  --nir-font-family-latin-mono: 'Noto Sans Mono';
+  --nir-font-family-devanagari-sans: 'Noto Sans Devanagari';
+  --nir-font-family-tamil-sans: 'Noto Sans Tamil';
+  --nir-font-family-bengali-sans: 'Noto Sans Bengali';
+  --nir-font-family-telugu-sans: 'Noto Sans Telugu';
+  --nir-font-family-kannada-sans: 'Noto Sans Kannada';
+  --nir-font-family-malayalam-sans: 'Noto Sans Malayalam';
+  --nir-font-family-gujarati-sans: 'Noto Sans Gujarati';
+  --nir-font-family-gurmukhi-sans: 'Noto Sans Gurmukhi';
+  --nir-font-family-odia-sans: 'Noto Sans Oriya';
+  --nir-font-family-urdu-nastaliq: 'Noto Nastaliq Urdu';
+  --nir-font-size-2xs: 10px;
+  --nir-font-size-xs: 12px;
+  --nir-font-size-sm: 14px;
+  --nir-font-size-base: 16px; /** Body text default */
+  --nir-font-size-lg: 18px;
+  --nir-font-size-xl: 20px;
+  --nir-font-size-2xl: 24px;
+  --nir-font-size-3xl: 30px;
+  --nir-font-size-4xl: 36px;
+  --nir-font-size-5xl: 48px;
+  --nir-font-size-6xl: 60px;
+  --nir-font-weight-regular: 400;
+  --nir-font-weight-medium: 500;
+  --nir-font-weight-semibold: 600;
+  --nir-font-weight-bold: 700;
+  --nir-font-line-height-none: 1;
+  --nir-font-line-height-tight: 1.25;
+  --nir-font-line-height-snug: 1.375;
+  --nir-font-line-height-normal: 1.5; /** Latin default */
+  --nir-font-line-height-relaxed: 1.625;
+  --nir-font-line-height-loose: 1.7; /** Devanagari/Bengali default */
+  --nir-font-line-height-looser: 1.8; /** Urdu Nastaliq default */
+  --nir-font-letter-spacing-tighter: -0.02em;
+  --nir-font-letter-spacing-tight: -0.01em;
+  --nir-font-letter-spacing-normal: 0em;
+  --nir-font-letter-spacing-wide: 0.01em; /** Tamil/Malayalam */
+  --nir-font-letter-spacing-wider: 0.02em;
+  --nir-font-letter-spacing-widest: 0.05em;
+  --nir-elevation-0: none;
+  --nir-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --nir-elevation-2: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --nir-elevation-3: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --nir-elevation-4: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --nir-elevation-5: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --nir-elevation-6: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --nir-elevation-dark-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --nir-elevation-dark-2: 0 2px 4px 0 rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --nir-elevation-dark-3: 0 4px 8px -2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --nir-elevation-dark-4: 0 8px 16px -4px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --nir-elevation-dark-5: 0 16px 32px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --nir-opacity-0: 0;
+  --nir-opacity-5: 0.05;
+  --nir-opacity-10: 0.1;
+  --nir-opacity-20: 0.2;
+  --nir-opacity-25: 0.25;
+  --nir-opacity-30: 0.3;
+  --nir-opacity-38: 0.38; /** Disabled state opacity */
+  --nir-opacity-40: 0.4;
+  --nir-opacity-50: 0.5;
+  --nir-opacity-60: 0.6;
+  --nir-opacity-70: 0.7;
+  --nir-opacity-75: 0.75;
+  --nir-opacity-80: 0.8;
+  --nir-opacity-90: 0.9;
+  --nir-opacity-95: 0.95;
+  --nir-opacity-100: 1;
+  --nir-duration-0: 0ms; /** FIX §I.2.2: Used for prefers-reduced-motion override */
+  --nir-duration-75: 75ms;
+  --nir-duration-100: 100ms;
+  --nir-duration-150: 150ms;
+  --nir-duration-200: 200ms;
+  --nir-duration-300: 300ms;
+  --nir-duration-500: 500ms;
+  --nir-duration-700: 700ms;
+  --nir-duration-1000: 1000ms;
+  --nir-easing-linear: cubic-bezier(0, 0, 1, 1);
+  --nir-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --nir-easing-decelerate: cubic-bezier(0.0, 0, 0.2, 1);
+  --nir-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --nir-easing-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --nir-breakpoint-xs: 320px; /** Small phone (min supported) */
+  --nir-breakpoint-sm: 375px; /** Standard phone */
+  --nir-breakpoint-md: 768px; /** Tablet */
+  --nir-breakpoint-lg: 1024px; /** Small desktop / landscape tablet */
+  --nir-breakpoint-xl: 1280px; /** Desktop */
+  --nir-breakpoint-2xl: 1440px; /** Large desktop */
+  --nir-breakpoint-3xl: 1920px; /** Full HD */
+  --nir-z-index-base: 0;
+  --nir-z-index-raised: 1;
+  --nir-z-index-dropdown: 1000;
+  --nir-z-index-sticky: 1100;
+  --nir-z-index-overlay: 1300;
+  --nir-z-index-modal: 1400;
+  --nir-z-index-popover: 1500;
+  --nir-z-index-toast: 1700;
+  --nir-z-index-tooltip: 1800;
+  --nir-direction-ltr: ltr;
+  --nir-direction-rtl: rtl;
+  --nir-number-format-indian: ##,##,###; /** Indian numbering: 12,34,567 (lakhs/crores) */
+  --nir-number-format-international: #,###,###; /** International: 1,234,567 */
+}

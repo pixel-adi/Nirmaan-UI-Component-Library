@@ -1,0 +1,464 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Contributing/Figma to Storybook Workflow" />
+
+# Figma → Storybook: Component Development Workflow
+
+A practical guide for turning Figma designs into production-ready Storybook components.
+
+---
+
+## Overview
+
+```
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   1. DESIGN  │ →  │   2. SPEC    │ →  │   3. BUILD   │ →  │  4. DOCUMENT │
+│   in Figma   │     │  extraction  │     │  in React    │     │  in Storybook│
+└──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
+  Designer role       Collab role           Developer role         Team role
+```
+
+Each stage has **inputs**, **outputs**, and **gate criteria**. Don't skip stages.
+
+---
+
+## Stage 1: DESIGN in Figma
+
+### Prerequisites
+
+Before starting, the designer needs:
+- Subscription to **[NIR] 00 — Foundations** library (variables published)
+- Access to the assigned **[NIR] 01 — Elements** file
+- A component proposal approved (GitHub Issue)
+- The accessibility specification written (ARIA role, keyboard model, SR strings)
+
+### Construction Rules
+
+```
+✅ Auto-layout for everything
+✅ All fills bound to Semantic/Color variables
+✅ All paddings/gaps bound to Semantic/Number variables
+✅ All radius bound to --nir-radius-* variables
+✅ All typography using Semantic type styles
+✅ Variants cover every state combination
+✅ Accessibility annotation layer exists
+❌ NO hardcoded colors (no #083459 anywhere)
+❌ NO hardcoded spacing (no 16px anywhere)
+❌ NO detached instances from library
+❌ NO fonts other than Noto Sans family
+```
+
+### Variant Matrix
+
+For a typical component, variants are:
+```
+variant × size × state × disabled = total combinations
+  5     ×  3   ×  6    ×    2    = 180 variants
+```
+
+Build ALL combinations. Missing states = missing code later.
+
+### Component Naming
+
+```
+nir-e-button           ← Element (atom)
+nir-p-form-field       ← Pattern (molecule)
+nir-b-header           ← Block (organism)
+```
+
+### Multi-Script Testing
+
+Create **script test frames** on a separate page showing the component with:
+
+| Frame | Label content |
+|---|---|
+| Latin | "Submit Application" |
+| Hindi | "आवेदन जमा करें" |
+| Tamil | "விண்ணப்பத்தை சமர்ப்பி" |
+| Urdu (RTL) | "درخواست جمع کرائیں" |
+
+Verify no clipping, proper line-height, correct padding. If text wraps in Hindi but fits in English, increase padding.
+
+### Gate Criteria — Stage 1 Complete
+
+```
+□ Component built with all variant × size × state combinations
+□ Zero hardcoded values (all bindings use variables)
+□ Accessibility annotation layer complete
+□ Script test frames pass (Latin + Hindi + Tamil minimum)
+□ Light, Dark, High-Contrast modes all render correctly
+□ Designer has added a dev note layer listing:
+   - Component name (e.g. nir-e-button)
+   - Props needed (variant, size, disabled, etc.)
+   - States (hover, focus, active, disabled, loading)
+   - A11y contract (role, keyboard shortcuts, SR strings)
+```
+
+---
+
+## Stage 2: SPEC EXTRACTION
+
+This is the **handoff** moment. Designer and developer sit together (or async via the GitHub issue).
+
+### What the developer extracts from Figma
+
+Use Figma **Dev Mode** to inspect:
+
+1. **Token references** — Every CSS value should show `var(--nir-*)` — not a hex or px number. If you see raw values, go back to Stage 1.
+
+2. **Component structure** — Note the nesting:
+   ```
+   .nir-e-button
+     └── .nir-e-button__icon (optional)
+     └── .nir-e-button__label
+     └── .nir-e-button__spinner (loading state)
+   ```
+
+3. **State changes** — For each state, list what changes:
+   ```
+   default → hover:  background changes to --nir-color-primary-hover
+   default → focus:  outline appears (2px --nir-color-interaction-focus-ring)
+   default → loading: label hidden, spinner shown, aria-busy="true"
+   ```
+
+4. **Variant logic** — Which props drive which visual changes:
+   ```
+   variant: primary | secondary | tertiary | danger | ghost
+     → controls background + text color + border
+   size: sm | md | lg
+     → controls height + padding + font-size
+   ```
+
+### The Spec Document
+
+Create this as a comment on the GitHub issue before writing code:
+
+```markdown
+## Component Spec: nir-e-toggle
+
+### Props
+- label: string (required)
+- description?: string
+- size: 'sm' | 'md' (default: 'md')
+- checked?: boolean
+- disabled?: boolean
+- onChange?: (checked: boolean) => void
+
+### Token Bindings
+- Track bg (off): --nir-color-border-default
+- Track bg (on):  --nir-color-primary-default
+- Thumb:          --nir-color-primary-on-primary
+- Label text:     --nir-color-text-default
+- Label size:     --nir-font-size-base
+- Focus ring:     --nir-color-interaction-focus-ring
+
+### States
+| State    | Track bg              | Thumb position | Opacity |
+|----------|----------------------|----------------|---------|
+| off      | border-default        | left           | 1       |
+| on       | primary-default       | right          | 1       |
+| disabled | border-default        | (current)      | 0.38    |
+| focus    | (current) + outline   | (current)      | 1       |
+
+### A11y Contract
+- role="switch" on native input
+- aria-checked follows checked state
+- Space to toggle
+- Focus ring: 2px solid, 2px offset
+
+### Figma Link
+https://www.figma.com/file/XXX?node-id=YYY
+```
+
+### Gate Criteria — Stage 2 Complete
+
+```
+□ Spec document written and reviewed
+□ All tokens are semantic (no primitives in the binding list)
+□ All states have explicit visual changes documented
+□ Developer has opened the Figma file in Dev Mode
+□ Any ambiguities resolved with designer
+```
+
+---
+
+## Stage 3: BUILD in React
+
+### File Structure
+
+Every component gets exactly these 4 files in `stories/elements/` (or `patterns/` / `blocks/`):
+
+```
+stories/elements/
+├── Toggle.tsx           ← Component implementation
+├── Toggle.css           ← Token-driven styles
+├── Toggle.stories.tsx   ← Interactive demos
+└── Toggle.mdx           ← Usage documentation
+```
+
+### Implementation Rules
+
+**1. Start with the TypeScript interface**
+
+```tsx
+export interface ToggleProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
+  label: string;                           // required
+  description?: string;                    // optional
+  size?: 'sm' | 'md';                     // matches Figma variants
+  labelPosition?: 'left' | 'right';
+}
+```
+
+Props interface = Figma variant matrix. One-to-one mapping.
+
+**2. Use forwardRef for composability**
+
+```tsx
+export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
+  (props, ref) => {
+    // ...
+  }
+);
+Toggle.displayName = 'NirToggle';
+```
+
+**3. BEM naming with `nir-` prefix**
+
+```tsx
+const classes = [
+  'nir-e-toggle',
+  'nir-e-toggle--' + size,
+  checked ? 'nir-e-toggle--checked' : '',
+  disabled ? 'nir-e-toggle--disabled' : '',
+].filter(Boolean).join(' ');
+```
+
+**4. CSS uses ONLY `var(--nir-*)` — never hardcoded values**
+
+```css
+/* ❌ WRONG */
+.nir-e-toggle__track { background: #083459; padding: 16px; }
+
+/* ✅ RIGHT */
+.nir-e-toggle__track {
+  background: var(--nir-color-primary-default);
+  padding: var(--nir-spacing-component-padding-md);
+}
+```
+
+**5. Multi-script line-height adjustment**
+
+Components with text labels must handle script-specific line-heights:
+
+```css
+.nir-e-button {
+  line-height: var(--nir-font-line-height-none, 1);
+}
+.nir-e-button:lang(hi),
+.nir-e-button:lang(mr),
+.nir-e-button:lang(bn) {
+  line-height: var(--nir-font-line-height-tight, 1.25);
+  padding-top: var(--nir-spacing-component-padding-sm);
+  padding-bottom: var(--nir-spacing-component-padding-sm);
+}
+```
+
+Without this, Devanagari text (with matras above and below) gets clipped.
+
+**6. Accessibility attributes**
+
+Every interactive element must have:
+- Role (native element preferred, ARIA role if needed)
+- Labels linked via `id`/`htmlFor` or `aria-labelledby`
+- State communicated via `aria-*` attributes
+- `role="alert"` on error messages
+
+### Gate Criteria — Stage 3 Complete
+
+```
+□ Component renders without console errors
+□ All props from spec are implemented
+□ All states from spec are implemented
+□ CSS uses ONLY --nir-* variables (grep the file)
+□ Hindi/Tamil labels don't clip
+□ Tab navigation works, focus ring visible
+□ Tested in Light, Dark, High-Contrast modes
+□ Tested with screen reader (VoiceOver or NVDA)
+```
+
+---
+
+## Stage 4: DOCUMENT in Storybook
+
+Three files document the component for designers, developers, and reviewers.
+
+### 4a. Stories file (`Component.stories.tsx`)
+
+Interactive demos. One story per use case:
+
+```tsx
+// One story per visual state
+export const Default: Story = { args: { label: 'Enable' } };
+export const Checked: Story = { args: { label: 'Enabled', defaultChecked: true } };
+export const Disabled: Story = { args: { label: 'Coming soon', disabled: true } };
+
+// Realistic examples — use actual government content
+export const SettingsPanel: Story = { ... };
+
+// Multi-script
+export const HindiLabel: Story = {
+  args: { label: 'सूचनाएँ सक्षम करें' },
+  decorators: [(Story) => <div lang="hi"><Story /></div>],
+};
+```
+
+**Rule:** Story titles should describe the use case, not the props.
+- ❌ `PrimaryVariant`
+- ✅ `SubmitApplicationButton`
+
+### 4b. MDX documentation (`Component.mdx`)
+
+The structure I follow for every component:
+
+```mdx
+# Component Name
+
+One-line description of what it does and when to use it.
+
+## Live Example
+<Canvas of={Stories.MainExample} />
+<Controls of={Stories.MainExample} />
+
+## When to Use
+Table comparing with alternatives.
+
+## Anatomy
+ASCII diagram or Figma embed showing parts.
+
+## Sizes / Variants
+<Canvas of={Stories.SizeComparison} />
+Table explaining each.
+
+## Keyboard Interaction
+Table of all keyboard shortcuts.
+
+## Accessibility
+Table of a11y requirements + SR announcements.
+
+## Multilingual Support
+Hindi/Tamil/Urdu examples.
+
+## Do's and Don'ts
+✅ / ❌ bullet list.
+
+## Code Usage
+Real code examples with imports.
+
+## Figma
+Link + component name + variant list.
+```
+
+### Visual Structure Rules
+
+- **Use horizontal rules (`---`)** to break sections
+- **Use tables, not prose** for specifications
+- **Embed `<Canvas>` liberally** — show, don't just tell
+- **Use ✅ / ❌** symbols in do's/don'ts (easier to scan)
+- **Code blocks** for every example
+
+### 4c. Update the barrel export
+
+Add to `packages/components/src/index.ts`:
+
+```tsx
+export { Toggle } from './elements/Toggle/Toggle';
+export type { ToggleProps } from './elements/Toggle/Toggle';
+```
+
+### Gate Criteria — Stage 4 Complete
+
+```
+□ Stories file has at least 5 stories
+□ MDX file has all 10 sections from the template
+□ At least one Hindi story with decorator
+□ Code examples compile and work
+□ Figma link is in the docs
+□ Component is exported from barrel
+□ Merged to main — Storybook deployed
+```
+
+---
+
+## Quick Reference: New Component Checklist
+
+Print this and tick it off as you go:
+
+```
+┌────────────────────────────────────────────────┐
+│ Component Development Checklist                │
+├────────────────────────────────────────────────┤
+│ □ Proposal approved (GitHub Issue)             │
+│ □ A11y spec written                            │
+│ □ Figma component built                        │
+│ □ Variant matrix complete                      │
+│ □ Script test frames pass                      │
+│ □ Spec document written                        │
+│ □ Figma Dev Mode inspected                     │
+│ □ Component.tsx created                        │
+│ □ Component.css with ONLY --nir-* tokens       │
+│ □ Multi-script line-height handled             │
+│ □ Stories file with 5+ stories                 │
+│ □ MDX doc with 10 sections                     │
+│ □ Hindi story included                         │
+│ □ Barrel export updated                        │
+│ □ Tested in Light + Dark + HC modes            │
+│ □ Screen reader tested                         │
+│ □ PR opened + reviewed                         │
+│ □ Merged to main                               │
+└────────────────────────────────────────────────┘
+```
+
+---
+
+## Common Pitfalls
+
+| Problem | Solution |
+|---|---|
+| Hindi text clips in button | Add `:lang()` rule with tighter line-height + more padding |
+| CSS has hardcoded values | Grep for `#` and `px` — replace with `var(--nir-*)` |
+| Component doesn't work in dark mode | You forgot to use semantic tokens (used primitives directly) |
+| Focus ring missing | Add `outline: 2px solid var(--nir-color-interaction-focus-ring); outline-offset: 2px;` on `:focus-visible` |
+| Screen reader doesn't announce state | Add `aria-*` attributes, test with VoiceOver (Cmd+F5 on Mac) |
+| Storybook story fails to load | Import path wrong — use `'./Component'` not `'./Component.tsx'` |
+
+---
+
+## Component Development Timeline
+
+For a typical **Element** (atom like Button):
+
+| Stage | Designer time | Developer time |
+|---|---|---|
+| Design | 4–8 hours | — |
+| Spec extraction | 1 hour | 1 hour |
+| Build | — | 4–8 hours |
+| Documentation | 1 hour | 2–3 hours |
+| Review + iterate | 2 hours | 2 hours |
+| **Total** | **~8–12 hours** | **~9–14 hours** |
+
+For a **Pattern** (molecule like FormField), double these. For a **Block** (organism like Header), quadruple.
+
+---
+
+## Adding Your Existing Figma Components
+
+If you already have Figma designs for components not yet in Storybook, follow this path:
+
+1. **Audit** — Does it use only variables? If not, retrofit first (Stage 1 rules).
+2. **Name it** — Apply the `nir-e-` / `nir-p-` / `nir-b-` prefix.
+3. **Extract spec** — Open Dev Mode, write the spec doc (Stage 2).
+4. **Build** — Follow Stage 3.
+5. **Document** — Follow Stage 4.
+
+Don't skip the audit. Retrofitting a poorly-built Figma component into production code produces a poorly-built production component.

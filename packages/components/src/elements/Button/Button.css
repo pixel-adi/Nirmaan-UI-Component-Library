@@ -1,0 +1,136 @@
+/* ═══════════════════════════════════════════
+   nir-e-button — Nirman Design System
+   Token-only styles. BEM naming with nir- prefix.
+   ═══════════════════════════════════════════ */
+
+.nir-e-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nir-spacing-inline-xs, 4px);
+  font-family: var(--nir-font-family-body, 'Noto Sans', sans-serif);
+  font-weight: var(--nir-font-weight-medium, 500);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background-color var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease),
+    border-color var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease),
+    box-shadow var(--nir-duration-fast, 100ms) var(--nir-easing-standard, ease);
+}
+
+/* ── Sizes ── */
+.nir-e-button--sm {
+  min-height: 36px;
+  padding: var(--nir-spacing-component-padding-xs, 6px) var(--nir-spacing-component-padding-sm, 12px);
+  font-size: var(--nir-font-size-sm, 14px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+.nir-e-button--md {
+  min-height: 44px;
+  padding: var(--nir-spacing-component-padding-sm, 10px) var(--nir-spacing-component-padding-md, 16px);
+  font-size: var(--nir-font-size-base, 16px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+.nir-e-button--lg {
+  min-height: 52px;
+  padding: var(--nir-spacing-component-padding-md, 14px) var(--nir-spacing-component-padding-lg, 24px);
+  font-size: var(--nir-font-size-lg, 18px);
+  border-radius: var(--nir-radius-interactive, 6px);
+}
+
+/* ── Primary ── */
+.nir-e-button--primary {
+  background: var(--nir-color-primary-default);
+  color: var(--nir-color-primary-on-primary);
+}
+.nir-e-button--primary:hover:not(:disabled) {
+  background: var(--nir-color-primary-hover);
+}
+.nir-e-button--primary:active:not(:disabled) {
+  background: var(--nir-color-primary-active);
+}
+
+/* ── Secondary ── */
+.nir-e-button--secondary {
+  background: transparent;
+  color: var(--nir-color-primary-default);
+  border-color: var(--nir-color-primary-default);
+}
+.nir-e-button--secondary:hover:not(:disabled) {
+  background: var(--nir-color-primary-subtle);
+}
+
+/* ── Tertiary ── */
+.nir-e-button--tertiary {
+  background: transparent;
+  color: var(--nir-color-primary-default);
+  border-color: transparent;
+}
+.nir-e-button--tertiary:hover:not(:disabled) {
+  background: var(--nir-color-primary-subtle);
+}
+
+/* ── Danger ── */
+.nir-e-button--danger {
+  background: var(--nir-color-feedback-error-default);
+  color: var(--nir-color-primary-on-primary);
+}
+.nir-e-button--danger:hover:not(:disabled) {
+  background: var(--nir-color-feedback-error-text);
+}
+
+/* ── Ghost ── */
+.nir-e-button--ghost {
+  background: transparent;
+  color: var(--nir-color-text-default);
+  border-color: transparent;
+}
+.nir-e-button--ghost:hover:not(:disabled) {
+  background: var(--nir-color-interaction-hover-overlay, rgba(0,0,0,0.04));
+}
+
+/* ── Disabled ── */
+.nir-e-button--disabled,
+.nir-e-button:disabled {
+  opacity: var(--nir-opacity-disabled, 0.38);
+  cursor: not-allowed;
+}
+
+/* ── Full width ── */
+.nir-e-button--full { width: 100%; }
+
+/* ── Focus ring ── */
+.nir-e-button:focus-visible {
+  outline: 2px solid var(--nir-color-interaction-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Spinner ── */
+.nir-e-button__spinner-svg {
+  width: 1em;
+  height: 1em;
+  animation: nir-spin 0.8s linear infinite;
+}
+@keyframes nir-spin { to { transform: rotate(360deg); } }
+
+/* ── Icon ── */
+.nir-e-button__icon {
+  display: inline-flex;
+  width: 1.25em;
+  height: 1.25em;
+}
+.nir-e-button__icon > svg { width: 100%; height: 100%; }
+
+/* ── SR-only ── */
+.nir-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
