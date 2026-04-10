@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Radio, RadioGroup } from './Radio';
+import { Radio, RadioGroup } from '@nirman/components';
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'Elements/Radio',
@@ -108,40 +108,36 @@ export const Disabled: Story = {
   },
 };
 
-export const HindiLabels: Story = {
-  name: 'Hindi (Devanagari)',
-  render: () => {
-    const [value, setValue] = useState('');
-    return (
-      <RadioGroup
-        name="lang-pref"
-        label="भाषा चुनें"
-        value={value}
-        onChange={setValue}
-      >
-        <Radio value="hi" label="हिंदी" />
-        <Radio value="en" label="अंग्रेज़ी" />
-        <Radio value="ur" label="उर्दू" />
-      </RadioGroup>
-    );
+export const VernacularTesting: Story = {
+  name: 'Vernacular Testing',
+  argTypes: {
+    language: {
+      control: 'select',
+      options: ['Hindi', 'Tamil', 'Urdu', 'Bengali', 'English'],
+    },
   },
-};
-
-export const TamilLabels: Story = {
-  name: 'Tamil',
-  render: () => {
+  args: {
+    language: 'Hindi',
+  },
+  render: (args: any) => {
+    const { language, ...rest } = args;
     const [value, setValue] = useState('');
+    const locales: Record<string, { label: string; p1: string; p2: string; p3: string; dir: 'ltr' | 'rtl' }> = {
+      Hindi: { label: 'भाषा चुनें', p1: 'हिंदी', p2: 'अंग्रेज़ी', p3: 'उर्दू', dir: 'ltr' },
+      Tamil: { label: 'மொழியைத் தேர்ந்தெடுக்கவும்', p1: 'தமிழ்', p2: 'ஆங்கிலம்', p3: 'இந்தி', dir: 'ltr' },
+      Urdu: { label: 'زبان منتخب کریں', p1: 'اردو', p2: 'انگریزی', p3: 'ہندی', dir: 'rtl' },
+      Bengali: { label: 'ভাষা নির্বাচন করুন', p1: 'বাংলা', p2: 'ইংরেজি', p3: 'হিন্দি', dir: 'ltr' },
+      English: { label: 'Select Language', p1: 'English', p2: 'Hindi', p3: 'Other', dir: 'ltr' },
+    };
+    const content = locales[language as string] || locales.English;
     return (
-      <RadioGroup
-        name="lang-ta"
-        label="மொழியைத் தேர்ந்தெடுக்கவும்"
-        value={value}
-        onChange={setValue}
-      >
-        <Radio value="ta" label="தமிழ்" />
-        <Radio value="en" label="ஆங்கிலம்" />
-        <Radio value="hi" label="இந்தி" />
-      </RadioGroup>
+      <div dir={content.dir} lang={(language || 'English').slice(0,2).toLowerCase()}>
+        <RadioGroup {...rest} name="lang-pref" label={content.label} value={value} onChange={setValue}>
+          <Radio value="p1" label={content.p1} />
+          <Radio value="p2" label={content.p2} />
+          <Radio value="p3" label={content.p3} />
+        </RadioGroup>
+      </div>
     );
   },
 };

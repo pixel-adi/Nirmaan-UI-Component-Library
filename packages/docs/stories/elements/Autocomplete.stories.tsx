@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Autocomplete, AutocompleteOption } from './Autocomplete';
+import { Autocomplete, AutocompleteOption } from '@nirman/components';
 
 const meta: Meta<typeof Autocomplete> = {
   title: 'Elements/Autocomplete',
   component: Autocomplete,
-  tags: ['autodocs'],
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     disabled: { control: 'boolean' },
@@ -128,52 +127,43 @@ export const Disabled: Story = {
   ),
 };
 
-export const HindiLabel: Story = {
-  name: 'Hindi (Devanagari)',
-  render: () => {
-    const [value, setValue] = useState<string | null>(null);
-    return (
-      <div lang="hi" style={{ width: '360px' }}>
-        <Autocomplete
-          label="शहर का नाम"
-          placeholder="शहर खोजें..."
-          options={[
-            { value: 'mumbai', label: 'मुंबई', description: 'महाराष्ट्र' },
-            { value: 'delhi', label: 'नई दिल्ली', description: 'दिल्ली' },
-            { value: 'lucknow', label: 'लखनऊ', description: 'उत्तर प्रदेश' },
-            { value: 'jaipur', label: 'जयपुर', description: 'राजस्थान' },
-            { value: 'patna', label: 'पटना', description: 'बिहार' },
-            { value: 'bhopal', label: 'भोपाल', description: 'मध्य प्रदेश' },
-          ]}
-          value={value || undefined}
-          onChange={setValue}
-          helperText="अपना शहर खोजें और चुनें"
-          noResultsText="कोई परिणाम नहीं मिला"
-        />
-      </div>
-    );
+export const VernacularTesting: Story = {
+  name: 'Vernacular Testing',
+  argTypes: {
+    language: {
+      control: 'select',
+      options: ['Hindi', 'Tamil', 'Urdu', 'Bengali', 'English'],
+    },
   },
-};
-
-export const TamilLabel: Story = {
-  name: 'Tamil',
-  render: () => {
+  args: {
+    language: 'Hindi',
+  },
+  render: (args: any) => {
+    const { language, ...rest } = args;
     const [value, setValue] = useState<string | null>(null);
+    const locales: Record<string, { label: string; placeholder: string; helperText: string; noResultsText: string; p1: string; p2: string; p3: string; p1Desc: string; p2Desc: string; p3Desc: string; dir: 'ltr' | 'rtl' }> = {
+      Hindi: { label: 'शहर का नाम', placeholder: 'शहर खोजें...', helperText: 'अपना शहर खोजें और चुनें', noResultsText: 'कोई परिणाम नहीं मिला', p1: 'मुंबई', p2: 'नई दिल्ली', p3: 'लखनऊ', p1Desc: 'महाराष्ट्र', p2Desc: 'दिल्ली', p3Desc: 'उत्तर प्रदेश', dir: 'ltr' },
+      Tamil: { label: 'நகரத்தைத் தேடுங்கள்', placeholder: 'நகரத்தின் பெயரை உள்ளிடவும்...', helperText: 'நகரத்தைத் தேர்வுசெய்யவும்', noResultsText: 'முடிவுகள் இல்லை', p1: 'சென்னை', p2: 'மதுரை', p3: 'கோயம்புத்தூர்', p1Desc: 'தமிழ்நாடு', p2Desc: 'தமிழ்நாடு', p3Desc: 'தமிழ்நாடு', dir: 'ltr' },
+      Urdu: { label: 'شہر کا نام', placeholder: 'شہر تلاش کریں...', helperText: 'اپنا شہر داخل کریں', noResultsText: 'کوئی نتیجہ نہیں ملا', p1: 'لکھنو', p2: 'دہلی', p3: 'ممبئی', p1Desc: 'اتر پردیش', p2Desc: 'دہلی', p3Desc: 'مہاراشٹر', dir: 'rtl' },
+      Bengali: { label: 'শহরের নাম', placeholder: 'শহর খুঁজুন...', helperText: 'শহর নির্বাচন করুন', noResultsText: 'কোন ফলাফল পাওয়া যায়নি', p1: 'কলকাতা', p2: 'দিল্লি', p3: 'মুম্বাই', p1Desc: 'পশ্চিমবঙ্গ', p2Desc: 'দিল্লি', p3Desc: 'মহারাষ্ট্র', dir: 'ltr' },
+      English: { label: 'City Name', placeholder: 'Search for a city...', helperText: 'Find and select your city', noResultsText: 'No results found', p1: 'Mumbai', p2: 'Delhi', p3: 'Lucknow', p1Desc: 'Maharashtra', p2Desc: 'Delhi', p3Desc: 'Uttar Pradesh', dir: 'ltr' },
+    };
+    const content = locales[language as string] || locales.English;
     return (
-      <div lang="ta" style={{ width: '360px' }}>
+      <div dir={content.dir} lang={(language || 'English').slice(0,2).toLowerCase()} style={{ width: '360px' }}>
         <Autocomplete
-          label="நகரத்தைத் தேடுங்கள்"
-          placeholder="நகரத்தின் பெயரை உள்ளிடவும்..."
+          {...rest}
+          label={content.label}
+          placeholder={content.placeholder}
+          helperText={content.helperText}
+          noResultsText={content.noResultsText}
           options={[
-            { value: 'chennai', label: 'சென்னை', description: 'தமிழ்நாடு' },
-            { value: 'madurai', label: 'மதுரை', description: 'தமிழ்நாடு' },
-            { value: 'coimbatore', label: 'கோயம்புத்தூர்', description: 'தமிழ்நாடு' },
-            { value: 'trichy', label: 'திருச்சிராப்பள்ளி', description: 'தமிழ்நாடு' },
-            { value: 'salem', label: 'சேலம்', description: 'தமிழ்நாடு' },
+            { value: 'p1', label: content.p1, description: content.p1Desc },
+            { value: 'p2', label: content.p2, description: content.p2Desc },
+            { value: 'p3', label: content.p3, description: content.p3Desc },
           ]}
           value={value || undefined}
           onChange={setValue}
-          noResultsText="முடிவுகள் இல்லை"
         />
       </div>
     );

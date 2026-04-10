@@ -1,5 +1,7 @@
-import { forwardRef, useId, useRef, useEffect, createContext, useContext, useState, useMemo, useCallback } from 'react';
-import { jsxs, jsx } from 'react/jsx-runtime';
+'use strict';
+
+var react = require('react');
+var jsxRuntime = require('react/jsx-runtime');
 
 /* @nirman/components — निर्माण Design System */
 
@@ -19,19 +21,19 @@ function Autocomplete({
   name,
   noResultsText = "No matches found"
 }) {
-  const id = useId();
+  const id = react.useId();
   const listboxId = id + "-listbox";
   const labelId = id + "-label";
   const helperId = helperText ? id + "-helper" : void 0;
   const errorId = error ? id + "-error" : void 0;
   const describedBy = [errorId, helperId].filter(Boolean).join(" ") || void 0;
   const selectedOption = options.find((o) => o.value === value);
-  const [inputValue, setInputValue] = useState(selectedOption?.label || "");
-  const [open, setOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const inputRef = useRef(null);
-  const listboxRef = useRef(null);
-  useEffect(() => {
+  const [inputValue, setInputValue] = react.useState(selectedOption?.label || "");
+  const [open, setOpen] = react.useState(false);
+  const [activeIndex, setActiveIndex] = react.useState(-1);
+  const inputRef = react.useRef(null);
+  const listboxRef = react.useRef(null);
+  react.useEffect(() => {
     if (value) {
       const opt = options.find((o) => o.value === value);
       if (opt) setInputValue(opt.label);
@@ -39,12 +41,12 @@ function Autocomplete({
       setInputValue("");
     }
   }, [value, options]);
-  const filteredOptions = useMemo(() => {
+  const filteredOptions = react.useMemo(() => {
     if (inputValue.length < minChars) return [];
     const query = inputValue.toLowerCase();
     return options.filter((o) => o.label.toLowerCase().includes(query)).slice(0, maxResults);
   }, [inputValue, options, minChars, maxResults]);
-  const close = useCallback(() => {
+  const close = react.useCallback(() => {
     setOpen(false);
     setActiveIndex(-1);
   }, []);
@@ -91,7 +93,7 @@ function Autocomplete({
         break;
     }
   };
-  useEffect(() => {
+  react.useEffect(() => {
     if (!open) return;
     const handleClick = (e) => {
       const target = e.target;
@@ -103,7 +105,7 @@ function Autocomplete({
     return () => document.removeEventListener("mousedown", handleClick);
   }, [open, close]);
   const showNoResults = open && inputValue.length >= minChars && filteredOptions.length === 0;
-  return /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxRuntime.jsxs(
     "div",
     {
       className: [
@@ -115,9 +117,9 @@ function Autocomplete({
         open ? "nir-e-autocomplete--open" : ""
       ].filter(Boolean).join(" "),
       children: [
-        /* @__PURE__ */ jsx("label", { className: "nir-e-autocomplete__label", id: labelId, htmlFor: id, children: label }),
-        /* @__PURE__ */ jsxs("div", { className: "nir-e-autocomplete__wrapper", children: [
-          /* @__PURE__ */ jsx(
+        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "nir-e-autocomplete__label", id: labelId, htmlFor: id, children: label }),
+        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-e-autocomplete__wrapper", children: [
+          /* @__PURE__ */ jsxRuntime.jsx(
             "input",
             {
               ref: inputRef,
@@ -140,11 +142,11 @@ function Autocomplete({
               autoComplete: "off"
             }
           ),
-          /* @__PURE__ */ jsxs("svg", { className: "nir-e-autocomplete__icon", viewBox: "0 0 20 20", "aria-hidden": "true", children: [
-            /* @__PURE__ */ jsx("circle", { cx: "9", cy: "9", r: "6", stroke: "currentColor", strokeWidth: "2", fill: "none" }),
-            /* @__PURE__ */ jsx("path", { d: "M14 14l4 4", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round" })
+          /* @__PURE__ */ jsxRuntime.jsxs("svg", { className: "nir-e-autocomplete__icon", viewBox: "0 0 20 20", "aria-hidden": "true", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("circle", { cx: "9", cy: "9", r: "6", stroke: "currentColor", strokeWidth: "2", fill: "none" }),
+            /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M14 14l4 4", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round" })
           ] }),
-          open && (filteredOptions.length > 0 || showNoResults) && /* @__PURE__ */ jsxs(
+          open && (filteredOptions.length > 0 || showNoResults) && /* @__PURE__ */ jsxRuntime.jsxs(
             "ul",
             {
               ref: listboxRef,
@@ -156,7 +158,7 @@ function Autocomplete({
                 filteredOptions.map((option, index) => {
                   const isActive = index === activeIndex;
                   const isSelected = option.value === value;
-                  return /* @__PURE__ */ jsxs(
+                  return /* @__PURE__ */ jsxRuntime.jsxs(
                     "li",
                     {
                       id: id + "-option-" + index,
@@ -170,42 +172,42 @@ function Autocomplete({
                       onClick: () => handleSelect(option),
                       onMouseEnter: () => setActiveIndex(index),
                       children: [
-                        /* @__PURE__ */ jsx(HighlightedLabel, { text: option.label, query: inputValue }),
-                        option.description && /* @__PURE__ */ jsx("span", { className: "nir-e-autocomplete__option-description", children: option.description })
+                        /* @__PURE__ */ jsxRuntime.jsx(HighlightedLabel, { text: option.label, query: inputValue }),
+                        option.description && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-autocomplete__option-description", children: option.description })
                       ]
                     },
                     option.value
                   );
                 }),
-                showNoResults && /* @__PURE__ */ jsx("li", { className: "nir-e-autocomplete__no-results", role: "option", "aria-selected": "false", children: noResultsText })
+                showNoResults && /* @__PURE__ */ jsxRuntime.jsx("li", { className: "nir-e-autocomplete__no-results", role: "option", "aria-selected": "false", children: noResultsText })
               ]
             }
           ),
-          name && /* @__PURE__ */ jsx("input", { type: "hidden", name, value: value || "" })
+          name && /* @__PURE__ */ jsxRuntime.jsx("input", { type: "hidden", name, value: value || "" })
         ] }),
-        error && /* @__PURE__ */ jsx("p", { className: "nir-e-autocomplete__error", id: errorId, role: "alert", children: error }),
-        helperText && !error && /* @__PURE__ */ jsx("p", { className: "nir-e-autocomplete__helper", id: helperId, children: helperText })
+        error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-autocomplete__error", id: errorId, role: "alert", children: error }),
+        helperText && !error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-autocomplete__helper", id: helperId, children: helperText })
       ]
     }
   );
 }
 Autocomplete.displayName = "NirAutocomplete";
 function HighlightedLabel({ text, query }) {
-  if (!query) return /* @__PURE__ */ jsx("span", { className: "nir-e-autocomplete__option-label", children: text });
+  if (!query) return /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-autocomplete__option-label", children: text });
   const lowerText = text.toLowerCase();
   const lowerQuery = query.toLowerCase();
   const idx = lowerText.indexOf(lowerQuery);
-  if (idx === -1) return /* @__PURE__ */ jsx("span", { className: "nir-e-autocomplete__option-label", children: text });
+  if (idx === -1) return /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-autocomplete__option-label", children: text });
   const before = text.slice(0, idx);
   const match = text.slice(idx, idx + query.length);
   const after = text.slice(idx + query.length);
-  return /* @__PURE__ */ jsxs("span", { className: "nir-e-autocomplete__option-label", children: [
+  return /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "nir-e-autocomplete__option-label", children: [
     before,
-    /* @__PURE__ */ jsx("mark", { className: "nir-e-autocomplete__match", children: match }),
+    /* @__PURE__ */ jsxRuntime.jsx("mark", { className: "nir-e-autocomplete__match", children: match }),
     after
   ] });
 }
-var Button = forwardRef(
+var Button = react.forwardRef(
   ({
     variant = "primary",
     size = "md",
@@ -228,7 +230,7 @@ var Button = forwardRef(
       isDisabled ? "nir-e-button--disabled" : "",
       className
     ].filter(Boolean).join(" ");
-    return /* @__PURE__ */ jsxs(
+    return /* @__PURE__ */ jsxRuntime.jsxs(
       "button",
       {
         ref,
@@ -238,7 +240,7 @@ var Button = forwardRef(
         "aria-busy": loading || void 0,
         ...rest,
         children: [
-          loading && /* @__PURE__ */ jsx("span", { className: "nir-e-button__spinner", "aria-hidden": "true", children: /* @__PURE__ */ jsx("svg", { viewBox: "0 0 20 20", fill: "none", className: "nir-e-button__spinner-svg", children: /* @__PURE__ */ jsx(
+          loading && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-button__spinner", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntime.jsx("svg", { viewBox: "0 0 20 20", fill: "none", className: "nir-e-button__spinner-svg", children: /* @__PURE__ */ jsxRuntime.jsx(
             "circle",
             {
               cx: "10",
@@ -251,17 +253,17 @@ var Button = forwardRef(
               strokeDashoffset: "25.13"
             }
           ) }) }),
-          !loading && iconLeft && /* @__PURE__ */ jsx("span", { className: "nir-e-button__icon", "aria-hidden": "true", children: iconLeft }),
-          /* @__PURE__ */ jsx("span", { className: "nir-e-button__label", children }),
-          !loading && iconRight && /* @__PURE__ */ jsx("span", { className: "nir-e-button__icon", "aria-hidden": "true", children: iconRight }),
-          loading && /* @__PURE__ */ jsx("span", { className: "nir-sr-only", children: "Loading, please wait" })
+          !loading && iconLeft && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-button__icon", "aria-hidden": "true", children: iconLeft }),
+          /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-button__label", children }),
+          !loading && iconRight && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-button__icon", "aria-hidden": "true", children: iconRight }),
+          loading && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-sr-only", children: "Loading, please wait" })
         ]
       }
     );
   }
 );
 Button.displayName = "NirButton";
-var Checkbox = forwardRef(
+var Checkbox = react.forwardRef(
   ({
     label,
     helperText,
@@ -273,13 +275,13 @@ var Checkbox = forwardRef(
     id: externalId,
     ...rest
   }, forwardedRef) => {
-    const generatedId = useId();
+    const generatedId = react.useId();
     const inputId = externalId || generatedId;
     const helperId = helperText ? inputId + "-helper" : void 0;
     const errorId = error ? inputId + "-error" : void 0;
     const describedBy = [errorId, helperId].filter(Boolean).join(" ") || void 0;
-    const internalRef = useRef(null);
-    useEffect(() => {
+    const internalRef = react.useRef(null);
+    react.useEffect(() => {
       const el = internalRef.current;
       if (el) el.indeterminate = indeterminate;
     }, [indeterminate]);
@@ -295,9 +297,9 @@ var Checkbox = forwardRef(
       disabled ? "nir-e-checkbox--disabled" : "",
       className
     ].filter(Boolean).join(" ");
-    return /* @__PURE__ */ jsxs("div", { className: wrapperClasses, children: [
-      /* @__PURE__ */ jsxs("div", { className: "nir-e-checkbox__control", children: [
-        /* @__PURE__ */ jsx(
+    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: wrapperClasses, children: [
+      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-e-checkbox__control", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(
           "input",
           {
             ref: setRef,
@@ -310,15 +312,15 @@ var Checkbox = forwardRef(
             ...rest
           }
         ),
-        /* @__PURE__ */ jsxs("svg", { className: "nir-e-checkbox__box", viewBox: "0 0 20 20", "aria-hidden": "true", children: [
-          /* @__PURE__ */ jsx("rect", { className: "nir-e-checkbox__bg", x: "1", y: "1", width: "18", height: "18", rx: "3" }),
-          /* @__PURE__ */ jsx("path", { className: "nir-e-checkbox__check", d: "M5 10l3 3 7-7", fill: "none", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }),
-          /* @__PURE__ */ jsx("line", { className: "nir-e-checkbox__dash", x1: "5", y1: "10", x2: "15", y2: "10", strokeWidth: "2", strokeLinecap: "round" })
+        /* @__PURE__ */ jsxRuntime.jsxs("svg", { className: "nir-e-checkbox__box", viewBox: "0 0 20 20", "aria-hidden": "true", children: [
+          /* @__PURE__ */ jsxRuntime.jsx("rect", { className: "nir-e-checkbox__bg", x: "1", y: "1", width: "18", height: "18", rx: "3" }),
+          /* @__PURE__ */ jsxRuntime.jsx("path", { className: "nir-e-checkbox__check", d: "M5 10l3 3 7-7", fill: "none", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }),
+          /* @__PURE__ */ jsxRuntime.jsx("line", { className: "nir-e-checkbox__dash", x1: "5", y1: "10", x2: "15", y2: "10", strokeWidth: "2", strokeLinecap: "round" })
         ] }),
-        /* @__PURE__ */ jsx("label", { className: "nir-e-checkbox__label", htmlFor: inputId, children: label })
+        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "nir-e-checkbox__label", htmlFor: inputId, children: label })
       ] }),
-      error && /* @__PURE__ */ jsx("p", { className: "nir-e-checkbox__error", id: errorId, role: "alert", children: error }),
-      helperText && !error && /* @__PURE__ */ jsx("p", { className: "nir-e-checkbox__helper", id: helperId, children: helperText })
+      error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-checkbox__error", id: errorId, role: "alert", children: error }),
+      helperText && !error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-checkbox__helper", id: helperId, children: helperText })
     ] });
   }
 );
@@ -336,19 +338,19 @@ function Dropdown({
   disabled = false,
   name
 }) {
-  const id = useId();
+  const id = react.useId();
   const listboxId = id + "-listbox";
   const labelId = id + "-label";
   const helperId = helperText ? id + "-helper" : void 0;
   const errorId = error ? id + "-error" : void 0;
   const describedBy = [errorId, helperId].filter(Boolean).join(" ") || void 0;
-  const [open, setOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const triggerRef = useRef(null);
-  const listboxRef = useRef(null);
+  const [open, setOpen] = react.useState(false);
+  const [activeIndex, setActiveIndex] = react.useState(-1);
+  const triggerRef = react.useRef(null);
+  const listboxRef = react.useRef(null);
   const selectedOption = options.find((o) => o.value === value);
   options.filter((o) => !o.disabled);
-  const close = useCallback(() => {
+  const close = react.useCallback(() => {
     setOpen(false);
     setActiveIndex(-1);
   }, []);
@@ -421,7 +423,7 @@ function Dropdown({
         break;
     }
   };
-  useEffect(() => {
+  react.useEffect(() => {
     if (!open) return;
     const handleClick = (e) => {
       const target = e.target;
@@ -432,7 +434,7 @@ function Dropdown({
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, [open, close]);
-  return /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxRuntime.jsxs(
     "div",
     {
       className: [
@@ -444,9 +446,9 @@ function Dropdown({
         open ? "nir-e-dropdown--open" : ""
       ].filter(Boolean).join(" "),
       children: [
-        /* @__PURE__ */ jsx("label", { className: "nir-e-dropdown__label", id: labelId, htmlFor: id, children: label }),
-        /* @__PURE__ */ jsxs("div", { className: "nir-e-dropdown__wrapper", children: [
-          /* @__PURE__ */ jsxs(
+        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "nir-e-dropdown__label", id: labelId, htmlFor: id, children: label }),
+        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-e-dropdown__wrapper", children: [
+          /* @__PURE__ */ jsxRuntime.jsxs(
             "button",
             {
               ref: triggerRef,
@@ -465,12 +467,12 @@ function Dropdown({
               onClick: () => !disabled && setOpen((o) => !o),
               onKeyDown: handleKeyDown,
               children: [
-                /* @__PURE__ */ jsx("span", { className: "nir-e-dropdown__value", children: selectedOption ? selectedOption.label : /* @__PURE__ */ jsx("span", { className: "nir-e-dropdown__placeholder", children: placeholder }) }),
-                /* @__PURE__ */ jsx("svg", { className: "nir-e-dropdown__chevron", viewBox: "0 0 20 20", "aria-hidden": "true", children: /* @__PURE__ */ jsx("path", { d: "M5 8l5 5 5-5", stroke: "currentColor", strokeWidth: "2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) })
+                /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-dropdown__value", children: selectedOption ? selectedOption.label : /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-dropdown__placeholder", children: placeholder }) }),
+                /* @__PURE__ */ jsxRuntime.jsx("svg", { className: "nir-e-dropdown__chevron", viewBox: "0 0 20 20", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M5 8l5 5 5-5", stroke: "currentColor", strokeWidth: "2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) })
               ]
             }
           ),
-          open && /* @__PURE__ */ jsx(
+          open && /* @__PURE__ */ jsxRuntime.jsx(
             "ul",
             {
               ref: listboxRef,
@@ -482,7 +484,7 @@ function Dropdown({
               children: options.map((option, index) => {
                 const isSelected = option.value === value;
                 const isActive = index === activeIndex;
-                return /* @__PURE__ */ jsxs(
+                return /* @__PURE__ */ jsxRuntime.jsxs(
                   "li",
                   {
                     id: id + "-option-" + index,
@@ -498,9 +500,9 @@ function Dropdown({
                     onClick: () => handleSelect(option),
                     onMouseEnter: () => !option.disabled && setActiveIndex(index),
                     children: [
-                      /* @__PURE__ */ jsx("span", { className: "nir-e-dropdown__option-label", children: option.label }),
-                      option.description && /* @__PURE__ */ jsx("span", { className: "nir-e-dropdown__option-description", children: option.description }),
-                      isSelected && /* @__PURE__ */ jsx("svg", { className: "nir-e-dropdown__check", viewBox: "0 0 20 20", "aria-hidden": "true", children: /* @__PURE__ */ jsx("path", { d: "M5 10l3 3 7-7", stroke: "currentColor", strokeWidth: "2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) })
+                      /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-dropdown__option-label", children: option.label }),
+                      option.description && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-dropdown__option-description", children: option.description }),
+                      isSelected && /* @__PURE__ */ jsxRuntime.jsx("svg", { className: "nir-e-dropdown__check", viewBox: "0 0 20 20", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M5 10l3 3 7-7", stroke: "currentColor", strokeWidth: "2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) })
                     ]
                   },
                   option.value
@@ -508,16 +510,16 @@ function Dropdown({
               })
             }
           ),
-          name && /* @__PURE__ */ jsx("input", { type: "hidden", name, value: value || "" })
+          name && /* @__PURE__ */ jsxRuntime.jsx("input", { type: "hidden", name, value: value || "" })
         ] }),
-        error && /* @__PURE__ */ jsx("p", { className: "nir-e-dropdown__error", id: errorId, role: "alert", children: error }),
-        helperText && !error && /* @__PURE__ */ jsx("p", { className: "nir-e-dropdown__helper", id: helperId, children: helperText })
+        error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-dropdown__error", id: errorId, role: "alert", children: error }),
+        helperText && !error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-dropdown__helper", id: helperId, children: helperText })
       ]
     }
   );
 }
 Dropdown.displayName = "NirDropdown";
-var Input = forwardRef(
+var Input = react.forwardRef(
   ({
     label,
     helperText,
@@ -531,7 +533,7 @@ var Input = forwardRef(
     id: externalId,
     ...rest
   }, ref) => {
-    const generatedId = useId();
+    const generatedId = react.useId();
     const inputId = externalId || generatedId;
     const helperId = helperText ? inputId + "-helper" : void 0;
     const errorId = error ? inputId + "-error" : void 0;
@@ -544,11 +546,11 @@ var Input = forwardRef(
       disabled ? "nir-e-input--disabled" : "",
       className
     ].filter(Boolean).join(" ");
-    return /* @__PURE__ */ jsxs("div", { className: wrapperClasses, children: [
-      /* @__PURE__ */ jsx("label", { className: "nir-e-input__label", htmlFor: inputId, children: label }),
-      /* @__PURE__ */ jsxs("div", { className: "nir-e-input__field-wrapper", children: [
-        iconLeft && /* @__PURE__ */ jsx("span", { className: "nir-e-input__icon nir-e-input__icon--left", "aria-hidden": "true", children: iconLeft }),
-        /* @__PURE__ */ jsx(
+    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: wrapperClasses, children: [
+      /* @__PURE__ */ jsxRuntime.jsx("label", { className: "nir-e-input__label", htmlFor: inputId, children: label }),
+      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-e-input__field-wrapper", children: [
+        iconLeft && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-input__icon nir-e-input__icon--left", "aria-hidden": "true", children: iconLeft }),
+        /* @__PURE__ */ jsxRuntime.jsx(
           "input",
           {
             ref,
@@ -560,15 +562,15 @@ var Input = forwardRef(
             ...rest
           }
         ),
-        iconRight && /* @__PURE__ */ jsx("span", { className: "nir-e-input__icon nir-e-input__icon--right", "aria-hidden": "true", children: iconRight })
+        iconRight && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-input__icon nir-e-input__icon--right", "aria-hidden": "true", children: iconRight })
       ] }),
-      error && /* @__PURE__ */ jsx("p", { className: "nir-e-input__error", id: errorId, role: "alert", children: error }),
-      helperText && !error && /* @__PURE__ */ jsx("p", { className: "nir-e-input__helper", id: helperId, children: helperText })
+      error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-input__error", id: errorId, role: "alert", children: error }),
+      helperText && !error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-input__helper", id: helperId, children: helperText })
     ] });
   }
 );
 Input.displayName = "NirInput";
-var RadioGroupContext = createContext(null);
+var RadioGroupContext = react.createContext(null);
 function RadioGroup({
   name,
   label,
@@ -581,11 +583,11 @@ function RadioGroup({
   direction = "vertical",
   children
 }) {
-  const labelId = useId();
+  const labelId = react.useId();
   const helperId = helperText ? labelId + "-helper" : void 0;
   const errorId = error ? labelId + "-error" : void 0;
   const describedBy = [errorId, helperId].filter(Boolean).join(" ") || void 0;
-  return /* @__PURE__ */ jsx(RadioGroupContext.Provider, { value: { name, value, onChange, disabled, size }, children: /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxRuntime.jsx(RadioGroupContext.Provider, { value: { name, value, onChange, disabled, size }, children: /* @__PURE__ */ jsxRuntime.jsxs(
     "fieldset",
     {
       className: [
@@ -597,16 +599,16 @@ function RadioGroup({
       "aria-labelledby": labelId,
       "aria-describedby": describedBy,
       children: [
-        /* @__PURE__ */ jsx("legend", { className: "nir-e-radio-group__legend", id: labelId, children: label }),
-        /* @__PURE__ */ jsx("div", { className: "nir-e-radio-group__options", children }),
-        error && /* @__PURE__ */ jsx("p", { className: "nir-e-radio-group__error", id: errorId, role: "alert", children: error }),
-        helperText && !error && /* @__PURE__ */ jsx("p", { className: "nir-e-radio-group__helper", id: helperId, children: helperText })
+        /* @__PURE__ */ jsxRuntime.jsx("legend", { className: "nir-e-radio-group__legend", id: labelId, children: label }),
+        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "nir-e-radio-group__options", children }),
+        error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-radio-group__error", id: errorId, role: "alert", children: error }),
+        helperText && !error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-radio-group__helper", id: helperId, children: helperText })
       ]
     }
   ) });
 }
 RadioGroup.displayName = "NirRadioGroup";
-var Radio = forwardRef(
+var Radio = react.forwardRef(
   ({
     label,
     value,
@@ -616,8 +618,8 @@ var Radio = forwardRef(
     id: externalId,
     ...rest
   }, ref) => {
-    const group = useContext(RadioGroupContext);
-    const generatedId = useId();
+    const group = react.useContext(RadioGroupContext);
+    const generatedId = react.useId();
     const inputId = externalId || generatedId;
     const size = sizeProp || group?.size || "md";
     const disabled = disabledProp || group?.disabled || false;
@@ -626,13 +628,13 @@ var Radio = forwardRef(
     const handleChange = () => {
       if (group?.onChange) group.onChange(value);
     };
-    return /* @__PURE__ */ jsx("div", { className: [
+    return /* @__PURE__ */ jsxRuntime.jsx("div", { className: [
       "nir-e-radio",
       "nir-e-radio--" + size,
       disabled ? "nir-e-radio--disabled" : "",
       className
-    ].filter(Boolean).join(" "), children: /* @__PURE__ */ jsxs("div", { className: "nir-e-radio__control", children: [
-      /* @__PURE__ */ jsx(
+    ].filter(Boolean).join(" "), children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-e-radio__control", children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
         "input",
         {
           ref,
@@ -648,16 +650,16 @@ var Radio = forwardRef(
           ...rest
         }
       ),
-      /* @__PURE__ */ jsxs("svg", { className: "nir-e-radio__circle", viewBox: "0 0 20 20", "aria-hidden": "true", children: [
-        /* @__PURE__ */ jsx("circle", { className: "nir-e-radio__outer", cx: "10", cy: "10", r: "9" }),
-        /* @__PURE__ */ jsx("circle", { className: "nir-e-radio__inner", cx: "10", cy: "10", r: "5" })
+      /* @__PURE__ */ jsxRuntime.jsxs("svg", { className: "nir-e-radio__circle", viewBox: "0 0 20 20", "aria-hidden": "true", children: [
+        /* @__PURE__ */ jsxRuntime.jsx("circle", { className: "nir-e-radio__outer", cx: "10", cy: "10", r: "9" }),
+        /* @__PURE__ */ jsxRuntime.jsx("circle", { className: "nir-e-radio__inner", cx: "10", cy: "10", r: "5" })
       ] }),
-      /* @__PURE__ */ jsx("label", { className: "nir-e-radio__label", htmlFor: inputId, children: label })
+      /* @__PURE__ */ jsxRuntime.jsx("label", { className: "nir-e-radio__label", htmlFor: inputId, children: label })
     ] }) });
   }
 );
 Radio.displayName = "NirRadio";
-var Toggle = forwardRef(
+var Toggle = react.forwardRef(
   ({
     label,
     description,
@@ -668,10 +670,10 @@ var Toggle = forwardRef(
     id: externalId,
     ...rest
   }, ref) => {
-    const generatedId = useId();
+    const generatedId = react.useId();
     const inputId = externalId || generatedId;
     const descId = description ? inputId + "-desc" : void 0;
-    return /* @__PURE__ */ jsx(
+    return /* @__PURE__ */ jsxRuntime.jsx(
       "div",
       {
         className: [
@@ -681,13 +683,13 @@ var Toggle = forwardRef(
           disabled ? "nir-e-toggle--disabled" : "",
           className
         ].filter(Boolean).join(" "),
-        children: /* @__PURE__ */ jsxs("label", { className: "nir-e-toggle__control", htmlFor: inputId, children: [
-          labelPosition === "left" && /* @__PURE__ */ jsxs("span", { className: "nir-e-toggle__text", children: [
-            /* @__PURE__ */ jsx("span", { className: "nir-e-toggle__label", children: label }),
-            description && /* @__PURE__ */ jsx("span", { className: "nir-e-toggle__description", id: descId, children: description })
+        children: /* @__PURE__ */ jsxRuntime.jsxs("label", { className: "nir-e-toggle__control", htmlFor: inputId, children: [
+          labelPosition === "left" && /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "nir-e-toggle__text", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-toggle__label", children: label }),
+            description && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-toggle__description", id: descId, children: description })
           ] }),
-          /* @__PURE__ */ jsxs("span", { className: "nir-e-toggle__switch", children: [
-            /* @__PURE__ */ jsx(
+          /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "nir-e-toggle__switch", children: [
+            /* @__PURE__ */ jsxRuntime.jsx(
               "input",
               {
                 ref,
@@ -700,11 +702,11 @@ var Toggle = forwardRef(
                 ...rest
               }
             ),
-            /* @__PURE__ */ jsx("span", { className: "nir-e-toggle__track", "aria-hidden": "true", children: /* @__PURE__ */ jsx("span", { className: "nir-e-toggle__thumb" }) })
+            /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-toggle__track", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-toggle__thumb" }) })
           ] }),
-          labelPosition === "right" && /* @__PURE__ */ jsxs("span", { className: "nir-e-toggle__text", children: [
-            /* @__PURE__ */ jsx("span", { className: "nir-e-toggle__label", children: label }),
-            description && /* @__PURE__ */ jsx("span", { className: "nir-e-toggle__description", id: descId, children: description })
+          labelPosition === "right" && /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "nir-e-toggle__text", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-toggle__label", children: label }),
+            description && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-e-toggle__description", id: descId, children: description })
           ] })
         ] })
       }
@@ -712,7 +714,7 @@ var Toggle = forwardRef(
   }
 );
 Toggle.displayName = "NirToggle";
-var NirmanContext = createContext(null);
+var NirmanContext = react.createContext(null);
 function NirmanProvider({
   children,
   defaultTheme = "light",
@@ -720,13 +722,13 @@ function NirmanProvider({
   defaultBrand = "nirman",
   rootElement
 }) {
-  const [theme, setTheme] = useState(defaultTheme);
-  const [density, setDensity] = useState(defaultDensity);
-  const [brand, setBrand] = useState(defaultBrand);
-  const toggleTheme = useCallback(() => {
+  const [theme, setTheme] = react.useState(defaultTheme);
+  const [density, setDensity] = react.useState(defaultDensity);
+  const [brand, setBrand] = react.useState(defaultBrand);
+  const toggleTheme = react.useCallback(() => {
     setTheme((prev) => prev === "light" ? "dark" : "light");
   }, []);
-  useEffect(() => {
+  react.useEffect(() => {
     const root = rootElement || document.documentElement;
     root.setAttribute("data-theme", theme);
     root.setAttribute("data-density", density);
@@ -737,7 +739,7 @@ function NirmanProvider({
       root.removeAttribute("data-brand");
     };
   }, [theme, density, brand, rootElement]);
-  useEffect(() => {
+  react.useEffect(() => {
     if (defaultTheme) return;
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const handler = (e) => setTheme(e.matches ? "dark" : "light");
@@ -745,7 +747,7 @@ function NirmanProvider({
     if (mq.matches) setTheme("dark");
     return () => mq.removeEventListener("change", handler);
   }, [defaultTheme]);
-  return /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(
     NirmanContext.Provider,
     {
       value: { theme, setTheme, toggleTheme, density, setDensity, brand, setBrand },
@@ -754,7 +756,7 @@ function NirmanProvider({
   );
 }
 function useNirman() {
-  const ctx = useContext(NirmanContext);
+  const ctx = react.useContext(NirmanContext);
   if (!ctx) {
     throw new Error(
       "useNirman() must be used within a <NirmanProvider>. Wrap your app root with <NirmanProvider> to use Nirman theme context."
@@ -763,6 +765,15 @@ function useNirman() {
   return ctx;
 }
 
-export { Autocomplete, Button, Checkbox, Dropdown, Input, NirmanProvider, Radio, RadioGroup, Toggle, useNirman };
-//# sourceMappingURL=index.mjs.map
-//# sourceMappingURL=index.mjs.map
+exports.Autocomplete = Autocomplete;
+exports.Button = Button;
+exports.Checkbox = Checkbox;
+exports.Dropdown = Dropdown;
+exports.Input = Input;
+exports.NirmanProvider = NirmanProvider;
+exports.Radio = Radio;
+exports.RadioGroup = RadioGroup;
+exports.Toggle = Toggle;
+exports.useNirman = useNirman;
+//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.js.map

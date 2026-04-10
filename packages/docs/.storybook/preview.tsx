@@ -4,6 +4,7 @@ import '../../tokens/build/css/primitives.css';
 import '../../tokens/build/css/light.css';
 import '../../tokens/build/css/dark.css';
 import '../../tokens/build/css/high-contrast.css';
+import '@nirman/components/dist/index.css';
 
 const preview: Preview = {
   parameters: {
@@ -14,22 +15,17 @@ const preview: Preview = {
       },
     },
     layout: 'centered',
+    options: {
+      storySort: {
+        order: ['Foundations', 'Getting Started', 'Elements', 'Contributing'],
+      },
+    },
   },
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme || 'light';
       return (
-        <div
-          data-theme={theme}
-          style={{
-            padding: '2rem',
-            minHeight: '100px',
-            background: 'var(--nir-color-surface-default, #fff)',
-            color: 'var(--nir-color-text-default, #000)',
-            fontFamily: 'var(--nir-font-family-body, "Noto Sans", sans-serif)',
-            borderRadius: '8px',
-          }}
-        >
+        <div data-theme={theme}>
           <Story />
         </div>
       );

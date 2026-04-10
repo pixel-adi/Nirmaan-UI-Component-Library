@@ -8,92 +8,66 @@ Every component must pass through these checks before shipping. This is not opti
 
 ## Before You Start Building
 
-```
-□ Proposal approved (GitHub Issue with ≥2 team use cases)
-□ Accessibility spec written FIRST:
-    □ ARIA role defined
-    □ Keyboard interaction model documented
-    □ Screen reader announcement strings written
-    □ Focus management behavior specified
-□ Token bindings defined (which --nir-* tokens does this use?)
-□ Variant matrix defined (variant × size × state)
-```
+| Requirements | Description |
+|---|---|
+| **Approval** | GitHub Issue explicitly approved with ≥2 team use cases. |
+| **Accessibility Spec** | Must define ARIA Roles, Screen Reader Strings, Focus Management, and Keyboard bindings. |
+| **Tokens Matrix** | Must define every single variable (`--nir-*`) and Variant Matrix (`variant x size x state`). |
 
 ## Figma Component (Designer)
 
-```
-□ Auto-layout used (no absolute positioning)
-□ ALL fills bound to Semantic/Color variables
-□ ALL padding/gap bound to Semantic/Number variables
-□ ALL radius bound to variables
-□ ZERO hardcoded values anywhere
-□ All variant × size × state combinations exist
-□ Accessibility annotation layer added:
-    □ ARIA role noted
-    □ Keyboard shortcuts noted
-    □ Touch target dimensions shown
-    □ Contrast ratios documented
-□ Script test frames:
-    □ English label renders correctly
-    □ Hindi (Devanagari) label renders correctly
-    □ Tamil label renders correctly
-    □ Text is not clipped in any script
-□ Light mode renders correctly
-□ Dark mode renders correctly
-□ High-contrast mode renders correctly
-```
+**Figma Variables**
+- ✅ Auto-layout for everything (no absolute positioning)
+- ✅ ALL fills bound to Semantic/Color variables
+- ✅ ALL padding/gap bound to Semantic/Number variables
+- ✅ ALL radius bound to variables
+- ✅ ZERO hardcoded values anywhere
+
+**Figma Matrices**
+- ✅ All `variant × size × state` combinations exist
+- ✅ Light mode, Dark mode, High-contrast mode render correctly
+
+**Figma Tests**
+- ✅ Script test frames: English, Hindi, Tamil, and RTL renders exist and are unclipped.
+- ✅ Accessibility annotation layer added: Role noted, Keyboard shortcuts noted, Touch target dimensions shown, Contrast ratios documented.
 
 ## Code Component (Developer)
 
-```
-□ TypeScript props interface with JSDoc on each prop
-□ forwardRef used for composability
-□ CSS uses ONLY --nir-* custom properties
-□ BEM naming with nir- prefix (nir-e-button, nir-e-button--primary)
-□ aria-* attributes match the a11y spec
-□ Keyboard interaction implemented and tested
-□ Focus ring visible on :focus-visible
-□ Unit tests:
-    □ Renders with correct role
-    □ All variants apply correct classes
-    □ Click handler fires
-    □ Disabled state prevents interaction
-    □ Loading state sets aria-busy
-    □ Ref forwarding works
-□ Storybook stories:
-    □ Every variant as individual story
-    □ Loading and Disabled states
-    □ Size comparison story
-    □ Hindi and Tamil label stories
-    □ autodocs tag set
-```
+| Review Phase | Requirements |
+|---|---|
+| **Architecture** | TypeScript props interface with JSDoc on each prop. `forwardRef` used for composability. |
+| **Styles** | CSS uses ONLY `--nir-*` custom properties. BEM naming with `nir-` prefix exactly (`nir-e-button`, `nir-e-button--primary`). |
+| **A11y Checks** | `aria-*` attributes match the a11y spec. Keyboard interaction natively implemented. Focus ring visibly works. |
+| **Unit Testing** | Renders with correct role, variants apply correct classes, disabled state blocks events, and loading states assert `aria-busy`. |
+| **Storybook Docs** | Every variant has an individual story, Size comparisons exist, and an integrated `VernacularTesting` script component exists with autodocs. |
 
 ## Documentation (MDX)
 
-```
-□ When to use / When NOT to use
-□ Live example with Controls
-□ Size guidance
-□ Accessibility table
-□ Screen reader announcements
-□ Do's and Don'ts
-□ Code usage example
-□ Figma location and component name
-□ Related components listed
-□ Changelog started
-```
+The MDX configuration must be robust for external integrators.
+
+- ✅ When to use / When NOT to use
+- ✅ Live example with Controls
+- ✅ Size guidance
+- ✅ Accessibility table
+- ✅ Screen reader announcements
+- ✅ Do's and Don'ts
+- ✅ Code usage example
+- ✅ Figma location and component name
+- ✅ Related components listed
+- ✅ Changelog started
 
 ## Audit Score
 
-```
-Score ≥49/70  →  Ship as ALPHA (internal only)
-Score ≥56/70  →  Ship as BETA (limited adoption)
-Score ≥63/70  →  Ship as STABLE (general availability)
+> [!TIP]
+> **Scoring Guidelines**
+> Score ≥49/70  →  Ship as ALPHA (internal only)
+> Score ≥56/70  →  Ship as BETA (limited adoption)
+> Score ≥63/70  →  Ship as STABLE (general availability)
 
-CRITICAL BLOCKERS (any one = cannot ship):
-  ✗ ARIA role missing
-  ✗ Keyboard navigation broken
-  ✗ Text contrast below 4.5:1
-  ✗ Any hardcoded value instead of token
-  ✗ Breaks in Hindi or Tamil
-```
+> [!WARNING]
+> **CRITICAL BLOCKERS** (any of these completely halts deployment):
+> - ✗ ARIA role missing
+> - ✗ Keyboard navigation broken
+> - ✗ Text contrast below 4.5:1
+> - ✗ Any hardcoded value instead of token
+> - ✗ Breaks in Hindi or Tamil

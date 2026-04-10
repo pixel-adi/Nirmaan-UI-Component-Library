@@ -5,21 +5,21 @@ import { Meta } from '@storybook/blocks';
 
 # Multi-Brand Theming
 
-Nirman supports four adopter classes (Constitution §V.2–V.5), each with a graduated scope of customization.
+> [!TIP]
+> **What is the Brand Axis?**
+> Nirman supports four strict adopter classes (Constitution §V.2–V.5), each granting a graduated level of visual customization to match specific jurisdictional branding.
 
 ## The Three Axes
 
-Every Nirman deployment has three independent theming axes:
+Every layout deployed via the Nirmaan architecture runs on independent visual axes calculating in real-time:
 
-```
-Brand × Mode × Density = Complete Theme State
+- **Brand**: `nirman` | `central-govt` | `kerala` | `tamilnadu` | `up` | `custom`
+- **Mode**: `light` | `dark` | `high-contrast`
+- **Density**: `default` | `compact` | `spacious`
 
-Brand:    nirman | central-govt | kerala | tamilnadu | up | custom
-Mode:     light | dark | high-contrast
-Density:  default | compact | spacious
-```
-
-Any combination must produce a valid, accessible result.
+> [!IMPORTANT]
+> **Calculation Guarantee**
+> Any combination of Brand × Mode × Density **MUST** inherently compile into a valid, rigorously accessible WCAG 2.1 AA UI out of the box.
 
 ## How Brand Theming Works
 
@@ -70,7 +70,9 @@ On Figma Professional plan, brand themes are separate library files. Designers s
 
 **High-contrast mode is universal and never brand-customized.** This is a legal accessibility baseline.
 
-## Theme File Format
+## Theme File Configuration
+
+Building brand packages involves defining token configurations. Because Nirman abstracts out hard-coded values from components, overriding the tokens dynamically adjusts everything across the entire workspace automatically:
 
 ```json
 {
@@ -99,4 +101,5 @@ On Figma Professional plan, brand themes are separate library files. Designers s
 }
 ```
 
-Each theme file is under 1KB. Switching brands is a configuration change — no component code changes, no rebuild of the library itself.
+> [!NOTE]
+> Each theme file generates out to less than **1KB**. Switching environments or adding a new jurisdictional brand is purely a `configuration` update—you never need to modify UI component `.tsx` files directly!

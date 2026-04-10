@@ -10,13 +10,14 @@ A practical guide for turning Figma designs into production-ready Storybook comp
 
 ## Overview
 
-```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│   1. DESIGN  │ →  │   2. SPEC    │ →  │   3. BUILD   │ →  │  4. DOCUMENT │
-│   in Figma   │     │  extraction  │     │  in React    │     │  in Storybook│
-└──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
-  Designer role       Collab role           Developer role         Team role
-```
+> [!TIP]
+> **Component Journey**
+> Every component follows a strict lifecycle across roles:
+> 
+> 1. **DESIGN** (in Figma) *→ Designer*
+> 2. **SPEC** (extraction) *→ Collab*
+> 3. **BUILD** (in React) *→ Developer*
+> 4. **DOCUMENT** (in Storybook) *→ Entire Team*
 
 Each stage has **inputs**, **outputs**, and **gate criteria**. Don't skip stages.
 
@@ -34,19 +35,17 @@ Before starting, the designer needs:
 
 ### Construction Rules
 
-```
-✅ Auto-layout for everything
-✅ All fills bound to Semantic/Color variables
-✅ All paddings/gaps bound to Semantic/Number variables
-✅ All radius bound to --nir-radius-* variables
-✅ All typography using Semantic type styles
-✅ Variants cover every state combination
-✅ Accessibility annotation layer exists
-❌ NO hardcoded colors (no #083459 anywhere)
-❌ NO hardcoded spacing (no 16px anywhere)
-❌ NO detached instances from library
-❌ NO fonts other than Noto Sans family
-```
+- ✅ Auto-layout for everything
+- ✅ All fills bound to Semantic/Color variables
+- ✅ All paddings/gaps bound to Semantic/Number variables
+- ✅ All radius bound to `--nir-radius-*` variables
+- ✅ All typography using Semantic type styles
+- ✅ Variants cover every state combination
+- ✅ Accessibility annotation layer exists
+- ❌ **NO** hardcoded colors (no `#083459` anywhere)
+- ❌ **NO** hardcoded spacing (no `16px` anywhere)
+- ❌ **NO** detached instances from library
+- ❌ **NO** fonts other than Noto Sans family
 
 ### Variant Matrix
 
@@ -81,18 +80,14 @@ Verify no clipping, proper line-height, correct padding. If text wraps in Hindi 
 
 ### Gate Criteria — Stage 1 Complete
 
-```
-□ Component built with all variant × size × state combinations
-□ Zero hardcoded values (all bindings use variables)
-□ Accessibility annotation layer complete
-□ Script test frames pass (Latin + Hindi + Tamil minimum)
-□ Light, Dark, High-Contrast modes all render correctly
-□ Designer has added a dev note layer listing:
-   - Component name (e.g. nir-e-button)
-   - Props needed (variant, size, disabled, etc.)
-   - States (hover, focus, active, disabled, loading)
-   - A11y contract (role, keyboard shortcuts, SR strings)
-```
+| Criteria | Status |
+|---|---|
+| **Component coverage** | All `variant × size × state` combinations exist |
+| **Token bindings** | Zero hardcoded values (all bindings use variables) |
+| **Accessibility** | Annotation layer complete |
+| **Scripts** | Script test frames pass (Latin + Hindi + Tamil minimum) |
+| **Themes** | Light, Dark, High-Contrast modes all render correctly |
+| **Dev Notes** | Component name, Props needed, A11y contract defined |
 
 ---
 
@@ -394,30 +389,20 @@ export type { ToggleProps } from './elements/Toggle/Toggle';
 
 Print this and tick it off as you go:
 
-```
-┌────────────────────────────────────────────────┐
-│ Component Development Checklist                │
-├────────────────────────────────────────────────┤
-│ □ Proposal approved (GitHub Issue)             │
-│ □ A11y spec written                            │
-│ □ Figma component built                        │
-│ □ Variant matrix complete                      │
-│ □ Script test frames pass                      │
-│ □ Spec document written                        │
-│ □ Figma Dev Mode inspected                     │
-│ □ Component.tsx created                        │
-│ □ Component.css with ONLY --nir-* tokens       │
-│ □ Multi-script line-height handled             │
-│ □ Stories file with 5+ stories                 │
-│ □ MDX doc with 10 sections                     │
-│ □ Hindi story included                         │
-│ □ Barrel export updated                        │
-│ □ Tested in Light + Dark + HC modes            │
-│ □ Screen reader tested                         │
-│ □ PR opened + reviewed                         │
-│ □ Merged to main                               │
-└────────────────────────────────────────────────┘
-```
+> [!IMPORTANT]
+> **Component Development Checklist**
+> Ensure the following are checked off completely before opening your Pull Request:
+> - ✅ Proposal approved (GitHub Issue)
+> - ✅ A11y spec written
+> - ✅ Figma component built and Variant matrix complete
+> - ✅ Script test frames pass and Figma Dev Mode inspected
+> - ✅ Component `.tsx` created
+> - ✅ Component `.css` strictly utilizing `--nir-*` tokens
+> - ✅ Multi-script line-height natively handled
+> - ✅ Component `.stories.tsx` successfully running 5+ examples including Hindi
+> - ✅ Component `.mdx` doc successfully rendering 10 sections
+> - ✅ Tested completely across Light + Dark + HC mode
+> - ✅ Screen reader tested thoroughly
 
 ---
 

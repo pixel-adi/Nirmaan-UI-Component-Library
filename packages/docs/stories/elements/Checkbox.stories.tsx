@@ -1,6 +1,7 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { Checkbox } from './Checkbox';
+import { Checkbox } from '@nirman/components';
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Elements/Checkbox',
@@ -64,7 +65,7 @@ export const Disabled: Story = {
 
 export const Group: Story = {
   name: 'Checkbox Group',
-  render: () => (
+  render: (args) => (
     <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
       <legend style={{
         fontSize: 'var(--nir-font-size-sm, 14px)',
@@ -75,25 +76,40 @@ export const Group: Story = {
         Select services required
       </legend>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        <Checkbox label="Income Certificate" />
-        <Checkbox label="Domicile Certificate" />
-        <Checkbox label="Caste Certificate" />
-        <Checkbox label="Birth Certificate" />
+        <Checkbox {...args} label={args.label || "Income Certificate"} />
+        <Checkbox {...args} label={args.label || "Domicile Certificate"} />
+        <Checkbox {...args} label={args.label || "Caste Certificate"} />
+        <Checkbox {...args} label={args.label || "Birth Certificate"} />
       </div>
     </fieldset>
   ),
 };
 
-export const HindiLabel: Story = {
-  name: 'Hindi (Devanagari)',
-  args: {
-    label: 'मैं नियम और शर्तों से सहमत हूँ',
+export const VernacularTesting: Story = {
+  name: 'Vernacular Testing',
+  argTypes: {
+    language: {
+      control: 'select',
+      options: ['Hindi', 'Tamil', 'Urdu', 'Bengali', 'English'],
+    },
   },
-};
-
-export const TamilLabel: Story = {
-  name: 'Tamil',
   args: {
-    label: 'விதிமுறைகள் மற்றும் நிபந்தனைகளை ஏற்கிறேன்',
+    language: 'Hindi',
+  },
+  render: (args: any) => {
+    const { language, ...rest } = args;
+    const labels: Record<string, { label: string; dir: 'ltr' | 'rtl' }> = {
+      Hindi: { label: 'मैं नियम और शर्तों से सहमत हूँ', dir: 'ltr' },
+      Tamil: { label: 'விதிமுறைகள் மற்றும் நிபந்தனைகளை ஏற்கிறேன்', dir: 'ltr' },
+      Urdu: { label: 'میں شرائط و ضوابط سے متفق ہوں', dir: 'rtl' },
+      Bengali: { label: 'আমি শর্তাবলী সম্মত', dir: 'ltr' },
+      English: { label: 'I agree to the Terms and Conditions', dir: 'ltr' },
+    };
+    const content = labels[language as string] || labels.English;
+    return (
+      <div dir={content.dir}>
+        <Checkbox {...rest} label={content.label} />
+      </div>
+    );
   },
 };
