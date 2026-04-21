@@ -1,28 +1,60 @@
 ---
 title: Toggle
-description: Instant state boolean switches.
+description: Layer 1 Element — Instant boolean actions.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
 import { Toggle } from '@nirman/components';
 
-Toggles map natively to `color.primary.default` when active, and `interaction.disabled-bg` when inactive.
+Toggles initiate instant logic modifications without demanding a structural "Save" button click afterwards.
 
-## Interactive Playground
+## 1. Accessibility Specification
+- **ARIA:** Formally translates directly to `<button role="switch" aria-checked="true">`. 
+- **Verbal Caching:** "On" and "Off" strings are formally bound to localizations, meaning SR devices explicitly define the current bounds based on screen state context.
+
+## 2. Token Binding
+- **Track Boundary:** Relates mathematically to `color.primary.default` when active and `color.interaction.disabled-bg` when disabled dynamically.
+- **Node Fill:** Fixed independently to `color.surface.default`.
+
+## 3. Interactive Playground
 
 <Playground>
   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-    <Toggle client:load label="Enable Notifications" defaultChecked />
-    <Toggle client:load label="Dark Mode" />
+    <Toggle client:load label="Enable GPS Monitoring" defaultChecked />
+    <Toggle client:load label="High-Contrast Mode" />
   </div>
 </Playground>
+
+## 4. Engineering Implementation
 
 <Tabs>
   <TabItem label="React Usage">
     ```tsx
     import { Toggle } from '@nirman/components';
-    <Toggle label="Wi-Fi" />
+    
+    // Abstracting ARIA translations!
+    <Toggle label="Enable Two-Factor Override" />
+    ```
+  </TabItem>
+  <TabItem label="SwiftUI Usage">
+    ```swift
+    Toggle(isOn: $active) {
+        Text("Two-Factor Binding")
+    }
+    .tint(Tokens.Color.primary.default)
+    ```
+  </TabItem>
+  <TabItem label="Jetpack Compose">
+    ```kotlin
+    Switch(
+        checked = active,
+        onCheckedChange = { active = it },
+        colors = SwitchDefaults.colors(
+            checkedThumbColor = Tokens.ColorSurfaceDefault,
+            checkedTrackColor = Tokens.ColorPrimaryDefault
+        )
+    )
     ```
   </TabItem>
 </Tabs>

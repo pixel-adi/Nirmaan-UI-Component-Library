@@ -1,40 +1,68 @@
 ---
 title: Autocomplete
-description: Predictive text entry mechanisms.
+description: Layer 2 Pattern — Predictive text merging input and dropdown parameters.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
 import { Autocomplete } from '@nirman/components';
 
-Autocomplete components merge `Input` bounding logic with `Dropdown` elevation overlays natively mapped to `zIndex.dropdown` and `elevation.3`.
+Autocomplete interfaces break the mold. They are formally **Layer 2 (Patterns)** because they intrinsically merge a `Layer 1 Input` and a `Layer 1 Dropdown` logically.
 
-## Interactive Playground
+## 1. Accessibility Specification
+- **ARIA:** Maps securely wrapping standard input strings with `role="combobox"` explicitly evaluating search subsets dynamically.
+- **Screen Reader Announcements:** Crucially evaluates and utilizes `aria-live="polite"` bounding box updates to instantly notify blind respondents how many elements exist!
+
+## 2. Token Binding
+- **Nested Tiers:** Composes the semantic tokens perfectly—border colors explicitly translate to `--nir-border-focus` while simultaneously spinning up depth mapping via `--nir-elevation-overlay`.
+
+## 3. Interactive Playground
 
 <Playground>
   <div style={{ width: '100%', maxWidth: '400px' }}>
     <Autocomplete 
       client:load 
-      label="Search Countries" 
+      label="Citizen Country Code" 
       options={[
-        { label: 'India', value: 'in' },
-        { label: 'United States', value: 'us' },
-        { label: 'United Kingdom', value: 'uk' }
+        { label: 'India (+91)', value: 'in' },
+        { label: 'United States (+1)', value: 'us' },
+        { label: 'United Kingdom (+44)', value: 'uk' }
       ]} 
       fullWidth 
     />
   </div>
 </Playground>
 
+## 4. Engineering Implementation
+
 <Tabs>
-  <TabItem label="React Integration">
+  <TabItem label="React Usage">
     ```tsx
     import { Autocomplete } from '@nirman/components';
 
-    <Autocomplete 
-      label="State"
-      options={[{label: 'Kerala', value: 'KL'}]} 
-    />
+    // The API merges dropdown arrays and standard input attributes natively
+    <Autocomplete label="Zone Query" options={[{label: "Zone A", value: "A"}]} />
+    ```
+  </TabItem>
+  <TabItem label="SwiftUI Usage">
+    ```swift
+    // Mobile patterns structure generic searches via bounded elements manually combining
+    TextField("Search Zone", text: $query)
+       // ... token styles applied internally 
+    ```
+  </TabItem>
+  <TabItem label="Jetpack Compose">
+    ```kotlin
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
+        TextField(
+            value = selectedOptionText,
+            onValueChange = {},
+            readOnly = true
+        )
+    }
     ```
   </TabItem>
 </Tabs>

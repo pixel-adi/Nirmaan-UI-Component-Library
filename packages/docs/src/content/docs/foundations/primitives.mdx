@@ -1,18 +1,17 @@
 ---
 title: Primitive Tokens
-description: The absolute foundational variables.
+description: Tier 1 Architecture — Abstract foundation units.
 ---
 
-Primitives are the raw mathematical building blocks mapped centrally into `packages/tokens/primitives/foundations.json`. These numbers lack context (for example, `spacing-4` is just `16px`). They have no intrinsic UI meaning without Semantic wrappers.
+Per the Constitutional design matrix, **Tier 1 (Primitive)** tokens represent raw, un-opinionated values. They are the complete palette from which all design is drawn but carry absolute zero semantic intent natively.
 
-## Core Primitives Available
+## Raw Palette Structure
 
-1. **Spacing:** Based strictly on a `4px` baseline multiplier (`px`, `1`, `1.5`, `2` ... `64`).
-2. **Radius:** Granular control over UI bending (`none`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `full`).
-3. **Typography Scaling:** Base dimensions scaling upwards from `10px` (`2xs`) to `60px` (`6xl`).
-4. **Colors:** Unmapped palettes like Navy, Red, Amber, Green (`color.navy.800`, `color.red.500`).
-5. **Elevation:** Explicit box-shadow logic mapping depth layers 0 through 6.
-6. **Breakpoints:** Explicit media query limits (`xs` ... `3xl`).
+Primitives are prefixed by `--nir-` internally:
+
+1. **Spacing Grid:** A rigid 4px multiplier scaling from `1` (4px) to `16` (64px) preventing random spacing permutations.
+2. **Radius Variants:** Granular definitions mapping `xs` through `full`.
+3. **Color Logic:** Complete baseline hex bounds (`blue.600`, `neutral.900`) stripped of contextual mappings like 'Success' or 'Danger'.
 
 > [!WARNING]
-> Do NOT use primitive variables directly in your frontend code! They are subject to theme mutations. Always use **Semantic Tokens**.
+> DO NOT reference Primitive variables directly in components (e.g. `color.blue.500`). This breaks **Parivartan-sheelta (Radical Adaptability)** by hardcoding identity. Always utilize **Tier 2 Semantic Variables**.

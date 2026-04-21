@@ -1,15 +1,15 @@
 ---
 title: Accessibility
-description: Core WCAG 2.1 compliance integration.
+description: Sarvajanik — Foundational Universal Design
 ---
 
-Accessibility is NOT an afterthought in Nirmaan; it is hardcoded into the mathematical limits of the component structure. You cannot utilize our component libraries to build non-compliant experiences.
+Accessibility operations in Nirmaan UI occur in **Step 1** of component generation, not via QA testing. By using Nirmaan components, a developer adopts exact Constitutional mandates flawlessly.
 
-## Baseline Rules Supported Natively
+## Verifiable Code Parity 
 
-1. **Touch Targets (WCAG 2.5.8 Target Size):** Any interactive element mapping to the `size = 'md'` variable invokes `{spacing.11}`, scaling to a rigid minimum of **`44x44px`** for iOS and Web interaction layers.
-2. **Focus Indicators (WCAG 2.4.11 Focus Appearance):** Focus states map to `--nir-interaction-focus-ring`, which ensures a contrast ratio of >3:1 against background nodes.
-3. **Contrast Ratios (WCAG 1.4.3 Contrast Minimum):** Every foreground element, such as `color.text.default` and `color.text.inverse`, mathematically clears an explicit readability margin of >4.5:1 on their associated Surface defaults (`color.surface.default`).
-4. **ARIA Standards:** React component bindings actively parse and bind `aria-describedby` when errors map into inputs.
+1. **Touch Targets (WCAG 2.5.8):** Minimum `44x44px` bounds are forced inside `Tier 3 (Component)` tokens natively inside inputs and buttons. It is mathematically impossible to produce smaller elements using default `size=md` definitions.
+2. **Contrast Levels (WCAG 1.4.3):** Color matrices force a `4.5:1` ratio. Nirmaan inherently offers a `High-Contrast` Theming Mode guaranteeing strict `7:1` (AAA) ratios.
+3. **Mandatory ARIA Binding:** Inputs demand `error` states which bind `aria-invalid` implicitly.
 
-By keeping components wrapped in Nirmaan primitives upstream, external apps inherently receive AAA compliances without granular QA testing.
+> [!IMPORTANT]
+> The minimum supported viewport width across every single defined component metric is bounded strictly to **320px**. All components break down fluidly without horizontal scroll.

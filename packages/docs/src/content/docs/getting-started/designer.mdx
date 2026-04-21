@@ -1,21 +1,26 @@
 ---
 title: Designer Workflow
-description: Designer Workflow
+description: Component Construction Protocol
 ---
 
-Nirmaan UI relies entirely on pushing updates directly from the Design tool straight into the engineering repositories. There is no manual handoff document bridging the gap.
+Nirmaan UI designers do not arbitrarily draw elements. Every component, regardless of layer, follows the **Component Construction Protocol** enforced universally.
 
-## Token Studio Integration
+## Component Construction Protocol
 
-We utilize **Token Studio for Figma** as our primary visual compiler.
+**Step 1 — Accessibility specification (Written First)**
+Before any visual design, document the component's ARIA contract, keyboard model, and screen reader announcements.
 
-1. **Construct Primitives:** Designers define explicit `Spacing` (e.g., `spacing-4` = `16px`), `Colors` (e.g., `navy-500` = `#083459`), and `Typography`.
-2. **Assign Semantics:** Designers map Primitives over to functional rules. For example, setting the `color.primary.default` alias to resolve to `{color.navy.500}`.
-3. **Commit to GitHub:** Using the native Token Studio plugin window, designers push the resulting `.json` configuration directly to the Nirmaan UI GitHub Repository.
+**Step 2 — Token binding**
+Create or reference the component's **Tier 3 (Component) tokens** via Token Studio for Figma. The property must explicitly bind to a **Tier 2 (Semantic) token**. Zero hardcoded values.
 
-## The CI Pipeline
-Once a designer pushes tokens, our automated `Turborepo` pipeline detects changes in the `packages/tokens/` payload and immediately:
-1. Runs `Style Dictionary` outputs filtering for Android, iOS, and Web.
-2. Formats all code outputs properly.
-3. Re-runs React Element validations in components.
-4. Updates this exact Starlight documentation site automatically to reflect the new visual variables.
+**Step 3 — Base component construction**
+Build using Figma's auto-layout. All spacing, padding, and sizing strictly references Native spacing variables. Naming must follow the `jds-[layer]-[name]-[variant]--[state]` convention.
+
+**Step 4 — Variant matrix**
+Define every visual modification. Every combination of variant × size × state must exist explicitly in the properties panel.
+
+**Step 5 — Accessibility annotation layer**
+Annotate the component showing ARIA roles, touch target dimensions (44x44 minimum), and contrast ratios.
+
+**Step 6 — Multi-script validation**
+Place the element in test frames mapping Hindi, Tamil, Telugu, and Urdu strings. Verify zero clipping occurs mathematically before committing the token definitions to GitHub!

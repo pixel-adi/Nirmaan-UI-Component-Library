@@ -1,34 +1,64 @@
 ---
 title: Dropdown
-description: Contextual menus triggering from buttons.
+description: Layer 1 Element — Contextual command arrays.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
 import { Dropdown } from '@nirman/components';
 
-Dropdowns utilize our semantic `surface.container` properties and respect the high-contrast accessibility inversions globally.
+Dropdowns govern dense contextual configuration sets bound deeply into the `--nir-elevation-overlay` logic safely avoiding canvas clipping.
 
-## Interactive Playground
+## 1. Accessibility Specification
+- **ARIA:** Translates actively to `<button aria-haspopup="listbox">` internally. Focus drops rapidly into the interior wrapper securely locking Tab rotations.
+- **Keyboard:** Closes rigidly on global `ESC` injections.
+
+## 2. Token Binding
+- **Elevation Layer:** The Z-Bounds strictly bind to `elevation.dropdown` and drop box shadows per `elevation.3`.
+- **Text Bounds:** Selectable matrices parse directly over array borders utilizing exactly `font.size.body-md`.
+
+## 3. Interactive Playground
 
 <Playground>
   <Dropdown 
     client:load 
-    label="Actions" 
+    label="Assign Case Priority" 
     options={[
-      { label: 'Edit Profile', value: 'edit' },
-      { label: 'Settings', value: 'settings' },
-      { label: 'Logout', value: 'logout' }
+      { label: 'Low', value: '1' },
+      { label: 'Medium', value: '2' },
+      { label: 'Critical Escalation', value: '3' }
     ]} 
   />
 </Playground>
+
+## 4. Engineering Implementation
 
 <Tabs>
   <TabItem label="React Usage">
     ```tsx
     import { Dropdown } from '@nirman/components';
 
-    <Dropdown label="Menu" options={[{label: 'Action', value: '1'}]} />
+    <Dropdown 
+       label="State Output" 
+       options={[{label: "Delhi", value: "DL"}]} 
+    />
+    ```
+  </TabItem>
+  <TabItem label="SwiftUI Usage">
+    ```swift
+    Menu("State Output") {
+        Button("Delhi", action: {  })
+    }
+    .background(Tokens.Color.surface.default)
+    .shadow(color: .black.opacity(0.12), radius: 16, y: 4) // Emulates generic elevation overlays
+    ```
+  </TabItem>
+  <TabItem label="Jetpack Compose">
+    ```kotlin
+    DropdownMenuItem(
+        text = { Text("Delhi", color = Tokens.ColorTextDefault) },
+        onClick = { }
+    )
     ```
   </TabItem>
 </Tabs>

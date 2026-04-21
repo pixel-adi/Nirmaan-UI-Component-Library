@@ -1,48 +1,42 @@
 ---
 title: Developer Workflow
-description: Developer Workflow
+description: Engineering via Canonical Parity
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Consuming Nirmaan UI requires practically zero configurations natively because the mathematical scaling and token translations are pre-compiled for your environment via `Style Dictionary v4`.
+Developers consuming the Nirmaan UI architecture do not overwrite configurations or "theme" component wrappers arbitrarily. They operate explicitly in **Layer 5 (Pages)** and **Layer 4 (Templates)**. 
 
-## Consuming Updates
+Components are guaranteed contractual APIs adhering to **Vishvasaniya (Trustworthy Consistency)** principles.
 
-Whenever designers push an update to Figma logic, the Turborepo CI pipeline builds the multi-platform payloads and version-bumps the `@nirman/tokens` package.
+## The Five-Layer Taxonomy
 
-You fetch these changes just by bumping your local package dependencies.
+You consume modules from these explicitly defined structures:
 
-## Applying in the Wild
+1. **Layer 1: Elements (Atoms):** The smallest reusable units. Single interactions (`<Button>`, `<Input>`).
+2. **Layer 2: Patterns (Molecules):** Functional groupings (`<Search Bar>`, `<Form Field>`).
+3. **Layer 3: Blocks (Organisms):** Self-contained complex regions (`<Government Header>`, `<Data Table>`).
+4. **Layer 4: Templates:** Spatial layouts scaling components rapidly.
+5. **Layer 5: Pages:** Real content implementations.
 
-Because we export perfectly typed semantics, your implementations remain incredibly clean.
+## Instantiating Code
 
 <Tabs>
-  <TabItem label="React Component">
-    React apps consume from `@nirman/components`. 
+  <TabItem label="React Integration">
+    Because all Layer 1 Elements dynamically scale the Three-Tier token variables internally, React mapping is heavily abstracted.
     ```tsx
     import { Input } from '@nirman/components';
     
-    // Components already possess mapped design tokens!
-    <Input label="Email address" error="Invalid format" fullWidth />
+    // ARIA labels securely bind dynamically!
+    <Input label="Aadhaar ID" error="Invalid verification format" />
     ```
   </TabItem>
-  <TabItem label="SwiftUI">
-    iOS apps natively read `Tokens.swift`.
+  <TabItem label="SwiftUI Integration">
+    Semantic Constants are rigidly pulled from Mobile tokens.
     ```swift
-    // You do not use hex codes!
-    .padding(Tokens.Spacing.4)
-    .background(Tokens.Color.cream[50])
-    .cornerRadius(Tokens.Radius.lg)
-    ```
-  </TabItem>
-  <TabItem label="Jetpack Compose">
-    Android apps natively read `Tokens.kt`.
-    ```kotlin
-    Card(
-        shape = RoundedCornerShape(Tokens.RadiusLg),
-        backgroundColor = Tokens.ColorCream50
-    )
+    // Theming Axis overrides automatically evaluate visually.
+    .padding(Tokens.Spacing.componentGap)
+    .background(Tokens.Color.surfaceVariant)
     ```
   </TabItem>
 </Tabs>

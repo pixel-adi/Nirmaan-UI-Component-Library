@@ -1,48 +1,35 @@
 ---
 title: Semantic Tokens
-description: The contextual UI variables mapping primitives.
+description: Tier 2 Architecture — Contextual Axis Mappings.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Semantic tokens inject context into primitives. E.g. `color.border.error` resolves back to the primitive `{color.red.500}`. 
+**Tier 2 (Semantic)** tokens map raw primitives to functional meaning. This powers the theming layer—changing Tier 2 values overrides identity securely.
 
-This enables native Dark Mode and High-Contrast mode swapping because the Semantic Token name remains perfectly identical across modes, but seamlessly changes the underlying primitive it points to!
+## Theming Combos (Brand × Mode × Density)
+The semantic layer resolves on three independent axes natively compiled for Engineering. An intersection must produce a valid accessible output dynamically.
 
-## Common Semantic Scopes
-
-### 1. Colors
-- `color.primary.default`
-- `color.secondary.stroke`
-- `color.surface.container`
-- `color.text.inverse`
-- `color.border.focus`
-- `color.feedback.warning`
-
-### 2. Interaction
-- `interaction.focus-ring`
-- `interaction.disabled-bg`
-- `interaction.hover-overlay`
-
-### 3. Fonts
-- `font.family.heading`
-- `font.size.body-md`
-- `font.line-height.display`
-
-## Examples in Applications
+1. **Brand Axis:** (e.g. Base, Central Govt, State Variants) redefining `color.primary`.
+2. **Mode Axis:** (Light, Dark, High-Contrast) dictating exact inversions of Surface and Typography contrast bounds (striving for 7:1 AAA ratio constraints in High-Contrast).
+3. **Density Axis:** Overriding spatial density to Compact or Spacious mappings mathematically resizing components.
 
 <Tabs>
-  <TabItem label="Web CSS">
+  <TabItem label="Semantic CSS">
     ```css
-    .text-input:focus {
-        border-color: var(--nir-border-focus);
-        box-shadow: 0 0 0 2px var(--nir-interaction-focus-ring);
+    /* Theming axes inherently override definitions */
+    :root {
+      --nir-color-surface: var(--nir-color-neutral-0);
+      --nir-color-border-error: var(--nir-color-red-600);
     }
     ```
   </TabItem>
-  <TabItem label="iOS">
+  <TabItem label="Swift Native">
     ```swift
-    .foregroundColor(Tokens.Color.Text.secondary)
+    // The developer only binds the intent!
+    RoundedRectangle()
+       .fill(Tokens.Color.surfaceVariant)
+       .stroke(Tokens.Color.borderStrong, lineWidth: 1)
     ```
   </TabItem>
 </Tabs>
