@@ -34,6 +34,7 @@ export default defineConfig({
 						{ label: 'Design Themes', slug: 'foundations/themes' },
 						{ label: 'Typography', slug: 'foundations/typography' },
 						{ label: 'Accessibility', slug: 'foundations/accessibility' },
+						{ label: 'Token Pipeline', slug: 'foundations/pipeline' },
 					],
 				},
 				{

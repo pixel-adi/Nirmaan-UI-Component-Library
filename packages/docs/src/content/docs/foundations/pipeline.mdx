@@ -1,0 +1,137 @@
+---
+title: Token Pipeline
+description: Architecture of Figma → Style Dictionary → All Platforms.
+---
+
+import { Steps, Card, CardGrid } from '@astrojs/starlight/components';
+
+The token pipeline is the backbone of Nirmaan's multi-platform guarantee. One design decision in Figma propagates automatically to CSS, Swift, Android XML, SCSS, and JavaScript.
+
+## Architecture
+
+```
+  FIGMA                                  CODE
+  ┌──────────────────┐                   ┌────────────────────────┐
+  │ Variables        │   export.json     │  Style Dictionary v4   │
+  │                  │ ────────────────→ │                        │
+  │ 3 Collections:   │                   │  Transforms JSON into: │
+  │  • global-vars   │                   │   → CSS variables      │
+  │  • tokens        │                   │   → iOS Swift          │
+  │  • local-vars    │                   │   → Android XML        │
+  │                  │                   │   → SCSS               │
+  │  Single mode     │                   │   → JSON (JS/TS)       │
+  └──────────────────┘                   └────────────────────────┘
+```
+
+## How JSON Maps to Each Platform
+
+```
+Figma path:  colour/primary/base
+
+  CSS:      --nir-colour-primary-base: #083459;
+  SCSS:     $nir-colour-primary-base: #083459;
+  Swift:    static let primaryBase = UIColor(hex: "#083459")
+  Android:  <color name="nir_colour_primary_base">#FF083459</color>
+  JS:       export const NirColourPrimaryBase = "#083459";
+```
+
+## Output Structure
+
+```
+packages/tokens/build/
+├── css/
+│   ├── variables.css
+│   └── variables.scss
+├── ios/
+│   ├── NirTokens.swift
+│   └── NirTokens.h
+├── android/
+│   ├── colors.xml
+│   └── dimens.xml
+└── js/
+    └── tokens.mjs
+```
+
+## When Tokens Change
+
+<Steps>
+
+1. **Designer updates a variable in Figma**
+
+2. **Re-export JSON**
+
+   Go to Plugins → Export Variables → save `export.json`.
+
+3. **Replace the file**
+
+   ```bash
+   cp ~/Downloads/export.json packages/tokens/export.json
+   ```
+
+4. **Rebuild all platforms**
+
+   ```bash
+   node sd.config.mjs
+   ```
+
+   New CSS/Swift/XML/JS files are generated automatically in `build/`.
+
+5. **Commit and push**
+
+   ```bash
+   git add packages/tokens/
+   git commit -m "tokens(colour): update primary base to #083459"
+   git push
+   ```
+
+   CI rebuilds and deploys automatically.
+
+</Steps>
+
+## Adding a New Token
+
+<CardGrid>
+  <Card title="In Figma (Preferred)" icon="approve-check-circle">
+    1. Open the Variables panel
+    2. Add to `global-variables` in the appropriate group
+    3. Set value, scoping, and code syntax
+    4. Re-export JSON and rebuild
+  </Card>
+  <Card title="In Code (Emergency Only)" icon="error">
+    1. Add to `export.json` following the existing naming structure
+    2. Run `node sd.config.mjs`
+    3. New output appears automatically
+    
+    **Always add in Figma first.** Figma is the single source of truth.
+  </Card>
+</CardGrid>
+
+> [!WARNING]
+> Never add tokens in code as your primary workflow. Code-first additions **will** drift from Figma, breaking the cross-platform guarantee. All additions must flow: Figma → JSON → build.
+
+## Token Naming Validation
+
+After rebuilding, verify your new token appears in all output files:
+
+```bash
+# Check CSS output
+grep "nir-colour-my-new-token" packages/tokens/build/css/variables.css
+
+# Check Swift output
+grep "myNewToken" packages/tokens/build/ios/NirTokens.swift
+
+# Check Android output
+grep "nir_colour_my_new_token" packages/tokens/build/android/colors.xml
+```
+
+## Style Dictionary Configuration
+
+The transformation rules live in `packages/tokens/sd.config.mjs`. Key transforms applied:
+
+| Transform | What it does |
+| :--- | :--- |
+| `name/camel` | camelCase for JS/Swift output |
+| `name/snake` | snake_case for Android XML |
+| `name/kebab` | kebab-case for CSS variables |
+| `size/rem` | Converts px values to rem for CSS |
+| `color/hex8` | Adds alpha channel for Android ARGB format |

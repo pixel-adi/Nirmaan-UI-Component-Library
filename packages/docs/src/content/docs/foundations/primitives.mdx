@@ -1,17 +1,129 @@
 ---
 title: Primitive Tokens
-description: Tier 1 Architecture — Abstract foundation units.
+description: Tier 1 Architecture — Raw values that semantic tokens reference.
 ---
 
-Per the Constitutional design matrix, **Tier 1 (Primitive)** tokens represent raw, un-opinionated values. They are the complete palette from which all design is drawn but carry absolute zero semantic intent natively.
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import ColorGrid from '../../../components/ColorGrid.astro';
 
-## Raw Palette Structure
+Primitives are the raw values that semantic tokens (`global-variables`) reference. They exist in the `tokens` collection in Figma.
 
-Primitives are prefixed by `--nir-` internally:
-
-1. **Spacing Grid:** A rigid 4px multiplier scaling from `1` (4px) to `16` (64px) preventing random spacing permutations.
-2. **Radius Variants:** Granular definitions mapping `xs` through `full`.
-3. **Color Logic:** Complete baseline hex bounds (`blue.600`, `neutral.900`) stripped of contextual mappings like 'Success' or 'Danger'.
+```
+Primitive:  tokens/16  →  value: 16
+                             ↑
+Semantic:   global-variables/spacing/horizontal/base  →  references tokens/16
+                             ↑
+Component:  .nir-e-button { padding: var(--nir-spacing-horizontal-base) }
+```
 
 > [!WARNING]
-> DO NOT reference Primitive variables directly in components (e.g. `color.blue.500`). This breaks **Parivartan-sheelta (Radical Adaptability)** by hardcoding identity. Always utilize **Tier 2 Semantic Variables**.
+> **Designers:** You never see or use primitives. They're hidden from the library.
+> **Developers:** Never reference `--nir-tokens-*` in CSS. Always use `--nir-spacing-*` or `--nir-colour-*` semantic tokens.
+
+## Why Primitives Exist
+
+<CardGrid>
+  <Card title="Scalability" icon="setting">
+    Without primitives, every semantic token would contain a hardcoded value. Change `tokens/16` from 16 to 14 and **every** semantic token referencing it updates automatically.
+  </Card>
+  <Card title="Density Modes" icon="laptop">
+    This is how density modes work — by swapping which primitives the semantic tokens reference. Compact mode = smaller primitives. No component code changes needed.
+  </Card>
+</CardGrid>
+
+## The Raw Palette Architecture
+
+Primitives are prefix-bound by `--nir-` and categorized mathematically:
+
+<CardGrid stagger>
+  <Card title="Spacing Grid" icon="setting">
+    A rigid **4px multiplier** scaling from `1` (4px) to `16` (64px). Physically prevents arbitrary spacing permutations.
+  </Card>
+  <Card title="Radius Variants" icon="approve-check-circle">
+    Mathematical definitions from `xs` (2px) through `full` (9999px) maintaining precise geometric consistency.
+  </Card>
+  <Card title="Colour Base" icon="information">
+    Complete baseline hex palette (`navy`, `cream`, `red`, `green`) stripped of contextual mappings like 'Success' or 'Danger'.
+  </Card>
+</CardGrid>
+
+## Numeric Scale Reference
+
+| Token | Value | Used by |
+| :--- | :--- | :--- |
+| `0` | 0 | `spacing/*/none` |
+| `2` | 2 | `corner-radius/smaller`, `stroke/thickness` |
+| `4` | 4 | `spacing/*/smallest`, `corner-radius/small` |
+| `8` | 8 | `spacing/*/smaller`, `corner-radius/base` |
+| `12` | 12 | `spacing/horizontal/small`, `corner-radius/large` |
+| `16` | 16 | `spacing/*/base`, `corner-radius/larger` |
+| `20` | 20 | `spacing/horizontal/large` |
+| `24` | 24 | `spacing/horizontal/larger`, `spacing/vertical/large` |
+| `32` | 32 | `spacing/horizontal/largest`, `spacing/vertical/larger` |
+| `40–64` | 40–64 | Large layout spacing |
+| `l` | 640 | Layout width reference |
+| `b` | 360 | Base/mobile width reference |
+
+## Raw Colour Palettes
+
+### Neutral Base
+
+<ColorGrid colors={[
+  { name: 'Neutral 0', var: '--nir-color-neutral-0' },
+  { name: 'Neutral 100', var: '--nir-color-neutral-100' },
+  { name: 'Neutral 300', var: '--nir-color-neutral-300' },
+  { name: 'Neutral 500', var: '--nir-color-neutral-500' },
+  { name: 'Neutral 700', var: '--nir-color-neutral-700' },
+  { name: 'Neutral 900', var: '--nir-color-neutral-900' },
+]} />
+
+### Cream (Surface Base)
+
+<ColorGrid colors={[
+  { name: 'Cream 50', var: '--nir-color-cream-50' },
+  { name: 'Cream 100', var: '--nir-color-cream-100' },
+  { name: 'Cream 300', var: '--nir-color-cream-300' },
+  { name: 'Cream 500', var: '--nir-color-cream-500' },
+  { name: 'Cream 700', var: '--nir-color-cream-700' },
+  { name: 'Cream 900', var: '--nir-color-cream-900' },
+]} />
+
+### Navy (Primary Anchor)
+
+<ColorGrid colors={[
+  { name: 'Navy 100', var: '--nir-color-navy-100' },
+  { name: 'Navy 300', var: '--nir-color-navy-300' },
+  { name: 'Navy 500', var: '--nir-color-navy-500' },
+  { name: 'Navy 600', var: '--nir-color-navy-600' },
+  { name: 'Navy 700', var: '--nir-color-navy-700' },
+  { name: 'Navy 900', var: '--nir-color-navy-900' },
+]} />
+
+### Red (Negative/Error)
+
+<ColorGrid colors={[
+  { name: 'Red 100', var: '--nir-color-red-100' },
+  { name: 'Red 300', var: '--nir-color-red-300' },
+  { name: 'Red 500', var: '--nir-color-red-500' },
+  { name: 'Red 700', var: '--nir-color-red-700' },
+  { name: 'Red 900', var: '--nir-color-red-900' },
+]} />
+
+### Green (Positive/Success)
+
+<ColorGrid colors={[
+  { name: 'Green 100', var: '--nir-color-green-100' },
+  { name: 'Green 300', var: '--nir-color-green-300' },
+  { name: 'Green 500', var: '--nir-color-green-500' },
+  { name: 'Green 700', var: '--nir-color-green-700' },
+  { name: 'Green 900', var: '--nir-color-green-900' },
+]} />
+
+### Amber (Warning)
+
+<ColorGrid colors={[
+  { name: 'Amber 100', var: '--nir-color-amber-100' },
+  { name: 'Amber 300', var: '--nir-color-amber-300' },
+  { name: 'Amber 500', var: '--nir-color-amber-500' },
+  { name: 'Amber 700', var: '--nir-color-amber-700' },
+] } />

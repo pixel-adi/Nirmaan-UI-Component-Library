@@ -1,60 +1,140 @@
 ---
 title: Toggle
-description: Layer 1 Element — Instant boolean actions.
+description: Layer 1 Element — Instant boolean switch.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
+import TokenMapping from '../../../components/TokenMapping.astro';
 import { Toggle } from '@nirman/components';
 
-Toggles initiate instant logic modifications without demanding a structural "Save" button click afterwards.
+Toggles initiate instant, reversible binary changes — no "Save" action required. They represent the current system state and should only be used when the action takes immediate effect.
 
 ## 1. Accessibility Specification
-- **ARIA:** Formally translates directly to `<button role="switch" aria-checked="true">`. 
-- **Verbal Caching:** "On" and "Off" strings are formally bound to localizations, meaning SR devices explicitly define the current bounds based on screen state context.
+
+| Attribute | Requirement | Detail |
+| :--- | :--- | :--- |
+| **Role** | `switch` | `<button role="switch">` — not `<input type="checkbox">`. |
+| **Checked state** | `aria-checked="true/false"` | Announces "on" or "off" to screen readers. |
+| **Label** | Always visible, adjacent to toggle | Describes what the toggle controls. |
+| **Keyboard** | `Space` to toggle | Tab to focus the switch, Space to flip state. |
+| **Touch target** | Minimum 44×44px | Track + padding must reach 44×44px combined. |
+| **State announcement** | Uses locale-mapped "On"/"Off" strings | Allows Hindi "चालू"/"बंद" localization. |
+| **Disabled** | `aria-disabled="true"` | Toggle visible but inoperable — user understands the constraint. |
 
 ## 2. Token Binding
-- **Track Boundary:** Relates mathematically to `color.primary.default` when active and `color.interaction.disabled-bg` when disabled dynamically.
-- **Node Fill:** Fixed independently to `color.surface.default`.
+
+<TokenMapping tokens={[
+  { element: 'track (active)', token: '--nir-colour-primary-default', description: 'Navy-600 fill when toggle is ON.' },
+  { element: 'track (inactive)', token: '--nir-colour-interaction-disabled-bg', description: 'Cream-300 fill when toggle is OFF.' },
+  { element: 'thumb (knob)', token: '--nir-colour-surface-default', description: 'White circle that slides across the track.' },
+  { element: 'focus ring', token: '--nir-colour-border-focus', description: '2px navy-600 ring on keyboard focus.' },
+  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', description: '0.38 composite opacity.' },
+  { element: 'label color', token: '--nir-colour-text-default', description: 'Near-black body text.' },
+  { element: 'transition duration', token: '--nir-motion-duration-normal', description: '200ms slide animation.' },
+  { element: 'transition easing', token: '--nir-motion-easing-standard', description: 'cubic-bezier(0.4, 0, 0.2, 1) smooth slide.' },
+]} />
 
 ## 3. Interactive Playground
 
 <Playground>
   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
     <Toggle client:load label="Enable GPS Monitoring" defaultChecked />
-    <Toggle client:load label="High-Contrast Mode" />
+    <Toggle client:load label="Receive push notifications" />
+    <Toggle client:load label="Biometric login (not available on this device)" disabled />
   </div>
 </Playground>
 
-## 4. Engineering Implementation
+## 4. Component Anatomy
+
+```
+Label text  [ ●     ]   ← OFF state
+Label text  [     ● ]   ← ON state (primary fill)
+
+  [       ] = .nir-e-toggle__track  → 40×24px visual track
+       ●    = .nir-e-toggle__thumb  → 20×20px white knob
+```
+
+The outer wrapper `.nir-e-toggle` expands to 44px height via padding.
+
+## 5. When to Use Toggle vs Checkbox
+
+| Scenario | Use |
+| :--- | :--- |
+| Setting takes immediate effect (e.g., dark mode) | **Toggle** |
+| Setting saved on form submit | **Checkbox** |
+| Multiple independent options in a list | **Checkbox** |
+| Single on/off system preference | **Toggle** |
+
+## 6. Engineering Implementation
 
 <Tabs>
-  <TabItem label="React Usage">
+  <TabItem label="React">
     ```tsx
     import { Toggle } from '@nirman/components';
-    
-    // Abstracting ARIA translations!
-    <Toggle label="Enable Two-Factor Override" />
+
+    // State change happens immediately — no submit button needed
+    <Toggle
+      label="Enable Two-Factor Authentication"
+      defaultChecked={user.twoFactorEnabled}
+      onChange={(isOn) => updateSetting('2fa', isOn)}
+    />
+
+    // Disabled toggle — shows state but prevents change
+    <Toggle
+      label="High-Contrast Mode"
+      disabled
+      helperText="Contact your administrator to change this setting"
+    />
     ```
   </TabItem>
-  <TabItem label="SwiftUI Usage">
+  <TabItem label="SwiftUI (iOS)">
     ```swift
-    Toggle(isOn: $active) {
-        Text("Two-Factor Binding")
+    import NirmaanTokens
+
+    Toggle(isOn: $isActive) {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("Enable GPS Monitoring")
+                .font(.custom(NirFontFamilyBody, size: NirFontSizeBodyMd))
+                .foregroundColor(Color(NirColourTextDefault))
+
+            Text("Required for field verification")
+                .font(.custom(NirFontFamilyBody, size: NirFontSizeBodySm))
+                .foregroundColor(Color(NirColourTextSecondary))
+        }
     }
-    .tint(Tokens.Color.primary.default)
+    // tint controls the ON state track colour
+    .tint(Color(NirColourPrimaryDefault))
+    .frame(minHeight: NirSpacingTouchTarget)
+    .accessibilityLabel("GPS Monitoring, \(isActive ? "on" : "off")")
     ```
   </TabItem>
-  <TabItem label="Jetpack Compose">
+  <TabItem label="Compose (Android)">
     ```kotlin
-    Switch(
-        checked = active,
-        onCheckedChange = { active = it },
-        colors = SwitchDefaults.colors(
-            checkedThumbColor = Tokens.ColorSurfaceDefault,
-            checkedTrackColor = Tokens.ColorPrimaryDefault
+    import dev.nirmaan.tokens.NirmaanTheme
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .defaultMinSize(minHeight = NirmaanTheme.spacing.touchTarget)
+    ) {
+        Text(
+            text = "Enable GPS Monitoring",
+            color = NirmaanTheme.colors.textDefault,
+            modifier = Modifier.weight(1f)
         )
-    )
+        Switch(
+            checked = isActive,
+            onCheckedChange = { isActive = it },
+            colors = SwitchDefaults.colors(
+                checkedTrackColor = NirmaanTheme.colors.primaryDefault,
+                checkedThumbColor = NirmaanTheme.colors.surfaceDefault,
+                uncheckedTrackColor = NirmaanTheme.colors.interactionDisabledBg,
+                uncheckedThumbColor = NirmaanTheme.colors.surfaceDefault
+            )
+        )
+    }
     ```
   </TabItem>
 </Tabs>

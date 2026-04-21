@@ -1,47 +1,132 @@
 ---
 title: Setup & Installation
-description: Bootstrapping Nirmaan UI across your environments.
+description: Bootstrapping Nirmaan UI across Web, iOS, and Android.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
-Integrating Nirmaan UI into your platform relies structurally on pulling down the appropriate `@nirman` artifacts.
+## For Developers
 
-## Web Setup (React)
+<Steps>
 
-To establish the frontend framework components into a React-based ecosystem (e.g. Next.js, Vite, or Astro):
+1. **Install the token package**
 
-1. **Install the unified library**
-```bash
-npm install @nirman/components @nirman/icons @nirman/tokens
-```
+   ```bash
+   npm install @nirman/tokens
+   ```
 
-2. **Import the Design Variables**
-The core `light.css` (and optionally `dark.css`) files dictate the exact typography, spatial gaps, and color hexes our components use. You **must** import them at the root of your application (usually `_app.tsx` or `index.ts`):
+2. **Import for your platform**
 
-```tsx
-import '@nirman/tokens/css/primitives.css';
-import '@nirman/tokens/css/light.css';
+   <Tabs>
+     <TabItem label="Web (CSS)">
+       Import at your app entry point (`_app.tsx`, `index.ts`, or `main.ts`):
+       ```tsx
+       import '@nirman/tokens/css/variables.css';
+       ```
+       All tokens become CSS custom properties:
+       ```css
+       .my-button {
+         background: var(--nir-colour-primary-base);
+         color: var(--nir-colour-primary-on-base);
+         padding: var(--nir-spacing-vertical-base) var(--nir-spacing-horizontal-base);
+         border-radius: var(--nir-spacing-corner-radius-base);
+       }
+       ```
+     </TabItem>
+     <TabItem label="Web (SCSS)">
+       ```scss
+       @import '@nirman/tokens/scss/variables';
 
-// Optionally include individual CSS if you aren't using CSS-in-JS injection:
-import '@nirman/components/dist/index.css';
-```
+       .my-button {
+         background: $nir-colour-primary-base;
+         border-radius: $nir-spacing-corner-radius-base;
+       }
+       ```
+     </TabItem>
+     <TabItem label="iOS (Swift)">
+       ```swift
+       import NirTokens
 
-## Native Setup (iOS / Android)
+       let button = UIButton()
+       button.backgroundColor = NirColour.primaryBase
+       button.layer.cornerRadius = NirSpacing.cornerRadiusBase
+       button.contentEdgeInsets = UIEdgeInsets(
+         top: NirSpacing.verticalBase,
+         left: NirSpacing.horizontalBase,
+         bottom: NirSpacing.verticalBase,
+         right: NirSpacing.horizontalBase
+       )
+       ```
+     </TabItem>
+     <TabItem label="Android (XML)">
+       ```xml
+       <Button
+         android:background="@color/nir_colour_primary_base"
+         android:textColor="@color/nir_colour_primary_on_base"
+         android:paddingHorizontal="@dimen/nir_spacing_horizontal_base"
+         android:paddingVertical="@dimen/nir_spacing_vertical_base"
+         app:cornerRadius="@dimen/nir_spacing_corner_radius_base" />
+       ```
+     </TabItem>
+     <TabItem label="JavaScript / TypeScript">
+       ```tsx
+       import { NirColourPrimaryBase, NirSpacingCornerRadiusBase } from '@nirman/tokens/js';
 
-Nirmaan does not enforce native platform UI frameworks—instead, we supply the exact variables (JSON mapping -> Swift / Kotlin) you need to conform precisely to the Figma models.
+       const styles = {
+         backgroundColor: NirColourPrimaryBase,
+         borderRadius: `${NirSpacingCornerRadiusBase}px`,
+       };
+       ```
+     </TabItem>
+   </Tabs>
 
-<Tabs>
-  <TabItem label="iOS (Swift)">
-    Simply copy the generated `Tokens.swift` payload from our design repo drop directly into your Xcode workspace. It includes structures for:
-    - `Tokens.Color.navy[500]`
-    - `Tokens.Radius.md`
-    - `Tokens.Spacing.11`
-  </TabItem>
-  <TabItem label="Android (Compose)">
-    Our architecture compiles `Tokens.kt` which generates standard Jetpack Compose compatible classes:
-    - `Tokens.ColorBlueLink500`
-    - `Tokens.RadiusMd`
-    - `Tokens.TypographyHeading1`
-  </TabItem>
-</Tabs>
+3. **Build tokens locally (for contributors)**
+
+   ```bash
+   git clone https://github.com/your-org/nirman.git
+   cd nirman/packages/tokens
+   pnpm install
+   node sd.config.mjs
+   ```
+
+   Output appears in the `build/` folder — one subfolder per platform.
+
+</Steps>
+
+---
+
+## For Designers
+
+<Steps>
+
+1. **Enable the Figma library**
+   1. Open any Figma file
+   2. Click **Assets** panel (left sidebar)
+   3. Click the **book icon** (Team Library)
+   4. Enable **Nirman Design System** library
+
+2. **Use variables**
+
+   All design values come from the Variables panel:
+   1. Select an element
+   2. Click fill, stroke, padding, or radius property
+   3. Click the **variable icon** (hexagon)
+   4. Browse `global-variables` for the token you need
+
+3. **Key rules**
+   - Always use variables from `global-variables`
+   - Check that Dev Mode shows `--nir-*` names
+   - Test your design in multiple scripts (Hindi, Tamil)
+   - **Never** hardcode hex colours or pixel values
+   - **Never** use `tokens` collection directly (those are primitives)
+   - **Never** detach a component instance
+
+4. **Exporting tokens (Design Lead only)**
+
+   When variables change:
+   1. Open Figma → Plugins → run export plugin
+   2. Save `export.json` to `packages/tokens/`
+   3. Run `node sd.config.mjs` to rebuild all platforms
+   4. Commit and push
+
+</Steps>

@@ -3,30 +3,82 @@ title: Introduction
 description: The Constitution of Design Language Parity
 ---
 
-This documentation defines the **Nirmaan UI Design System**. It exists to solve a specific problem: the absence of a unified, enforceable design language for digital public infrastructure in India — one that is simultaneously accessible to a user in Vidarbha on a 2G network, and a bureaucrat in New Delhi on a desktop.
+import { Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
 
-It is not a component library. It is not a UI kit. It is a **constitutional framework for design-code parity**.
+<div style="position:absolute;top:0;left:0;width:100vw;height:6px;background:linear-gradient(90deg,#ff9800 0%,transparent 40%,transparent 60%,#16a34a 100%);z-index:9999;"></div>
 
-## The Six Principles
+Nirmaan is a **design token-driven system** for Indian public infrastructure — built for multi-platform delivery across Web, iOS, and Android. It provides a single source of truth defined in Figma, transformed by Style Dictionary, and consumed by any platform.
 
-Every architectural decision and component specification traces its reasoning back to these immovable philosophical foundations:
+> [!NOTE]
+> **One design decision. Every platform.**
+> `Figma Variables → Style Dictionary → CSS / Swift / Android XML / SCSS / JS`
 
-1. **Janabhasha (जनभाषा) — The People's Language**
-   Every interface must communicate through typographic respect for each script's unique visual grammar. Nirmaan utilizes a script-aware token architecture scaling 12+ scripts inherently.
+## Who is this for?
 
-2. **Sarvajanik (सार्वजनिक) — Universal by Default**
-   Accessibility is the foundational layer. Minimum contrast ratios (4.5:1) and touch target minimums (44×44px) are mathematically bound at the token level.
+<CardGrid>
+  <Card title="Designers" icon="pencil">
+    New to the system? Start with [Setup & Installation](/getting-started/setup/) then [Designer Workflow](/getting-started/designer/).
+  </Card>
+  <Card title="Developers" icon="seti:default">
+    Integrating components? Start with [Setup & Installation](/getting-started/setup/) then [Developer Workflow](/getting-started/developer/).
+  </Card>
+  <Card title="Contributors" icon="github">
+    Building components? See [Developer Workflow](/getting-started/developer/) → Components section.
+  </Card>
+</CardGrid>
 
-3. **Parivartan-sheelta (परिवर्तनशीलता) — Radical Adaptability**
-   Any organization must be able to express their identity without forking the codebase. Our three-tier architecture achieves this.
+## How Tokens Flow
 
-4. **Vishvasaniya (विश्वसनीय) — Trustworthy Consistency**
-   Figma logic and engineering logic must explicitly maintain verifiable parity. Component APIs are contractual.
+```
+┌──────────────────────────────────────────────────────────────┐
+│  FIGMA                          STYLE DICTIONARY             │
+│  ┌─────────────────┐            ┌─────────────────┐         │
+│  │ 3 Collections:  │ export.json│ Transforms to:  │         │
+│  │                 │ ─────────→ │                 │         │
+│  │ global-variables│            │  • CSS vars     │         │
+│  │ tokens          │            │  • Swift        │         │
+│  │ local-variables │            │  • Android XML  │         │
+│  └─────────────────┘            │  • SCSS / JS/TS │         │
+│                                 └─────────────────┘         │
+│  CONSUMED BY                                                 │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐       │
+│  │  React   │ │ SwiftUI  │ │ Jetpack  │ │ Flutter  │       │
+│  │Components│ │  Views   │ │ Compose  │ │ Widgets  │       │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘       │
+└──────────────────────────────────────────────────────────────┘
+```
 
-5. **Saral (सरल) — Complexity Absorbed**
-   The system must function securely at 320px viewport widths and load seamlessly.
+## Token Naming Convention
 
-6. **Surakshit (सुरक्षित) — Secure by Pattern**
-   Interaction design is secure by default (masking, OTP inputs, session timeouts).
+All tokens follow the path structure from Figma: `collection / group / subgroup / variant`
 
-Navigate the documentation to see the exact mapping of these principles into Engineering architecture!
+| Platform | Format | Example |
+| :--- | :--- | :--- |
+| **CSS** | `--nir-{path}` | `--nir-colour-primary-base` |
+| **SCSS** | `$nir-{path}` | `$nir-colour-primary-base` |
+| **Swift** | `Nir.Colour.Primary.base` | `UIColor(hex: "#083459")` |
+| **Android** | `nir_colour_primary_base` | `@color/nir_colour_primary_base` |
+| **JS/TS** | `NirColourPrimaryBase` | `"#083459"` |
+
+## The Six Design Principles
+
+<CardGrid stagger>
+  <Card title="1. Token-First" icon="approve-check-circle">
+    No hardcoded values. Every colour, spacing, and radius is a design token. Changing one value propagates across the entire system and every platform instantly.
+  </Card>
+  <Card title="2. Multi-Platform" icon="laptop">
+    One definition serves Web, iOS, Android, and beyond. Style Dictionary handles the transformation so your team never defines a value twice.
+  </Card>
+  <Card title="3. Janabhasha (जनभाषा) — Multi-Script" icon="document">
+    Built for 12 Indian scripts with per-script typographic metrics. Shirorekha-aware line heights are **mathematically enforced** in the token architecture.
+  </Card>
+  <Card title="4. Sarvajanik (सार्वजनिक) — Accessible" icon="magnifier">
+    WCAG AA minimum, enforced in the token layer. High-contrast mode and 44×44px touch targets are structurally clamped — not a checklist item.
+  </Card>
+  <Card title="5. Vishvasaniya (विश्वसनीय) — Open" icon="information">
+    All tools are open-source. JSON is the source of truth. No vendor lock-in. Your tokens are portable to any future system.
+  </Card>
+  <Card title="6. Surakshit (सुरक्षित) — Trustworthy" icon="error">
+    Strict API contracts between Figma and Engineering. Interaction patterns like OTP masking and session timeouts are secure by default.
+  </Card>
+</CardGrid>

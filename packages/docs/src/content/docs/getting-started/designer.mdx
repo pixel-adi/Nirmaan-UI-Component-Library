@@ -1,26 +1,196 @@
 ---
 title: Designer Workflow
-description: Component Construction Protocol
+description: Component Construction Protocol — Section II.4.2
 ---
 
-Nirmaan UI designers do not arbitrarily draw elements. Every component, regardless of layer, follows the **Component Construction Protocol** enforced universally.
+import { Steps } from '@astrojs/starlight/components';
+import TokenMapping from '../../../components/TokenMapping.astro';
 
-## Component Construction Protocol
+Nirmaan UI designers do not arbitrarily draw elements. Every component follows the **Component Construction Protocol** enforced universally, mirroring rigorous systems like Material Design 3.
 
-**Step 1 — Accessibility specification (Written First)**
-Before any visual design, document the component's ARIA contract, keyboard model, and screen reader announcements.
+## Your Variables — What Goes Where
 
-**Step 2 — Token binding**
-Create or reference the component's **Tier 3 (Component) tokens** via Token Studio for Figma. The property must explicitly bind to a **Tier 2 (Semantic) token**. Zero hardcoded values.
+| Variable group | What it controls | Example token | Example value |
+| :--- | :--- | :--- | :--- |
+| `colour/primary/*` | Brand colours, key actions | `colour/primary/base` | `#083459` |
+| `colour/secondary/*` | Supporting actions | `colour/secondary/base` | `#fcfcfc` |
+| `colour/surface/*` | Backgrounds, text, borders | `colour/surface/container` | `#fcfcfc` |
+| `colour/status/*` | Success/error/warning/info | `colour/status/positive/base` | `#18941c` |
+| `spacing/horizontal/*` | Left/right padding, column gaps | `spacing/horizontal/base` | `16` |
+| `spacing/vertical/*` | Top/bottom padding, row gaps | `spacing/vertical/base` | `16` |
+| `spacing/corner-radius/*` | Border radius | `spacing/corner-radius/base` | `8` |
+| `spacing/stroke/*` | Border width | `spacing/stroke/thickness` | `2` |
 
-**Step 3 — Base component construction**
-Build using Figma's auto-layout. All spacing, padding, and sizing strictly references Native spacing variables. Naming must follow the `jds-[layer]-[name]-[variant]--[state]` convention.
+## Building a Component in Figma
 
-**Step 4 — Variant matrix**
-Define every visual modification. Every combination of variant × size × state must exist explicitly in the properties panel.
+<Steps>
 
-**Step 5 — Accessibility annotation layer**
-Annotate the component showing ARIA roles, touch target dimensions (44x44 minimum), and contrast ratios.
+1. **Set up auto-layout**
 
-**Step 6 — Multi-script validation**
-Place the element in test frames mapping Hindi, Tamil, Telugu, and Urdu strings. Verify zero clipping occurs mathematically before committing the token definitions to GitHub!
+   Every component must use auto-layout — no absolute positioning.
+   ```
+   Frame (auto-layout, horizontal)
+   ├── Icon (optional)
+   ├── Label text
+   └── Trailing element (optional)
+
+   Padding: bound to spacing/horizontal/* and spacing/vertical/*
+   Gap: bound to spacing/horizontal/smaller
+   Radius: bound to spacing/corner-radius/*
+   ```
+
+2. **Bind all visual properties to variables**
+
+   <TokenMapping tokens={[
+     { element: 'Fill colour', token: 'colour/primary/base', description: 'Or colour/surface/container for neutral fills.' },
+     { element: 'Text colour', token: 'colour/primary/on-base', description: 'Or colour/surface/on-container for text inside cards.' },
+     { element: 'Stroke colour', token: 'colour/primary/stroke', description: 'Or colour/surface/container-stroke.' },
+     { element: 'Stroke width', token: 'spacing/stroke/thickness', description: 'Always 2px — never hardcode.' },
+     { element: 'Padding left/right', token: 'spacing/horizontal/*', description: 'Use /base for standard, /smaller for tight.' },
+     { element: 'Padding top/bottom', token: 'spacing/vertical/*', description: 'Use /smaller for buttons, /base for cards.' },
+     { element: 'Gap (between children)', token: 'spacing/horizontal/smaller', description: 'Or vertical/smallest for tight stacked layouts.' },
+     { element: 'Corner radius', token: 'spacing/corner-radius/*', description: 'Use /base for buttons, inputs, dropdowns.' },
+   ]} />
+
+3. **Create all variant combinations**
+
+   | Property | Options |
+   | :--- | :--- |
+   | Variant | primary, secondary, tertiary, danger, ghost |
+   | Size | small, medium, large |
+   | State | default, hover, focused, active, disabled |
+   | Content | with-icon, without-icon, icon-only |
+
+   > [!WARNING]
+   > Build every combination. Missing variants = missing code states later.
+
+4. **Name your component**
+
+   ```
+   nir-e-button      ← Element (atom)
+   nir-p-form-field  ← Pattern (molecule)
+   nir-b-header      ← Block (organism)
+   ```
+
+5. **Add accessibility annotations**
+
+   On a separate "A11y" layer or page:
+   ```
+   Component: nir-e-button
+   Role:      button (native HTML)
+   Keyboard:  Enter/Space to activate, Tab to focus
+   Focus:     2px outline, colour/primary/base, 2px offset
+   SR text:   "[label], button" / "[label], button, dimmed" (disabled)
+   Touch:     Min 44×44px tap area (medium size)
+   ```
+
+6. **Multi-script validation**
+
+   Place the component in test frames with Hindi, Tamil, Telugu, and Urdu labels. Verify zero clipping occurs before committing to GitHub.
+
+</Steps>
+
+## Spacing Cheat Sheet
+
+| Context | Direction | Token | Value |
+| :--- | :--- | :--- | :--- |
+| Button padding (horizontal) | → | `spacing/horizontal/base` | 16 |
+| Button padding (vertical) | ↓ | `spacing/vertical/smaller` | 8 |
+| Card padding | both | `spacing/horizontal/larger` + `spacing/vertical/large` | 24 |
+| Gap between form fields | ↓ | `spacing/vertical/base` | 16 |
+| Gap between icon and text | → | `spacing/horizontal/smaller` | 8 |
+| Gap between label and input | ↓ | `spacing/vertical/smallest` | 4 |
+| Page margin | → | `spacing/horizontal/largest` | 32 |
+| Tight list items | ↓ | `spacing/vertical/smallest` | 4 |
+
+### Corner Radius Guide
+
+| Use case | Token | Value |
+| :--- | :--- | :--- |
+| Small badges, tags | `corner-radius/smaller` | 2px |
+| Input fields, buttons (small) | `corner-radius/small` | 4px |
+| **Buttons, inputs, dropdowns** | **`corner-radius/base`** | **8px** |
+| Cards, modals | `corner-radius/large` | 12px |
+| Large cards, hero sections | `corner-radius/larger` | 16px |
+
+## Colour Usage Decision Tree
+
+```
+What are you colouring?
+│
+├─ Primary action (main button, key CTA)?
+│  Fill:    colour/primary/base
+│  Text:    colour/primary/on-base
+│  Border:  colour/primary/stroke
+│
+├─ Secondary action (cancel, back)?
+│  Fill:    colour/secondary/base
+│  Text:    colour/secondary/on-base
+│
+├─ Page background?
+│  Fill:    colour/surface/base           (cream)
+│  Text:    colour/surface/on-base        (near-black)
+│
+├─ Card / container?
+│  Fill:    colour/surface/container      (white)
+│  Text:    colour/surface/on-container   (dark grey)
+│  Border:  colour/surface/container-stroke
+│
+├─ Success / error / warning message?
+│  Background: colour/status/[type]/container
+│  Text:       colour/status/[type]/on-container
+│  Icon/badge: colour/status/[type]/base
+│
+├─ Muted / secondary text?
+│  Text:    colour/surface/container-light
+│
+├─ Link?
+│  Text:    colour/surface/text-link
+│
+└─ Modal overlay?
+   Fill:    colour/surface/overlay
+```
+
+## Handing Off to Development
+
+<Steps>
+
+1. **Verify in Dev Mode** — every property must show a `--nir-*` variable name. Raw hex values mean the variable isn't bound.
+
+2. **Write the handoff note**
+
+   ```
+   Component: nir-e-dropdown
+   Props:
+     - label (string, required)
+     - options (array of {value, label})
+     - size: sm | md | lg
+     - disabled: boolean
+     - error: string
+
+   States: default, hover, focused, open, disabled, error
+   Keyboard: Arrow keys navigate, Enter selects, Escape closes
+   ARIA: role="combobox", aria-expanded, aria-activedescendant
+   ```
+
+3. **Create a GitHub Issue** — Use the Component Proposal template with the Figma link.
+
+4. **Review the built component**
+   - Compare Storybook output with Figma design
+   - Check all states render correctly
+   - Check Hindi and Tamil labels don't clip
+   - Check Dark mode and High-Contrast mode
+   - Approve or request changes on the PR
+
+</Steps>
+
+## Common Mistakes
+
+| Mistake | Impact | Fix |
+| :--- | :--- | :--- |
+| Hardcoded `#083459` instead of variable | Breaks when theme changes | Rebind to `colour/primary/base` |
+| Used `16px` padding instead of variable | Inconsistent across components | Rebind to `spacing/horizontal/base` |
+| Missing disabled variant | Developer improvises or skips | Add disabled state to all variants |
+| No a11y annotation | Component ships with missing ARIA | Add annotations before handoff |
+| Used `tokens/16` instead of `global-variables` | Primitives shouldn't be used directly | Always use `global-variables` |
+| Detached a library component | Breaks future updates | Propose a new variant instead |

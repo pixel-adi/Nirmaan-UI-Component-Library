@@ -1,59 +1,143 @@
 ---
 title: Radio
-description: Layer 1 Element — Distinctly mutually exclusive selections.
+description: Layer 1 Element — Mutually exclusive single selection.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
+import TokenMapping from '../../../components/TokenMapping.astro';
 import { Radio } from '@nirman/components';
 
-Radio buttons dictate that only a singular choice may be parsed simultaneously within a specific structure array.
+Radio buttons enforce that only one option within a group can be selected at a time. They must always exist as part of a named group — a lone radio button is an accessibility violation.
 
 ## 1. Accessibility Specification
-- **ARIA:** Groups must inherently be wrapped in generic `fieldset` parameters with a visually hidden `legend` outlining the group context natively.
-- **Keyboard:** Explicitly utilizes arrow-keys to rotate selections natively without firing standard tab navigation recursively.
+
+| Attribute | Requirement | Detail |
+| :--- | :--- | :--- |
+| **Group wrapper** | `<fieldset>` + `<legend>` | Legend announces the group question to SR users. |
+| **Role** | `radio` (native `<input type="radio">`) | Native element required — never custom `<div>`. |
+| **Group role** | `role="radiogroup"` | Applied automatically to the wrapper. |
+| **Keyboard** | `Arrow keys` to navigate within group | `Tab` moves to/from the group as a unit. |
+| **Checked state** | `aria-checked="true/false"` | Native to `<input type="radio">`. |
+| **Touch target** | 44×44px minimum via padding | Visual dot is 20×20px; padding extends tap area. |
+| **Disabled** | `aria-disabled="true"` | Individual options can be disabled while group remains navigable. |
 
 ## 2. Token Binding
-- **Active State:** Overrides inherently to `color.primary.default` and enforces an internal `size / radius` manipulation drawing the inner dot.
-- **Touch Limits:** Bounding padding extends exactly equal to Checkbox to capture `44px` bounds securely.
+
+<TokenMapping tokens={[
+  { element: 'outer ring (selected)', token: '--nir-colour-primary-default', description: 'Navy border of selected radio button.' },
+  { element: 'inner dot (selected)', token: '--nir-colour-primary-default', description: 'Filled dot when selected.' },
+  { element: 'outer ring (unselected)', token: '--nir-colour-border-strong', description: 'Navy-200 border when not selected.' },
+  { element: 'outer ring (focus)', token: '--nir-colour-border-focus', description: '2px offset focus ring.' },
+  { element: 'background (disabled)', token: '--nir-colour-interaction-disabled-bg', description: 'Cream-300 when disabled.' },
+  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', description: '0.38 composite opacity.' },
+  { element: 'label color', token: '--nir-colour-text-default', description: 'Near-black body text.' },
+  { element: 'touch area', token: '--nir-spacing-touch-target', description: '44px minimum hit area via padding.' },
+]} />
 
 ## 3. Interactive Playground
 
 <Playground>
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-    <Radio client:load name="region" label="North Sector" defaultChecked />
-    <Radio client:load name="region" label="Aadhaar Verification Node" />
-    <Radio client:load name="region" label="System Offline" disabled />
-  </div>
+  <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
+    <legend style={{ marginBottom: '0.75rem', fontWeight: 600, fontSize: '0.9rem' }}>Select verification method</legend>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <Radio client:load name="verify" label="Aadhaar OTP" defaultChecked />
+      <Radio client:load name="verify" label="Mobile OTP" />
+      <Radio client:load name="verify" label="Biometric (unavailable in your region)" disabled />
+    </div>
+  </fieldset>
 </Playground>
 
-## 4. Engineering Implementation
+## 4. Component Anatomy
+
+```
+◉  Label text       ← Selected state
+○  Another option   ← Unselected state
+○  Disabled         ← Disabled state (0.38 opacity)
+
+  ◉ = .nir-e-radio__dot (filled when selected)
+  ○ = .nir-e-radio__ring (outer border)
+```
+
+## 5. Engineering Implementation
 
 <Tabs>
-  <TabItem label="React Usage">
+  <TabItem label="React">
     ```tsx
     import { Radio } from '@nirman/components';
 
-    <Radio name="node" label="Enable Validation Mode" />
+    // Always use name prop to form the group
+    <fieldset>
+      <legend>Preferred language for correspondence</legend>
+      <Radio name="language" label="English" value="en" defaultChecked />
+      <Radio name="language" label="हिंदी (Hindi)" value="hi" />
+      <Radio name="language" label="தமிழ் (Tamil)" value="ta" />
+      <Radio name="language" label="తెలుగు (Telugu)" value="te" />
+    </fieldset>
     ```
   </TabItem>
-  <TabItem label="SwiftUI Usage">
+  <TabItem label="SwiftUI (iOS)">
     ```swift
-    // Swift draws bounding radius tokens directly
-    Circle()
-      .stroke(Tokens.Color.primary.default, lineWidth: 2)
-      .frame(width: 20, height: 20)
+    import NirmaanTokens
+
+    // SwiftUI doesn't have a native Radio — implement with custom toggle style
+    ForEach(options) { option in
+        Button(action: { selectedOption = option.id }) {
+            HStack(spacing: NirSpacingHorizontalSmaller) {
+                ZStack {
+                    Circle()
+                        .stroke(
+                            selectedOption == option.id
+                                ? Color(NirColourPrimaryDefault)
+                                : Color(NirColourBorderStrong),
+                            lineWidth: 2
+                        )
+                        .frame(width: 20, height: 20)
+
+                    if selectedOption == option.id {
+                        Circle()
+                            .fill(Color(NirColourPrimaryDefault))
+                            .frame(width: 10, height: 10)
+                    }
+                }
+                Text(option.label)
+                    .foregroundColor(Color(NirColourTextDefault))
+            }
+        }
+        .frame(minHeight: NirSpacingTouchTarget)
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(selectedOption == option.id ? .isSelected : [])
+    }
     ```
   </TabItem>
-  <TabItem label="Jetpack Compose">
+  <TabItem label="Compose (Android)">
     ```kotlin
-    RadioButton(
-        selected = isSelected,
-        onClick = { onSelected() },
-        colors = RadioButtonDefaults.colors(
-            selectedColor = Tokens.ColorPrimaryDefault
-        )
-    )
+    import dev.nirmaan.tokens.NirmaanTheme
+
+    options.forEach { option ->
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = NirmaanTheme.spacing.touchTarget)
+                .selectable(
+                    selected = (selectedOption == option.value),
+                    onClick = { selectedOption = option.value },
+                    role = Role.RadioButton
+                )
+        ) {
+            RadioButton(
+                selected = (selectedOption == option.value),
+                onClick = null,
+                colors = RadioButtonDefaults.colors(
+                    selectedColor = NirmaanTheme.colors.primaryDefault,
+                    unselectedColor = NirmaanTheme.colors.borderStrong
+                )
+            )
+            Spacer(Modifier.width(NirmaanTheme.spacing.horizontalSmaller))
+            Text(option.label, color = NirmaanTheme.colors.textDefault)
+        }
+    }
     ```
   </TabItem>
 </Tabs>

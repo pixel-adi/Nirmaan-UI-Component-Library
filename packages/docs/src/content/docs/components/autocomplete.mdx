@@ -1,67 +1,177 @@
 ---
 title: Autocomplete
-description: Layer 2 Pattern — Predictive text merging input and dropdown parameters.
+description: Layer 2 Pattern — Predictive search merging Input and Dropdown.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
+import TokenMapping from '../../../components/TokenMapping.astro';
 import { Autocomplete } from '@nirman/components';
 
-Autocomplete interfaces break the mold. They are formally **Layer 2 (Patterns)** because they intrinsically merge a `Layer 1 Input` and a `Layer 1 Dropdown` logically.
+Autocomplete is a **Layer 2 (Pattern)** component — it composes a `Layer 1 Input` and a `Layer 1 Dropdown` into a unified predictive search experience. As the user types, the option list filters in real time and results are announced to screen reader users via `aria-live`.
 
 ## 1. Accessibility Specification
-- **ARIA:** Maps securely wrapping standard input strings with `role="combobox"` explicitly evaluating search subsets dynamically.
-- **Screen Reader Announcements:** Crucially evaluates and utilizes `aria-live="polite"` bounding box updates to instantly notify blind respondents how many elements exist!
+
+| Attribute | Requirement | Detail |
+| :--- | :--- | :--- |
+| **Role** | `combobox` on input | `<input role="combobox" aria-autocomplete="list">` |
+| **List role** | `listbox` on suggestions panel | `<ul role="listbox">` |
+| **Option role** | `option` per suggestion | `<li role="option" aria-selected="true/false">` |
+| **Active item** | `aria-activedescendant` | Updated to the currently highlighted option ID. |
+| **Open state** | `aria-expanded="true/false"` | True when suggestions panel is visible. |
+| **Keyboard** | Type to filter, `↑↓` navigate, `Enter` select, `Esc` close | Full keyboard navigation without mouse. |
+| **Live region** | `aria-live="polite"` on results count | Announces "3 results found" after each keystroke. |
+| **Touch target** | 44px input height minimum | Standard input sizing applies. |
 
 ## 2. Token Binding
-- **Nested Tiers:** Composes the semantic tokens perfectly—border colors explicitly translate to `--nir-border-focus` while simultaneously spinning up depth mapping via `--nir-elevation-overlay`.
+
+<TokenMapping tokens={[
+  { element: 'input border (default)', token: '--nir-colour-border-default', description: 'Cream-400 resting border on input.' },
+  { element: 'input border (focus)', token: '--nir-colour-border-focus', description: 'Navy-600 when input is focused.' },
+  { element: 'input background', token: '--nir-colour-surface-container', description: 'White input fill.' },
+  { element: 'input text', token: '--nir-colour-text-default', description: 'Near-black user-typed text.' },
+  { element: 'placeholder', token: '--nir-colour-text-placeholder', description: 'Muted navy-200 placeholder.' },
+  { element: 'suggestions panel background', token: '--nir-colour-surface-container', description: 'White suggestion list panel.' },
+  { element: 'suggestions panel shadow', token: '--nir-elevation-overlay', description: 'Elevation-4 shadow for depth.' },
+  { element: 'suggestions panel z-index', token: '--nir-z-index-dropdown', description: '1000 — above content.' },
+  { element: 'suggestion hover', token: '--nir-colour-interaction-hover-overlay', description: 'rgba(0,0,0,0.04) on hover.' },
+  { element: 'suggestion active/selected', token: '--nir-colour-interaction-selected-bg', description: 'Navy-50 on selected suggestion.' },
+  { element: 'match highlight', token: '--nir-colour-primary-muted', description: 'Navy-100 background on matched text fragment.' },
+  { element: 'min-height', token: '--nir-spacing-touch-target', description: '44px WCAG 2.5.8.' },
+]} />
 
 ## 3. Interactive Playground
 
 <Playground>
-  <div style={{ width: '100%', maxWidth: '400px' }}>
-    <Autocomplete 
-      client:load 
-      label="Citizen Country Code" 
+  <div style={{ width: '100%', maxWidth: '420px' }}>
+    <Autocomplete
+      client:load
+      label="State"
+      placeholder="Type to search states…"
       options={[
-        { label: 'India (+91)', value: 'in' },
-        { label: 'United States (+1)', value: 'us' },
-        { label: 'United Kingdom (+44)', value: 'uk' }
-      ]} 
-      fullWidth 
+        { label: 'Andhra Pradesh', value: 'AP' },
+        { label: 'Assam', value: 'AS' },
+        { label: 'Bihar', value: 'BR' },
+        { label: 'Delhi', value: 'DL' },
+        { label: 'Gujarat', value: 'GJ' },
+        { label: 'Karnataka', value: 'KA' },
+        { label: 'Kerala', value: 'KL' },
+        { label: 'Maharashtra', value: 'MH' },
+        { label: 'Tamil Nadu', value: 'TN' },
+        { label: 'Uttar Pradesh', value: 'UP' },
+        { label: 'West Bengal', value: 'WB' },
+      ]}
+      fullWidth
     />
   </div>
 </Playground>
 
-## 4. Engineering Implementation
+## 4. Component Anatomy
+
+```
+┌─ label ──────────────────────────────────┐
+│ State                                    │
+├──────────────────────────────────────────┤
+│ [🔍]  User typed text…             [×]  │  ← input field
+└──────────────────────────────────────────┘
+  ┌──────────────────────────────────────┐
+  │  ─── 4 results ─────────────────     │  ← aria-live region
+  │  Tamil Nadu                          │
+  │  Telangana  ← highlighted match      │
+  │  Tripura                             │
+  │  Uttarakhand                         │
+  └──────────────────────────────────────┘
+```
+
+## 5. Engineering Implementation
 
 <Tabs>
-  <TabItem label="React Usage">
+  <TabItem label="React">
     ```tsx
     import { Autocomplete } from '@nirman/components';
 
-    // The API merges dropdown arrays and standard input attributes natively
-    <Autocomplete label="Zone Query" options={[{label: "Zone A", value: "A"}]} />
+    // The component handles filtering, aria-live, keyboard nav automatically
+    <Autocomplete
+      label="State"
+      placeholder="Type to search…"
+      options={states.map(s => ({ label: s.name, value: s.code }))}
+      onChange={(selected) => setSelectedState(selected.value)}
+      helperText="Select the state where the incident occurred"
+    />
+
+    // Async options (for large datasets — fetched from API as user types)
+    <Autocomplete
+      label="District"
+      placeholder="Search by district name…"
+      loadOptions={async (query) => {
+        const results = await searchDistricts(query);
+        return results.map(d => ({ label: d.name, value: d.code }));
+      }}
+    />
     ```
   </TabItem>
-  <TabItem label="SwiftUI Usage">
+  <TabItem label="SwiftUI (iOS)">
     ```swift
-    // Mobile patterns structure generic searches via bounded elements manually combining
-    TextField("Search Zone", text: $query)
-       // ... token styles applied internally 
+    import NirmaanTokens
+
+    // iOS 16+ — native searchable modifier
+    NavigationView {
+        List(filteredStates) { state in
+            Text(state.name)
+                .onTapGesture { selectedState = state }
+        }
+        .searchable(
+            text: $searchText,
+            prompt: "Type to search states…"
+        )
+        .onChange(of: searchText) { query in
+            filteredStates = query.isEmpty
+                ? allStates
+                : allStates.filter { $0.name.localizedCaseInsensitiveContains(query) }
+        }
+    }
+    .tint(Color(NirColourPrimaryDefault))
     ```
   </TabItem>
-  <TabItem label="Jetpack Compose">
+  <TabItem label="Compose (Android)">
     ```kotlin
+    import dev.nirmaan.tokens.NirmaanTheme
+
+    var query by remember { mutableStateOf("") }
+    val filtered = remember(query) {
+        states.filter { it.name.contains(query, ignoreCase = true) }
+    }
+
     ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = !expanded }
+        expanded = query.isNotEmpty() && filtered.isNotEmpty(),
+        onExpandedChange = {}
     ) {
-        TextField(
-            value = selectedOptionText,
-            onValueChange = {},
-            readOnly = true
+        OutlinedTextField(
+            value = query,
+            onValueChange = { query = it },
+            label = { Text("State") },
+            placeholder = { Text("Type to search…") },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = NirmaanTheme.colors.borderFocus,
+                unfocusedBorderColor = NirmaanTheme.colors.borderDefault,
+            ),
+            modifier = Modifier
+                .menuAnchor()
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = NirmaanTheme.spacing.touchTarget)
         )
+
+        ExposedDropdownMenu(
+            expanded = filtered.isNotEmpty() && query.isNotEmpty(),
+            onDismissRequest = { query = "" }
+        ) {
+            filtered.forEach { state ->
+                DropdownMenuItem(
+                    text = { Text(state.name) },
+                    onClick = { query = state.name }
+                )
+            }
+        }
     }
     ```
   </TabItem>

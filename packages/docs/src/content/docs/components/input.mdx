@@ -1,60 +1,146 @@
 ---
 title: Input
-description: Layer 1 Element — Standard form capture mechanisms.
+description: Layer 1 Element — Standard form text capture.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
+import TokenMapping from '../../../components/TokenMapping.astro';
 import { Input } from '@nirman/components';
 
-Text inputs govern standard data entry schemas on Web and Native apps natively bounded to Constitutional definitions. 
+Text inputs govern standard data entry. Every border, label, error colour, and spacing value is token-driven — no hardcoded values exist in the component implementation.
 
 ## 1. Accessibility Specification
-- **ARIA:** Natively constructs IDs automatically linking explicit standard `aria-describedby` when errors map to inputs.
-- **Focus Indicators:** Binds cleanly to `--nir-interaction-focus-ring` (minimum 3:1 AAA ratio against canvas bounding).
-- **Min Touch Bounds:** The interactive container hits a `44px` hard minimum.
+
+| Attribute | Requirement | Detail |
+| :--- | :--- | :--- |
+| **Label** | Always visible `<label>` linked via `htmlFor`/`id` | Floating or fixed — never placeholder-only labels. |
+| **Error** | `aria-invalid="true"` + `aria-describedby` pointing to error text | Screen readers announce "invalid entry" automatically. |
+| **Error message** | `role="alert"` | Triggers immediate announcement on error state change. |
+| **Helper text** | `aria-describedby` | Linked to input — announced after label. |
+| **Required** | `aria-required="true"` | Announced as "required field". |
+| **Focus ring** | 2px solid `--nir-colour-border-focus`, 0px offset (inside) | Inset outline to avoid layout shift. |
+| **Touch target** | Minimum 44px height | Enforced via `min-height: var(--nir-spacing-touch-target)`. |
+| **Disabled** | `aria-disabled="true"` + `cursor: not-allowed` | Not HTML `disabled` — keeps tab navigation intact. |
 
 ## 2. Token Binding
-- **Border:** `color.border.default` mapping properly to `color.border.focus` (Interaction semantic).
-- **State Feedback:** Error configurations instantly pivot to `color.feedback.error.border` without manual injection.
+
+<TokenMapping tokens={[
+  { element: 'border-color (default)', token: '--nir-colour-border-default', description: 'Resting border — cream-400 (#E6E2DE).' },
+  { element: 'border-color (focus)', token: '--nir-colour-border-focus', description: 'Navy-600 (#083459) on keyboard focus.' },
+  { element: 'border-color (error)', token: '--nir-colour-border-error', description: 'Red-500 (#BC3737) — automatic on error prop.' },
+  { element: 'border-color (success)', token: '--nir-colour-border-success', description: 'Green-500 (#18941C) — on validated state.' },
+  { element: 'background', token: '--nir-colour-surface-container', description: 'White (#FCFCFC) input fill.' },
+  { element: 'color (text)', token: '--nir-colour-text-default', description: 'Near-black (#010F2A) for legibility.' },
+  { element: 'color (placeholder)', token: '--nir-colour-text-placeholder', description: 'Muted navy-200 (#8298AA).' },
+  { element: 'color (label)', token: '--nir-colour-text-secondary', description: 'Mid-tone ink-600 (#23313C).' },
+  { element: 'color (error text)', token: '--nir-colour-feedback-error-text', description: 'Red-500 — matches border for visual coherence.' },
+  { element: 'border-radius', token: '--nir-spacing-corner-radius-base', description: '8px — consistent with all form controls.' },
+  { element: 'padding-inline', token: '--nir-spacing-horizontal-base', description: '16px horizontal padding.' },
+  { element: 'min-height', token: '--nir-spacing-touch-target', description: '44px WCAG 2.5.8 minimum.' },
+]} />
 
 ## 3. Interactive Playground
 
 <Playground>
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-    <Input client:load label="Username" fullWidth />
-    <Input client:load label="Pan Card Number" error="Must conform to PAN structures" fullWidth />
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
+    <Input client:load label="Full Name" placeholder="Enter your full name" fullWidth />
+    <Input client:load label="PAN Card Number" error="Must match format: ABCDE1234F" fullWidth />
+    <Input client:load label="Mobile Number" disabled value="+91 98765 43210" fullWidth />
   </div>
 </Playground>
 
-## 4. Engineering Implementation
+## 4. Component Anatomy
+
+```
+┌─ label ─────────────────────────────┐
+│ Full Name                           │
+├─────────────────────────────────────┤
+│  Input text or placeholder          │  ← .nir-e-input__field
+│                                     │
+└─────────────────────────────────────┘
+  Helper text or error message          ← .nir-e-input__helper / __error
+```
+
+## 5. States Reference
+
+| State | Border token | Background | Description |
+| :--- | :--- | :--- | :--- |
+| Default | `--nir-colour-border-default` | `--nir-colour-surface-container` | Resting state |
+| Focused | `--nir-colour-border-focus` | `--nir-colour-surface-container` | 2px navy inset ring |
+| Error | `--nir-colour-border-error` | `--nir-colour-feedback-error-subtle` | Invalid data |
+| Success | `--nir-colour-border-success` | `--nir-colour-surface-container` | Validated |
+| Disabled | `--nir-colour-border-disabled` | `--nir-colour-interaction-disabled-bg` | 0.38 opacity |
+
+## 6. Engineering Implementation
 
 <Tabs>
-  <TabItem label="React Usage">
+  <TabItem label="React">
     ```tsx
     import { Input } from '@nirman/components';
 
-    <Input label="Aadhaar Hash" error="Invalid formatting" />
+    // All ARIA links, token states, and announcements are automatic
+    <Input
+      label="Aadhaar ID"
+      placeholder="Enter 12-digit number"
+      helperText="Find your Aadhaar on your e-Aadhaar card"
+      required
+      fullWidth
+    />
+
+    // Error state — aria-invalid + aria-describedby bound automatically
+    <Input
+      label="PAN Card Number"
+      error="Must match format: ABCDE1234F"
+      fullWidth
+    />
     ```
   </TabItem>
-  <TabItem label="SwiftUI Usage">
+  <TabItem label="SwiftUI (iOS)">
     ```swift
-    TextField("Aadhaar Hash", text: $val)
-      .padding(Tokens.Spacing.componentPaddingMd)
-      .overlay(
-          RoundedRectangle(cornerRadius: Tokens.Radius.interactive)
-              .stroke(Tokens.Color.Feedback.Error.border, lineWidth: 2)
-      )
-      .frame(minHeight: Tokens.Spacing.touchTarget) 
+    import NirmaanTokens
+
+    VStack(alignment: .leading, spacing: NirSpacingVerticalSmallest) {
+        Text("Aadhaar ID")
+            .font(.custom(NirFontFamilyBody, size: NirFontSizeBodySm))
+            .foregroundColor(Color(NirColourTextSecondary))
+
+        TextField("Enter 12-digit number", text: $value)
+            .padding(.horizontal, NirSpacingHorizontalBase)
+            .padding(.vertical, NirSpacingVerticalSmaller)
+            .frame(minHeight: NirSpacingTouchTarget)
+            .overlay(
+                RoundedRectangle(cornerRadius: NirSpacingCornerRadiusBase)
+                    .stroke(
+                        hasError ? Color(NirColourBorderError) : Color(NirColourBorderDefault),
+                        lineWidth: 2
+                    )
+            )
+            .accessibilityLabel("Aadhaar ID")
+            .accessibilityHint(hasError ? "Invalid format" : "Enter 12-digit number")
+    }
     ```
   </TabItem>
-  <TabItem label="Jetpack Compose">
+  <TabItem label="Compose (Android)">
     ```kotlin
+    import dev.nirmaan.tokens.NirmaanTheme
+
     OutlinedTextField(
         value = text,
         onValueChange = { text = it },
-        isError = true, // Directly modifies internal stroke arrays to Feedback borders
-        modifier = Modifier.defaultMinSize(minHeight = Tokens.SpacingTouchTarget)
+        label = { Text("Aadhaar ID") },
+        isError = hasError,
+        supportingText = {
+            if (hasError) Text("Invalid format", color = NirmaanTheme.colors.feedbackErrorText)
+        },
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = NirmaanTheme.colors.borderFocus,
+            unfocusedBorderColor = NirmaanTheme.colors.borderDefault,
+            errorBorderColor = NirmaanTheme.colors.borderError,
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .defaultMinSize(minHeight = NirmaanTheme.spacing.touchTarget)
     )
     ```
   </TabItem>

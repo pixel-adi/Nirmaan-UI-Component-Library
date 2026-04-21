@@ -1,35 +1,190 @@
 ---
 title: Semantic Tokens
-description: Tier 2 Architecture — Contextual Axis Mappings.
+description: Tier 2 Architecture — The tokens designers and developers actually use.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import ColorGrid from '../../../components/ColorGrid.astro';
+import TokenMapping from '../../../components/TokenMapping.astro';
 
-**Tier 2 (Semantic)** tokens map raw primitives to functional meaning. This powers the theming layer—changing Tier 2 values overrides identity securely.
+**Tier 2 (Semantic)** tokens map raw primitives to functional, contextual meaning. They live in the `global-variables` collection in Figma, and are the only token tier that designers and developers should ever reference directly.
 
 ## Theming Combos (Brand × Mode × Density)
-The semantic layer resolves on three independent axes natively compiled for Engineering. An intersection must produce a valid accessible output dynamically.
 
-1. **Brand Axis:** (e.g. Base, Central Govt, State Variants) redefining `color.primary`.
-2. **Mode Axis:** (Light, Dark, High-Contrast) dictating exact inversions of Surface and Typography contrast bounds (striving for 7:1 AAA ratio constraints in High-Contrast).
-3. **Density Axis:** Overriding spatial density to Compact or Spacious mappings mathematically resizing components.
+The semantic layer resolves on three independent axes, producing a valid accessible output for every combination:
+
+1. **Brand Axis:** Redefines brand expressions (e.g., `colour/primary/base` maps to Central Govt or State identity).
+2. **Mode Axis:** Dictates exact colour inversions (Light, Dark, High-Contrast). Strives for 7:1 AAA in High-Contrast.
+3. **Density Axis:** Overrides spatial density (Compact, Standard, Spacious) universally across components.
+
+## Cross-Platform Output
+
+Every token generates output for all platforms:
+
+```
+Figma token: global-variables / colour / primary / base = #083459
+
+  CSS:      --nir-colour-primary-base: #083459;
+  SCSS:     $nir-colour-primary-base: #083459;
+  Swift:    static let primaryBase = UIColor(hex: "#083459")
+  Android:  <color name="nir_colour_primary_base">#FF083459</color>
+  JS:       export const NirColourPrimaryBase = "#083459";
+```
+
+---
+
+## Colour Tokens
+
+### Primary — Brand Identity & Key Actions
+
+<ColorGrid colors={[
+  { name: 'primary/base', var: '--nir-color-primary-default', description: 'Primary button fill, brand accents.' },
+  { name: 'primary/hover', var: '--nir-color-primary-hover', description: 'Hover state on primary actions.' },
+  { name: 'primary/active', var: '--nir-color-primary-active', description: 'Pressed state on primary actions.' },
+  { name: 'primary/muted', var: '--nir-color-primary-muted', description: 'Subtle primary accents and highlights.' },
+  { name: 'primary/on-base', var: '--nir-color-primary-on-primary', description: 'Text or icons placed on primary backgrounds.' },
+]} />
+
+| Token | CSS Variable | Value | Use for |
+| :--- | :--- | :--- | :--- |
+| `colour/primary/base` | `--nir-colour-primary-base` | `#083459` | Primary button fill, brand accents |
+| `colour/primary/on-base` | `--nir-colour-primary-on-base` | `#fcfcfc` | Text on primary backgrounds |
+| `colour/primary/stroke` | `--nir-colour-primary-stroke` | `#083459` | Primary button border |
+| `colour/primary/very-light` | `--nir-colour-primary-very-light` | `#ced6de` | Hover backgrounds, subtle highlights |
+
+### Secondary — Supporting Actions
+
+<ColorGrid colors={[
+  { name: 'secondary/base', var: '--nir-color-secondary-default', description: 'Secondary button fill.' },
+  { name: 'secondary/stroke', var: '--nir-color-secondary-stroke', description: 'Secondary button border.' },
+  { name: 'secondary/on-base', var: '--nir-color-secondary-on-secondary', description: 'Text on secondary buttons.' },
+]} />
+
+| Token | CSS Variable | Value | Use for |
+| :--- | :--- | :--- | :--- |
+| `colour/secondary/base` | `--nir-colour-secondary-base` | `#fcfcfc` | Secondary button fill |
+| `colour/secondary/on-base` | `--nir-colour-secondary-on-base` | `#083459` | Text on secondary buttons |
+| `colour/secondary/stroke` | `--nir-colour-secondary-stroke` | `#083459` | Secondary button border |
+
+### Surface — Backgrounds, Text & Containers
+
+<ColorGrid colors={[
+  { name: 'surface/base', var: '--nir-color-surface-default', description: 'Page background (cream).' },
+  { name: 'surface/container', var: '--nir-color-surface-container', description: 'Card and panel backgrounds.' },
+  { name: 'surface/stroke', var: '--nir-color-surface-container-stroke', description: 'Card border.' },
+  { name: 'surface/on-base', var: '--nir-color-text-default', description: 'Primary body text.' },
+  { name: 'surface/on-container', var: '--nir-color-text-secondary', description: 'Text inside cards.' },
+  { name: 'surface/container-light', var: '--nir-color-surface-container-light', description: 'Muted and secondary text.' },
+]} />
+
+| Token | CSS Variable | Value | Use for |
+| :--- | :--- | :--- | :--- |
+| `colour/surface/base` | `--nir-colour-surface-base` | `#fef6ee` | Page background |
+| `colour/surface/on-base` | `--nir-colour-surface-on-base` | `#010f2a` | Primary body text |
+| `colour/surface/container` | `--nir-colour-surface-container` | `#fcfcfc` | Card/panel backgrounds |
+| `colour/surface/on-container` | `--nir-colour-surface-on-container` | `#23313c` | Text inside cards |
+| `colour/surface/container-stroke` | `--nir-colour-surface-container-stroke` | `#e6e2de` | Card borders |
+| `colour/surface/container-light` | `--nir-colour-surface-container-light` | `#8298aa` | Muted/secondary text |
+| `colour/surface/overlay` | `--nir-colour-surface-overlay` | `rgba(0,0,0,0.5)` | Modal backdrop |
+| `colour/surface/text-link` | `--nir-colour-surface-text-link` | `#092de2` | Hyperlink text |
+
+### Status — Feedback States
+
+Each status follows the **base / container / on / on-container** pattern:
+
+<ColorGrid colors={[
+  { name: 'status/positive/base', var: '--nir-color-feedback-success-default', description: 'Bold success — icons, badges.' },
+  { name: 'status/positive/container', var: '--nir-color-feedback-success-subtle', description: 'Light success background tint.' },
+  { name: 'status/negative/base', var: '--nir-color-feedback-error-default', description: 'Bold error — icons, badges.' },
+  { name: 'status/negative/container', var: '--nir-color-feedback-error-subtle', description: 'Light error background tint.' },
+  { name: 'status/warning/base', var: '--nir-color-feedback-warning-default', description: 'Bold warning — icons, badges.' },
+  { name: 'status/warning/container', var: '--nir-color-feedback-warning-subtle', description: 'Light warning background tint.' },
+  { name: 'status/neutral/base', var: '--nir-color-feedback-info-default', description: 'Bold info — icons, badges.' },
+  { name: 'status/neutral/container', var: '--nir-color-feedback-info-subtle', description: 'Light info background tint.' },
+]} />
+
+| Status | `base` | `container` | `on` | `on-container` |
+| :--- | :--- | :--- | :--- | :--- |
+| **Positive** | `#18941c` | `#cee7cf` | `#fcfcfc` | `#005a03` |
+| **Negative** | `#bc3737` | `#efd5d5` | `#fcfcfc` | `#bc3737` |
+| **Warning** | `#fab401` | `#ffefc6` | `#fcfcfc` | `#d18f00` |
+| **Neutral** | `#083459` | `#ccd4dc` | `#fcfcfc` | `#083459` |
+
+---
+
+## Spacing Tokens
+
+### Horizontal Spacing — Inline Direction
+
+Used for `padding-left`, `padding-right`, `column-gap`, and `margin-inline`.
+
+| Token | Value | CSS Variable | When to use |
+| :--- | :--- | :--- | :--- |
+| `spacing/horizontal/none` | 0 | `--nir-spacing-horizontal-none` | Alignment correction only |
+| `spacing/horizontal/smallest` | 4px | `--nir-spacing-horizontal-smallest` | Icon-to-text gap |
+| `spacing/horizontal/smaller` | 8px | `--nir-spacing-horizontal-smaller` | Tight inline spacing |
+| `spacing/horizontal/small` | 12px | `--nir-spacing-horizontal-small` | Compact button padding |
+| `spacing/horizontal/base` | 16px | `--nir-spacing-horizontal-base` | Default button/input padding |
+| `spacing/horizontal/large` | 20px | `--nir-spacing-horizontal-large` | Comfortable padding |
+| `spacing/horizontal/larger` | 24px | `--nir-spacing-horizontal-larger` | Card inner padding |
+| `spacing/horizontal/largest` | 32px | `--nir-spacing-horizontal-largest` | Page margins, section padding |
+
+### Vertical Spacing — Block Direction
+
+Used for `padding-top`, `padding-bottom`, `row-gap`, and `margin-block`.
+
+| Token | Value | CSS Variable | When to use |
+| :--- | :--- | :--- | :--- |
+| `spacing/vertical/none` | 0 | `--nir-spacing-vertical-none` | Alignment correction only |
+| `spacing/vertical/smallest` | 4px | `--nir-spacing-vertical-smallest` | Label-to-input gap |
+| `spacing/vertical/smaller` | 8px | `--nir-spacing-vertical-smaller` | Button padding, list items |
+| `spacing/vertical/base` | 16px | `--nir-spacing-vertical-base` | Form field spacing |
+| `spacing/vertical/large` | 24px | `--nir-spacing-vertical-large` | Card padding, group spacing |
+| `spacing/vertical/larger` | 32px | `--nir-spacing-vertical-larger` | Section separation |
+
+### Corner Radius
+
+| Token | Value | CSS Variable | When to use |
+| :--- | :--- | :--- | :--- |
+| `corner-radius/smaller` | 2px | `--nir-spacing-corner-radius-smaller` | Tags, tiny badges |
+| `corner-radius/small` | 4px | `--nir-spacing-corner-radius-small` | Compact inputs, tooltips |
+| **`corner-radius/base`** | **8px** | **`--nir-spacing-corner-radius-base`** | **Buttons, inputs, dropdowns** |
+| `corner-radius/large` | 12px | `--nir-spacing-corner-radius-large` | Cards, modals |
+| `corner-radius/larger` | 16px | `--nir-spacing-corner-radius-larger` | Large cards, hero sections |
+
+### Stroke
+
+| Token | Value | CSS Variable | When to use |
+| :--- | :--- | :--- | :--- |
+| `stroke/thickness` | 2px | `--nir-spacing-stroke-thickness` | All borders |
+
+---
+
+## Implementing Semantics
 
 <Tabs>
-  <TabItem label="Semantic CSS">
+  <TabItem label="CSS">
     ```css
-    /* Theming axes inherently override definitions */
+    /* Theming axes override definitions gracefully */
     :root {
-      --nir-color-surface: var(--nir-color-neutral-0);
-      --nir-color-border-error: var(--nir-color-red-600);
+      --nir-colour-surface: var(--nir-colour-neutral-0);
+      --nir-colour-border-error: var(--nir-colour-red-600);
     }
     ```
   </TabItem>
-  <TabItem label="Swift Native">
+  <TabItem label="Swift">
     ```swift
-    // The developer only binds the intent!
+    // The developer only binds the intent — no hardcoded colours.
     RoundedRectangle()
        .fill(Tokens.Color.surfaceVariant)
-       .stroke(Tokens.Color.borderStrong, lineWidth: 1)
+       .stroke(Tokens.Color.borderError, lineWidth: 1)
+    ```
+  </TabItem>
+  <TabItem label="Android XML">
+    ```xml
+    <View
+      android:background="@color/nir_colour_surface_container"
+      android:stroke="@color/nir_colour_primary_stroke" />
     ```
   </TabItem>
 </Tabs>

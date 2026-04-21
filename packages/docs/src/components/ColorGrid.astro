@@ -1,0 +1,67 @@
+---
+export interface Props {
+  colors: { name: string; var: string; description?: string }[];
+}
+
+const { colors } = Astro.props;
+---
+
+<div class="color-grid">
+  {colors.map((c) => (
+    <div class="color-card">
+      <div class="color-swatch" style={`background-color: var(${c.var})`}></div>
+      <div class="color-details">
+        <code class="color-name">{c.name}</code>
+        <span class="color-var">{c.var}</span>
+        {c.description && <span class="color-desc">{c.description}</span>}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  .color-card {
+    border: 1px solid var(--sl-color-hairline, var(--sl-color-gray-5));
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--sl-color-bg);
+    box-shadow: var(--sl-shadow-sm);
+  }
+  .color-swatch {
+    height: 80px;
+    width: 100%;
+    border-bottom: 1px solid var(--sl-color-hairline, var(--sl-color-gray-5));
+  }
+  .color-details {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .color-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sl-color-text);
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+  .color-var {
+    font-size: 0.75rem;
+    color: var(--sl-color-gray-3);
+    font-family: monospace;
+  }
+  .color-desc {
+    font-size: 0.75rem;
+    color: var(--sl-color-gray-2);
+    margin-top: 0.25rem;
+    line-height: var(--sl-line-height);
+  }
+</style>

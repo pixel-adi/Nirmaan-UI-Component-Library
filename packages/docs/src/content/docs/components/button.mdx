@@ -5,63 +5,128 @@ description: Layer 1 Element — Core action trigger.
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
+import TokenMapping from '../../../components/TokenMapping.astro';
 import { Button } from '@nirman/components';
 
-Buttons are Layer 1 interactive Elements. Nirmaan Button constraints explicitly map to Constitutional Accessibility standards. 
+Buttons are the primary mechanism for triggering actions. The Nirmaan Button maps strictly to Constitutional accessibility standards — every sizing, colour, and interaction state is token-bound.
 
 ## 1. Accessibility Specification
-- **ARIA:** Requires explicit `aria-label` or implicit text content guaranteeing readable identifiers.
-- **Keyboard:** Triggers actively on `SPACE/ENTER` keys natively.
-- **Min Touch Bounds:** The default bounds are governed strictly by the component token `min-height: 44px`.
+
+| Attribute | Requirement | Detail |
+| :--- | :--- | :--- |
+| **Role** | `button` (native `<button>` element) | Never use `<div>` or `<span>` as a button. |
+| **Label** | Explicit text content or `aria-label` | Screen readers announce the label as "[text], button". |
+| **Keyboard** | `Enter` and `Space` to activate | Native to `<button>` — no custom JS required. |
+| **Disabled** | `aria-disabled="true"` | Keeps the element in tab order so users know it exists. |
+| **Loading** | `aria-busy="true"` | Announces "busy" to screen readers during loading state. |
+| **Focus ring** | 2px solid, 2px offset | Uses `--nir-colour-primary-base` against page background. |
+| **Touch target** | Minimum 44×44px | Enforced via `min-height: var(--nir-spacing-touch-target)`. |
 
 ## 2. Token Binding
-- **Backgrounds:** Bind directly to `color.primary.default`.
-- **Text:** Bind cleanly to `color.text.inverse`.
-- **States:** Hover binds to `color.primary.hover` securely handling pseudo-states independently.
+
+<TokenMapping tokens={[
+  { element: 'background', token: '--nir-colour-primary-base', description: 'Primary fill. Switches on hover/active states automatically.' },
+  { element: 'background (hover)', token: '--nir-colour-primary-hover', description: 'Darker navy on hover — no manual JS needed.' },
+  { element: 'background (active)', token: '--nir-colour-primary-active', description: 'Pressed state fill.' },
+  { element: 'color (text)', token: '--nir-colour-primary-on-base', description: 'Off-white label text on navy backgrounds.' },
+  { element: 'border-color', token: '--nir-colour-primary-stroke', description: 'Used for secondary/outlined variant border.' },
+  { element: 'border-radius', token: '--nir-spacing-corner-radius-base', description: '8px — the standard interactive radius.' },
+  { element: 'padding-inline', token: '--nir-spacing-horizontal-base', description: '16px horizontal padding (standard size).' },
+  { element: 'padding-block', token: '--nir-spacing-vertical-smaller', description: '8px vertical padding (standard size).' },
+  { element: 'min-height', token: '--nir-spacing-touch-target', description: '44px WCAG 2.5.8 minimum touch target.' },
+  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', description: '0.38 — consistent disabled visual across all components.' },
+]} />
 
 ## 3. Interactive Playground
 
 <Playground>
-  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
     <Button client:load>Primary Action</Button>
     <Button client:load variant="secondary">Secondary Action</Button>
-    <Button client:load disabled>Disabled Boundary</Button>
+    <Button client:load disabled>Disabled State</Button>
   </div>
 </Playground>
 
-## 4. Engineering Implementation
+## 4. Component Anatomy
 
-The semantic properties natively handle states locally across platforms.
+```
+┌─────────────────────────────────┐
+│  [icon?]  Label Text  [icon?]   │  ← Button container
+└─────────────────────────────────┘
+     │           │
+     │           └── .nir-e-button__label  → font: label-md (medium, 16px)
+     └──────────── .nir-e-button__icon  → size: 20×20px
+```
+
+## 5. Variants & Sizes
+
+| Variant | Use case | Fill | Border |
+| :--- | :--- | :--- | :--- |
+| `primary` | Main CTA, submit actions | `--nir-colour-primary-base` | None |
+| `secondary` | Cancel, back, secondary actions | `--nir-colour-secondary-base` | `--nir-colour-primary-stroke` |
+| `danger` | Destructive actions (delete, revoke) | `--nir-colour-status-negative-base` | None |
+| `ghost` | Low-emphasis, inline actions | Transparent | None |
+
+| Size | Height | Padding H | Font size |
+| :--- | :--- | :--- | :--- |
+| `sm` | 36px | 12px | 14px |
+| `md` (default) | 44px | 16px | 16px |
+| `lg` | 52px | 24px | 18px |
+
+## 6. Engineering Implementation
 
 <Tabs>
-  <TabItem label="React Usage">
+  <TabItem label="React">
     ```tsx
     import { Button } from '@nirman/components';
-    
-    // React handles all A11y & token evaluation out of the box dynamically
-    <Button variant="primary">Submit Application</Button>
+
+    // All ARIA, token bindings, and state handlers are automatic
+    <Button variant="primary" size="md">
+      Submit Application
+    </Button>
+
+    <Button variant="secondary" onClick={handleCancel}>
+      Cancel
+    </Button>
+
+    <Button variant="primary" disabled aria-label="Submit, unavailable">
+      Disabled
+    </Button>
     ```
   </TabItem>
-  <TabItem label="SwiftUI Usage">
+  <TabItem label="SwiftUI (iOS)">
     ```swift
-    Button(action: submit) {
+    import NirmaanTokens
+
+    Button(action: { submit() }) {
         Text("Submit Application")
+            .font(.custom(NirFontFamilyBody, size: NirFontSizeBodyMd))
+            .foregroundColor(Color(NirColourPrimaryOnBase))
     }
-    .background(Tokens.Color.Primary.default)
-    .cornerRadius(Tokens.Radius.interactive)
-    .frame(minHeight: Tokens.Spacing.touchTarget) // explicitly applies 44px
+    .frame(minHeight: NirSpacingTouchTarget)
+    .padding(.horizontal, NirSpacingHorizontalBase)
+    .background(Color(NirColourPrimaryBase))
+    .cornerRadius(NirSpacingCornerRadiusBase)
+    .accessibilityLabel("Submit Application")
     ```
   </TabItem>
-  <TabItem label="Jetpack Compose">
+  <TabItem label="Compose (Android)">
     ```kotlin
+    import dev.nirmaan.tokens.NirmaanTheme
+
     Button(
         onClick = { submit() },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = Tokens.ColorPrimaryDefault
+            containerColor = NirmaanTheme.colors.primaryBase,
+            contentColor = NirmaanTheme.colors.primaryOnBase,
+            disabledContainerColor = NirmaanTheme.colors.primaryBase.copy(alpha = 0.38f)
         ),
-        modifier = Modifier.defaultMinSize(minHeight = Tokens.SpacingTouchTarget)
+        shape = RoundedCornerShape(NirmaanTheme.radius.cornerBase),
+        modifier = Modifier
+            .defaultMinSize(minHeight = NirmaanTheme.spacing.touchTarget)
+            .padding(horizontal = NirmaanTheme.spacing.horizontalBase)
     ) {
-        Text("Submit Application", color = Tokens.ColorTextInverse)
+        Text("Submit Application")
     }
     ```
   </TabItem>

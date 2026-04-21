@@ -8,29 +8,44 @@ import Playground from '../../../components/Playground.astro';
 
 Typography in Nirmaan UI guarantees semantic translations of multi-script configurations mapped perfectly to **Janabhasha (The People’s Language)**. Indian scripts possess entirely different vertical metrics than standard Latin (e.g., Devanagari's Shirorekha).
 
-Therefore, Nirmaan resolves semantic tokens conditionally mapping explicitly to `:lang()` nodes natively, adjusting line-heights on the fly mathematically.
+To solve this, Nirmaan resolves semantic typographic tokens conditionally mapping explicitly to `:lang()` nodes natively, adjusting sizes and line-heights on the fly gracefully.
 
 ## Multi-Script Metric Adjustments
 
-- **Latin (`:lang(en)`):** 1.50 multiplier.
-- **Devanagari (`:lang(hi)`):** 1.70 multiplier (avoids matra collision).
-- **Tamil (`:lang(ta)`):** 1.65 multiplier and +0.01em tracking (spacing round forms).
-- **Urdu (`:lang(ur)`):** RTL Nastaliq scales heavily to a 1.80 multiplier.
+Different scripts automatically trigger unique architectural multipliers ensuring visual stability.
 
-## Interactive Output
+| Script Context | Multiplier Logic | Reasoning |
+| :--- | :--- | :--- |
+| **Latin (`:lang(en)`)** | `1.50` | Standard, tight leading default. |
+| **Devanagari (`:lang(hi)`)** | `1.70` | Expands leading explicitly to prevent matra (vowel) collisions. |
+| **Tamil (`:lang(ta)`)** | `1.65` / `+0.01em` tracking | Expands vertical spacing and slightly tracks out to accommodate dense round letterforms. |
+| **Urdu (`:lang(ur)`)** | `1.80` | RTL Nastaliq scales heavily to maintain legibility. |
+
+## Interactive Output Validation
+
+Verify the mathematical expansion in real-time below. Notice how the Devanagari string inherently claims more vertical space to stay legible without manual CSS overrides.
 
 <Playground>
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-    <h1 class="nir-type-h1" style={{ margin: 0 }}>National Database</h1>
-    <h1 class="nir-type-h1" lang="hi" style={{ margin: 0 }}>राष्ट्रीय डेटाबेस</h1>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%', alignItems: 'flex-start' }}>
+    <div style={{ border: '1px solid var(--sl-color-gray-5)', padding: '1rem', width: '100%' }}>
+      <label style={{ fontSize: '0.8rem', color: 'var(--sl-color-gray-3)', marginBottom: '0.5rem', display: 'block' }}>Latin (English)</label>
+      <h1 className="nir-type-h1" style={{ margin: 0 }}>National Database</h1>
+    </div>
+    
+    <div style={{ border: '1px solid var(--sl-color-gray-5)', padding: '1rem', width: '100%' }}>
+      <label style={{ fontSize: '0.8rem', color: 'var(--sl-color-gray-3)', marginBottom: '0.5rem', display: 'block' }}>Devanagari (Hindi)</label>
+      <h1 className="nir-type-h1" lang="hi" style={{ margin: 0 }}>राष्ट्रीय डेटाबेस</h1>
+    </div>
   </div>
 </Playground>
 
+## Integration & Binding
+
 <Tabs>
   <TabItem label="React Integration">
-    ```jsx
-    // Native wrapping simply defines the `lang` metric. 
-    // The tokens handle the underlying adjustments universally via CSS.
+    ```tsx
+    // The parent element defines the `lang` metric.
+    // Nirmaan tokens natively detect this and bind the correct scaling multipliers!
     <div lang="ur">
       <h1 className="nir-type-h2">ڈیش بورڈ</h1>
     </div>

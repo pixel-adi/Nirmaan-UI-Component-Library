@@ -1,24 +1,123 @@
 ---
 title: Design Themes
-description: Handling multiple brand overrides and modes.
+description: Brand overrides, density modes, and multi-government theming.
 ---
 
-Nirmaan UI natively generates cross-functional themes dynamically mapped out of `packages/tokens/semantic/`. By utilizing Semantic variables inside your applications instead of primitive hex codes, we achieve 100% compliant dynamic UI switching.
+import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
 
-## Modes 
-Our design system ships with 3 primary display modes:
-1. **Light Mode (Default)**: Normal visual scaling (`light.json`).
-2. **Dark Mode**: Reversed visual logic targeting deep contrast (`dark.json`).
-3. **High Contrast**: Aggressive border boxing and stark WCAG AAA compliance (`high-contrast.json`).
+Nirmaan's theme system works by **overriding semantic tokens**. Components automatically adapt because they reference semantic tokens, not hardcoded values.
 
-*In React, injecting `data-theme="dark"` onto your `<html />` element seamlessly re-writes all CSS node definitions at execution.*
+```
+                Base Theme (Nirman)
+                colour/primary/base = #083459
+                        │
+        ┌───────────────┼───────────────┐
+        │               │               │
+    Central Govt    Kerala          Tamil Nadu
+    #0B3D91         #006B3F         #B71C1C
+```
 
-## Brand Theming 
-Because Nirmaan represents multiple Government domains, it has a robust sub-theming mechanism parsing different brands instantly. 
-Current internal schemas:
-- `central-govt.css` -> mapping `[data-brand="goi"]`
-- `state-kerala.css` -> mapping `[data-brand="kl"]`
-- `state-tamilnadu.css` -> mapping `[data-brand="tn"]`
-- `state-up.css` -> mapping `[data-brand="up"]`
+## How Theming Works
 
-When a component mounts in these brands, `var(--nir-color-primary-default)` resolves to completely unique variables securely without duplicate frontend logic.
+<CardGrid>
+  <Card title="Semantic Override" icon="setting">
+    Each brand theme replaces a small set of semantic tokens. Components reference semantics, so all visuals update automatically with zero component code changes.
+  </Card>
+  <Card title="Mode Composition" icon="laptop">
+    Brand and mode compose naturally. Apply `data-brand="kerala"` and `data-theme="dark"` simultaneously for full control.
+  </Card>
+</CardGrid>
+
+## Creating a Brand Theme
+
+### Step 1 — Define Token Overrides
+
+| Token | Base (Nirman) | Kerala | Tamil Nadu |
+| :--- | :--- | :--- | :--- |
+| `colour/primary/base` | `#083459` | `#006B3F` | `#B71C1C` |
+| `colour/primary/on-base` | `#fcfcfc` | `#fcfcfc` | `#fcfcfc` |
+| `colour/primary/stroke` | `#083459` | `#006B3F` | `#B71C1C` |
+| `colour/primary/very-light` | `#ced6de` | `#c8e6d0` | `#e6c8c8` |
+
+### Step 2 — Create the Override CSS
+
+```css
+[data-brand="kerala"] {
+  --nir-colour-primary-base: #006B3F;
+  --nir-colour-primary-stroke: #006B3F;
+  --nir-colour-primary-very-light: #c8e6d0;
+}
+
+[data-brand="tamilnadu"] {
+  --nir-colour-primary-base: #B71C1C;
+  --nir-colour-primary-stroke: #B71C1C;
+  --nir-colour-primary-very-light: #e6c8c8;
+}
+```
+
+### Step 3 — Apply in Code
+
+<Tabs>
+  <TabItem label="HTML / React">
+    ```tsx
+    // Brand theme applied at wrapper level — all children inherit
+    <div data-brand="kerala">
+      <Button variant="primary">Submit</Button>
+      {/* Renders with Kerala green automatically */}
+    </div>
+    ```
+  </TabItem>
+  <TabItem label="Brand + Dark Mode">
+    ```html
+    <!-- Brand and mode compose naturally -->
+    <div data-brand="kerala" data-theme="dark">
+      <!-- Kerala green theme + dark mode surfaces -->
+    </div>
+    ```
+  </TabItem>
+</Tabs>
+
+## Display Modes
+
+Nirmaan ships with 3 primary display modes:
+
+| Mode | `data-theme` value | Description |
+| :--- | :--- | :--- |
+| **Light** (default) | `light` or omit | Normal visual scaling. Cream-based surfaces. |
+| **Dark** | `dark` | Reversed visual logic targeting deep contrast. |
+| **High-Contrast** | `high-contrast` | Aggressive borders, stark WCAG AAA compliance. |
+
+```tsx
+// In React, injecting this onto <html> re-writes all CSS variables instantly
+document.documentElement.dataset.theme = 'dark';
+```
+
+## In Figma
+
+| Figma Plan | Approach |
+| :--- | :--- |
+| **Figma Pro** | Add Mode columns to `global-variables` — one per brand. Switch modes on any frame to preview. |
+| **Figma Free** | Create separate library files per brand with overridden variable values. |
+
+## Theme Scope Rules
+
+> [!CAUTION]
+> Status colours are **never customizable**. Red means error everywhere. This is a legal accessibility baseline.
+
+| Token group | Central Govt | State Govt | PSU | Open |
+| :--- | :--- | :--- | :--- | :--- |
+| `colour/primary/*` | Limited | Yes | Yes | Yes |
+| `colour/secondary/*` | Yes | Yes | Yes | Yes |
+| `colour/surface/*` | No | Tint only | Yes | Yes |
+| `colour/status/*` | **Never** | **Never** | **Never** | **Never** |
+| `spacing/*` | No | No | Yes | Yes |
+| `corner-radius/*` | No | No | Yes | Yes |
+
+## Internal Brand Schemas
+
+Current internal schemas shipped with Nirmaan:
+
+- `central-govt.css` → mapping `[data-brand="goi"]`
+- `state-kerala.css` → mapping `[data-brand="kl"]`
+- `state-tamilnadu.css` → mapping `[data-brand="tn"]`
+- `state-up.css` → mapping `[data-brand="up"]`

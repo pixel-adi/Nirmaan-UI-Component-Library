@@ -1,42 +1,219 @@
 ---
 title: Developer Workflow
-description: Engineering via Canonical Parity
+description: API Contract Declarations & Token-First Engineering
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Developers consuming the Nirmaan UI architecture do not overwrite configurations or "theme" component wrappers arbitrarily. They operate explicitly in **Layer 5 (Pages)** and **Layer 4 (Templates)**. 
+Developers consuming Nirmaan UI do not overwrite configurations or "theme" component wrappers arbitrarily. They operate within defined contractual boundaries ensuring **Vishvasaniya (Trustworthy Consistency)** across every platform.
 
-Components are guaranteed contractual APIs adhering to **Vishvasaniya (Trustworthy Consistency)** principles.
+## The Golden Rule
+
+> [!IMPORTANT]
+> Every visual value — colour, spacing, radius, border — comes from a token. Never hardcode.
+
+```css
+/* WRONG — hardcoded values */
+.card {
+  background: #fcfcfc;
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid #e6e2de;
+}
+
+/* RIGHT — token-driven */
+.card {
+  background: var(--nir-colour-surface-container);
+  padding: var(--nir-spacing-vertical-base) var(--nir-spacing-horizontal-base);
+  border-radius: var(--nir-spacing-corner-radius-base);
+  border: var(--nir-spacing-stroke-thickness) solid var(--nir-colour-surface-container-stroke);
+}
+```
+
+## Quick Reference: Which Token for Which Property
+
+| CSS Property | Token Path | Example |
+| :--- | :--- | :--- |
+| `background` | `colour/surface/*` or `colour/primary/*` | `--nir-colour-surface-container` |
+| `color` (text) | `colour/surface/on-base` or `on-container` | `--nir-colour-surface-on-container` |
+| `padding` (horizontal) | `spacing/horizontal/*` | `--nir-spacing-horizontal-base` |
+| `padding` (vertical) | `spacing/vertical/*` | `--nir-spacing-vertical-base` |
+| `gap` | `spacing/horizontal/*` or `vertical/*` | `--nir-spacing-horizontal-smaller` |
+| `border-radius` | `spacing/corner-radius/*` | `--nir-spacing-corner-radius-base` |
+| `border-width` | `spacing/stroke/thickness` | `--nir-spacing-stroke-thickness` |
+| `border-color` | `colour/*/stroke` | `--nir-colour-primary-stroke` |
+| link colour | `colour/surface/text-link` | `--nir-colour-surface-text-link` |
+| overlay | `colour/surface/overlay` | `--nir-colour-surface-overlay` |
 
 ## The Five-Layer Taxonomy
 
-You consume modules from these explicitly defined structures:
+You consume modules from these explicitly defined tiered structures:
 
-1. **Layer 1: Elements (Atoms):** The smallest reusable units. Single interactions (`<Button>`, `<Input>`).
-2. **Layer 2: Patterns (Molecules):** Functional groupings (`<Search Bar>`, `<Form Field>`).
-3. **Layer 3: Blocks (Organisms):** Self-contained complex regions (`<Government Header>`, `<Data Table>`).
+1. **Layer 1: Elements (Atoms):** The smallest reusable units (`<Button>`, `<Input>`).
+2. **Layer 2: Patterns (Molecules):** Functional groupings (`<SearchBar>`, `<FormField>`).
+3. **Layer 3: Blocks (Organisms):** Self-contained complex regions (`<GovernmentHeader>`, `<DataTable>`).
 4. **Layer 4: Templates:** Spatial layouts scaling components rapidly.
 5. **Layer 5: Pages:** Real content implementations.
 
-## Instantiating Code
+## Spacing: Horizontal vs Vertical
+
+The token system intentionally separates horizontal and vertical spacing — reading direction and content flow have different density needs.
+
+```css
+.component {
+  /* Horizontal = inline direction */
+  padding-left: var(--nir-spacing-horizontal-base);
+  padding-right: var(--nir-spacing-horizontal-base);
+  column-gap: var(--nir-spacing-horizontal-smaller);
+
+  /* Vertical = block direction */
+  padding-top: var(--nir-spacing-vertical-smaller);
+  padding-bottom: var(--nir-spacing-vertical-smaller);
+  row-gap: var(--nir-spacing-vertical-smallest);
+}
+```
+
+## Status Colours: The Container Pattern
+
+Status tokens follow a consistent **base / container / on / on-container** pattern:
+
+```css
+/* Success alert */
+.alert--success {
+  background: var(--nir-colour-status-positive-container);
+  color: var(--nir-colour-status-positive-on-container);
+  border-left: 3px solid var(--nir-colour-status-positive-base);
+}
+
+/* Error alert */
+.alert--error {
+  background: var(--nir-colour-status-negative-container);
+  color: var(--nir-colour-status-negative-on-container);
+  border-left: 3px solid var(--nir-colour-status-negative-base);
+}
+```
+
+| Suffix | Purpose |
+| :--- | :--- |
+| `base` | Bold, saturated version — icons, borders, badges |
+| `container` | Light background tint |
+| `on` | Text/icon colour placed directly on `base` |
+| `on-container` | Text/icon colour placed on `container` |
+
+## Building a Component
+
+### File Structure
+
+```
+stories/elements/
+├── MyComponent.tsx         ← React implementation
+├── MyComponent.css         ← Token-driven styles
+├── MyComponent.stories.tsx ← Storybook demos
+└── MyComponent.mdx         ← Usage documentation
+```
+
+### CSS Naming Convention (BEM with `nir-` prefix)
+
+```css
+.nir-e-button { }                /* Block */
+.nir-e-button--primary { }      /* Modifier */
+.nir-e-button--sm { }           /* Size modifier */
+.nir-e-button__label { }        /* Element */
+.nir-e-button__icon { }         /* Element */
+.nir-e-button--disabled { }     /* State modifier */
+```
+
+| Prefix | Layer | Examples |
+| :--- | :--- | :--- |
+| `nir-e-` | Element (atom) | button, input, checkbox |
+| `nir-p-` | Pattern (molecule) | form-field, alert, search-bar |
+| `nir-b-` | Block (organism) | header, footer, card |
+
+### Accessibility Checklist Per Component
+
+- Native semantic element (`button`, `input`, `select` — not `div`)
+- Label linked via `htmlFor`/`id` or `aria-labelledby`
+- `aria-invalid` on error state
+- `role="alert"` on error messages
+- `aria-describedby` linking helper/error text
+- `:focus-visible` with 2px outline, 2px offset
+- Disabled: `aria-disabled` (not just HTML `disabled`)
+- Tested with VoiceOver (Cmd+F5 on Mac)
+
+## Cross-Platform Instantiation
 
 <Tabs>
   <TabItem label="React Integration">
-    Because all Layer 1 Elements dynamically scale the Three-Tier token variables internally, React mapping is heavily abstracted.
     ```tsx
     import { Input } from '@nirman/components';
-    
-    // ARIA labels securely bind dynamically!
-    <Input label="Aadhaar ID" error="Invalid verification format" />
+
+    // ARIA labels and token bindings are abstracted — fully automatic.
+    <Input
+      label="Aadhaar ID"
+      variant="outlined"
+      error="Invalid verification format"
+      required
+    />
     ```
   </TabItem>
-  <TabItem label="SwiftUI Integration">
-    Semantic Constants are rigidly pulled from Mobile tokens.
+  <TabItem label="SwiftUI (iOS)">
     ```swift
-    // Theming Axis overrides automatically evaluate visually.
-    .padding(Tokens.Spacing.componentGap)
-    .background(Tokens.Color.surfaceVariant)
+    import NirmaanTokens
+
+    // OS preference for dark/light mode is automatically evaluated.
+    Text("Janabhasha")
+      .padding(Tokens.Spacing.componentGap)
+      .background(Tokens.Color.surfaceVariant)
+      .foregroundColor(Tokens.Color.onSurface)
+    ```
+  </TabItem>
+  <TabItem label="Compose (Android)">
+    ```kotlin
+    import dev.nirmaan.tokens.NirmaanTheme
+
+    Surface(
+        color = NirmaanTheme.colors.surfaceVariant,
+        contentColor = NirmaanTheme.colors.onSurface
+    ) {
+        Text(
+            text = "Welcome",
+            modifier = Modifier.padding(NirmaanTheme.spacing.componentGap)
+        )
+    }
     ```
   </TabItem>
 </Tabs>
+
+## Multi-Platform Token Output
+
+| Token | CSS output | iOS output | Android output |
+| :--- | :--- | :--- | :--- |
+| `spacing/horizontal/base` (16) | `16px` | `16.0` (CGFloat) | `16dp` |
+| `spacing/corner-radius/base` (8) | `8px` | `8.0` (CGFloat) | `8dp` |
+| `colour/primary/base` (#083459) | `#083459` | `UIColor(hex: "#083459")` | `#FF083459` (ARGB) |
+
+## When Tokens Update
+
+1. Pull latest from Git
+2. Run `node sd.config.mjs` in `packages/tokens/`
+3. CSS/Swift/XML files regenerate automatically
+4. Verify nothing broke — run tests and check Storybook
+5. If a token was renamed, search the codebase for the old name
+
+```bash
+# Find hardcoded hex values (should be zero)
+grep -rn '#[0-9a-fA-F]\{6\}' packages/components/src/
+
+# Find hardcoded px values in CSS (should be zero except min-height)
+grep -rn '[0-9]px' packages/components/src/ --include="*.css"
+```
+
+## Commit Convention
+
+```
+feat(nir-e-button): add loading state with spinner
+fix(nir-e-input): fix label contrast in dark mode
+docs(toggle): add Hindi examples to MDX
+tokens(colour): update negative status colour
+chore(deps): update style-dictionary to v4.1
+```

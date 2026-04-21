@@ -1,32 +1,35 @@
 ---
-title: Welcome to Nirmaan
-description: The Multi-Platform Design System.
+title: "Nirmaan (निर्माण) UI"
+description: The Multi-Platform Design System for Bharat.
 template: splash
 hero:
-  tagline: A single source of truth for Web, iOS, and Android.
+  tagline: Digital Public Infrastructure designed for Bharat. A unified, accessible source of truth for Web, iOS, and Android seamlessly synchronising semantics across a billion users.
   actions:
     - text: Developer Workflow
       link: /getting-started/developer/
       icon: right-arrow
       variant: primary
-    - text: View Tokens
-      link: /foundations/tokens/
-      icon: external
+    - text: View Semantic Tokens
+      link: /foundations/semantics/
+      icon: list-format
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+{/* Subtle Saffron to Green gradient acting as a structural canopy */}
+<div style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '6px', background: 'linear-gradient(90deg, var(--nir-color-saffron-500) 0%, var(--sl-color-bg) 50%, var(--nir-color-green-600) 100%)', zIndex: 9999 }}></div>
+
 <CardGrid stagger>
-	<Card title="Multi-Platform" icon="apple">
-		Generate Swift, Kotlin, and Web variables dynamically from a single token architecture.
+	<Card title="Janabhasha (जनभाषा)" icon="document">
+		Built from the ground up to respect Indian typographic metrics. **Shirorekha-aware line heights** and multi-script harmony are mathematically enforced across 12+ scripts natively.
 	</Card>
-	<Card title="Strict Accessibility" icon="magnifier">
-		Built-in WCAG tests ensuring components always stay compliant.
+	<Card title="Sarvajanik (सार्वजनिक)" icon="magnifier">
+		Accessibility is entirely systemic, not a checklist. WCAG 2.1 AA mandates, including high-contrast grids and **44x44px minimum touch targets**, are physically clamped into the core tokens.
 	</Card>
-	<Card title="React Ready" icon="document">
-		Ready-to-use `@nirman/components` bound directly to the core design system.
+	<Card title="Multi-Platform Fidelity" icon="apple">
+		Generate Swift, Kotlin, and Web CSS variables dynamically from a single token architecture without fragmentation. Build once, deploy universally.
 	</Card>
-	<Card title="Designer Handshake" icon="setting">
-		Export straight from Figma using Token Studio directly to our codebase.
+	<Card title="Vishvasaniya (विश्वसनीय)" icon="approve-check-circle">
+		Strict API contracts between Figma and Engineering. Export variables strictly from Token Studio directly into your React, iOS, or Android monolithic repositories.
 	</Card>
 </CardGrid>

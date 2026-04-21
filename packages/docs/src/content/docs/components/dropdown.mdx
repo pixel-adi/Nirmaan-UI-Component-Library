@@ -1,64 +1,178 @@
 ---
 title: Dropdown
-description: Layer 1 Element — Contextual command arrays.
+description: Layer 1 Element — Single-value selection from a contextual list.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
+import TokenMapping from '../../../components/TokenMapping.astro';
 import { Dropdown } from '@nirman/components';
 
-Dropdowns govern dense contextual configuration sets bound deeply into the `--nir-elevation-overlay` logic safely avoiding canvas clipping.
+Dropdowns present a list of options from which the user selects one value. The list is hidden until triggered, keeping the interface clean. The overlay panel renders above other content using `--nir-z-index-dropdown`.
 
 ## 1. Accessibility Specification
-- **ARIA:** Translates actively to `<button aria-haspopup="listbox">` internally. Focus drops rapidly into the interior wrapper securely locking Tab rotations.
-- **Keyboard:** Closes rigidly on global `ESC` injections.
+
+| Attribute | Requirement | Detail |
+| :--- | :--- | :--- |
+| **Role** | `combobox` on trigger | `<button role="combobox" aria-haspopup="listbox">` |
+| **List role** | `listbox` on options panel | `<ul role="listbox">` |
+| **Option role** | `option` per item | `<li role="option" aria-selected="true/false">` |
+| **Open state** | `aria-expanded="true/false"` | Toggled on open/close. |
+| **Active item** | `aria-activedescendant` | Points to the currently highlighted option ID. |
+| **Keyboard** | `Enter`/`Space` opens, `↑↓` navigate, `Enter` selects, `Esc` closes | Full keyboard control required. |
+| **Label** | Visible `<label>` linked to trigger | Always present — placeholder alone is not sufficient. |
+| **Touch target** | Minimum 44px height on trigger | The closed button state must meet touch target. |
 
 ## 2. Token Binding
-- **Elevation Layer:** The Z-Bounds strictly bind to `elevation.dropdown` and drop box shadows per `elevation.3`.
-- **Text Bounds:** Selectable matrices parse directly over array borders utilizing exactly `font.size.body-md`.
+
+<TokenMapping tokens={[
+  { element: 'trigger background', token: '--nir-colour-surface-container', description: 'White (#FCFCFC) closed state fill.' },
+  { element: 'trigger border (default)', token: '--nir-colour-border-default', description: 'Cream-400 resting border.' },
+  { element: 'trigger border (focus)', token: '--nir-colour-border-focus', description: 'Navy-600 focus ring.' },
+  { element: 'trigger border (open)', token: '--nir-colour-border-focus', description: 'Navy-600 while panel is open.' },
+  { element: 'trigger border (error)', token: '--nir-colour-border-error', description: 'Red-500 on validation error.' },
+  { element: 'chevron icon', token: '--nir-colour-icon-default', description: 'Ink-600 — rotates 180° when open.' },
+  { element: 'panel background', token: '--nir-colour-surface-container', description: 'White overlay panel.' },
+  { element: 'panel shadow', token: '--nir-elevation-overlay', description: 'Shadow for dropdown depth (elevation-4).' },
+  { element: 'panel z-index', token: '--nir-z-index-dropdown', description: '1000 — above content, below modals.' },
+  { element: 'option hover', token: '--nir-colour-interaction-hover-overlay', description: 'rgba(0,0,0,0.04) on hover.' },
+  { element: 'option selected', token: '--nir-colour-interaction-selected-bg', description: 'Navy-50 highlight for selected item.' },
+  { element: 'min-height (trigger)', token: '--nir-spacing-touch-target', description: '44px WCAG 2.5.8 minimum.' },
+]} />
 
 ## 3. Interactive Playground
 
 <Playground>
-  <Dropdown 
-    client:load 
-    label="Assign Case Priority" 
-    options={[
-      { label: 'Low', value: '1' },
-      { label: 'Medium', value: '2' },
-      { label: 'Critical Escalation', value: '3' }
-    ]} 
-  />
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '400px' }}>
+    <Dropdown
+      client:load
+      label="Assign Case Priority"
+      options={[
+        { label: 'Low', value: '1' },
+        { label: 'Medium', value: '2' },
+        { label: 'High', value: '3' },
+        { label: 'Critical Escalation', value: '4' }
+      ]}
+    />
+    <Dropdown
+      client:load
+      label="Select State"
+      disabled
+      options={[{ label: 'Delhi', value: 'DL' }]}
+    />
+  </div>
 </Playground>
 
-## 4. Engineering Implementation
+## 4. Component Anatomy
+
+```
+┌─ label ──────────────────────────────────┐
+│ Select State                             │
+├──────────────────────────────────────────┤
+│  Selected value or placeholder      [∨]  │  ← trigger
+└──────────────────────────────────────────┘
+  ┌──────────────────────────────────────┐
+  │  Option A                            │  ← panel (elevation-4)
+  │  Option B  ✓ (selected)              │
+  │  Option C                            │
+  └──────────────────────────────────────┘
+```
+
+## 5. Engineering Implementation
 
 <Tabs>
-  <TabItem label="React Usage">
+  <TabItem label="React">
     ```tsx
     import { Dropdown } from '@nirman/components';
 
-    <Dropdown 
-       label="State Output" 
-       options={[{label: "Delhi", value: "DL"}]} 
+    <Dropdown
+      label="State"
+      placeholder="Select your state"
+      options={[
+        { label: 'Andhra Pradesh', value: 'AP' },
+        { label: 'Delhi', value: 'DL' },
+        { label: 'Karnataka', value: 'KA' },
+        { label: 'Tamil Nadu', value: 'TN' },
+        { label: 'Uttar Pradesh', value: 'UP' },
+      ]}
+      onChange={(value) => setSelectedState(value)}
+    />
+
+    // With error state
+    <Dropdown
+      label="District"
+      options={districts}
+      error="Please select a district to continue"
     />
     ```
   </TabItem>
-  <TabItem label="SwiftUI Usage">
+  <TabItem label="SwiftUI (iOS)">
     ```swift
-    Menu("State Output") {
-        Button("Delhi", action: {  })
+    import NirmaanTokens
+
+    Menu {
+        ForEach(states) { state in
+            Button(state.name) { selectedState = state }
+        }
+    } label: {
+        HStack {
+            Text(selectedState?.name ?? "Select State")
+                .foregroundColor(
+                    selectedState == nil
+                        ? Color(NirColourTextPlaceholder)
+                        : Color(NirColourTextDefault)
+                )
+            Spacer()
+            Image(systemName: "chevron.down")
+                .foregroundColor(Color(NirColourIconDefault))
+        }
+        .padding(.horizontal, NirSpacingHorizontalBase)
+        .padding(.vertical, NirSpacingVerticalSmaller)
+        .frame(minHeight: NirSpacingTouchTarget)
+        .background(Color(NirColourSurfaceContainer))
+        .cornerRadius(NirSpacingCornerRadiusBase)
+        .overlay(
+            RoundedRectangle(cornerRadius: NirSpacingCornerRadiusBase)
+                .stroke(Color(NirColourBorderDefault), lineWidth: 2)
+        )
     }
-    .background(Tokens.Color.surface.default)
-    .shadow(color: .black.opacity(0.12), radius: 16, y: 4) // Emulates generic elevation overlays
+    .accessibilityLabel("State selector")
     ```
   </TabItem>
-  <TabItem label="Jetpack Compose">
+  <TabItem label="Compose (Android)">
     ```kotlin
-    DropdownMenuItem(
-        text = { Text("Delhi", color = Tokens.ColorTextDefault) },
-        onClick = { }
-    )
+    import dev.nirmaan.tokens.NirmaanTheme
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
+        OutlinedTextField(
+            value = selectedOption,
+            onValueChange = {},
+            readOnly = true,
+            label = { Text("Select State") },
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = NirmaanTheme.colors.borderFocus,
+                unfocusedBorderColor = NirmaanTheme.colors.borderDefault,
+            ),
+            modifier = Modifier
+                .menuAnchor()
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = NirmaanTheme.spacing.touchTarget)
+        )
+        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            states.forEach { state ->
+                DropdownMenuItem(
+                    text = { Text(state.name) },
+                    onClick = { selectedOption = state.name; expanded = false }
+                )
+            }
+        }
+    }
     ```
   </TabItem>
 </Tabs>
