@@ -1,0 +1,24 @@
+---
+title: Design Themes
+description: Handling multiple brand overrides and modes.
+---
+
+Nirmaan UI natively generates cross-functional themes dynamically mapped out of `packages/tokens/semantic/`. By utilizing Semantic variables inside your applications instead of primitive hex codes, we achieve 100% compliant dynamic UI switching.
+
+## Modes 
+Our design system ships with 3 primary display modes:
+1. **Light Mode (Default)**: Normal visual scaling (`light.json`).
+2. **Dark Mode**: Reversed visual logic targeting deep contrast (`dark.json`).
+3. **High Contrast**: Aggressive border boxing and stark WCAG AAA compliance (`high-contrast.json`).
+
+*In React, injecting `data-theme="dark"` onto your `<html />` element seamlessly re-writes all CSS node definitions at execution.*
+
+## Brand Theming 
+Because Nirmaan represents multiple Government domains, it has a robust sub-theming mechanism parsing different brands instantly. 
+Current internal schemas:
+- `central-govt.css` -> mapping `[data-brand="goi"]`
+- `state-kerala.css` -> mapping `[data-brand="kl"]`
+- `state-tamilnadu.css` -> mapping `[data-brand="tn"]`
+- `state-up.css` -> mapping `[data-brand="up"]`
+
+When a component mounts in these brands, `var(--nir-color-primary-default)` resolves to completely unique variables securely without duplicate frontend logic.

@@ -1,0 +1,48 @@
+---
+title: Semantic Tokens
+description: The contextual UI variables mapping primitives.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Semantic tokens inject context into primitives. E.g. `color.border.error` resolves back to the primitive `{color.red.500}`. 
+
+This enables native Dark Mode and High-Contrast mode swapping because the Semantic Token name remains perfectly identical across modes, but seamlessly changes the underlying primitive it points to!
+
+## Common Semantic Scopes
+
+### 1. Colors
+- `color.primary.default`
+- `color.secondary.stroke`
+- `color.surface.container`
+- `color.text.inverse`
+- `color.border.focus`
+- `color.feedback.warning`
+
+### 2. Interaction
+- `interaction.focus-ring`
+- `interaction.disabled-bg`
+- `interaction.hover-overlay`
+
+### 3. Fonts
+- `font.family.heading`
+- `font.size.body-md`
+- `font.line-height.display`
+
+## Examples in Applications
+
+<Tabs>
+  <TabItem label="Web CSS">
+    ```css
+    .text-input:focus {
+        border-color: var(--nir-border-focus);
+        box-shadow: 0 0 0 2px var(--nir-interaction-focus-ring);
+    }
+    ```
+  </TabItem>
+  <TabItem label="iOS">
+    ```swift
+    .foregroundColor(Tokens.Color.Text.secondary)
+    ```
+  </TabItem>
+</Tabs>

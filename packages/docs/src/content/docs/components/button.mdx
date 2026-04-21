@@ -1,0 +1,115 @@
+---
+title: Button
+description: Primary interactive element for triggering actions.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Playground from '../../../components/Playground.astro';
+import { Button } from '@nirman/components';
+
+Buttons encapsulate the core interaction metrics of Nirmaan UI. They are deeply bound to our foundation tokens, scaling natively on Web, iOS, and Android ensuring an identical WCAG 2.5.8 touch target (minimum 44x44px).
+
+## Interactive Playground
+
+Test the primary React web component live:
+
+<Playground>
+  <Button client:load variant="primary">Primary Action</Button>
+  <Button client:load variant="secondary">Secondary</Button>
+  <Button client:load variant="danger" iconRight="🗑️">Delete</Button>
+  <Button client:load variant="ghost">Cancel</Button>
+</Playground>
+
+## Usage Across Platforms
+
+Because Nirmaan is a Multi-Platform Design System, "Button" styling cascades downstream universally. Utilize the syntax specific to your engineering environment:
+
+<Tabs>
+  <TabItem label="React (Web)">
+    ```tsx
+    import { Button } from '@nirman/components';
+
+    export default function App() {
+      return (
+        <Button 
+          variant="primary" 
+          size="md" 
+          onClick={() => alert('Clicked!')}
+        >
+          Submit Form
+        </Button>
+      );
+    }
+    ```
+  </TabItem>
+  
+  <TabItem label="SwiftUI (iOS)">
+    ```swift
+    import SwiftUI
+    import NirmaanTokens
+
+    struct PrimaryButton: View {
+        var action: () -> Void
+        var label: String
+        
+        var body: some View {
+            Button(action: action) {
+                Text(label)
+                    .font(Tokens.Typography.button)
+                    .foregroundColor(Tokens.Color.navy[50])
+            }
+            // Binding directly to the generated multi-platform Swift struct!
+            .padding()
+            .background(Tokens.Color.blueLink[500]) 
+            .cornerRadius(Tokens.Radius.md)
+            .frame(minHeight: Tokens.Spacing.11) // 44px WCAG touch
+        }
+    }
+    ```
+  </TabItem>
+
+  <TabItem label="Compose (Android)">
+    ```kotlin
+    import androidx.compose.material3.Button
+    import androidx.compose.material3.ButtonDefaults
+    import androidx.compose.material3.Text
+    import androidx.compose.runtime.Composable
+    import com.nirmaan.tokens.Tokens
+
+    @Composable
+    fun PrimaryButton(onClick: () -> Unit, text: String) {
+        Button(
+            onClick = onClick,
+            colors = ButtonDefaults.buttonColors(
+                // Binding directly to generated Kotlin object
+                containerColor = Tokens.ColorBlueLink500,
+                contentColor = Tokens.ColorNavy50
+            ),
+            shape = RoundedCornerShape(Tokens.RadiusMd)
+        ) {
+            Text(text)
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+## Variants & States
+
+Buttons scale mathematically across 3 primary dimensions: **Variant**, **Size**, and **State**.
+
+### Sizes
+All dimensions tie back to the `spacing` and `font-size` foundational tokens.
+<Playground>
+  <Button client:load size="sm">Small (sm)</Button>
+  <Button client:load size="md">Medium (md)</Button>
+  <Button client:load size="lg">Large (lg)</Button>
+</Playground>
+
+### Loading State
+When `loading` is passed, the button automatically disables itself, suppresses click events, injects the SVG spinner, and announces "Loading, please wait" to screen readers natively.
+
+<Playground>
+  <Button client:load loading>Save changes</Button>
+  <Button client:load loading variant="secondary">Syncing...</Button>
+</Playground>

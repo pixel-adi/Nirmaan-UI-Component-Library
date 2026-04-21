@@ -1,0 +1,22 @@
+
+
+> @nirman/docs@0.1.0 build /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/docs
+> astro build
+
+11:31:45 [vite] Re-optimizing dependencies because lockfile has changed
+11:31:45 [content] Syncing content
+11:31:45 [content] Synced content
+11:31:45 [types] Generated 399ms
+11:31:45 [build] output: "static"
+11:31:45 [build] mode: "static"
+11:31:45 [build] directory: /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/docs/dist/
+11:31:45 [build] Collecting build info...
+11:31:45 [build] ✓ Completed in 484ms.
+11:31:45 [build] Building static entrypoints...
+[2K[1G11:31:46 [ERROR] [vite] ✗ Build failed in 1.08s
+[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1GCould not resolve "../../../../components/Playground.astro" from "src/content/docs/components/button.mdx"
+file: /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/docs/src/content/docs/components/button.mdx
+  Stack trace:
+    at getRollupError (file:///Users/itsadi/Desktop/Nirmaan%20UI%20Component%20Library/node_modules/.pnpm/rollup@4.60.1/node_modules/rollup/dist/es/shared/parseAst.js:406:41)
+    at ModuleLoader.handleInvalidResolvedId (file:///Users/itsadi/Desktop/Nirmaan%20UI%20Component%20Library/node_modules/.pnpm/rollup@4.60.1/node_modules/rollup/dist/es/shared/node-entry.js:22106:24)
+ ELIFECYCLE  Command failed with exit code 1.

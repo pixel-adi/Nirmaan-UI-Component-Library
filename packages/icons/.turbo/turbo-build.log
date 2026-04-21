@@ -1,0 +1,6 @@
+
+
+> @nirman/icons@1.0.0 build /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/icons
+> svgr --out-dir dist --icon --typescript src
+
+src/edit.svg -> dist/Edit.tsx

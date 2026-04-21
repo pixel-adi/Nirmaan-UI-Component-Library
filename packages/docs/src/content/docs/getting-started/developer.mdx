@@ -1,0 +1,48 @@
+---
+title: Developer Workflow
+description: Developer Workflow
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Consuming Nirmaan UI requires practically zero configurations natively because the mathematical scaling and token translations are pre-compiled for your environment via `Style Dictionary v4`.
+
+## Consuming Updates
+
+Whenever designers push an update to Figma logic, the Turborepo CI pipeline builds the multi-platform payloads and version-bumps the `@nirman/tokens` package.
+
+You fetch these changes just by bumping your local package dependencies.
+
+## Applying in the Wild
+
+Because we export perfectly typed semantics, your implementations remain incredibly clean.
+
+<Tabs>
+  <TabItem label="React Component">
+    React apps consume from `@nirman/components`. 
+    ```tsx
+    import { Input } from '@nirman/components';
+    
+    // Components already possess mapped design tokens!
+    <Input label="Email address" error="Invalid format" fullWidth />
+    ```
+  </TabItem>
+  <TabItem label="SwiftUI">
+    iOS apps natively read `Tokens.swift`.
+    ```swift
+    // You do not use hex codes!
+    .padding(Tokens.Spacing.4)
+    .background(Tokens.Color.cream[50])
+    .cornerRadius(Tokens.Radius.lg)
+    ```
+  </TabItem>
+  <TabItem label="Jetpack Compose">
+    Android apps natively read `Tokens.kt`.
+    ```kotlin
+    Card(
+        shape = RoundedCornerShape(Tokens.RadiusLg),
+        backgroundColor = Tokens.ColorCream50
+    )
+    ```
+  </TabItem>
+</Tabs>

@@ -1,0 +1,34 @@
+---
+title: Dropdown
+description: Contextual menus triggering from buttons.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Playground from '../../../components/Playground.astro';
+import { Dropdown } from '@nirman/components';
+
+Dropdowns utilize our semantic `surface.container` properties and respect the high-contrast accessibility inversions globally.
+
+## Interactive Playground
+
+<Playground>
+  <Dropdown 
+    client:load 
+    label="Actions" 
+    options={[
+      { label: 'Edit Profile', value: 'edit' },
+      { label: 'Settings', value: 'settings' },
+      { label: 'Logout', value: 'logout' }
+    ]} 
+  />
+</Playground>
+
+<Tabs>
+  <TabItem label="React Usage">
+    ```tsx
+    import { Dropdown } from '@nirman/components';
+
+    <Dropdown label="Menu" options={[{label: 'Action', value: '1'}]} />
+    ```
+  </TabItem>
+</Tabs>

@@ -1,0 +1,21 @@
+---
+title: Designer Workflow
+description: Designer Workflow
+---
+
+Nirmaan UI relies entirely on pushing updates directly from the Design tool straight into the engineering repositories. There is no manual handoff document bridging the gap.
+
+## Token Studio Integration
+
+We utilize **Token Studio for Figma** as our primary visual compiler.
+
+1. **Construct Primitives:** Designers define explicit `Spacing` (e.g., `spacing-4` = `16px`), `Colors` (e.g., `navy-500` = `#083459`), and `Typography`.
+2. **Assign Semantics:** Designers map Primitives over to functional rules. For example, setting the `color.primary.default` alias to resolve to `{color.navy.500}`.
+3. **Commit to GitHub:** Using the native Token Studio plugin window, designers push the resulting `.json` configuration directly to the Nirmaan UI GitHub Repository.
+
+## The CI Pipeline
+Once a designer pushes tokens, our automated `Turborepo` pipeline detects changes in the `packages/tokens/` payload and immediately:
+1. Runs `Style Dictionary` outputs filtering for Android, iOS, and Web.
+2. Formats all code outputs properly.
+3. Re-runs React Element validations in components.
+4. Updates this exact Starlight documentation site automatically to reflect the new visual variables.

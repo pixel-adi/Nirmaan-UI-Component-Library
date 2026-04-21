@@ -1,0 +1,29 @@
+---
+// Playgound.astro
+// Wrapper for rendering active React components inside documentation with a clean border
+---
+<div class="playground-wrapper">
+  <div class="playground-preview">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .playground-wrapper {
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 8px;
+    margin: 2rem 0;
+    overflow: hidden;
+    background-image: radial-gradient(var(--sl-color-hairline) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: -10px -10px;
+  }
+  .playground-preview {
+    padding: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

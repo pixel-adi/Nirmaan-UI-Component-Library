@@ -1,0 +1,23 @@
+---
+title: Typography
+description: Foundational Text hierarchies and scripts.
+---
+
+Typography in Nirmaan UI extends past basic sizes; it supports multi-script language architectures fundamentally.
+
+## Composite Typing
+
+Designers and Developers operate using "Composite Tokens"—bundles merging weight, line-height, letter-spacing, and size into singular variables.
+
+- **`Heading` Composites:** `display`, `heading-xl`, `heading-lg`, `heading-md`, `heading-sm`
+- **`Body` Composites:** `body-lg`, `body-md`, `body-sm`
+- **`Utility` Composites:** `label-lg`, `label-md`, `label-sm`, `caption`, `overline`
+
+## Script Line-Heights
+
+Because Nirmaan operates across multiple scripts natively, the system parses line-height based on font characteristics automatically:
+
+- **Latin Default:** 1.5 multiplier.
+- **Devanagari (Hindi/Sanskrit):** 1.7 multiplier (allows room for shirorekha and upper matras).
+- **Tamil:** 1.625 multiplier (accommodates dense round forms).
+- **Urdu Nastaliq:** 1.8 multiplier (tallest script, requires RTL rendering).

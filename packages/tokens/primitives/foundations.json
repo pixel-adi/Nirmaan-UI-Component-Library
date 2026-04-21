@@ -29,12 +29,7 @@
     "40": { "$value": "160px", "$type": "dimension" },
     "48": { "$value": "192px", "$type": "dimension" },
     "56": { "$value": "224px", "$type": "dimension" },
-    "64": { "$value": "256px", "$type": "dimension" },
-
-    "safe-area-top":    { "$value": "env(safe-area-inset-top, 0px)",    "$type": "dimension", "$description": "FIX §V.8: Mobile notch / Dynamic Island. Falls back to 0px on non-notched devices." },
-    "safe-area-bottom": { "$value": "env(safe-area-inset-bottom, 0px)", "$type": "dimension", "$description": "FIX §V.8: Mobile home indicator. Falls back to 0px on devices without home bar." },
-    "safe-area-left":   { "$value": "env(safe-area-inset-left, 0px)",   "$type": "dimension", "$description": "Landscape mode safe area" },
-    "safe-area-right":  { "$value": "env(safe-area-inset-right, 0px)",  "$type": "dimension", "$description": "Landscape mode safe area" }
+    "64": { "$value": "256px", "$type": "dimension" }
   },
 
   "radius": {

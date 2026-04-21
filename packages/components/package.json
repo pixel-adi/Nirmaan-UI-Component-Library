@@ -14,13 +14,19 @@
     "./dist/index.css": "./dist/index.css"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo 'No lint specified'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {
+    "@nirman/icons": "workspace:*",
     "@nirman/tokens": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",

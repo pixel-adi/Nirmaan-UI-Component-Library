@@ -1,0 +1,39 @@
+---
+title: Usage & Platforms
+description: Utilizing vector icons across web and native platforms.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Playground from '../../../components/Playground.astro';
+import { Edit } from '@nirman/icons';
+
+Our architecture manages vector graphics logically inside the `@nirman/icons` pipeline instead of disjointed static files. Designers simply push raw `.svg` files from Figma straight to `packages/icons/src`.
+
+## SVGR React Injection
+
+When the raw Figma SVG is pushed, Turborepo builds it dynamically into a beautifully typed React component using SVGR compilation:
+
+<Playground>
+  <Edit width="48" height="48" stroke="blue" />
+</Playground>
+
+<Tabs>
+  <TabItem label="React Integration">
+    Because all components export from `@nirman/icons`, you drop them perfectly into any Webapp logic immediately natively.
+    ```tsx
+    import { Edit } from '@nirman/icons';
+
+    export const UserCard = () => {
+        return (
+            <div>
+               <p>User Profile</p>
+               <Edit width="24" height="24" stroke="var(--nir-color-icon-default)" />
+            </div>
+        )
+    }
+    ```
+  </TabItem>
+  <TabItem label="iOS/Android Integration">
+    Mobile endpoints currently utilize the exported generic `packages/icons/src/*.svg` shapes bundled securely inside their standard iOS `Assets.xcassets` and Android XML Vector Drawables parsing pipelines.
+  </TabItem>
+</Tabs>

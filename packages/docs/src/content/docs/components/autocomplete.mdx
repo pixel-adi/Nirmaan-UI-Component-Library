@@ -1,0 +1,40 @@
+---
+title: Autocomplete
+description: Predictive text entry mechanisms.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Playground from '../../../components/Playground.astro';
+import { Autocomplete } from '@nirman/components';
+
+Autocomplete components merge `Input` bounding logic with `Dropdown` elevation overlays natively mapped to `zIndex.dropdown` and `elevation.3`.
+
+## Interactive Playground
+
+<Playground>
+  <div style={{ width: '100%', maxWidth: '400px' }}>
+    <Autocomplete 
+      client:load 
+      label="Search Countries" 
+      options={[
+        { label: 'India', value: 'in' },
+        { label: 'United States', value: 'us' },
+        { label: 'United Kingdom', value: 'uk' }
+      ]} 
+      fullWidth 
+    />
+  </div>
+</Playground>
+
+<Tabs>
+  <TabItem label="React Integration">
+    ```tsx
+    import { Autocomplete } from '@nirman/components';
+
+    <Autocomplete 
+      label="State"
+      options={[{label: 'Kerala', value: 'KL'}]} 
+    />
+    ```
+  </TabItem>
+</Tabs>

@@ -1,0 +1,18 @@
+---
+title: Primitive Tokens
+description: The absolute foundational variables.
+---
+
+Primitives are the raw mathematical building blocks mapped centrally into `packages/tokens/primitives/foundations.json`. These numbers lack context (for example, `spacing-4` is just `16px`). They have no intrinsic UI meaning without Semantic wrappers.
+
+## Core Primitives Available
+
+1. **Spacing:** Based strictly on a `4px` baseline multiplier (`px`, `1`, `1.5`, `2` ... `64`).
+2. **Radius:** Granular control over UI bending (`none`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `full`).
+3. **Typography Scaling:** Base dimensions scaling upwards from `10px` (`2xs`) to `60px` (`6xl`).
+4. **Colors:** Unmapped palettes like Navy, Red, Amber, Green (`color.navy.800`, `color.red.500`).
+5. **Elevation:** Explicit box-shadow logic mapping depth layers 0 through 6.
+6. **Breakpoints:** Explicit media query limits (`xs` ... `3xl`).
+
+> [!WARNING]
+> Do NOT use primitive variables directly in your frontend code! They are subject to theme mutations. Always use **Semantic Tokens**.

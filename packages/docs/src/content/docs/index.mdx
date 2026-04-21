@@ -1,0 +1,32 @@
+---
+title: Welcome to Nirmaan
+description: The Multi-Platform Design System.
+template: splash
+hero:
+  tagline: A single source of truth for Web, iOS, and Android.
+  actions:
+    - text: Developer Workflow
+      link: /getting-started/developer/
+      icon: right-arrow
+      variant: primary
+    - text: View Tokens
+      link: /foundations/tokens/
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="Multi-Platform" icon="apple">
+		Generate Swift, Kotlin, and Web variables dynamically from a single token architecture.
+	</Card>
+	<Card title="Strict Accessibility" icon="magnifier">
+		Built-in WCAG tests ensuring components always stay compliant.
+	</Card>
+	<Card title="React Ready" icon="document">
+		Ready-to-use `@nirman/components` bound directly to the core design system.
+	</Card>
+	<Card title="Designer Handshake" icon="setting">
+		Export straight from Figma using Token Studio directly to our codebase.
+	</Card>
+</CardGrid>

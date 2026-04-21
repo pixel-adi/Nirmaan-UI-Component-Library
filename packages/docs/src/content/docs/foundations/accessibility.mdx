@@ -1,0 +1,15 @@
+---
+title: Accessibility
+description: Core WCAG 2.1 compliance integration.
+---
+
+Accessibility is NOT an afterthought in Nirmaan; it is hardcoded into the mathematical limits of the component structure. You cannot utilize our component libraries to build non-compliant experiences.
+
+## Baseline Rules Supported Natively
+
+1. **Touch Targets (WCAG 2.5.8 Target Size):** Any interactive element mapping to the `size = 'md'` variable invokes `{spacing.11}`, scaling to a rigid minimum of **`44x44px`** for iOS and Web interaction layers.
+2. **Focus Indicators (WCAG 2.4.11 Focus Appearance):** Focus states map to `--nir-interaction-focus-ring`, which ensures a contrast ratio of >3:1 against background nodes.
+3. **Contrast Ratios (WCAG 1.4.3 Contrast Minimum):** Every foreground element, such as `color.text.default` and `color.text.inverse`, mathematically clears an explicit readability margin of >4.5:1 on their associated Surface defaults (`color.surface.default`).
+4. **ARIA Standards:** React component bindings actively parse and bind `aria-describedby` when errors map into inputs.
+
+By keeping components wrapped in Nirmaan primitives upstream, external apps inherently receive AAA compliances without granular QA testing.

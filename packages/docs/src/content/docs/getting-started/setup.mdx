@@ -1,0 +1,47 @@
+---
+title: Setup & Installation
+description: Bootstrapping Nirmaan UI across your environments.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Integrating Nirmaan UI into your platform relies structurally on pulling down the appropriate `@nirman` artifacts.
+
+## Web Setup (React)
+
+To establish the frontend framework components into a React-based ecosystem (e.g. Next.js, Vite, or Astro):
+
+1. **Install the unified library**
+```bash
+npm install @nirman/components @nirman/icons @nirman/tokens
+```
+
+2. **Import the Design Variables**
+The core `light.css` (and optionally `dark.css`) files dictate the exact typography, spatial gaps, and color hexes our components use. You **must** import them at the root of your application (usually `_app.tsx` or `index.ts`):
+
+```tsx
+import '@nirman/tokens/css/primitives.css';
+import '@nirman/tokens/css/light.css';
+
+// Optionally include individual CSS if you aren't using CSS-in-JS injection:
+import '@nirman/components/dist/index.css';
+```
+
+## Native Setup (iOS / Android)
+
+Nirmaan does not enforce native platform UI frameworks—instead, we supply the exact variables (JSON mapping -> Swift / Kotlin) you need to conform precisely to the Figma models.
+
+<Tabs>
+  <TabItem label="iOS (Swift)">
+    Simply copy the generated `Tokens.swift` payload from our design repo drop directly into your Xcode workspace. It includes structures for:
+    - `Tokens.Color.navy[500]`
+    - `Tokens.Radius.md`
+    - `Tokens.Spacing.11`
+  </TabItem>
+  <TabItem label="Android (Compose)">
+    Our architecture compiles `Tokens.kt` which generates standard Jetpack Compose compatible classes:
+    - `Tokens.ColorBlueLink500`
+    - `Tokens.RadiusMd`
+    - `Tokens.TypographyHeading1`
+  </TabItem>
+</Tabs>

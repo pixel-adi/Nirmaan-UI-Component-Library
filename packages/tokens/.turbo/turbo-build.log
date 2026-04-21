@@ -1,0 +1,175 @@
+
+
+> @nirman/tokens@0.1.0 build /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/tokens
+> node sd.config.mjs
+
+🏗️  Building Nirman tokens...
+
+
+Token collisions detected (9):
+
+Collision detected at: ! Original value: Nirman Design System — Primitive Tokens: Color. Raw values derived from the existing design language. Never used directly by components. Prefix: nir-, New value: Nirman Design System — Primitive Tokens: Foundations. Spacing, radius, typography, motion, elevation, opacity, breakpoints, z-index, safe areas, direction. Prefix: nir-
+Collision detected at: ! Original value: Nirman Design System — Primitive Tokens: Foundations. Spacing, radius, typography, motion, elevation, opacity, breakpoints, z-index, safe areas, direction. Prefix: nir-, New value: Nirman Design System — Semantic Tokens: Light Mode (default). All constitutional gaps fixed. CSS prefix: --nir-
+Collision detected at: opacity! Original value: Opacity scale for disabled states, overlays, etc., New value: Semantic opacity tokens. Lives in Semantic/Number collection.
+Collision detected at: font.line-height! Original value: Line-height primitives. Script profiles reference these., New value: FIX §I.2.1: Per-script line-height semantic tokens. These resolve via :lang() in CSS and script modes in Figma.
+Collision detected at: number-format! Original value: FIX §IV.1 Dim 3.10: Indian number formatting patterns, New value: FIX §IV.1 Dim 3.10: Default number format. Resolved per locale.
+Collision detected at: ! Original value: Nirman Design System — Primitive Tokens: Foundations. Spacing, radius, typography, motion, elevation, opacity, breakpoints, z-index, safe areas, direction. Prefix: nir-, New value: Nirman Design System — Semantic Tokens: DARK MODE. All gaps fixed. CSS prefix: --nir-
+Collision detected at: elevation! Original value: Box shadow primitives for depth levels, New value: FIX: Dark mode uses lighter shadows with subtle white border for depth perception
+Collision detected at: ! Original value: Nirman Design System — Primitive Tokens: Foundations. Spacing, radius, typography, motion, elevation, opacity, breakpoints, z-index, safe areas, direction. Prefix: nir-, New value: Nirman Design System — Semantic Tokens: HIGH CONTRAST MODE. All text ≥7:1 (AAA). All gaps fixed. CSS prefix: --nir-
+Collision detected at: elevation! Original value: Box shadow primitives for depth levels, New value: HC mode uses solid borders instead of shadows for maximum clarity
+
+
+
+js
+✔︎ build/js/tokens.mjs
+
+scss
+✔︎ build/scss/_variables.scss
+
+ios
+✔︎ build/ios/Tokens.swift
+
+android
+✔︎ build/android/colors.xml
+✔︎ build/android/dimens.xml
+
+compose
+✔︎ build/compose/Tokens.kt
+
+css
+⚠️ build/css/primitives.css
+While building primitives.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
+Here are the references that are used but not defined in the file:
+    color.navy.700
+    color.navy.600
+    color.navy.800
+    color.navy.50
+    color.navy.100
+    color.cream.100
+    color.cream.50
+    color.cream.400
+    color.navy.200
+    color.navy.900
+    color.ink.600
+    color.ink.400
+    color.cream.600
+    color.blue-link.500
+    color.red.500
+    color.green.500
+    color.amber.500
+    color.red.100
+    color.red.200
+    color.green.100
+    color.green.700
+    color.green.200
+    color.amber.100
+    color.amber.200
+    color.amber.600
+    color.cream.300
+    spacing.1
+    spacing.2
+    spacing.3
+    spacing.4
+    spacing.6
+    spacing.8
+    spacing.11
+    radius.md
+    radius.lg
+    radius.full
+    font.family.latin-sans
+    font.family.latin-mono
+    font.size.xs
+    font.size.sm
+    font.size.base
+    font.size.lg
+    font.size.xl
+    font.size.2xl
+    font.size.3xl
+    font.size.4xl
+    font.size.5xl
+    font.weight.regular
+    font.weight.semibold
+    font.weight.medium
+    font.weight.bold
+    font.line-height.normal
+    font.line-height.loose
+    font.line-height.relaxed
+    font.line-height.looser
+    font.line-height.tight
+    font.line-height.none
+    font.letter-spacing.normal
+    font.letter-spacing.wide
+    font.letter-spacing.tight
+    direction.ltr
+    direction.rtl
+    font.line-height.snug
+    font.letter-spacing.wider
+    font.size.2xs
+    font.letter-spacing.widest
+    elevation.0
+    elevation.2
+    elevation.4
+    elevation.5
+    opacity.38
+    number-format.indian
+    duration.100
+    duration.200
+    duration.300
+    duration.150
+    duration.0
+    easing.standard
+    easing.decelerate
+    easing.accelerate
+This is caused when combining a filter and `outputReferences`.
+✔︎ build/css/light.css
+  ✓ Primitives + Light mode (CSS, JS, SCSS, iOS, Android, Compose)
+
+css
+⚠️ build/css/dark.css
+While building dark.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
+
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
+  ✓ Dark mode (CSS)
+
+css
+⚠️ build/css/high-contrast.css
+While building high-contrast.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
+
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
+  ✓ High-contrast mode (CSS)
+
+Token collisions detected (6):
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
+
+css
+✔︎ build/css/themes/central-govt.css
+  ✓ Theme: central-govt (CSS → [data-brand="goi"])
+
+Token collisions detected (6):
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
+
+css
+✔︎ build/css/themes/state-kerala.css
+  ✓ Theme: state-kerala (CSS → [data-brand="kl"])
+
+Token collisions detected (6):
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
+
+css
+✔︎ build/css/themes/state-tamilnadu.css
+  ✓ Theme: state-tamilnadu (CSS → [data-brand="tn"])
+
+Token collisions detected (6):
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
+
+css
+✔︎ build/css/themes/state-up.css
+  ✓ Theme: state-up (CSS → [data-brand="up"])
+
+✅ All token platforms built successfully
