@@ -26,23 +26,24 @@ Autocomplete is a **Layer 2 (Pattern)** component — it composes a `Layer 1 Inp
 ## 2. Token Binding
 
 <TokenMapping tokens={[
-  { element: 'input border (default)', token: '--nir-colour-border-default', description: 'Cream-400 resting border on input.' },
-  { element: 'input border (focus)', token: '--nir-colour-border-focus', description: 'Navy-600 when input is focused.' },
-  { element: 'input background', token: '--nir-colour-surface-container', description: 'White input fill.' },
-  { element: 'input text', token: '--nir-colour-text-default', description: 'Near-black user-typed text.' },
-  { element: 'placeholder', token: '--nir-colour-text-placeholder', description: 'Muted navy-200 placeholder.' },
-  { element: 'suggestions panel background', token: '--nir-colour-surface-container', description: 'White suggestion list panel.' },
-  { element: 'suggestions panel shadow', token: '--nir-elevation-overlay', description: 'Elevation-4 shadow for depth.' },
-  { element: 'suggestions panel z-index', token: '--nir-z-index-dropdown', description: '1000 — above content.' },
-  { element: 'suggestion hover', token: '--nir-colour-interaction-hover-overlay', description: 'rgba(0,0,0,0.04) on hover.' },
-  { element: 'suggestion active/selected', token: '--nir-colour-interaction-selected-bg', description: 'Navy-50 on selected suggestion.' },
-  { element: 'match highlight', token: '--nir-colour-primary-muted', description: 'Navy-100 background on matched text fragment.' },
-  { element: 'min-height', token: '--nir-spacing-touch-target', description: '44px WCAG 2.5.8.' },
+  { element: 'input border (default)', token: '--nir-color-border-default', value: '#e6e2de', description: 'cream-400 resting border on input.' },
+  { element: 'input border (focus)', token: '--nir-color-primary-default', value: '#083459', description: 'navy-600 when input is focused.' },
+  { element: 'input border (error)', token: '--nir-color-feedback-error-default', value: '#bc3737', description: 'red-500 on validation error.' },
+  { element: 'input background', token: '--nir-color-surface-container', value: '#fcfcfc', description: 'cream-100 input fill.' },
+  { element: 'input text', token: '--nir-color-text-default', value: '#010f2a', description: 'navy-900 user-typed text.' },
+  { element: 'placeholder text', token: '--nir-color-text-placeholder', value: '#8298aa', description: 'navy-200 before typing.' },
+  { element: 'clear icon', token: '--nir-color-text-secondary', value: '#23313c', description: 'ink-600 ✕ icon to clear typed text.' },
+  { element: 'suggestions background', token: '--nir-color-surface-container', value: '#fcfcfc', description: 'cream-100 suggestion list panel.' },
+  { element: 'suggestion hover', token: '--nir-color-interaction-hover-overlay', value: 'rgba(0,0,0,0.04)', description: '4% black tint on hover.' },
+  { element: 'suggestion active', token: '--nir-color-primary-subtle', value: '#e6edf3', description: 'navy-50 on keyboard-active item.' },
+  { element: 'match highlight bg', token: '--nir-color-primary-muted', value: '#ced6de', description: 'navy-100 background on matched text fragment.' },
+  { element: 'live region', token: 'aria-live="polite"', value: 'polite', description: 'Announces count of filtered results after each keystroke.' },
+  { element: 'min-height', token: 'none — 44px', value: '44px', description: 'WCAG 2.5.8 — input trigger height.' },
 ]} />
 
 ## 3. Interactive Playground
 
-<Playground>
+<Playground column bg="container">
   <div style={{ width: '100%', maxWidth: '420px' }}>
     <Autocomplete
       client:load
@@ -50,15 +51,33 @@ Autocomplete is a **Layer 2 (Pattern)** component — it composes a `Layer 1 Inp
       placeholder="Type to search states…"
       options={[
         { label: 'Andhra Pradesh', value: 'AP' },
+        { label: 'Arunachal Pradesh', value: 'AR' },
         { label: 'Assam', value: 'AS' },
         { label: 'Bihar', value: 'BR' },
+        { label: 'Chhattisgarh', value: 'CG' },
         { label: 'Delhi', value: 'DL' },
+        { label: 'Goa', value: 'GA' },
         { label: 'Gujarat', value: 'GJ' },
+        { label: 'Haryana', value: 'HR' },
+        { label: 'Himachal Pradesh', value: 'HP' },
+        { label: 'Jharkhand', value: 'JH' },
         { label: 'Karnataka', value: 'KA' },
         { label: 'Kerala', value: 'KL' },
+        { label: 'Madhya Pradesh', value: 'MP' },
         { label: 'Maharashtra', value: 'MH' },
+        { label: 'Manipur', value: 'MN' },
+        { label: 'Meghalaya', value: 'ML' },
+        { label: 'Mizoram', value: 'MZ' },
+        { label: 'Nagaland', value: 'NL' },
+        { label: 'Odisha', value: 'OR' },
+        { label: 'Punjab', value: 'PB' },
+        { label: 'Rajasthan', value: 'RJ' },
+        { label: 'Sikkim', value: 'SK' },
         { label: 'Tamil Nadu', value: 'TN' },
+        { label: 'Telangana', value: 'TS' },
+        { label: 'Tripura', value: 'TR' },
         { label: 'Uttar Pradesh', value: 'UP' },
+        { label: 'Uttarakhand', value: 'UK' },
         { label: 'West Bengal', value: 'WB' },
       ]}
       fullWidth

@@ -26,24 +26,27 @@ Checkboxes enable multi-select from a list. Unlike Radio buttons, multiple check
 ## 2. Token Binding
 
 <TokenMapping tokens={[
-  { element: 'background (checked)', token: '--nir-colour-primary-default', description: 'Navy fill when checked.' },
-  { element: 'checkmark icon', token: '--nir-colour-primary-on-primary', description: 'White tick on navy background.' },
-  { element: 'border (unchecked)', token: '--nir-colour-border-strong', description: 'Navy-200 border when unchecked.' },
-  { element: 'border (focus)', token: '--nir-colour-border-focus', description: '2px navy-600 focus ring.' },
-  { element: 'background (disabled)', token: '--nir-colour-interaction-disabled-bg', description: 'Cream-300 — visually muted.' },
-  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', description: '0.38 composite opacity.' },
-  { element: 'label color', token: '--nir-colour-text-default', description: 'Near-black body text.' },
-  { element: 'touch area', token: '--nir-spacing-touch-target', description: '44px minimum hit area via padding.' },
+  { element: 'background (checked)', token: '--nir-color-primary-default', value: '#083459', description: 'navy-600 fill when checked.' },
+  { element: 'checkmark SVG stroke', token: '--nir-color-primary-on-primary', value: '#fcfcfc', description: 'cream-100 tick on navy background.' },
+  { element: 'border (unchecked)', token: '--nir-color-border-default', value: '#e6e2de', description: 'cream-400 border when unchecked.' },
+  { element: 'border (hover)', token: '--nir-color-border-strong', value: '#c8c4c0', description: 'cream-600 on hover.' },
+  { element: 'border (focus ring)', token: '--nir-color-interaction-focus-ring', value: '#083459', description: '2px solid, 2px offset around the SVG box.' },
+  { element: 'background (disabled)', token: '--nir-color-interaction-disabled-bg', value: '#f0ece8', description: 'cream-200 — visually muted fill.' },
+  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', value: '0.38', description: 'Composite opacity on the SVG box.' },
+  { element: 'label color', token: '--nir-color-text-default', value: '#010f2a', description: 'navy-900 body text.' },
+  { element: 'label (error)', token: '--nir-color-feedback-error-text', value: '#bc3737', description: 'red-500 label when checkbox has error.' },
+  { element: 'box size (md)', token: 'none — 20x20px', value: '20×20px', description: 'Visual box. Touch area = 44px via padding.' },
+  { element: 'touch area', token: 'min-height on wrapper', value: '44px', description: 'padding extends hit area without enlarging visual.' },
 ]} />
 
 ## 3. Interactive Playground
 
-<Playground>
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-    <Checkbox client:load label="I acknowledge the compliance mandates" defaultChecked />
-    <Checkbox client:load label="Receive notifications via registered mobile" />
-    <Checkbox client:load label="This option is unavailable" disabled />
-  </div>
+<Playground column>
+  <Checkbox client:load label="I acknowledge the compliance mandates" defaultChecked />
+  <Checkbox client:load label="Receive push notifications via registered mobile" />
+  <Checkbox client:load label="Enable biometric login" />
+  <Checkbox client:load label="This feature is restricted to admins" disabled />
+  <Checkbox client:load label="Accept partial data submission" indeterminate />
 </Playground>
 
 ## 4. Component Anatomy

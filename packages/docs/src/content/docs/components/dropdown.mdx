@@ -26,39 +26,63 @@ Dropdowns present a list of options from which the user selects one value. The l
 ## 2. Token Binding
 
 <TokenMapping tokens={[
-  { element: 'trigger background', token: '--nir-colour-surface-container', description: 'White (#FCFCFC) closed state fill.' },
-  { element: 'trigger border (default)', token: '--nir-colour-border-default', description: 'Cream-400 resting border.' },
-  { element: 'trigger border (focus)', token: '--nir-colour-border-focus', description: 'Navy-600 focus ring.' },
-  { element: 'trigger border (open)', token: '--nir-colour-border-focus', description: 'Navy-600 while panel is open.' },
-  { element: 'trigger border (error)', token: '--nir-colour-border-error', description: 'Red-500 on validation error.' },
-  { element: 'chevron icon', token: '--nir-colour-icon-default', description: 'Ink-600 — rotates 180° when open.' },
-  { element: 'panel background', token: '--nir-colour-surface-container', description: 'White overlay panel.' },
-  { element: 'panel shadow', token: '--nir-elevation-overlay', description: 'Shadow for dropdown depth (elevation-4).' },
-  { element: 'panel z-index', token: '--nir-z-index-dropdown', description: '1000 — above content, below modals.' },
-  { element: 'option hover', token: '--nir-colour-interaction-hover-overlay', description: 'rgba(0,0,0,0.04) on hover.' },
-  { element: 'option selected', token: '--nir-colour-interaction-selected-bg', description: 'Navy-50 highlight for selected item.' },
-  { element: 'min-height (trigger)', token: '--nir-spacing-touch-target', description: '44px WCAG 2.5.8 minimum.' },
+  { element: 'trigger background', token: '--nir-color-surface-container', value: '#fcfcfc', description: 'cream-100 closed state fill.' },
+  { element: 'trigger border (default)', token: '--nir-color-border-default', value: '#e6e2de', description: 'cream-400 resting border.' },
+  { element: 'trigger border (focus)', token: '--nir-color-primary-default', value: '#083459', description: 'navy-600 focus ring + open state border.' },
+  { element: 'trigger border (error)', token: '--nir-color-feedback-error-default', value: '#bc3737', description: 'red-500 on validation error.' },
+  { element: 'trigger text', token: '--nir-color-text-default', value: '#010f2a', description: 'navy-900 selected value text.' },
+  { element: 'placeholder text', token: '--nir-color-text-placeholder', value: '#8298aa', description: 'navy-200 muted unselected placeholder.' },
+  { element: 'chevron icon', token: '--nir-color-text-default', value: '#010f2a', description: 'Rotates 180° when panel is open.' },
+  { element: 'panel background', token: '--nir-color-surface-container', value: '#fcfcfc', description: 'cream-100 white overlay panel.' },
+  { element: 'panel border', token: '--nir-color-border-default', value: '#e6e2de', description: 'cream-400 panel border.' },
+  { element: 'option hover background', token: '--nir-color-interaction-hover-overlay', value: 'rgba(0,0,0,0.04)', description: 'Subtle 4% black tint on hover.' },
+  { element: 'option selected bg', token: '--nir-color-primary-subtle', value: '#e6edf3', description: 'navy-50 highlight for selected item.' },
+  { element: 'option selected check', token: '--nir-color-primary-default', value: '#083459', description: 'Checkmark icon for selected item.' },
+  { element: 'border-radius (trigger)', token: '--nir-radius-interactive', value: '6px', description: 'Consistent with all form controls.' },
+  { element: 'min-height (trigger)', token: 'none — 44px', value: '44px', description: 'WCAG 2.5.8 minimum.' },
+  { element: 'font-size (option)', token: '--nir-font-size-base', value: '16px', description: 'Body-md size for all option labels.' },
 ]} />
 
 ## 3. Interactive Playground
 
-<Playground>
+<Playground column bg="container">
   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '400px' }}>
     <Dropdown
       client:load
-      label="Assign Case Priority"
+      label="State"
+      placeholder="Select your state"
+      options={[
+        { label: 'Andhra Pradesh', value: 'AP' },
+        { label: 'Delhi', value: 'DL' },
+        { label: 'Gujarat', value: 'GJ' },
+        { label: 'Karnataka', value: 'KA' },
+        { label: 'Kerala', value: 'KL' },
+        { label: 'Maharashtra', value: 'MH' },
+        { label: 'Tamil Nadu', value: 'TN' },
+        { label: 'Uttar Pradesh', value: 'UP' },
+      ]}
+      fullWidth
+    />
+    <Dropdown
+      client:load
+      label="Case Priority"
+      placeholder="Select priority level"
       options={[
         { label: 'Low', value: '1' },
         { label: 'Medium', value: '2' },
         { label: 'High', value: '3' },
-        { label: 'Critical Escalation', value: '4' }
+        { label: 'Critical Escalation', value: '4' },
       ]}
+      error="Priority must be set before submission"
+      fullWidth
     />
     <Dropdown
       client:load
-      label="Select State"
+      label="Document Type"
+      placeholder="Not available in this context"
+      options={[{ label: 'Aadhaar', value: 'uid' }]}
       disabled
-      options={[{ label: 'Delhi', value: 'DL' }]}
+      fullWidth
     />
   </div>
 </Playground>

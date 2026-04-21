@@ -26,27 +26,33 @@ Text inputs govern standard data entry. Every border, label, error colour, and s
 ## 2. Token Binding
 
 <TokenMapping tokens={[
-  { element: 'border-color (default)', token: '--nir-colour-border-default', description: 'Resting border — cream-400 (#E6E2DE).' },
-  { element: 'border-color (focus)', token: '--nir-colour-border-focus', description: 'Navy-600 (#083459) on keyboard focus.' },
-  { element: 'border-color (error)', token: '--nir-colour-border-error', description: 'Red-500 (#BC3737) — automatic on error prop.' },
-  { element: 'border-color (success)', token: '--nir-colour-border-success', description: 'Green-500 (#18941C) — on validated state.' },
-  { element: 'background', token: '--nir-colour-surface-container', description: 'White (#FCFCFC) input fill.' },
-  { element: 'color (text)', token: '--nir-colour-text-default', description: 'Near-black (#010F2A) for legibility.' },
-  { element: 'color (placeholder)', token: '--nir-colour-text-placeholder', description: 'Muted navy-200 (#8298AA).' },
-  { element: 'color (label)', token: '--nir-colour-text-secondary', description: 'Mid-tone ink-600 (#23313C).' },
-  { element: 'color (error text)', token: '--nir-colour-feedback-error-text', description: 'Red-500 — matches border for visual coherence.' },
-  { element: 'border-radius', token: '--nir-spacing-corner-radius-base', description: '8px — consistent with all form controls.' },
-  { element: 'padding-inline', token: '--nir-spacing-horizontal-base', description: '16px horizontal padding.' },
-  { element: 'min-height', token: '--nir-spacing-touch-target', description: '44px WCAG 2.5.8 minimum.' },
+  { element: 'border-color (default)', token: '--nir-color-border-default', value: '#e6e2de', description: 'cream-400 resting border.' },
+  { element: 'border-color:hover', token: '--nir-color-border-strong', value: '#c8c4c0', description: 'cream-600 on hover.' },
+  { element: 'border-color:focus', token: '--nir-color-primary-default', value: '#083459', description: 'navy-600 on keyboard focus. 2px inset outline.' },
+  { element: 'border-color (error)', token: '--nir-color-feedback-error-default', value: '#bc3737', description: 'red-500 — automatic on error prop.' },
+  { element: 'background', token: '--nir-color-surface-default', value: '#fef6ee', description: 'cream-50 default. container (#fcfcfc) inside cards.' },
+  { element: 'color (text)', token: '--nir-color-text-default', value: '#010f2a', description: 'navy-900 — near-black for maximum legibility.' },
+  { element: 'color (placeholder)', token: '--nir-color-text-placeholder', value: '#8298aa', description: 'navy-200 muted placeholder.' },
+  { element: 'color (label)', token: '--nir-color-text-default', value: '#010f2a', description: 'Label inherits default text colour.' },
+  { element: 'color (error text)', token: '--nir-color-feedback-error-text', value: '#bc3737', description: 'Matches border for visual coherence.' },
+  { element: 'color (helper text)', token: '--nir-color-text-secondary', value: '#23313c', description: 'ink-600 — slightly muted below label.' },
+  { element: 'border-radius', token: '--nir-radius-interactive', value: '6px', description: 'Consistent with all form controls.' },
+  { element: 'padding-inline', token: '--nir-spacing-component-padding-md', value: '16px', description: '16px horizontal padding (md size).' },
+  { element: 'min-height', token: '--nir-spacing-touch-target', value: '44px', description: 'WCAG 2.5.8 minimum.' },
+  { element: 'font-size (label)', token: '--nir-font-size-sm', value: '14px', description: 'Smaller than body for visual hierarchy.' },
+  { element: 'font-size (input)', token: '--nir-font-size-base', value: '16px', description: 'Prevents iOS auto-zoom (must be ≥16px).' },
+  { element: 'background (disabled)', token: '--nir-color-interaction-disabled-bg', value: '#f0ece8', description: 'cream-200 — muted surface for disabled field.' },
+  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', value: '0.38', description: 'WCAG standard disabled visual.' },
+  { element: 'focus-ring', token: '--nir-color-interaction-focus-ring', value: '#083459', description: '2px solid outline, 2px offset.' },
 ]} />
 
 ## 3. Interactive Playground
 
-<Playground>
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
+<Playground column bg="container">
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '400px' }}>
     <Input client:load label="Full Name" placeholder="Enter your full name" fullWidth />
-    <Input client:load label="PAN Card Number" error="Must match format: ABCDE1234F" fullWidth />
-    <Input client:load label="Mobile Number" disabled value="+91 98765 43210" fullWidth />
+    <Input client:load label="PAN Card Number" defaultValue="ABCDE1234" error="Must match format: ABCDE1234F" fullWidth />
+    <Input client:load label="Mobile Number" disabled defaultValue="+91 98765 43210" fullWidth />
   </div>
 </Playground>
 

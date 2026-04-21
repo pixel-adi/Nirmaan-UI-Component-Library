@@ -1,29 +1,136 @@
 ---
-// Playgound.astro
-// Wrapper for rendering active React components inside documentation with a clean border
+// Playground.astro
+// Isolated Nirmaan design-system surface for rendering live React components.
+// Forces light-mode token resolution regardless of the Starlight site theme.
+export interface Props {
+  /** 'center' (default) | 'start' | 'space-between' — controls horizontal alignment of playground items */
+  align?: 'center' | 'start' | 'space-between';
+  /** If true, renders a tighter, column-stacked layout */
+  column?: boolean;
+  /** Optional background override: 'surface' (cream, default) | 'container' (white) */
+  bg?: 'surface' | 'container';
+}
+
+const { align = 'center', column = false, bg = 'surface' } = Astro.props;
 ---
-<div class="playground-wrapper">
-  <div class="playground-preview">
-    <slot />
+
+<div class="nir-playground">
+  <!-- Label strip -->
+  <div class="nir-playground__label">
+    <span class="nir-playground__dot nir-playground__dot--red"></span>
+    <span class="nir-playground__dot nir-playground__dot--amber"></span>
+    <span class="nir-playground__dot nir-playground__dot--green"></span>
+    <span class="nir-playground__label-text">Live Preview</span>
+  </div>
+
+  <!-- Isolated Nirmaan canvas -->
+  <!-- data-theme="light" forces all --nir-* semantic tokens to light-mode values inside this surface -->
+  <div
+    class={`nir-playground__canvas nir-playground__canvas--bg-${bg}`}
+    data-theme="light"
+  >
+    <div
+      class={[
+        'nir-playground__content',
+        column ? 'nir-playground__content--column' : '',
+        `nir-playground__content--${align}`,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      <slot />
+    </div>
   </div>
 </div>
 
 <style>
-  .playground-wrapper {
+  /* ─── Outer wrapper ─────────────────────────── */
+  .nir-playground {
     border: 1px solid var(--sl-color-hairline);
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 2rem 0;
     overflow: hidden;
-    background-image: radial-gradient(var(--sl-color-hairline) 1px, transparent 1px);
-    background-size: 20px 20px;
-    background-position: -10px -10px;
+    font-family: 'Noto Sans', system-ui, sans-serif;
   }
-  .playground-preview {
-    padding: 3rem;
+
+  /* ─── Label strip ──────────────────────────── */
+  .nir-playground__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--sl-color-bg-sidebar);
+    border-bottom: 1px solid var(--sl-color-hairline);
+  }
+
+  .nir-playground__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .nir-playground__dot--red    { background: #ff5f57; }
+  .nir-playground__dot--amber  { background: #ffbd2e; }
+  .nir-playground__dot--green  { background: #28c840; }
+
+  .nir-playground__label-text {
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
+    font-family: 'Noto Sans Mono', monospace;
+  }
+
+  /* ─── Canvas — isolated Nirmaan surface ────── */
+  /*
+   * All Nirmaan --nir-* surface tokens are resolved here.
+   * We override Starlight's theme variables locally so the
+   * components render exactly as they would in a real product.
+   */
+  .nir-playground__canvas {
+    /* Reset Starlight variables that would bleed into components */
+    --sl-color-bg: #fef6ee;
+    --sl-color-text: #010f2a;
+    color: var(--sl-color-text);
+    background: var(--sl-color-bg);
+    padding: 3rem 2rem;
+    position: relative;
+  }
+
+  /* Subtle dot grid pattern — same cream tone so it reads as texture not grid */
+  .nir-playground__canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #e6e2de 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* White container variant — for components that need a card surface */
+  .nir-playground__canvas--bg-container {
+    --sl-color-bg: #fcfcfc;
+  }
+
+  /* ─── Content layout ────────────────────────── */
+  .nir-playground__content {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: center;
-    justify-content: center;
+  }
+
+  .nir-playground__content--center         { justify-content: center; }
+  .nir-playground__content--start          { justify-content: flex-start; }
+  .nir-playground__content--space-between  { justify-content: space-between; }
+
+  .nir-playground__content--column {
+    flex-direction: column;
+    align-items: flex-start;
   }
 </style>

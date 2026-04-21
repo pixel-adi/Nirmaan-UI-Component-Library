@@ -25,25 +25,54 @@ Buttons are the primary mechanism for triggering actions. The Nirmaan Button map
 ## 2. Token Binding
 
 <TokenMapping tokens={[
-  { element: 'background', token: '--nir-colour-primary-base', description: 'Primary fill. Switches on hover/active states automatically.' },
-  { element: 'background (hover)', token: '--nir-colour-primary-hover', description: 'Darker navy on hover — no manual JS needed.' },
-  { element: 'background (active)', token: '--nir-colour-primary-active', description: 'Pressed state fill.' },
-  { element: 'color (text)', token: '--nir-colour-primary-on-base', description: 'Off-white label text on navy backgrounds.' },
-  { element: 'border-color', token: '--nir-colour-primary-stroke', description: 'Used for secondary/outlined variant border.' },
-  { element: 'border-radius', token: '--nir-spacing-corner-radius-base', description: '8px — the standard interactive radius.' },
-  { element: 'padding-inline', token: '--nir-spacing-horizontal-base', description: '16px horizontal padding (standard size).' },
-  { element: 'padding-block', token: '--nir-spacing-vertical-smaller', description: '8px vertical padding (standard size).' },
-  { element: 'min-height', token: '--nir-spacing-touch-target', description: '44px WCAG 2.5.8 minimum touch target.' },
-  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', description: '0.38 — consistent disabled visual across all components.' },
+  { element: 'background', token: '--nir-color-primary-default', value: '#083459', description: 'Primary fill — navy-600. Resolves via semantic → primitive chain.' },
+  { element: 'background:hover', token: '--nir-color-primary-hover', value: '#062a48', description: 'navy-700 on hover. Applied via :hover:not(:disabled).' },
+  { element: 'background:active', token: '--nir-color-primary-active', value: '#041e34', description: 'navy-800 on pressed state.' },
+  { element: 'background (secondary)', token: 'transparent', value: 'transparent', description: 'Outlined/secondary variant — no fill.' },
+  { element: 'background (hover, secondary)', token: '--nir-color-primary-subtle', value: '#e6edf3', description: 'navy-50 hover tint for secondary/tertiary.' },
+  { element: 'color', token: '--nir-color-primary-on-primary', value: '#fcfcfc', description: 'cream-100 text on all navy backgrounds.' },
+  { element: 'color (secondary)', token: '--nir-color-primary-default', value: '#083459', description: 'Navy text on transparent secondary bg.' },
+  { element: 'border-color', token: '--nir-color-primary-default', value: '#083459', description: 'Secondary/outlined variant border. 1px solid.' },
+  { element: 'border-color (danger)', token: '--nir-color-feedback-error-default', value: '#bc3737', description: 'red-500 fill for destructive actions.' },
+  { element: 'border-radius (sm)', token: '--nir-radius-interactive', value: '6px', description: 'radius-md — all sizes share same radius.' },
+  { element: 'padding-inline (sm)', token: '--nir-spacing-component-padding-sm', value: '12px', description: 'Compact horizontal padding.' },
+  { element: 'padding-inline (md)', token: '--nir-spacing-component-padding-md', value: '16px', description: 'Standard horizontal padding.' },
+  { element: 'padding-inline (lg)', token: '--nir-spacing-component-padding-lg', value: '24px', description: 'Large horizontal padding.' },
+  { element: 'min-height (sm)', token: 'none — 36px hard value', value: '36px', description: 'sm size: below WCAG touch target. Admin use only.' },
+  { element: 'min-height (md)', token: '--nir-spacing-touch-target', value: '44px', description: 'WCAG 2.5.8 minimum — the default size.' },
+  { element: 'min-height (lg)', token: 'none — 52px hard value', value: '52px', description: 'lg exceeds WCAG target comfortably.' },
+  { element: 'font-family', token: '--nir-font-family-body', value: "'Noto Sans'", description: 'Noto Sans for Latin script context.' },
+  { element: 'font-size (md)', token: '--nir-font-size-base', value: '16px', description: 'Body base size for standard button label.' },
+  { element: 'font-weight', token: '--nir-font-weight-medium', value: '500', description: 'Medium weight — readable without being bold.' },
+  { element: 'focus outline', token: '--nir-color-interaction-focus-ring', value: '#083459', description: '2px solid, 2px offset. ≥3:1 contrast against cream.' },
+  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', value: '0.38', description: 'WCAG standard disabled visual across all components.' },
+  { element: 'transition', token: '--nir-duration-fast + --nir-easing-standard', value: '100ms ease', description: 'Fast bg/border/shadow transitions.' },
 ]} />
 
 ## 3. Interactive Playground
 
 <Playground>
-  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-    <Button client:load>Primary Action</Button>
-    <Button client:load variant="secondary">Secondary Action</Button>
-    <Button client:load disabled>Disabled State</Button>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', alignItems: 'center' }}>
+    {/* Row 1: All variants at md size */}
+    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Button client:load variant="primary">Primary</Button>
+      <Button client:load variant="secondary">Secondary</Button>
+      <Button client:load variant="tertiary">Tertiary</Button>
+      <Button client:load variant="danger">Danger</Button>
+      <Button client:load variant="ghost">Ghost</Button>
+    </div>
+    {/* Row 2: Sizes */}
+    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Button client:load variant="primary" size="sm">Small</Button>
+      <Button client:load variant="primary" size="md">Medium</Button>
+      <Button client:load variant="primary" size="lg">Large</Button>
+    </div>
+    {/* Row 3: States */}
+    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Button client:load variant="primary" disabled>Disabled</Button>
+      <Button client:load variant="primary" loading>Loading…</Button>
+      <Button client:load variant="secondary" disabled>Disabled</Button>
+    </div>
   </div>
 </Playground>
 

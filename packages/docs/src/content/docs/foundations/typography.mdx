@@ -1,54 +1,298 @@
 ---
 title: Typography
-description: Janabhasha — Script-Aware Type Systems.
+description: Janabhasha — Script-aware type system. All sizing, weight, spacing and script multipliers driven by design tokens.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Playground from '../../../components/Playground.astro';
 
-Typography in Nirmaan UI guarantees semantic translations of multi-script configurations mapped perfectly to **Janabhasha (The People’s Language)**. Indian scripts possess entirely different vertical metrics than standard Latin (e.g., Devanagari's Shirorekha).
+Typography in Nirmaan is fully token-bound. Every size, weight, line-height, and script multiplier originates in Figma, is transformed by Style Dictionary, and resolves at runtime via CSS custom properties. No hardcoded font sizes exist in component CSS.
 
-To solve this, Nirmaan resolves semantic typographic tokens conditionally mapping explicitly to `:lang()` nodes natively, adjusting sizes and line-heights on the fly gracefully.
+## Type Scale — Live Specimen
+
+The table below shows every text style defined in the system. Hover a row to see the exact token name.
+
+<div class="nir-type-table">
+  <div class="nir-type-table__header">
+    <span>Style</span>
+    <span>Token</span>
+    <span>Size · Weight · Leading</span>
+    <span>Preview</span>
+  </div>
+
+  {[
+    {
+      name: 'Display',
+      token: '--nir-font-size-display',
+      meta: '48px · 700 · 1.15',
+      sample: 'Nirmaan (निर्माण)',
+      style: { fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)', fontWeight: 700, lineHeight: 1.15, fontFamily: "'Noto Serif', serif", overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+    },
+    {
+      name: 'H1',
+      token: '--nir-font-size-h1',
+      meta: '36px · 700 · 1.2',
+      sample: 'Design Token Architecture',
+      style: { fontSize: 'clamp(1.25rem, 2.8vw, 2rem)', fontWeight: 700, lineHeight: 1.2, fontFamily: "'Noto Serif', serif", overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+    },
+    {
+      name: 'H2',
+      token: '--nir-font-size-h2',
+      meta: '28px · 700 · 1.25',
+      sample: 'Semantic System Overview',
+      style: { fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', fontWeight: 700, lineHeight: 1.25, fontFamily: "'Noto Serif', serif", overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+    },
+    {
+      name: 'H3',
+      token: '--nir-font-size-h3',
+      meta: '22px · 600 · 1.35',
+      sample: 'Component Token Binding',
+      style: { fontSize: '1.375rem', fontWeight: 600, lineHeight: 1.35, fontFamily: "'Noto Serif', serif" },
+    },
+    {
+      name: 'H4',
+      token: '--nir-font-size-h4',
+      meta: '18px · 600 · 1.4',
+      sample: 'Accessibility Requirements',
+      style: { fontSize: '1.125rem', fontWeight: 600, lineHeight: 1.4, fontFamily: "'Noto Serif', serif" },
+    },
+    {
+      name: 'Body LG',
+      token: '--nir-font-size-lg',
+      meta: '18px · 400 · 1.75',
+      sample: 'Public infrastructure built for 1.4 billion citizens across 12 scripts.',
+      style: { fontSize: '1.125rem', fontWeight: 400, lineHeight: 1.75, fontFamily: "'Noto Serif', serif" },
+    },
+    {
+      name: 'Body MD (Base)',
+      token: '--nir-font-size-base',
+      meta: '16px · 400 · 1.75',
+      sample: 'One design decision propagates to every platform: web, iOS, and Android.',
+      style: { fontSize: '1rem', fontWeight: 400, lineHeight: 1.75, fontFamily: "'Noto Serif', serif" },
+    },
+    {
+      name: 'Body SM',
+      token: '--nir-font-size-sm',
+      meta: '14px · 400 · 1.6',
+      sample: 'Helper text, supporting context, and form-level annotations.',
+      style: { fontSize: '0.875rem', fontWeight: 400, lineHeight: 1.6, fontFamily: "'Noto Sans', sans-serif" },
+    },
+    {
+      name: 'Caption / XS',
+      token: '--nir-font-size-xs',
+      meta: '12px · 400 · 1.5',
+      sample: 'Timestamps, metadata labels, badge text.',
+      style: { fontSize: '0.75rem', fontWeight: 400, lineHeight: 1.5, fontFamily: "'Noto Sans', sans-serif" },
+    },
+    {
+      name: 'Label MD',
+      token: '--nir-font-weight-label',
+      meta: '14px · 500 · 1.4',
+      sample: 'Input label · Toggle label · Radio label',
+      style: { fontSize: '0.875rem', fontWeight: 500, lineHeight: 1.4, fontFamily: "'Noto Sans', sans-serif", letterSpacing: '0.01em' },
+    },
+    {
+      name: 'Label SM (Caps)',
+      token: '--nir-font-size-xs + uppercase',
+      meta: '11px · 700 · 1.3 · UPPERCASE',
+      sample: 'SECTION HEADER · TOKEN GROUP · TABLE COLUMN',
+      style: { fontSize: '0.6875rem', fontWeight: 700, lineHeight: 1.3, letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: "'Noto Sans', sans-serif" },
+    },
+    {
+      name: 'Mono',
+      token: '--sl-font-mono',
+      meta: '14px · 400 · 1.6',
+      sample: '--nir-color-primary-default: #083459',
+      style: { fontSize: '0.875rem', fontWeight: 400, lineHeight: 1.6, fontFamily: "'Noto Sans Mono', monospace" },
+    },
+  ].map(row => (
+    <div class="nir-type-table__row">
+      <div class="nir-type-table__cell nir-type-table__cell--name">
+        <strong>{row.name}</strong>
+      </div>
+      <div class="nir-type-table__cell nir-type-table__cell--token">
+        <code>{row.token}</code>
+      </div>
+      <div class="nir-type-table__cell nir-type-table__cell--meta">
+        <span>{row.meta}</span>
+      </div>
+      <div class="nir-type-table__cell nir-type-table__cell--preview">
+        <span style={row.style}>{row.sample}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Font Families
+
+| Role | Font | Fallback | Token |
+| :--- | :--- | :--- | :--- |
+| **Display / Body** | Noto Serif | Georgia, serif | `--nir-font-family-display` |
+| **UI / Labels** | Noto Sans | system-ui, sans-serif | `--nir-font-family-body` |
+| **Code / Mono** | Noto Sans Mono | Fira Code, monospace | `--nir-font-family-mono` |
+| **Devanagari** | Noto Serif Devanagari | Noto Sans Devanagari | via `:lang(hi)` |
+| **Tamil** | Noto Serif Tamil | Noto Sans Tamil | via `:lang(ta)` |
+| **Urdu / Nastaliq** | Noto Nastaliq Urdu | system | via `:lang(ur)` |
 
 ## Multi-Script Metric Adjustments
 
-Different scripts automatically trigger unique architectural multipliers ensuring visual stability.
+Different scripts require different typographic multipliers to prevent vertical collision and maintain visual rhythm.
 
-| Script Context | Multiplier Logic | Reasoning |
-| :--- | :--- | :--- |
-| **Latin (`:lang(en)`)** | `1.50` | Standard, tight leading default. |
-| **Devanagari (`:lang(hi)`)** | `1.70` | Expands leading explicitly to prevent matra (vowel) collisions. |
-| **Tamil (`:lang(ta)`)** | `1.65` / `+0.01em` tracking | Expands vertical spacing and slightly tracks out to accommodate dense round letterforms. |
-| **Urdu (`:lang(ur)`)** | `1.80` | RTL Nastaliq scales heavily to maintain legibility. |
+| Script | Lang attribute | Line-height multiplier | Tracking | Reasoning |
+| :--- | :--- | :--- | :--- | :--- |
+| **Latin** | `:lang(en)` | `1.50` | `0` | Standard, tight default |
+| **Devanagari** | `:lang(hi)` | `1.70` | `0` | Matra (vowel diacritic) clearance |
+| **Tamil** | `:lang(ta)` | `1.65` | `+0.01em` | Dense round letterforms |
+| **Bengali** | `:lang(bn)` | `1.68` | `0` | Matra + ascender clearance |
+| **Urdu** | `:lang(ur)` | `1.80` | `0` | Nastaliq vertical depth |
 
-## Interactive Output Validation
+## Live Script Preview
 
-Verify the mathematical expansion in real-time below. Notice how the Devanagari string inherently claims more vertical space to stay legible without manual CSS overrides.
-
-<Playground>
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%', alignItems: 'flex-start' }}>
-    <div style={{ border: '1px solid var(--sl-color-gray-5)', padding: '1rem', width: '100%' }}>
-      <label style={{ fontSize: '0.8rem', color: 'var(--sl-color-gray-3)', marginBottom: '0.5rem', display: 'block' }}>Latin (English)</label>
-      <h1 className="nir-type-h1" style={{ margin: 0 }}>National Database</h1>
+<Playground bg="container" column>
+  <div class="nir-script-demo">
+    <div class="nir-script-demo__item">
+      <span class="nir-script-demo__lang">English · Latin</span>
+      <p class="nir-script-demo__text" lang="en" style={{ fontFamily: "'Noto Serif', serif", fontSize: '1.25rem', lineHeight: 1.5, margin: 0 }}>National Citizen Registry — Nirmaan</p>
     </div>
-    
-    <div style={{ border: '1px solid var(--sl-color-gray-5)', padding: '1rem', width: '100%' }}>
-      <label style={{ fontSize: '0.8rem', color: 'var(--sl-color-gray-3)', marginBottom: '0.5rem', display: 'block' }}>Devanagari (Hindi)</label>
-      <h1 className="nir-type-h1" lang="hi" style={{ margin: 0 }}>राष्ट्रीय डेटाबेस</h1>
+    <div class="nir-script-demo__item">
+      <span class="nir-script-demo__lang">हिन्दी · Devanagari</span>
+      <p class="nir-script-demo__text" lang="hi" style={{ fontFamily: "'Noto Serif', serif", fontSize: '1.25rem', lineHeight: 1.7, margin: 0 }}>राष्ट्रीय नागरिक रजिस्ट्री — निर्माण</p>
+    </div>
+    <div class="nir-script-demo__item">
+      <span class="nir-script-demo__lang">தமிழ் · Tamil</span>
+      <p class="nir-script-demo__text" lang="ta" style={{ fontFamily: "'Noto Serif Tamil', serif", fontSize: '1.25rem', lineHeight: 1.65, margin: 0 }}>தேசிய குடிமக்கள் பதிவேடு</p>
+    </div>
+    <div class="nir-script-demo__item">
+      <span class="nir-script-demo__lang">اردو · Nastaliq</span>
+      <p class="nir-script-demo__text" lang="ur" dir="rtl" style={{ fontFamily: "'Noto Nastaliq Urdu', serif", fontSize: '1.4rem', lineHeight: 1.8, margin: 0, textAlign: 'right' }}>قومی شہری رجسٹری</p>
     </div>
   </div>
 </Playground>
 
-## Integration & Binding
+## Token Reference
 
-<Tabs>
-  <TabItem label="React Integration">
-    ```tsx
-    // The parent element defines the `lang` metric.
-    // Nirmaan tokens natively detect this and bind the correct scaling multipliers!
-    <div lang="ur">
-      <h1 className="nir-type-h2">ڈیش بورڈ</h1>
-    </div>
-    ```
-  </TabItem>
-</Tabs>
+Full type-scale token names to copy directly into your components:
+
+```css
+/* Size scale */
+--nir-font-size-display: 3rem;      /* 48px */
+--nir-font-size-h1:      2.25rem;   /* 36px */
+--nir-font-size-h2:      1.75rem;   /* 28px */
+--nir-font-size-h3:      1.375rem;  /* 22px */
+--nir-font-size-h4:      1.125rem;  /* 18px */
+--nir-font-size-lg:      1.125rem;  /* 18px — body large */
+--nir-font-size-base:    1rem;      /* 16px — body default */
+--nir-font-size-sm:      0.875rem;  /* 14px — helper / label */
+--nir-font-size-xs:      0.75rem;   /* 12px — caption */
+
+/* Weight scale */
+--nir-font-weight-display: 700;
+--nir-font-weight-heading:  700;
+--nir-font-weight-medium:   500;
+--nir-font-weight-label:    500;
+--nir-font-weight-body:     400;
+
+/* Line-height scale */
+--nir-font-line-height-tight:   1.2;
+--nir-font-line-height-snug:    1.35;
+--nir-font-line-height-normal:  1.5;
+--nir-font-line-height-relaxed: 1.75;
+--nir-font-line-height-loose:   1.9;
+```
+
+<style>{`
+  /* ── Type specimen table ── */
+  .nir-type-table {
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 2rem 0;
+    font-family: 'Noto Sans', sans-serif;
+  }
+
+  .nir-type-table__header {
+    display: grid;
+    grid-template-columns: 110px 200px 190px 1fr;
+    gap: 1rem;
+    padding: 0.55rem 1rem;
+    background: var(--sl-color-bg-sidebar);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
+    border-bottom: 1px solid var(--sl-color-hairline);
+  }
+
+  .nir-type-table__row {
+    display: grid;
+    grid-template-columns: 110px 200px 190px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--sl-color-hairline);
+    align-items: center;
+    transition: background 80ms ease;
+    overflow: hidden;
+  }
+  .nir-type-table__row:last-child { border-bottom: none; }
+  .nir-type-table__row:hover { background: var(--sl-color-bg-inline-code); }
+
+  .nir-type-table__cell--name strong {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--sl-color-text);
+  }
+
+  .nir-type-table__cell--token code {
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--sl-color-text-accent);
+    background: transparent;
+    border: none;
+    padding: 0;
+    word-break: break-all;
+  }
+
+  .nir-type-table__cell--meta span {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 0.75rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .nir-type-table__cell--preview {
+    overflow: hidden;
+  }
+
+  /* ── Script demo ── */
+  .nir-script-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .nir-script-demo__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .nir-script-demo__lang {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--nir-color-text-secondary, #23313c);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 900px) {
+    .nir-type-table__header,
+    .nir-type-table__row {
+      grid-template-columns: 1fr;
+    }
+    .nir-type-table__header { display: none; }
+    .nir-type-table__row { gap: 0.5rem; }
+  }
+`}</style>

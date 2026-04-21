@@ -25,26 +25,30 @@ Radio buttons enforce that only one option within a group can be selected at a t
 ## 2. Token Binding
 
 <TokenMapping tokens={[
-  { element: 'outer ring (selected)', token: '--nir-colour-primary-default', description: 'Navy border of selected radio button.' },
-  { element: 'inner dot (selected)', token: '--nir-colour-primary-default', description: 'Filled dot when selected.' },
-  { element: 'outer ring (unselected)', token: '--nir-colour-border-strong', description: 'Navy-200 border when not selected.' },
-  { element: 'outer ring (focus)', token: '--nir-colour-border-focus', description: '2px offset focus ring.' },
-  { element: 'background (disabled)', token: '--nir-colour-interaction-disabled-bg', description: 'Cream-300 when disabled.' },
-  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', description: '0.38 composite opacity.' },
-  { element: 'label color', token: '--nir-colour-text-default', description: 'Near-black body text.' },
-  { element: 'touch area', token: '--nir-spacing-touch-target', description: '44px minimum hit area via padding.' },
+  { element: 'outer ring (selected)', token: '--nir-color-primary-default', value: '#083459', description: 'navy-600 ring border when selected.' },
+  { element: 'inner dot (selected)', token: '--nir-color-primary-default', value: '#083459', description: 'Filled dot — same as ring for coherence.' },
+  { element: 'outer ring (unselected)', token: '--nir-color-border-default', value: '#e6e2de', description: 'cream-400 when not selected.' },
+  { element: 'outer ring (hover)', token: '--nir-color-border-strong', value: '#c8c4c0', description: 'cream-600 on hover.' },
+  { element: 'focus ring', token: '--nir-color-interaction-focus-ring', value: '#083459', description: '2px solid, 2px offset around the radio circle.' },
+  { element: 'background (disabled)', token: '--nir-color-interaction-disabled-bg', value: '#f0ece8', description: 'cream-200 when disabled.' },
+  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', value: '0.38', description: 'Composite opacity on the entire control.' },
+  { element: 'label color', token: '--nir-color-text-default', value: '#010f2a', description: 'navy-900 body text.' },
+  { element: 'label (disabled)', token: '--nir-opacity-disabled on label', value: '0.38', description: 'Same opacity on label as control.' },
+  { element: 'circle size (md)', token: 'none — 20x20px', value: '20×20px', description: 'Visual circle. Touch area = 44px via padding.' },
+  { element: 'inner dot size', token: 'none — 10x10px', value: '10×10px', description: '50% of outer ring diameter.' },
 ]} />
 
 ## 3. Interactive Playground
 
-<Playground>
+<Playground column>
   <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
-    <legend style={{ marginBottom: '0.75rem', fontWeight: 600, fontSize: '0.9rem' }}>Select verification method</legend>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <Radio client:load name="verify" label="Aadhaar OTP" defaultChecked />
-      <Radio client:load name="verify" label="Mobile OTP" />
-      <Radio client:load name="verify" label="Biometric (unavailable in your region)" disabled />
-    </div>
+    <legend style={{ marginBottom: '0.75rem', fontWeight: 600, fontSize: '0.875rem', color: 'var(--nir-color-text-default)' }}>
+      Select verification method
+    </legend>
+    <Radio client:load name="verify" label="Aadhaar OTP" defaultChecked />
+    <Radio client:load name="verify" label="Mobile OTP" />
+    <Radio client:load name="verify" label="Email OTP" />
+    <Radio client:load name="verify" label="Biometric (unavailable in your region)" disabled />
   </fieldset>
 </Playground>
 

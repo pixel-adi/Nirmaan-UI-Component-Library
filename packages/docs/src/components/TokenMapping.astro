@@ -1,77 +1,180 @@
 ---
 export interface Props {
-  tokens: { element: string; token: string; description?: string }[];
+  tokens: {
+    element: string;
+    token: string;
+    value?: string;        // computed hex/value for quick reference
+    description?: string;
+  }[];
 }
 
 const { tokens } = Astro.props;
 ---
 
-<div class="token-mapping">
-  <div class="mapping-header">
-    <div class="col">Target Element</div>
-    <div class="col">Semantic Token</div>
-    <div class="col desc">Implementation Detail</div>
+<div class="nir-token-map">
+  <div class="nir-token-map__header">
+    <div class="nir-token-map__col nir-token-map__col--element">Element / Property</div>
+    <div class="nir-token-map__col nir-token-map__col--token">Semantic Token (CSS Variable)</div>
+    <div class="nir-token-map__col nir-token-map__col--value">Resolved Value</div>
+    <div class="nir-token-map__col nir-token-map__col--desc">Design Intent</div>
   </div>
+
   {tokens.map((t) => (
-    <div class="mapping-row">
-      <div class="col target"><code>{t.element}</code></div>
-      <div class="col token">
-        <code>{t.token}</code>
+    <div class="nir-token-map__row">
+      <div class="nir-token-map__col nir-token-map__col--element">
+        <code class="nir-token-map__element">{t.element}</code>
       </div>
-      <div class="col desc">{t.description}</div>
+      <div class="nir-token-map__col nir-token-map__col--token">
+        <code class="nir-token-map__token">{t.token}</code>
+      </div>
+      <div class="nir-token-map__col nir-token-map__col--value">
+        {t.value ? (
+          <span class="nir-token-map__value-wrap">
+            {/^#[0-9a-fA-F]/.test(t.value) || t.value.startsWith('rgba') ? (
+              <span
+                class="nir-token-map__swatch"
+                style={`background:${t.value}`}
+                title={t.value}
+              />
+            ) : null}
+            <code class="nir-token-map__value">{t.value}</code>
+          </span>
+        ) : (
+          <span class="nir-token-map__value-empty">—</span>
+        )}
+      </div>
+      <div class="nir-token-map__col nir-token-map__col--desc">
+        {t.description}
+      </div>
     </div>
   ))}
 </div>
 
 <style>
-  .token-mapping {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--sl-color-hairline, var(--sl-color-gray-5));
+  .nir-token-map {
+    border: 1px solid var(--sl-color-hairline);
     border-radius: 8px;
-    background: var(--sl-color-black);
-    margin: 1.5rem 0;
     overflow: hidden;
+    margin: 1.5rem 0 2rem;
+    font-family: 'Noto Sans', system-ui, sans-serif;
+    font-size: 0.8rem;
   }
-  .mapping-header {
-    display: flex;
-    background: var(--sl-color-gray-6);
-    padding: 0.75rem 1.25rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--sl-color-white);
-    border-bottom: 1px solid var(--sl-color-hairline, var(--sl-color-gray-5));
-  }
-  .mapping-row {
-    display: flex;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid var(--sl-color-hairline, var(--sl-color-gray-5));
-    align-items: center;
+
+  /* ── Header ── */
+  .nir-token-map__header {
+    display: grid;
+    grid-template-columns: 1.4fr 2fr 1fr 2fr;
+    background: var(--sl-color-bg-sidebar);
+    border-bottom: 1px solid var(--sl-color-hairline);
+    padding: 0.6rem 1rem;
     gap: 1rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
   }
-  .mapping-row:last-child {
+
+  /* ── Row ── */
+  .nir-token-map__row {
+    display: grid;
+    grid-template-columns: 1.4fr 2fr 1fr 2fr;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--sl-color-hairline);
+    align-items: center;
+    transition: background 80ms ease;
+  }
+  .nir-token-map__row:last-child {
     border-bottom: none;
   }
-  .col {
-    flex: 1;
-    font-size: 0.85rem;
+  .nir-token-map__row:hover {
+    background: var(--sl-color-bg-nav);
   }
-  .col.desc {
-    flex: 1.5;
+
+  /* ── Columns ── */
+  .nir-token-map__col {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  /* ── Element chip ── */
+  .nir-token-map__element {
+    display: inline-block;
+    background: hsla(215, 60%, 50%, 0.1);
+    color: hsl(215, 70%, 38%);
+    border: 1px solid hsla(215, 60%, 50%, 0.25);
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  :global([data-theme='dark']) .nir-token-map__element {
+    background: hsla(215, 60%, 50%, 0.15);
+    color: hsl(215, 80%, 72%);
+    border-color: hsla(215, 60%, 50%, 0.3);
+  }
+
+  /* ── Token name ── */
+  .nir-token-map__token {
+    display: inline-block;
+    background: transparent;
+    color: var(--sl-color-text);
+    font-size: 0.77rem;
+    padding: 0;
+    border: none;
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+
+  /* ── Value row ── */
+  .nir-token-map__value-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nir-token-map__swatch {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    display: inline-block;
+  }
+
+  .nir-token-map__value {
+    font-size: 0.76rem;
+    color: var(--sl-color-text-accent, hsl(215, 70%, 38%));
+    background: transparent;
+    border: none;
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  .nir-token-map__value-empty {
+    color: var(--sl-color-gray-4);
+  }
+
+  /* ── Description ── */
+  .nir-token-map__col--desc {
+    font-size: 0.78rem;
     color: var(--sl-color-gray-2);
     line-height: 1.5;
   }
-  .target code {
-    background: var(--sl-color-gray-6);
-    color: var(--sl-color-accent);
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    font-weight: 600;
-  }
-  .token code {
-    background: transparent;
-    color: var(--sl-color-gray-1);
-    font-size: 0.8rem;
-    border: 1px solid var(--sl-color-gray-5);
+
+  /* ── Mobile: stack columns ── */
+  @media (max-width: 800px) {
+    .nir-token-map__header {
+      display: none;
+    }
+    .nir-token-map__row {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+    .nir-token-map__col--desc {
+      color: var(--sl-color-gray-3);
+    }
   }
 </style>

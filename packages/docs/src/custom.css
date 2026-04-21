@@ -1,0 +1,685 @@
+/* ═══════════════════════════════════════════════════════════
+   Nirmaan Design System — Docs Portal Custom Theme v2
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. Google Fonts ────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Mono:wght@400;500&display=swap');
+
+/* ── 2. Palette aliases (available in all contexts) ─────── */
+:root {
+  --sl-font:      'Noto Serif', Georgia, serif;
+  --sl-font-mono: 'Noto Sans Mono', 'Fira Code', monospace;
+
+  /* Nirmaan primitives — aliased for use in Starlight overrides */
+  --nir-p-navy-50:   #e6edf3;
+  --nir-p-navy-100:  #ced6de;
+  --nir-p-navy-200:  #8298aa;
+  --nir-p-navy-300:  #5b7a94;
+  --nir-p-navy-600:  #083459;
+  --nir-p-navy-700:  #062a48;
+  --nir-p-navy-800:  #041e34;
+  --nir-p-navy-900:  #010f2a;
+  --nir-p-cream-50:  #fef6ee;
+  --nir-p-cream-100: #fcfcfc;
+  --nir-p-cream-200: #f7f3ef;
+  --nir-p-cream-300: #f0ebe5;
+  --nir-p-cream-400: #e6e2de;
+  --nir-p-cream-500: #d4cfc9;
+  --nir-p-cream-600: #b8b2ab;
+  --nir-p-ink-600:   #23313c;
+
+  /* Link accent — warm saffron/terracotta (distinctly different from navy text) */
+  --nir-p-saffron:     #b35c1e;   /* light mode links */
+  --nir-p-saffron-hover:#8e4715;  /* light mode link hover */
+  --nir-p-amber:       #e8a74e;   /* dark mode links */
+  --nir-p-amber-hover:  #f5c97a;  /* dark mode link hover */
+}
+
+/* ══════════════════════════════════════════════════════════
+   LIGHT MODE
+   ══════════════════════════════════════════════════════════ */
+:root,
+[data-theme='light'] {
+  /* ── Backgrounds ── */
+  --sl-color-bg:             var(--nir-p-cream-50);   /* #fef6ee — warm cream page */
+  --sl-color-bg-nav:         var(--nir-p-cream-100);  /* #fcfcfc — near-white nav bar */
+  --sl-color-bg-sidebar:     var(--nir-p-cream-200);  /* #f7f3ef — soft cream sidebar */
+  --sl-color-bg-inline-code: var(--nir-p-cream-300);  /* #f0ebe5 — code chip bg */
+  --sl-color-bg-accent:      var(--nir-p-navy-600);
+
+  /* ── Borders ── */
+  --sl-color-hairline:       var(--nir-p-cream-400);  /* #e6e2de */
+  --sl-color-hairline-light: var(--nir-p-cream-300);
+
+  /* ── CRITICAL: white/black semantics ──────────────────────
+     Starlight uses --sl-color-black as the FILL for <Card>
+     components and certain UI chips. In light mode it must
+     resolve to a LIGHT surface (cream/white), NOT navy.
+     --sl-color-white is used for text-on-dark surfaces.     */
+  --sl-color-white: var(--nir-p-navy-900);   /* text on dark/accent surfaces: navy-900 */
+  --sl-color-black: var(--nir-p-cream-100);  /* Card fill / chip fill: near-white cream */
+
+  /* ── Text colours ── */
+  --sl-color-text:        var(--nir-p-navy-900);
+  --sl-color-text-accent: var(--nir-p-saffron);   /* links: warm saffron */
+  --sl-color-text-invert: var(--nir-p-cream-100);
+
+  /* ── Gray ramp → cream/navy for light surfaces ── */
+  --sl-color-gray-1: var(--nir-p-navy-900);   /* darkest text */
+  --sl-color-gray-2: var(--nir-p-ink-600);    /* secondary text */
+  --sl-color-gray-3: var(--nir-p-navy-300);   /* muted text / labels */
+  --sl-color-gray-4: var(--nir-p-navy-200);   /* placeholder / disabled */
+  --sl-color-gray-5: var(--nir-p-cream-500);  /* subtle borders */
+  --sl-color-gray-6: var(--nir-p-cream-300);  /* background hairlines */
+  --sl-color-gray-7: var(--nir-p-cream-200);  /* sidebar / panel bg */
+
+  /* ── Accent (used for active sidebar, badges) ── */
+  --sl-color-accent:      var(--nir-p-navy-600);
+  --sl-color-accent-low:  var(--nir-p-navy-50);
+  --sl-color-accent-high: var(--nir-p-navy-700);
+
+  /* ── Code blocks (pre) — intentionally dark ── */
+  --sl-color-bg-code: #1e2d3d;
+}
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE
+   ══════════════════════════════════════════════════════════ */
+[data-theme='dark'] {
+  /* ── Backgrounds — layered deep navy ── */
+  --sl-color-bg:             #0c1929;   /* deepest page bg */
+  --sl-color-bg-nav:         #0a1520;   /* nav bar: slightly darker than page */
+  --sl-color-bg-sidebar:     #081018;   /* sidebar: darkest layer */
+  --sl-color-bg-inline-code: #0f2035;
+  --sl-color-bg-accent:      var(--nir-p-navy-600);
+
+  /* ── Borders ── */
+  --sl-color-hairline:       rgba(130, 152, 170, 0.18);
+  --sl-color-hairline-light: rgba(130, 152, 170, 0.08);
+
+  /* ── Text ──
+     CRITICAL: Nav bg is #0a1520 (very dark) → nav title must be LIGHT.
+     white → cream-100 (#fcfcfc) so site title is visible. ✓ */
+  --sl-color-white: #fcfcfc;           /* nav title, sidebar headings: bright */
+  --sl-color-black: #0c1929;           /* NOT used for text in dark mode */
+
+  --sl-color-text:        #c8dae8;     /* body text: light blue-grey */
+  --sl-color-text-accent: var(--nir-p-amber);     /* links: warm amber #e8a74e */
+  --sl-color-text-invert: var(--nir-p-navy-900);
+
+  /* ── Gray ramp ── */
+  --sl-color-gray-1: #d6e8f5;
+  --sl-color-gray-2: #9ab8cc;
+  --sl-color-gray-3: #6890a8;
+  --sl-color-gray-4: #3a5a72;
+  --sl-color-gray-5: #1e3448;
+  --sl-color-gray-6: #142840;
+  --sl-color-gray-7: #0f2035;
+
+  /* ── Accent ── */
+  --sl-color-accent:      var(--nir-p-navy-100);   /* #ced6de — bright enough on dark */
+  --sl-color-accent-low:  rgba(8, 52, 89, 0.35);
+  --sl-color-accent-high: #fcfcfc;
+
+  /* ── Code block ── */
+  --sl-color-bg-code: #060f1a;
+}
+
+/* ══════════════════════════════════════════════════════════
+   TYPOGRAPHY — font family assignments
+   ══════════════════════════════════════════════════════════ */
+
+/* Body / markdown → Noto Serif */
+body,
+.sl-markdown-content,
+.sl-markdown-content p,
+.sl-markdown-content li,
+.sl-markdown-content blockquote,
+.sl-markdown-content dd {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+/* Headings → Noto Serif bold */
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--sl-color-text);
+}
+
+/* UI chrome (sidebar, nav, buttons, forms) → Noto Sans */
+header,
+nav,
+aside,
+footer,
+.site-title,
+[class*='sidebar'],
+[class*='nav-'],
+[class*='TableOfContents'],
+button,
+input,
+select,
+textarea,
+.sl-select,
+.group-label,
+.pagination-links,
+[class*='hero'] {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+}
+
+/* Monospace */
+code, pre, kbd, samp,
+.sl-markdown-content code {
+  font-family: 'Noto Sans Mono', 'Fira Code', monospace;
+  font-size: 0.85em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SITE TITLE — explicit high-contrast override
+   ══════════════════════════════════════════════════════════ */
+/* Light: nav bg is cream-100 (#fcfcfc) → title must be dark navy */
+[data-theme='light'] .site-title,
+[data-theme='light'] a.site-title,
+[data-theme='light'] [class*='site-title'] {
+  color: var(--nir-p-navy-900) !important;
+  text-decoration: none !important;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 700;
+}
+
+/* Dark: nav bg is very dark (#0a1520) → title must be near-white */
+[data-theme='dark'] .site-title,
+[data-theme='dark'] a.site-title,
+[data-theme='dark'] [class*='site-title'] {
+  color: #fcfcfc !important;
+  text-decoration: none !important;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 700;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SEARCH BAR — force light surface in light mode
+   ══════════════════════════════════════════════════════════ */
+
+/* Search trigger button (the bar in the nav) */
+[data-theme='light'] site-search button,
+[data-theme='light'] [class*='search'] button,
+[data-theme='light'] .header-search-button,
+[data-theme='light'] [class*='search-box'],
+[data-theme='light'] [class*='search-bar'] {
+  background-color: var(--nir-p-cream-200) !important;
+  border: 1px solid var(--nir-p-cream-400) !important;
+  color: var(--nir-p-navy-900) !important;
+}
+
+/* Pagefind search modal (opens on click ⌘K) */
+[data-theme='light'] #pagefind-search,
+[data-theme='light'] .pagefind-ui,
+[data-theme='light'] .pagefind-ui__search-input {
+  --pagefind-ui-background: var(--nir-p-cream-100);
+  --pagefind-ui-border: var(--nir-p-cream-400);
+  --pagefind-ui-text: var(--nir-p-navy-900);
+  background: var(--nir-p-cream-100);
+  color: var(--nir-p-navy-900);
+}
+
+/* The modal dialog overlay */
+[data-theme='light'] dialog::backdrop {
+  background: rgba(1, 15, 42, 0.4);
+}
+
+[data-theme='light'] dialog {
+  background: var(--nir-p-cream-100);
+  color: var(--nir-p-navy-900);
+  border: 1px solid var(--nir-p-cream-400);
+  border-radius: 12px;
+}
+
+/* Starlight's search bar element — force cream bg */
+[data-theme='light'] site-search,
+[data-theme='light'] site-search > *,
+[data-theme='light'] [class*='search'] > button {
+  background: var(--nir-p-cream-200) !important;
+  border-color: var(--nir-p-cream-400) !important;
+  color: var(--nir-p-navy-900) !important;
+}
+
+/* Keyboard shortcut badge (⌘K or Ctrl+K) inside search bar */
+[data-theme='light'] [class*='search'] kbd,
+[data-theme='light'] site-search kbd {
+  background: var(--nir-p-cream-300) !important;
+  color: var(--nir-p-navy-900) !important;
+  border-color: var(--nir-p-cream-500) !important;
+}
+
+/* Dark mode search — keep dark */
+[data-theme='dark'] site-search button,
+[data-theme='dark'] [class*='search'] > button {
+  background: rgba(8, 52, 89, 0.5) !important;
+  border-color: rgba(130, 152, 170, 0.2) !important;
+  color: #c8dae8 !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   STARLIGHT CARDS — ensure light fill in light mode
+   The Card component uses --sl-color-black as its background.
+   With our fix (black = cream-100) cards now become light.
+   But we also explicitly override border for clarity.
+   ══════════════════════════════════════════════════════════ */
+[data-theme='light'] .sl-markdown-content .card,
+[data-theme='light'] .card {
+  background: var(--nir-p-cream-100) !important;
+  border-color: var(--nir-p-cream-400) !important;
+  color: var(--nir-p-navy-900) !important;
+}
+
+[data-theme='light'] .card p,
+[data-theme='light'] .card .sl-markdown-content p {
+  color: var(--nir-p-ink-600);
+}
+
+[data-theme='light'] .card a {
+  color: var(--nir-p-saffron) !important;
+}
+
+[data-theme='dark'] .card a {
+  color: var(--nir-p-amber) !important;
+}
+
+[data-theme='light'] .card .card-title,
+[data-theme='light'] .card h2,
+[data-theme='light'] .card h3 {
+  color: var(--nir-p-navy-900) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   SIDEBAR — clear text contrast in both modes
+   ══════════════════════════════════════════════════════════ */
+
+/* Sidebar group section label */
+.group-label span,
+[class*='group-label'] {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-theme='light'] .group-label span {
+  color: var(--nir-p-navy-600);
+}
+
+[data-theme='dark'] .group-label span {
+  color: var(--nir-p-navy-200);
+}
+
+/* Sidebar links — default state */
+[data-theme='light'] .sidebar-content a,
+[data-theme='light'] nav a:not(.site-title):not([aria-current]) {
+  color: var(--nir-p-ink-600);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .sidebar-content a,
+[data-theme='dark'] nav a:not(.site-title):not([aria-current]) {
+  color: var(--nir-p-navy-100);
+  text-decoration: none;
+}
+
+/* Sidebar links — hover */
+[data-theme='light'] .sidebar-content a:hover {
+  color: var(--nir-p-navy-600);
+  background: var(--nir-p-cream-300);
+}
+
+[data-theme='dark'] .sidebar-content a:hover {
+  color: #fcfcfc;
+  background: rgba(130, 152, 170, 0.1);
+}
+
+/* Active page link */
+a[aria-current='page'],
+a[aria-current='page'] * {
+  color: #fcfcfc !important;
+  background: var(--nir-p-navy-600);
+  border-radius: 5px;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   LINKS — distinctive saffron/amber color treatment
+   ══════════════════════════════════════════════════════════ */
+
+/* Global: no underline by default */
+a {
+  text-decoration: none;
+}
+
+/* Sidebar / nav / chrome links: never underline, keep nav colour */
+nav a,
+aside a,
+header a,
+.sidebar-content a,
+[class*='sidebar'] a,
+[class*='nav'] a,
+[class*='TableOfContents'] a,
+.pagination-links a {
+  text-decoration: none !important;
+}
+
+/* ── Prose hyperlinks: saffron in light, amber in dark ── */
+.sl-markdown-content a {
+  transition: color 120ms ease, text-decoration-color 120ms ease;
+}
+
+/* Light mode prose links */
+[data-theme='light'] .sl-markdown-content a {
+  color: var(--nir-p-saffron);  /* #b35c1e — warm terracotta */
+  text-decoration: none;
+}
+[data-theme='light'] .sl-markdown-content p a,
+[data-theme='light'] .sl-markdown-content li a,
+[data-theme='light'] .sl-markdown-content blockquote a,
+[data-theme='light'] .sl-markdown-content td a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(179, 92, 30, 0.3);
+}
+[data-theme='light'] .sl-markdown-content a:hover {
+  color: var(--nir-p-saffron-hover);  /* #8e4715 — darker saffron */
+  text-decoration-color: var(--nir-p-saffron-hover);
+}
+
+/* Dark mode prose links */
+[data-theme='dark'] .sl-markdown-content a {
+  color: var(--nir-p-amber);  /* #e8a74e — warm amber */
+  text-decoration: none;
+}
+[data-theme='dark'] .sl-markdown-content p a,
+[data-theme='dark'] .sl-markdown-content li a,
+[data-theme='dark'] .sl-markdown-content blockquote a,
+[data-theme='dark'] .sl-markdown-content td a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(232, 167, 78, 0.3);
+}
+[data-theme='dark'] .sl-markdown-content a:hover {
+  color: var(--nir-p-amber-hover);  /* #f5c97a — bright amber */
+  text-decoration-color: var(--nir-p-amber-hover);
+}
+
+/* Heading anchors / table links: no underlines */
+.sl-markdown-content h1 a,
+.sl-markdown-content h2 a,
+.sl-markdown-content h3 a,
+.sl-markdown-content h4 a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* Card links: inherit card text colour */
+.card a {
+  color: inherit;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BODY CONTENT
+   ══════════════════════════════════════════════════════════ */
+.sl-markdown-content {
+  line-height: 1.8;
+  font-size: 1rem;
+  color: var(--sl-color-text);
+}
+
+.sl-markdown-content p {
+  margin-block: 0.9em;
+  color: var(--sl-color-text);
+}
+
+/* Italic lead paragraph */
+.sl-markdown-content > p:first-of-type {
+  font-size: 1.05rem;
+  font-style: italic;
+  opacity: 0.88;
+}
+
+/* H1 */
+.sl-markdown-content h1 {
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  border-bottom: 1.5px solid var(--sl-color-hairline);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+/* H2 */
+.sl-markdown-content h2 {
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  margin-top: 3rem;
+}
+
+/* H3 */
+.sl-markdown-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  color: var(--sl-color-gray-2);
+}
+
+/* ══════════════════════════════════════════════════════════
+   TABLES
+   ══════════════════════════════════════════════════════════ */
+.sl-markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-size: 0.84rem;
+  margin: 1.5rem 0;
+}
+
+.sl-markdown-content thead th {
+  background: var(--sl-color-bg-sidebar);
+  color: var(--sl-color-gray-2);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--sl-color-hairline);
+  text-align: left;
+}
+
+.sl-markdown-content tbody tr {
+  border-bottom: 1px solid var(--sl-color-hairline);
+  transition: background 80ms ease;
+}
+
+.sl-markdown-content tbody tr:hover {
+  background: var(--sl-color-bg-inline-code);
+}
+
+.sl-markdown-content tbody td {
+  padding: 0.6rem 1rem;
+  color: var(--sl-color-text);
+  vertical-align: top;
+}
+
+/* ══════════════════════════════════════════════════════════
+   INLINE CODE
+   ══════════════════════════════════════════════════════════ */
+:not(pre) > code {
+  background: var(--sl-color-bg-inline-code);
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.82em;
+}
+
+[data-theme='light'] :not(pre) > code {
+  color: var(--nir-p-navy-700);
+}
+
+[data-theme='dark'] :not(pre) > code {
+  background: rgba(8, 52, 89, 0.55);
+  color: var(--nir-p-navy-100);
+  border-color: rgba(130, 152, 170, 0.22);
+}
+
+/* ══════════════════════════════════════════════════════════
+   CODE BLOCKS
+   ══════════════════════════════════════════════════════════ */
+.sl-markdown-content pre {
+  background: #1e2d3d !important;
+  border: 1px solid rgba(130, 152, 170, 0.18);
+  border-radius: 8px;
+}
+
+[data-theme='dark'] .sl-markdown-content pre {
+  background: #060f1a !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BLOCKQUOTES
+   ══════════════════════════════════════════════════════════ */
+.sl-markdown-content blockquote {
+  border-left: 3px solid var(--sl-color-accent);
+  padding-left: 1.25rem;
+  font-style: italic;
+  margin-inline: 0;
+  color: var(--sl-color-gray-2);
+}
+
+/* ══════════════════════════════════════════════════════════
+   STARLIGHT ASIDES
+   ══════════════════════════════════════════════════════════ */
+.starlight-aside {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+.starlight-aside__title {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PLAYGROUND CANVAS (keep Noto Sans for component previews)
+   ══════════════════════════════════════════════════════════ */
+.nir-playground__canvas,
+.nir-playground__canvas * {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+}
+
+/* ══════════════════════════════════════════════════════════
+   DESIGN SYSTEM COMPONENTS (TokenMapping, ColorGrid)
+   ══════════════════════════════════════════════════════════ */
+.nir-token-map,
+.nir-color-grid {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RIGHT SIDEBAR — "On this page" Table of Contents
+   ══════════════════════════════════════════════════════════ */
+
+/* Right sidebar at ~70% of Starlight's default 220px ≈ 154px */
+.right-sidebar {
+  width: calc(var(--sl-sidebar-width, 220px) * 0.70) !important;
+  min-width: 140px;
+  max-width: 160px;
+}
+
+/* TOC panel inherits 100% of that column */
+.right-sidebar-panel,
+starlight-toc,
+starlight-toc nav {
+  width: 100%;
+}
+
+/* "On this page" h2 heading — scale down to fit narrow sidebar */
+.right-sidebar h2,
+.right-sidebar-panel h2,
+starlight-toc h2 {
+  font-size: 1.1rem !important;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+/* "ON THIS PAGE" heading — keep uppercase, fix contrast */
+[data-theme='light'] .right-sidebar-panel p,
+[data-theme='light'] starlight-toc .toc-wrapper > p {
+  color: var(--nir-p-navy-600);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+[data-theme='dark'] .right-sidebar-panel p,
+[data-theme='dark'] starlight-toc .toc-wrapper > p {
+  color: var(--nir-p-navy-200);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+/* ToC links — allow wrapping, sentence-case, correct contrast */
+starlight-toc a,
+.right-sidebar-panel a {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  text-transform: none;          /* cancel any uppercase inheritance */
+  letter-spacing: 0;
+  white-space: normal;           /* allow wrapping at narrow width */
+  word-break: break-word;
+  display: block;
+  text-decoration: none;
+  transition: color 80ms ease;
+}
+
+/* Light mode link colours */
+[data-theme='light'] starlight-toc a,
+[data-theme='light'] .right-sidebar-panel a {
+  color: var(--nir-p-ink-600);   /* #23313c — solid, readable on cream */
+}
+[data-theme='light'] starlight-toc a:hover,
+[data-theme='light'] .right-sidebar-panel a:hover {
+  color: var(--nir-p-navy-600);
+}
+[data-theme='light'] starlight-toc a[aria-current='true'],
+[data-theme='light'] .right-sidebar-panel a[aria-current='true'] {
+  color: var(--nir-p-navy-600);
+  font-weight: 600;
+}
+
+/* Dark mode link colours — must contrast against ~#0c1929 */
+[data-theme='dark'] starlight-toc a,
+[data-theme='dark'] .right-sidebar-panel a {
+  color: #9ab8cc;                /* blue-grey, clearly visible, not blinding */
+}
+[data-theme='dark'] starlight-toc a:hover,
+[data-theme='dark'] .right-sidebar-panel a:hover {
+  color: #fcfcfc;
+}
+[data-theme='dark'] starlight-toc a[aria-current='true'],
+[data-theme='dark'] .right-sidebar-panel a[aria-current='true'] {
+  color: #fcfcfc;
+  font-weight: 600;
+}
+

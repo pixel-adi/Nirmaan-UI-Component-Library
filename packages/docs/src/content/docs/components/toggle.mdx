@@ -25,24 +25,28 @@ Toggles initiate instant, reversible binary changes — no "Save" action require
 ## 2. Token Binding
 
 <TokenMapping tokens={[
-  { element: 'track (active)', token: '--nir-colour-primary-default', description: 'Navy-600 fill when toggle is ON.' },
-  { element: 'track (inactive)', token: '--nir-colour-interaction-disabled-bg', description: 'Cream-300 fill when toggle is OFF.' },
-  { element: 'thumb (knob)', token: '--nir-colour-surface-default', description: 'White circle that slides across the track.' },
-  { element: 'focus ring', token: '--nir-colour-border-focus', description: '2px navy-600 ring on keyboard focus.' },
-  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', description: '0.38 composite opacity.' },
-  { element: 'label color', token: '--nir-colour-text-default', description: 'Near-black body text.' },
-  { element: 'transition duration', token: '--nir-motion-duration-normal', description: '200ms slide animation.' },
-  { element: 'transition easing', token: '--nir-motion-easing-standard', description: 'cubic-bezier(0.4, 0, 0.2, 1) smooth slide.' },
+  { element: 'track (ON state)', token: '--nir-color-primary-default', value: '#083459', description: 'navy-600 fill when toggle is ON.' },
+  { element: 'track (OFF state)', token: '--nir-color-border-default', value: '#e6e2de', description: 'cream-400 fill when toggle is OFF.' },
+  { element: 'track (hover, OFF)', token: '--nir-color-border-strong', value: '#c8c4c0', description: 'cream-600 on hover over an OFF toggle.' },
+  { element: 'track (hover, ON)', token: '--nir-color-primary-hover', value: '#062a48', description: 'navy-700 on hover over an ON toggle.' },
+  { element: 'thumb (knob)', token: '--nir-color-primary-on-primary', value: '#fcfcfc', description: 'cream-100 — always white regardless of state.' },
+  { element: 'thumb shadow', token: 'none — 0 1px 3px rgba(0,0,0,0.2)', value: 'rgba(0,0,0,0.2)', description: 'Fixed shadow for 3D depth cue.' },
+  { element: 'focus ring', token: '--nir-color-interaction-focus-ring', value: '#083459', description: '2px solid, 2px offset on track element.' },
+  { element: 'label color', token: '--nir-color-text-default', value: '#010f2a', description: 'navy-900 label text.' },
+  { element: 'description color', token: '--nir-color-text-secondary', value: '#23313c', description: 'ink-600 — muted helper below label.' },
+  { element: 'opacity (disabled)', token: '--nir-opacity-disabled', value: '0.38', description: 'Applied to switch + label + description.' },
+  { element: 'track size (md)', token: 'none — 44x24px', value: '44×24px', description: 'Track dimensions. Touch area = wrapper min-height 44px.' },
+  { element: 'thumb size (md)', token: 'none — 20x20px', value: '20×20px', description: 'Knob dimensions. Translates 20px on check.' },
+  { element: 'transition', token: '--nir-duration-fast', value: '100ms ease', description: 'Track colour and thumb slide transition.' },
 ]} />
 
 ## 3. Interactive Playground
 
-<Playground>
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-    <Toggle client:load label="Enable GPS Monitoring" defaultChecked />
-    <Toggle client:load label="Receive push notifications" />
-    <Toggle client:load label="Biometric login (not available on this device)" disabled />
-  </div>
+<Playground column>
+  <Toggle client:load label="Enable GPS Monitoring" description="Required for field officer verification" defaultChecked />
+  <Toggle client:load label="Receive push notifications" />
+  <Toggle client:load label="Two-factor authentication" description="Adds an extra layer of account security" defaultChecked />
+  <Toggle client:load label="Biometric login" description="Not available on this device" disabled />
 </Playground>
 
 ## 4. Component Anatomy
