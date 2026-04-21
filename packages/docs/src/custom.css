@@ -10,6 +10,11 @@
   --sl-font:      'Noto Serif', Georgia, serif;
   --sl-font-mono: 'Noto Sans Mono', 'Fira Code', monospace;
 
+  /* ── Layout proportions: ~15% / ~70% / ~15% ── */
+  --sl-sidebar-width: 14.5rem;   /* both sidebars: ~232px ≈ 15% on wide screens */
+  --sl-content-width: 70vw;      /* fluid — scales with viewport, leaves room for ToC */
+  --sl-content-pad-x: 3rem;      /* 48px symmetrical content padding */
+
   /* Nirmaan primitives — aliased for use in Starlight overrides */
   --nir-p-navy-50:   #e6edf3;
   --nir-p-navy-100:  #ced6de;
@@ -40,42 +45,42 @@
    ══════════════════════════════════════════════════════════ */
 :root,
 [data-theme='light'] {
-  /* ── Backgrounds ── */
-  --sl-color-bg:             var(--nir-p-cream-50);   /* #fef6ee — warm cream page */
-  --sl-color-bg-nav:         var(--nir-p-cream-100);  /* #fcfcfc — near-white nav bar */
-  --sl-color-bg-sidebar:     var(--nir-p-cream-200);  /* #f7f3ef — soft cream sidebar */
-  --sl-color-bg-inline-code: var(--nir-p-cream-300);  /* #f0ebe5 — code chip bg */
+  /* ── Backgrounds (Android-docs-clean: white content, soft-cream chrome) ── */
+  --sl-color-bg:             #ffffff;                /* pure white content area */
+  --sl-color-bg-nav:         #ffffff;                /* clean white nav bar */
+  --sl-color-bg-sidebar:     #f8f6f3;               /* very light warm gray sidebar */
+  --sl-color-bg-inline-code: #f0ebe5;               /* cream-300 code chips */
   --sl-color-bg-accent:      var(--nir-p-navy-600);
 
   /* ── Borders ── */
-  --sl-color-hairline:       var(--nir-p-cream-400);  /* #e6e2de */
-  --sl-color-hairline-light: var(--nir-p-cream-300);
+  --sl-color-hairline:       #e8e4df;               /* subtle warm border */
+  --sl-color-hairline-light: #f0ece7;
 
   /* ── CRITICAL: white/black semantics ──────────────────────
      Starlight uses --sl-color-black as the FILL for <Card>
      components and certain UI chips. In light mode it must
-     resolve to a LIGHT surface (cream/white), NOT navy.
+     resolve to a LIGHT surface, NOT navy.
      --sl-color-white is used for text-on-dark surfaces.     */
-  --sl-color-white: var(--nir-p-navy-900);   /* text on dark/accent surfaces: navy-900 */
-  --sl-color-black: var(--nir-p-cream-100);  /* Card fill / chip fill: near-white cream */
+  --sl-color-white: var(--nir-p-navy-900);   /* text on dark/accent surfaces */
+  --sl-color-black: #ffffff;                 /* Card fill: pure white */
 
   /* ── Text colours ── */
-  --sl-color-text:        var(--nir-p-navy-900);
-  --sl-color-text-accent: var(--nir-p-saffron);   /* links: warm saffron */
-  --sl-color-text-invert: var(--nir-p-cream-100);
+  --sl-color-text:        #1a2b3c;                  /* slightly softer than pure black */
+  --sl-color-text-accent: var(--nir-p-saffron);     /* links: warm saffron */
+  --sl-color-text-invert: #ffffff;
 
-  /* ── Gray ramp → cream/navy for light surfaces ── */
-  --sl-color-gray-1: var(--nir-p-navy-900);   /* darkest text */
-  --sl-color-gray-2: var(--nir-p-ink-600);    /* secondary text */
-  --sl-color-gray-3: var(--nir-p-navy-300);   /* muted text / labels */
-  --sl-color-gray-4: var(--nir-p-navy-200);   /* placeholder / disabled */
-  --sl-color-gray-5: var(--nir-p-cream-500);  /* subtle borders */
-  --sl-color-gray-6: var(--nir-p-cream-300);  /* background hairlines */
-  --sl-color-gray-7: var(--nir-p-cream-200);  /* sidebar / panel bg */
+  /* ── Gray ramp → clean neutrals ── */
+  --sl-color-gray-1: #1a2b3c;    /* darkest text */
+  --sl-color-gray-2: #3d4f5f;    /* secondary text */
+  --sl-color-gray-3: #6b7b8a;    /* muted text / labels */
+  --sl-color-gray-4: #9ba8b4;    /* placeholder / disabled */
+  --sl-color-gray-5: #d4cfc9;    /* subtle borders */
+  --sl-color-gray-6: #ebe7e2;    /* background hairlines */
+  --sl-color-gray-7: #f5f2ef;    /* sidebar / panel bg */
 
   /* ── Accent (used for active sidebar, badges) ── */
   --sl-color-accent:      var(--nir-p-navy-600);
-  --sl-color-accent-low:  var(--nir-p-navy-50);
+  --sl-color-accent-low:  #e8f0f8;
   --sl-color-accent-high: var(--nir-p-navy-700);
 
   /* ── Code blocks (pre) — intentionally dark ── */
@@ -183,11 +188,11 @@ code, pre, kbd, samp,
 /* ══════════════════════════════════════════════════════════
    SITE TITLE — explicit high-contrast override
    ══════════════════════════════════════════════════════════ */
-/* Light: nav bg is cream-100 (#fcfcfc) → title must be dark navy */
+/* Light: nav bg is white → title must be dark navy */
 [data-theme='light'] .site-title,
 [data-theme='light'] a.site-title,
 [data-theme='light'] [class*='site-title'] {
-  color: var(--nir-p-navy-900) !important;
+  color: #1a2b3c !important;
   text-decoration: none !important;
   font-family: 'Noto Sans', system-ui, sans-serif;
   font-weight: 700;
@@ -213,49 +218,49 @@ code, pre, kbd, samp,
 [data-theme='light'] .header-search-button,
 [data-theme='light'] [class*='search-box'],
 [data-theme='light'] [class*='search-bar'] {
-  background-color: var(--nir-p-cream-200) !important;
-  border: 1px solid var(--nir-p-cream-400) !important;
-  color: var(--nir-p-navy-900) !important;
+  background-color: #f5f2ef !important;
+  border: 1px solid #e8e4df !important;
+  color: #1a2b3c !important;
 }
 
 /* Pagefind search modal (opens on click ⌘K) */
 [data-theme='light'] #pagefind-search,
 [data-theme='light'] .pagefind-ui,
 [data-theme='light'] .pagefind-ui__search-input {
-  --pagefind-ui-background: var(--nir-p-cream-100);
-  --pagefind-ui-border: var(--nir-p-cream-400);
-  --pagefind-ui-text: var(--nir-p-navy-900);
-  background: var(--nir-p-cream-100);
-  color: var(--nir-p-navy-900);
+  --pagefind-ui-background: #ffffff;
+  --pagefind-ui-border: #e8e4df;
+  --pagefind-ui-text: #1a2b3c;
+  background: #ffffff;
+  color: #1a2b3c;
 }
 
 /* The modal dialog overlay */
 [data-theme='light'] dialog::backdrop {
-  background: rgba(1, 15, 42, 0.4);
+  background: rgba(26, 43, 60, 0.35);
 }
 
 [data-theme='light'] dialog {
-  background: var(--nir-p-cream-100);
-  color: var(--nir-p-navy-900);
-  border: 1px solid var(--nir-p-cream-400);
+  background: #ffffff;
+  color: #1a2b3c;
+  border: 1px solid #e8e4df;
   border-radius: 12px;
 }
 
-/* Starlight's search bar element — force cream bg */
+/* Starlight's search bar element — force light bg */
 [data-theme='light'] site-search,
 [data-theme='light'] site-search > *,
 [data-theme='light'] [class*='search'] > button {
-  background: var(--nir-p-cream-200) !important;
-  border-color: var(--nir-p-cream-400) !important;
-  color: var(--nir-p-navy-900) !important;
+  background: #f5f2ef !important;
+  border-color: #e8e4df !important;
+  color: #1a2b3c !important;
 }
 
 /* Keyboard shortcut badge (⌘K or Ctrl+K) inside search bar */
 [data-theme='light'] [class*='search'] kbd,
 [data-theme='light'] site-search kbd {
-  background: var(--nir-p-cream-300) !important;
-  color: var(--nir-p-navy-900) !important;
-  border-color: var(--nir-p-cream-500) !important;
+  background: #ebe7e2 !important;
+  color: #1a2b3c !important;
+  border-color: #d4cfc9 !important;
 }
 
 /* Dark mode search — keep dark */
@@ -274,14 +279,15 @@ code, pre, kbd, samp,
    ══════════════════════════════════════════════════════════ */
 [data-theme='light'] .sl-markdown-content .card,
 [data-theme='light'] .card {
-  background: var(--nir-p-cream-100) !important;
-  border-color: var(--nir-p-cream-400) !important;
-  color: var(--nir-p-navy-900) !important;
+  background: #ffffff !important;
+  border: 1px solid #e8e4df !important;
+  color: #1a2b3c !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 [data-theme='light'] .card p,
 [data-theme='light'] .card .sl-markdown-content p {
-  color: var(--nir-p-ink-600);
+  color: #3d4f5f;
 }
 
 [data-theme='light'] .card a {
@@ -295,7 +301,7 @@ code, pre, kbd, samp,
 [data-theme='light'] .card .card-title,
 [data-theme='light'] .card h2,
 [data-theme='light'] .card h3 {
-  color: var(--nir-p-navy-900) !important;
+  color: #1a2b3c !important;
 }
 
 
@@ -314,7 +320,7 @@ code, pre, kbd, samp,
 }
 
 [data-theme='light'] .group-label span {
-  color: var(--nir-p-navy-600);
+  color: #3d4f5f;
 }
 
 [data-theme='dark'] .group-label span {
@@ -324,20 +330,22 @@ code, pre, kbd, samp,
 /* Sidebar links — default state */
 [data-theme='light'] .sidebar-content a,
 [data-theme='light'] nav a:not(.site-title):not([aria-current]) {
-  color: var(--nir-p-ink-600);
+  color: #3d4f5f;
   text-decoration: none;
+  font-size: 0.875rem;
 }
 
 [data-theme='dark'] .sidebar-content a,
 [data-theme='dark'] nav a:not(.site-title):not([aria-current]) {
   color: var(--nir-p-navy-100);
   text-decoration: none;
+  font-size: 0.875rem;
 }
 
 /* Sidebar links — hover */
 [data-theme='light'] .sidebar-content a:hover {
   color: var(--nir-p-navy-600);
-  background: var(--nir-p-cream-300);
+  background: #ebe7e2;
 }
 
 [data-theme='dark'] .sidebar-content a:hover {
@@ -378,7 +386,7 @@ header a,
 
 /* ── Prose hyperlinks: saffron in light, amber in dark ── */
 .sl-markdown-content a {
-  transition: color 120ms ease, text-decoration-color 120ms ease;
+  transition: color 120ms ease;
 }
 
 /* Light mode prose links */
@@ -386,18 +394,8 @@ header a,
   color: var(--nir-p-saffron);  /* #b35c1e — warm terracotta */
   text-decoration: none;
 }
-[data-theme='light'] .sl-markdown-content p a,
-[data-theme='light'] .sl-markdown-content li a,
-[data-theme='light'] .sl-markdown-content blockquote a,
-[data-theme='light'] .sl-markdown-content td a {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  text-decoration-color: rgba(179, 92, 30, 0.3);
-}
 [data-theme='light'] .sl-markdown-content a:hover {
-  color: var(--nir-p-saffron-hover);  /* #8e4715 — darker saffron */
-  text-decoration-color: var(--nir-p-saffron-hover);
+  color: var(--nir-p-saffron-hover);  /* #8e4715 */
 }
 
 /* Dark mode prose links */
@@ -405,18 +403,8 @@ header a,
   color: var(--nir-p-amber);  /* #e8a74e — warm amber */
   text-decoration: none;
 }
-[data-theme='dark'] .sl-markdown-content p a,
-[data-theme='dark'] .sl-markdown-content li a,
-[data-theme='dark'] .sl-markdown-content blockquote a,
-[data-theme='dark'] .sl-markdown-content td a {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  text-decoration-color: rgba(232, 167, 78, 0.3);
-}
 [data-theme='dark'] .sl-markdown-content a:hover {
-  color: var(--nir-p-amber-hover);  /* #f5c97a — bright amber */
-  text-decoration-color: var(--nir-p-amber-hover);
+  color: var(--nir-p-amber-hover);  /* #f5c97a */
 }
 
 /* Heading anchors / table links: no underlines */
@@ -436,6 +424,8 @@ header a,
 /* ══════════════════════════════════════════════════════════
    BODY CONTENT
    ══════════════════════════════════════════════════════════ */
+
+
 .sl-markdown-content {
   line-height: 1.8;
   font-size: 1rem;
@@ -539,13 +529,57 @@ header a,
    CODE BLOCKS
    ══════════════════════════════════════════════════════════ */
 .sl-markdown-content pre {
-  background: #1e2d3d !important;
-  border: 1px solid rgba(130, 152, 170, 0.18);
   border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
 }
 
+.sl-markdown-content pre code {
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* Light mode code blocks — light bg, GitHub-style for maximum readability */
+[data-theme='light'] .sl-markdown-content pre {
+  background: #f6f4f1 !important;
+  border: 1px solid #e0dbd5;
+  color: #24292f;
+}
+[data-theme='light'] .sl-markdown-content pre code {
+  color: #24292f;
+}
+/* Syntax token colors for light mode — vivid, high-contrast */
+[data-theme='light'] .sl-markdown-content pre .token.comment,
+[data-theme='light'] .sl-markdown-content pre .token.prolog {
+  color: #6e7781;
+}
+[data-theme='light'] .sl-markdown-content pre .token.keyword,
+[data-theme='light'] .sl-markdown-content pre .token.tag {
+  color: #cf222e;
+}
+[data-theme='light'] .sl-markdown-content pre .token.string,
+[data-theme='light'] .sl-markdown-content pre .token.attr-value {
+  color: #0a3069;
+}
+[data-theme='light'] .sl-markdown-content pre .token.function {
+  color: #8250df;
+}
+[data-theme='light'] .sl-markdown-content pre .token.attr-name {
+  color: #953800;
+}
+[data-theme='light'] .sl-markdown-content pre .token.number,
+[data-theme='light'] .sl-markdown-content pre .token.boolean {
+  color: #0550ae;
+}
+
+/* Dark mode code blocks */
 [data-theme='dark'] .sl-markdown-content pre {
   background: #060f1a !important;
+  border: 1px solid rgba(130, 152, 170, 0.15);
+  color: #c8dae8;
+}
+[data-theme='dark'] .sl-markdown-content pre code {
+  color: #c8dae8;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -560,20 +594,94 @@ header a,
 }
 
 /* ══════════════════════════════════════════════════════════
-   STARLIGHT ASIDES
+   STARLIGHT ASIDES (Note, Important, Tip, Caution, Danger)
+   Premium card treatment with refined colours
    ══════════════════════════════════════════════════════════ */
 .starlight-aside {
   font-family: 'Noto Serif', Georgia, serif;
   font-size: 0.9rem;
   line-height: 1.75;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  border-inline-start-width: 4px;
 }
 
 .starlight-aside__title {
   font-family: 'Noto Sans', system-ui, sans-serif;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  gap: 0.5rem;
+}
+
+.starlight-aside__icon {
+  font-size: 1.1em;
+}
+
+/* ── NOTE (blue) ── */
+[data-theme='light'] .starlight-aside--note {
+  background: #eef4fb;
+  border-color: #4a90d9;
+  color: #1a2b3c;
+}
+[data-theme='light'] .starlight-aside--note .starlight-aside__title {
+  color: #2b6cb0;
+}
+[data-theme='dark'] .starlight-aside--note {
+  background: rgba(42, 90, 150, 0.12);
+  border-color: #5a9fd4;
+}
+
+/* ── TIP (purple) ── */
+[data-theme='light'] .starlight-aside--tip {
+  background: #f3eefb;
+  border-color: #7c5cbf;
+  color: #1a2b3c;
+}
+[data-theme='light'] .starlight-aside--tip .starlight-aside__title {
+  color: #6b46a3;
+}
+[data-theme='dark'] .starlight-aside--tip {
+  background: rgba(100, 70, 160, 0.12);
+  border-color: #9b7fd4;
+}
+
+/* ── CAUTION / IMPORTANT (amber/orange) ── */
+[data-theme='light'] .starlight-aside--caution {
+  background: #fdf5e6;
+  border-color: #d4940a;
+  color: #1a2b3c;
+}
+[data-theme='light'] .starlight-aside--caution .starlight-aside__title {
+  color: #b37d08;
+}
+[data-theme='dark'] .starlight-aside--caution {
+  background: rgba(180, 130, 20, 0.1);
+  border-color: #e8a74e;
+}
+
+/* ── DANGER (red) ── */
+[data-theme='light'] .starlight-aside--danger {
+  background: #fdf0f0;
+  border-color: #d9534f;
+  color: #1a2b3c;
+}
+[data-theme='light'] .starlight-aside--danger .starlight-aside__title {
+  color: #c0392b;
+}
+[data-theme='dark'] .starlight-aside--danger {
+  background: rgba(180, 50, 50, 0.1);
+  border-color: #e8605a;
+}
+
+/* Aside content text — proper contrast in both modes */
+[data-theme='light'] .starlight-aside .starlight-aside__content {
+  color: #3d4f5f;
+}
+[data-theme='dark'] .starlight-aside .starlight-aside__content {
+  color: #c8dae8;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -594,37 +702,69 @@ header a,
 
 /* ══════════════════════════════════════════════════════════
    RIGHT SIDEBAR — "On this page" Table of Contents
+   Sized to match left sidebar (~15% of viewport = 14.5rem)
    ══════════════════════════════════════════════════════════ */
 
-/* Right sidebar at ~70% of Starlight's default 220px ≈ 154px */
+/* Right sidebar container — use full column width */
 .right-sidebar {
-  width: calc(var(--sl-sidebar-width, 220px) * 0.70) !important;
-  min-width: 140px;
-  max-width: 160px;
+  width: var(--sl-sidebar-width) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
-/* TOC panel inherits 100% of that column */
+/* All internal panels fill 100% — kill all internal padding/margin waste */
 .right-sidebar-panel,
+.right-sidebar-panel > *,
 starlight-toc,
-starlight-toc nav {
-  width: 100%;
+starlight-toc nav,
+starlight-toc .toc-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  padding-left: 0.75rem !important;
+  padding-right: 0.25rem !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
-/* "On this page" h2 heading — scale down to fit narrow sidebar */
+/* ToC list items — fill full width */
+starlight-toc ul,
+starlight-toc li,
+.right-sidebar-panel ul,
+.right-sidebar-panel li {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* "On this page" heading */
 .right-sidebar h2,
 .right-sidebar-panel h2,
 starlight-toc h2 {
-  font-size: 1.1rem !important;
+  font-size: 0.8rem !important;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   white-space: normal;
-  word-break: break-word;
   line-height: 1.3;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-/* "ON THIS PAGE" heading — keep uppercase, fix contrast */
+/* Heading contrast per theme */
+[data-theme='light'] .right-sidebar h2,
+[data-theme='light'] .right-sidebar-panel h2 {
+  color: #3d4f5f;
+}
+[data-theme='dark'] .right-sidebar h2,
+[data-theme='dark'] .right-sidebar-panel h2 {
+  color: var(--nir-p-navy-200);
+}
+
+/* "ON THIS PAGE" small heading text */
 [data-theme='light'] .right-sidebar-panel p,
 [data-theme='light'] starlight-toc .toc-wrapper > p {
-  color: var(--nir-p-navy-600);
+  color: #3d4f5f;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.07em;
@@ -638,17 +778,19 @@ starlight-toc h2 {
   letter-spacing: 0.07em;
 }
 
-/* ToC links — allow wrapping, sentence-case, correct contrast */
+/* ToC links — natural wrapping, no cropping */
 starlight-toc a,
 .right-sidebar-panel a {
   font-family: 'Noto Sans', system-ui, sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.55;
-  text-transform: none;          /* cancel any uppercase inheritance */
+  font-size: 0.8rem;
+  line-height: 1.6;
+  text-transform: none;
   letter-spacing: 0;
-  white-space: normal;           /* allow wrapping at narrow width */
-  word-break: break-word;
+  white-space: normal;           /* allow wrapping — fixes cropping */
+  overflow-wrap: break-word;
+  word-break: normal;
   display: block;
+  padding: 0.15rem 0;
   text-decoration: none;
   transition: color 80ms ease;
 }
@@ -656,11 +798,11 @@ starlight-toc a,
 /* Light mode link colours */
 [data-theme='light'] starlight-toc a,
 [data-theme='light'] .right-sidebar-panel a {
-  color: var(--nir-p-ink-600);   /* #23313c — solid, readable on cream */
+  color: #6b7b8a;
 }
 [data-theme='light'] starlight-toc a:hover,
 [data-theme='light'] .right-sidebar-panel a:hover {
-  color: var(--nir-p-navy-600);
+  color: #1a2b3c;
 }
 [data-theme='light'] starlight-toc a[aria-current='true'],
 [data-theme='light'] .right-sidebar-panel a[aria-current='true'] {
@@ -668,10 +810,10 @@ starlight-toc a,
   font-weight: 600;
 }
 
-/* Dark mode link colours — must contrast against ~#0c1929 */
+/* Dark mode link colours */
 [data-theme='dark'] starlight-toc a,
 [data-theme='dark'] .right-sidebar-panel a {
-  color: #9ab8cc;                /* blue-grey, clearly visible, not blinding */
+  color: #9ab8cc;
 }
 [data-theme='dark'] starlight-toc a:hover,
 [data-theme='dark'] .right-sidebar-panel a:hover {
