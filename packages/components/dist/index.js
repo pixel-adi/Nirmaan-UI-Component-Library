@@ -13,13 +13,15 @@ function Autocomplete({
   placeholder = "Start typing...",
   helperText,
   error,
+  variant = "outlined",
   size = "md",
   fullWidth = false,
   disabled = false,
   minChars = 1,
   maxResults = 10,
   name,
-  noResultsText = "No matches found"
+  noResultsText = "No matches found",
+  clearable = true
 }) {
   const id = react.useId();
   const listboxId = id + "-listbox";
@@ -28,55 +30,70 @@ function Autocomplete({
   const errorId = error ? id + "-error" : void 0;
   const describedBy = [errorId, helperId].filter(Boolean).join(" ") || void 0;
   const selectedOption = options.find((o) => o.value === value);
-  const [inputValue, setInputValue] = react.useState(selectedOption?.label || "");
+  const [inputValue, setInputValue] = react.useState(selectedOption?.label ?? "");
   const [open, setOpen] = react.useState(false);
   const [activeIndex, setActiveIndex] = react.useState(-1);
   const inputRef = react.useRef(null);
   const listboxRef = react.useRef(null);
+  const wrapperRef = react.useRef(null);
   react.useEffect(() => {
-    if (value) {
-      const opt = options.find((o) => o.value === value);
-      if (opt) setInputValue(opt.label);
-    } else {
-      setInputValue("");
-    }
+    const opt = options.find((o) => o.value === value);
+    setInputValue(opt?.label ?? "");
   }, [value, options]);
   const filteredOptions = react.useMemo(() => {
     if (inputValue.length < minChars) return [];
-    const query = inputValue.toLowerCase();
-    return options.filter((o) => o.label.toLowerCase().includes(query)).slice(0, maxResults);
+    const q = inputValue.toLowerCase();
+    return options.filter((o) => o.label.toLowerCase().includes(q)).slice(0, maxResults);
   }, [inputValue, options, minChars, maxResults]);
   const close = react.useCallback(() => {
     setOpen(false);
     setActiveIndex(-1);
   }, []);
-  const handleSelect = (option) => {
-    setInputValue(option.label);
-    onChange?.(option.value);
-    close();
-    inputRef.current?.focus();
-  };
+  const handleSelect = react.useCallback(
+    (option) => {
+      setInputValue(option.label);
+      onChange?.(option.value);
+      close();
+      requestAnimationFrame(() => inputRef.current?.focus());
+    },
+    [onChange, close]
+  );
+  const handleClear = react.useCallback(
+    (e) => {
+      e.preventDefault();
+      setInputValue("");
+      onChange?.(null);
+      close();
+      requestAnimationFrame(() => inputRef.current?.focus());
+    },
+    [onChange, close]
+  );
   const handleInputChange = (e) => {
     const next = e.target.value;
     setInputValue(next);
-    setOpen(next.length >= minChars);
+    if (next.length >= minChars) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
     setActiveIndex(-1);
-    if (next === "" && value) {
+    if (next === "" && value !== void 0) {
       onChange?.(null);
     }
   };
   const handleKeyDown = (e) => {
     if (disabled) return;
+    const total = filteredOptions.length;
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
         if (!open && inputValue.length >= minChars) setOpen(true);
-        setActiveIndex((i) => (i + 1) % Math.max(filteredOptions.length, 1));
+        setActiveIndex((i) => total === 0 ? -1 : (i + 1) % total);
         break;
       case "ArrowUp":
         e.preventDefault();
         if (!open) return;
-        setActiveIndex((i) => i <= 0 ? filteredOptions.length - 1 : i - 1);
+        setActiveIndex((i) => total === 0 ? -1 : i <= 0 ? total - 1 : i - 1);
         break;
       case "Enter":
         if (open && activeIndex >= 0 && filteredOptions[activeIndex]) {
@@ -95,22 +112,31 @@ function Autocomplete({
   };
   react.useEffect(() => {
     if (!open) return;
-    const handleClick = (e) => {
-      const target = e.target;
-      if (inputRef.current && !inputRef.current.contains(target) && listboxRef.current && !listboxRef.current.contains(target)) {
+    const onMouseDown = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
         close();
       }
     };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("mousedown", onMouseDown);
+    return () => document.removeEventListener("mousedown", onMouseDown);
   }, [open, close]);
+  react.useEffect(() => {
+    if (!listboxRef.current || activeIndex < 0) return;
+    const item = listboxRef.current.querySelector(
+      `[id="${id}-option-${activeIndex}"]`
+    );
+    item?.scrollIntoView({ block: "nearest" });
+  }, [activeIndex, id]);
   const showNoResults = open && inputValue.length >= minChars && filteredOptions.length === 0;
+  const showClear = clearable && inputValue.length > 0 && !disabled;
   return /* @__PURE__ */ jsxRuntime.jsxs(
     "div",
     {
+      ref: wrapperRef,
       className: [
         "nir-e-autocomplete",
-        "nir-e-autocomplete--" + size,
+        `nir-e-autocomplete--${variant}`,
+        `nir-e-autocomplete--${size}`,
         fullWidth ? "nir-e-autocomplete--full" : "",
         error ? "nir-e-autocomplete--error" : "",
         disabled ? "nir-e-autocomplete--disabled" : "",
@@ -119,6 +145,10 @@ function Autocomplete({
       children: [
         /* @__PURE__ */ jsxRuntime.jsx("label", { className: "nir-e-autocomplete__label", id: labelId, htmlFor: id, children: label }),
         /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-e-autocomplete__wrapper", children: [
+          /* @__PURE__ */ jsxRuntime.jsxs("svg", { className: "nir-e-autocomplete__icon", viewBox: "0 0 20 20", "aria-hidden": "true", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("circle", { cx: "8.5", cy: "8.5", r: "5.5", stroke: "currentColor", strokeWidth: "1.8", fill: "none" }),
+            /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M13 13l3.5 3.5", stroke: "currentColor", strokeWidth: "1.8", strokeLinecap: "round" })
+          ] }),
           /* @__PURE__ */ jsxRuntime.jsx(
             "input",
             {
@@ -130,22 +160,41 @@ function Autocomplete({
               "aria-autocomplete": "list",
               "aria-expanded": open,
               "aria-controls": listboxId,
-              "aria-activedescendant": activeIndex >= 0 ? id + "-option-" + activeIndex : void 0,
+              "aria-activedescendant": activeIndex >= 0 ? `${id}-option-${activeIndex}` : void 0,
               "aria-describedby": describedBy,
               "aria-invalid": error ? true : void 0,
+              "aria-label": label,
               value: inputValue,
               onChange: handleInputChange,
               onKeyDown: handleKeyDown,
-              onFocus: () => inputValue.length >= minChars && setOpen(true),
+              onFocus: () => {
+                if (inputValue.length >= minChars && filteredOptions.length > 0) setOpen(true);
+              },
               placeholder,
               disabled,
-              autoComplete: "off"
+              autoComplete: "off",
+              spellCheck: false
             }
           ),
-          /* @__PURE__ */ jsxRuntime.jsxs("svg", { className: "nir-e-autocomplete__icon", viewBox: "0 0 20 20", "aria-hidden": "true", children: [
-            /* @__PURE__ */ jsxRuntime.jsx("circle", { cx: "9", cy: "9", r: "6", stroke: "currentColor", strokeWidth: "2", fill: "none" }),
-            /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M14 14l4 4", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round" })
-          ] }),
+          showClear && /* @__PURE__ */ jsxRuntime.jsx(
+            "button",
+            {
+              type: "button",
+              className: "nir-e-autocomplete__clear",
+              "aria-label": "Clear",
+              tabIndex: -1,
+              onMouseDown: handleClear,
+              children: /* @__PURE__ */ jsxRuntime.jsx("svg", { viewBox: "0 0 16 16", "aria-hidden": "true", children: /* @__PURE__ */ jsxRuntime.jsx(
+                "path",
+                {
+                  d: "M4 4l8 8M12 4l-8 8",
+                  stroke: "currentColor",
+                  strokeWidth: "1.8",
+                  strokeLinecap: "round"
+                }
+              ) })
+            }
+          ),
           open && (filteredOptions.length > 0 || showNoResults) && /* @__PURE__ */ jsxRuntime.jsxs(
             "ul",
             {
@@ -155,13 +204,18 @@ function Autocomplete({
               role: "listbox",
               "aria-labelledby": labelId,
               children: [
+                /* @__PURE__ */ jsxRuntime.jsxs("li", { role: "presentation", className: "nir-e-autocomplete__sr-count", "aria-live": "polite", children: [
+                  filteredOptions.length,
+                  " result",
+                  filteredOptions.length !== 1 ? "s" : ""
+                ] }),
                 filteredOptions.map((option, index) => {
                   const isActive = index === activeIndex;
                   const isSelected = option.value === value;
                   return /* @__PURE__ */ jsxRuntime.jsxs(
                     "li",
                     {
-                      id: id + "-option-" + index,
+                      id: `${id}-option-${index}`,
                       className: [
                         "nir-e-autocomplete__option",
                         isSelected ? "nir-e-autocomplete__option--selected" : "",
@@ -169,7 +223,10 @@ function Autocomplete({
                       ].filter(Boolean).join(" "),
                       role: "option",
                       "aria-selected": isSelected,
-                      onClick: () => handleSelect(option),
+                      onMouseDown: (e) => {
+                        e.preventDefault();
+                        handleSelect(option);
+                      },
                       onMouseEnter: () => setActiveIndex(index),
                       children: [
                         /* @__PURE__ */ jsxRuntime.jsx(HighlightedLabel, { text: option.label, query: inputValue }),
@@ -179,11 +236,19 @@ function Autocomplete({
                     option.value
                   );
                 }),
-                showNoResults && /* @__PURE__ */ jsxRuntime.jsx("li", { className: "nir-e-autocomplete__no-results", role: "option", "aria-selected": "false", children: noResultsText })
+                showNoResults && /* @__PURE__ */ jsxRuntime.jsx(
+                  "li",
+                  {
+                    className: "nir-e-autocomplete__no-results",
+                    role: "option",
+                    "aria-selected": false,
+                    children: noResultsText
+                  }
+                )
               ]
             }
           ),
-          name && /* @__PURE__ */ jsxRuntime.jsx("input", { type: "hidden", name, value: value || "" })
+          name && /* @__PURE__ */ jsxRuntime.jsx("input", { type: "hidden", name, value: value ?? "" })
         ] }),
         error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-autocomplete__error", id: errorId, role: "alert", children: error }),
         helperText && !error && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-e-autocomplete__helper", id: helperId, children: helperText })
@@ -764,15 +829,290 @@ function useNirman() {
   }
   return ctx;
 }
+function LoginTemplate({
+  logo,
+  title = "Welcome back",
+  subtitle = "Please enter your details to sign in.",
+  onLogin,
+  onForgotPassword,
+  onSignUp,
+  isLoading = false
+}) {
+  const [email, setEmail] = react.useState("");
+  const [password, setPassword] = react.useState("");
+  const [remember, setRemember] = react.useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin?.(email, password, remember);
+  };
+  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "nir-t-login", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-login__container", children: [
+    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-login__header", children: [
+      logo && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "nir-t-login__logo", children: logo }),
+      /* @__PURE__ */ jsxRuntime.jsx("h1", { className: "nir-t-login__title", children: title }),
+      /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-t-login__subtitle", children: subtitle })
+    ] }),
+    /* @__PURE__ */ jsxRuntime.jsxs("form", { className: "nir-t-login__form", onSubmit: handleSubmit, children: [
+      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-login__fields", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(
+          Input,
+          {
+            type: "email",
+            label: "Email",
+            placeholder: "Enter your email",
+            value: email,
+            onChange: (e) => setEmail(e.target.value),
+            required: true,
+            fullWidth: true
+          }
+        ),
+        /* @__PURE__ */ jsxRuntime.jsx(
+          Input,
+          {
+            type: "password",
+            label: "Password",
+            placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+            value: password,
+            onChange: (e) => setPassword(e.target.value),
+            required: true,
+            fullWidth: true
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-login__actions", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(
+          Checkbox,
+          {
+            label: "Remember me",
+            checked: remember,
+            onChange: (e) => setRemember(e.target.checked)
+          }
+        ),
+        onForgotPassword && /* @__PURE__ */ jsxRuntime.jsx(
+          "button",
+          {
+            type: "button",
+            className: "nir-t-login__link",
+            onClick: onForgotPassword,
+            children: "Forgot password?"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        Button,
+        {
+          type: "submit",
+          variant: "primary",
+          size: "lg",
+          fullWidth: true,
+          disabled: isLoading || !email || !password,
+          children: isLoading ? "Signing in..." : "Sign in"
+        }
+      )
+    ] }),
+    onSignUp && /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-login__footer", children: [
+      /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-t-login__footer-text", children: "Don't have an account?" }),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        "button",
+        {
+          type: "button",
+          className: "nir-t-login__link nir-t-login__link--strong",
+          onClick: onSignUp,
+          children: "Sign up"
+        }
+      )
+    ] })
+  ] }) });
+}
+var DEFAULT_TIMEZONES = [
+  { label: "Pacific Time (US & Canada)", value: "PST" },
+  { label: "Mountain Time (US & Canada)", value: "MST" },
+  { label: "Central Time (US & Canada)", value: "CST" },
+  { label: "Eastern Time (US & Canada)", value: "EST" },
+  { label: "Greenwich Mean Time (London)", value: "GMT" },
+  { label: "Central European Time (Paris)", value: "CET" },
+  { label: "Indian Standard Time (New Delhi)", value: "IST" },
+  { label: "Japan Standard Time (Tokyo)", value: "JST" },
+  { label: "Australian Eastern Time (Sydney)", value: "AET" }
+];
+function SettingsTemplate({
+  title = "Account Settings",
+  subtitle = "Manage your profile and preferences.",
+  initialData = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    timezone: "",
+    marketingEmails: false,
+    securityAlerts: true
+  },
+  timezoneOptions = DEFAULT_TIMEZONES,
+  onSave,
+  isSaving = false
+}) {
+  const [formData, setFormData] = react.useState(initialData);
+  const handleInputChange = (field) => (e) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+  };
+  const handleToggleChange = (field) => (e) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.checked }));
+  };
+  const handleTimezoneChange = (value) => {
+    setFormData((prev) => ({ ...prev, timezone: value || "" }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave?.(formData);
+  };
+  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "nir-t-settings", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__container", children: [
+    /* @__PURE__ */ jsxRuntime.jsx("aside", { className: "nir-t-settings__sidebar", children: /* @__PURE__ */ jsxRuntime.jsxs("nav", { className: "nir-t-settings__nav", children: [
+      /* @__PURE__ */ jsxRuntime.jsx("a", { href: "#profile", className: "nir-t-settings__nav-item nir-t-settings__nav-item--active", children: "Profile" }),
+      /* @__PURE__ */ jsxRuntime.jsx("a", { href: "#notifications", className: "nir-t-settings__nav-item", children: "Notifications" }),
+      /* @__PURE__ */ jsxRuntime.jsx("a", { href: "#security", className: "nir-t-settings__nav-item", children: "Security" }),
+      /* @__PURE__ */ jsxRuntime.jsx("a", { href: "#billing", className: "nir-t-settings__nav-item", children: "Billing" })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntime.jsxs("main", { className: "nir-t-settings__main", children: [
+      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__header", children: [
+        /* @__PURE__ */ jsxRuntime.jsx("h1", { className: "nir-t-settings__title", children: title }),
+        /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-t-settings__subtitle", children: subtitle })
+      ] }),
+      /* @__PURE__ */ jsxRuntime.jsxs("form", { className: "nir-t-settings__form", onSubmit: handleSubmit, children: [
+        /* @__PURE__ */ jsxRuntime.jsxs("section", { className: "nir-t-settings__section", children: [
+          /* @__PURE__ */ jsxRuntime.jsx("h2", { className: "nir-t-settings__section-title", children: "Personal Information" }),
+          /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__grid", children: [
+            /* @__PURE__ */ jsxRuntime.jsx(
+              Input,
+              {
+                label: "First Name",
+                placeholder: "e.g. Jane",
+                value: formData.firstName,
+                onChange: handleInputChange("firstName"),
+                fullWidth: true
+              }
+            ),
+            /* @__PURE__ */ jsxRuntime.jsx(
+              Input,
+              {
+                label: "Last Name",
+                placeholder: "e.g. Doe",
+                value: formData.lastName,
+                onChange: handleInputChange("lastName"),
+                fullWidth: true
+              }
+            ),
+            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "nir-t-settings__grid-full", children: /* @__PURE__ */ jsxRuntime.jsx(
+              Input,
+              {
+                type: "email",
+                label: "Email Address",
+                placeholder: "jane@example.com",
+                value: formData.email,
+                onChange: handleInputChange("email"),
+                fullWidth: true
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "nir-t-settings__grid-full", children: /* @__PURE__ */ jsxRuntime.jsx(
+              Autocomplete,
+              {
+                label: "Timezone",
+                placeholder: "Search timezones...",
+                options: timezoneOptions,
+                value: formData.timezone,
+                onChange: handleTimezoneChange,
+                fullWidth: true
+              }
+            ) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntime.jsx("hr", { className: "nir-t-settings__divider" }),
+        /* @__PURE__ */ jsxRuntime.jsxs("section", { className: "nir-t-settings__section", children: [
+          /* @__PURE__ */ jsxRuntime.jsx("h2", { className: "nir-t-settings__section-title", children: "Email Notifications" }),
+          /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__toggles", children: [
+            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__toggle-row", children: [
+              /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__toggle-info", children: [
+                /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-t-settings__toggle-label", children: "Marketing emails" }),
+                /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-t-settings__toggle-desc", children: "Receive updates about new features and promotions." })
+              ] }),
+              /* @__PURE__ */ jsxRuntime.jsx(
+                Toggle,
+                {
+                  label: "Toggle Marketing Emails",
+                  checked: formData.marketingEmails,
+                  onChange: handleToggleChange("marketingEmails")
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__toggle-row", children: [
+              /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__toggle-info", children: [
+                /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-t-settings__toggle-label", children: "Security alerts" }),
+                /* @__PURE__ */ jsxRuntime.jsx("span", { className: "nir-t-settings__toggle-desc", children: "Get notified when there's suspicious activity on your account." })
+              ] }),
+              /* @__PURE__ */ jsxRuntime.jsx(
+                Toggle,
+                {
+                  label: "Toggle Security Alerts",
+                  checked: formData.securityAlerts,
+                  onChange: handleToggleChange("securityAlerts")
+                }
+              )
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntime.jsx("hr", { className: "nir-t-settings__divider" }),
+        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-settings__actions", children: [
+          /* @__PURE__ */ jsxRuntime.jsx(Button, { type: "button", variant: "secondary", children: "Cancel" }),
+          /* @__PURE__ */ jsxRuntime.jsx(Button, { type: "submit", variant: "primary", disabled: isSaving, children: isSaving ? "Saving changes..." : "Save changes" })
+        ] })
+      ] })
+    ] })
+  ] }) });
+}
+function EmptyStateTemplate({
+  graphic,
+  title,
+  description,
+  actionText,
+  onAction,
+  secondaryActionText,
+  onSecondaryAction
+}) {
+  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "nir-t-empty-state", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-empty-state__content", children: [
+    graphic && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "nir-t-empty-state__graphic", children: graphic }),
+    /* @__PURE__ */ jsxRuntime.jsx("h2", { className: "nir-t-empty-state__title", children: title }),
+    description && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "nir-t-empty-state__description", children: description }),
+    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "nir-t-empty-state__actions", children: [
+      actionText && /* @__PURE__ */ jsxRuntime.jsx(
+        Button,
+        {
+          variant: "primary",
+          size: "lg",
+          onClick: onAction,
+          children: actionText
+        }
+      ),
+      secondaryActionText && /* @__PURE__ */ jsxRuntime.jsx(
+        Button,
+        {
+          variant: "secondary",
+          size: "lg",
+          onClick: onSecondaryAction,
+          children: secondaryActionText
+        }
+      )
+    ] })
+  ] }) });
+}
 
 exports.Autocomplete = Autocomplete;
 exports.Button = Button;
 exports.Checkbox = Checkbox;
 exports.Dropdown = Dropdown;
+exports.EmptyStateTemplate = EmptyStateTemplate;
 exports.Input = Input;
+exports.LoginTemplate = LoginTemplate;
 exports.NirmanProvider = NirmanProvider;
 exports.Radio = Radio;
 exports.RadioGroup = RadioGroup;
+exports.SettingsTemplate = SettingsTemplate;
 exports.Toggle = Toggle;
 exports.useNirman = useNirman;
 //# sourceMappingURL=index.js.map

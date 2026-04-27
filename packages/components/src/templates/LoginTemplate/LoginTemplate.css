@@ -1,0 +1,131 @@
+/* ═══════════════════════════════════════════════════════
+   nir-t-login — Login Page Template
+   ═══════════════════════════════════════════════════════ */
+
+.nir-t-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: transparent;
+  font-family: var(--nir-font-family-body, 'Noto Sans', system-ui, sans-serif);
+  padding: var(--nir-spacing-6, 24px) 0;
+  box-sizing: border-box;
+}
+
+.nir-t-login__container {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--nir-color-surface-default, #fff);
+  border-radius: var(--nir-radius-2xl, 16px);
+  border: 1px solid var(--nir-color-border-default, #e2e5e8);
+  box-shadow: 0 12px 32px -4px rgba(1, 15, 42, 0.08), 0 4px 12px -2px rgba(1, 15, 42, 0.04);
+  padding: var(--nir-spacing-10, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-8, 32px);
+  box-sizing: border-box;
+}
+
+/* ── Header ──────────────────────────────────────── */
+.nir-t-login__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--nir-spacing-2, 8px);
+}
+
+.nir-t-login__logo {
+  margin-bottom: var(--nir-spacing-2, 8px);
+  height: var(--nir-spacing-12, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nir-t-login__title {
+  margin: 0;
+  font-family: var(--nir-font-family-body, 'Noto Sans', system-ui, sans-serif) !important;
+  font-size: var(--nir-font-size-2xl, 24px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-default, #010f2a);
+  line-height: var(--nir-font-line-height-tight, 1.25);
+  letter-spacing: var(--nir-font-letter-spacing-tight, -0.01em);
+}
+
+.nir-t-login__subtitle {
+  margin: 0;
+  font-size: var(--nir-font-size-sm, 14px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  line-height: var(--nir-font-line-height-normal, 1.5);
+}
+
+/* ── Form ────────────────────────────────────────── */
+.nir-t-login__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-6, 24px);
+}
+
+.nir-t-login__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+/* ── Actions (Remember Me + Forgot Pass) ─────────── */
+.nir-t-login__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: calc(var(--nir-spacing-2, 8px) * -1);
+}
+
+.nir-t-login__link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-medium, 500);
+  color: var(--nir-color-primary-default, #083459);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--nir-duration-150, 150ms) var(--nir-easing-standard, ease);
+}
+
+.nir-t-login__link:hover {
+  opacity: var(--nir-opacity-80, 0.8);
+}
+
+.nir-t-login__link--strong {
+  font-weight: var(--nir-font-weight-semibold, 600);
+}
+
+/* ── Footer ──────────────────────────────────────── */
+.nir-t-login__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nir-spacing-1-5, 6px);
+  margin-top: calc(var(--nir-spacing-2, 8px) * -1);
+  padding-top: var(--nir-spacing-6, 24px);
+  border-top: 1px solid var(--nir-color-border-default, #e2e5e8);
+}
+
+.nir-t-login__footer-text {
+  font-size: var(--nir-font-size-sm, 14px);
+  color: var(--nir-color-text-secondary, #5f7382);
+}
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .nir-t-login__container {
+    box-shadow: none;
+    border: none;
+    padding: var(--nir-spacing-6, 24px) var(--nir-spacing-4, 16px);
+    border-radius: 0;
+  }
+}

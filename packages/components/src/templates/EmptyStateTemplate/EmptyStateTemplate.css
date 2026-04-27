@@ -1,0 +1,66 @@
+/* ═══════════════════════════════════════════════════════
+   nir-t-empty-state — Empty State / Onboarding Template
+   ═══════════════════════════════════════════════════════ */
+
+.nir-t-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  font-family: var(--nir-font-family-body, 'Noto Sans', system-ui, sans-serif);
+  padding: var(--nir-spacing-12, 48px) var(--nir-spacing-6, 24px);
+  box-sizing: border-box;
+}
+
+.nir-t-empty-state__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 420px;
+}
+
+.nir-t-empty-state__graphic {
+  margin-bottom: var(--nir-spacing-6, 24px);
+  color: var(--nir-color-icon-secondary, #5f7382);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  line-height: 1;
+}
+
+.nir-t-empty-state__graphic svg {
+  width: var(--nir-spacing-16, 64px);
+  height: var(--nir-spacing-16, 64px);
+}
+
+.nir-t-empty-state__title {
+  margin: 0;
+  margin-bottom: var(--nir-spacing-3, 12px);
+  font-family: var(--nir-font-family-body, 'Noto Sans', system-ui, sans-serif) !important;
+  font-size: var(--nir-font-size-2xl, 24px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-default, #010f2a);
+  line-height: var(--nir-font-line-height-tight, 1.25);
+  letter-spacing: var(--nir-font-letter-spacing-tight, -0.01em);
+}
+
+.nir-t-empty-state__description {
+  margin: 0;
+  margin-bottom: var(--nir-spacing-8, 32px);
+  font-size: var(--nir-font-size-base, 16px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  line-height: var(--nir-font-line-height-relaxed, 1.6);
+}
+
+.nir-t-empty-state__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nir-spacing-3, 12px);
+}

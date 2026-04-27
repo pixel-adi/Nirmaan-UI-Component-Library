@@ -1,0 +1,65 @@
+---
+title: Settings Template
+description: A standard user profile and preferences layout built using Nirmaan UI components.
+---
+
+import { SettingsTemplate } from '@nirman/components';
+import Playground from '../../../components/Playground.astro';
+
+The `SettingsTemplate` is a comprehensive **Layer 3 (Template)** layout that provides a robust starting point for dashboard settings, user profiles, or preference menus. It seamlessly integrates `Input`, `Autocomplete`, `Toggle`, and `Button` components inside a responsive grid structure.
+
+## 1. Interactive Preview
+
+This interactive demo shows how the template organizes multiple form elements and semantic categories into a cohesive view. 
+
+<Playground>
+  <div style={{ transform: 'scale(0.85)', transformOrigin: 'top center', width: '100%', height: '600px', overflowY: 'auto' }}>
+    <SettingsTemplate client:load />
+  </div>
+</Playground>
+
+## 2. Developer Implementation
+
+The settings template is designed to accept an initial data object and handle complex multi-field form updates automatically.
+
+```tsx
+import { SettingsTemplate } from '@nirman/components';
+
+function UserSettingsPage() {
+  const initialProfileData = {
+    firstName: 'Arjun',
+    lastName: 'Kumar',
+    email: 'arjun@nirmaan.org',
+    timezone: 'IST',
+    marketingEmails: false,
+    securityAlerts: true,
+  };
+
+  const handleSaveSettings = (updatedData) => {
+    console.log('Saving profile...', updatedData);
+  };
+
+  return (
+    <SettingsTemplate 
+      title="User Preferences"
+      subtitle="Manage your personal details and system notifications."
+      initialData={initialProfileData}
+      onSave={handleSaveSettings}
+      isSaving={false}
+    />
+  );
+}
+
+export default UserSettingsPage;
+```
+
+## 3. Customization & Props
+
+| Prop | Type | Description |
+| ---- | ---- | ----------- |
+| `title` | `string` | The main `h1` heading. Defaults to "Account Settings". |
+| `subtitle` | `string` | Descriptive text below the title. |
+| `initialData` | `object` | An object containing fields `firstName`, `lastName`, `email`, `timezone`, `marketingEmails`, `securityAlerts`. |
+| `timezoneOptions` | `AutocompleteOption[]` | Custom array of timezone options for the dropdown. |
+| `isSaving` | `boolean` | When `true`, disables the primary button and switches it to a loading state. |
+| `onSave` | `(data) => void` | Triggers when the user successfully submits the form, returning the updated state object. |

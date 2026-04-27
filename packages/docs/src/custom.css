@@ -466,6 +466,29 @@ header a,
   color: var(--sl-color-gray-2);
 }
 
+/* ── Bento card h3 override — beats sl-markdown-content h3 ── */
+.nir-bento-section .nir-bento-card h3.nir-bento-title {
+  font-size: 1.9rem !important;
+  font-weight: 700 !important;
+  margin-top: 0 !important;
+  color: #112338 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  font-family: 'Noto Serif', Georgia, serif !important;
+}
+[data-theme='dark'] .nir-bento-section .nir-bento-card h3.nir-bento-title {
+  color: #ffffff !important;
+}
+/* Dark card — must override the light-mode color above */
+.nir-bento-section .nir-bento-card.nir-bento-card--dark h3.nir-bento-title {
+  color: #ffffff !important;
+}
+.nir-bento-section .nir-bento-card h3.nir-bento-title.nir-bento-title--small {
+  font-size: 1.4rem !important;
+  font-family: 'Noto Sans', system-ui, sans-serif !important;
+  letter-spacing: -0.01em !important;
+}
+
 /* ══════════════════════════════════════════════════════════
    TABLES
    ══════════════════════════════════════════════════════════ */
@@ -929,6 +952,7 @@ starlight-toc a,
   gap: 1.5rem;
   max-width: 68rem;
   margin: 0 auto;
+  align-items: stretch;
 }
 
 @media (max-width: 64rem) {
@@ -971,11 +995,16 @@ starlight-toc a,
 .nir-bento-card--large {
   grid-column: span 2;
 }
+/* Force the Typography card (sibling of --large) to match Architecture card height */
+.nir-bento-card--large + .nir-bento-card {
+  align-self: stretch;
+}
 @media (max-width: 64rem) {
   .nir-bento-card--large { grid-column: span 2; }
 }
 @media (max-width: 40rem) {
   .nir-bento-card--large { grid-column: span 1; }
+  .nir-bento-card--large + .nir-bento-card { align-self: auto; }
 }
 
 .nir-bento-card__content {
@@ -999,14 +1028,17 @@ starlight-toc a,
 
 .nir-bento-title {
   font-family: 'Noto Serif', Georgia, serif;
-  font-size: 1.6rem;
+  font-size: 1.9rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 .nir-bento-title--small {
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 [data-theme='light'] .nir-bento-title { color: #112338; }
 [data-theme='dark'] .nir-bento-title { color: #ffffff; }
@@ -1035,26 +1067,38 @@ starlight-toc a,
 /* Platform Grid */
 .nir-platform-grid {
   margin-top: auto;
+  padding-top: 1.5rem;
   display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
 }
 .nir-platform-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  width: 68px;
+  flex-shrink: 0;
 }
 .nir-platform-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+.nir-platform-icon svg,
+.nir-platform-icon .nir-svg-icon {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0;
 }
 [data-theme='light'] .nir-platform-icon { background: #eef4f9; color: #1a365d; }
-[data-theme='dark'] .nir-platform-icon { background: rgba(255,255,255,0.05); color: #82b1ff; }
+[data-theme='dark'] .nir-platform-icon { background: rgba(255,255,255,0.06); color: #82b1ff; }
 
 .nir-platform-label {
   font-family: 'Noto Sans', system-ui, sans-serif;

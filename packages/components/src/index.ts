@@ -15,3 +15,11 @@ export type { ToggleProps } from './elements/Toggle';
 import './elements/Typography/typography.css';
 export { NirmanProvider, useNirman } from './providers/NirmanProvider';
 export type { NirmanProviderProps, NirmanContextType, NirTheme, NirDensity, NirBrand } from './providers/NirmanProvider';
+
+// Templates (Layer 3)
+export { LoginTemplate } from './templates/LoginTemplate/LoginTemplate';
+export type { LoginTemplateProps } from './templates/LoginTemplate/LoginTemplate';
+export { SettingsTemplate } from './templates/SettingsTemplate/SettingsTemplate';
+export type { SettingsTemplateProps } from './templates/SettingsTemplate/SettingsTemplate';
+export { EmptyStateTemplate } from './templates/EmptyStateTemplate/EmptyStateTemplate';
+export type { EmptyStateTemplateProps } from './templates/EmptyStateTemplate/EmptyStateTemplate';

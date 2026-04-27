@@ -1,0 +1,65 @@
+---
+title: Empty State Template
+description: A standard layout for empty data states, zero-results, or feature onboarding.
+---
+
+import { EmptyStateTemplate } from '@nirman/components';
+import Playground from '../../../components/Playground.astro';
+
+The `EmptyStateTemplate` is a structured **Layer 3 (Template)** component designed to handle "zero-data" scenarios gracefully. It provides a consistent, centered layout for graphics, messaging, and primary calls-to-action to help users recover or proceed.
+
+## 1. Interactive Preview
+
+<Playground>
+  <div style={{ width: '100%', padding: '24px' }}>
+    <EmptyStateTemplate 
+      title="No projects found" 
+      description="You haven't created any projects yet. Start by creating a new project to manage your design system."
+      actionText="Create new project"
+      secondaryActionText="Read documentation"
+      graphic="📁"
+      client:load 
+    />
+  </div>
+</Playground>
+
+## 2. Developer Implementation
+
+Use this template whenever a list, table, or dashboard view has no data to display.
+
+```tsx
+import { EmptyStateTemplate } from '@nirman/components';
+import { FolderIcon } from 'lucide-react';
+
+function Dashboard() {
+  const hasProjects = false;
+
+  if (!hasProjects) {
+    return (
+      <EmptyStateTemplate 
+        graphic={<FolderIcon size={64} />}
+        title="Your workspace is empty"
+        description="Get started by importing your first set of design tokens."
+        actionText="Import tokens"
+        onAction={() => openImportModal()}
+        secondaryActionText="View examples"
+        onSecondaryAction={() => navigate('/examples')}
+      />
+    );
+  }
+
+  return <ProjectList />;
+}
+```
+
+## 3. Customization & Props
+
+| Prop | Type | Description |
+| ---- | ---- | ----------- |
+| `graphic` | `React.ReactNode` | Optional SVG icon, illustration, or image to render above the title. |
+| `title` | `string` | The main `h2` heading explaining the state. |
+| `description` | `string` | Optional descriptive text to guide the user. |
+| `actionText` | `string` | Text for the primary action button. |
+| `onAction` | `() => void` | Callback triggered when the primary button is clicked. |
+| `secondaryActionText` | `string` | Text for an optional secondary (ghost/outline) button. |
+| `onSecondaryAction` | `() => void` | Callback triggered when the secondary button is clicked. |

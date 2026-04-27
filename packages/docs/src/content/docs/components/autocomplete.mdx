@@ -8,9 +8,190 @@ import Playground from '../../../components/Playground.astro';
 import TokenMapping from '../../../components/TokenMapping.astro';
 import { Autocomplete } from '@nirman/components';
 
-Autocomplete is a **Layer 2 (Pattern)** component — it composes a `Layer 1 Input` and a `Layer 1 Dropdown` into a unified predictive search experience. As the user types, the option list filters in real time and results are announced to screen reader users via `aria-live`.
+export const STATES = [
+  { label: 'Andhra Pradesh', value: 'AP' },
+  { label: 'Arunachal Pradesh', value: 'AR' },
+  { label: 'Assam', value: 'AS' },
+  { label: 'Bihar', value: 'BR' },
+  { label: 'Chhattisgarh', value: 'CG' },
+  { label: 'Delhi', value: 'DL' },
+  { label: 'Goa', value: 'GA' },
+  { label: 'Gujarat', value: 'GJ' },
+  { label: 'Haryana', value: 'HR' },
+  { label: 'Himachal Pradesh', value: 'HP' },
+  { label: 'Jharkhand', value: 'JH' },
+  { label: 'Karnataka', value: 'KA' },
+  { label: 'Kerala', value: 'KL' },
+  { label: 'Madhya Pradesh', value: 'MP' },
+  { label: 'Maharashtra', value: 'MH' },
+  { label: 'Manipur', value: 'MN' },
+  { label: 'Meghalaya', value: 'ML' },
+  { label: 'Mizoram', value: 'MZ' },
+  { label: 'Nagaland', value: 'NL' },
+  { label: 'Odisha', value: 'OR' },
+  { label: 'Punjab', value: 'PB' },
+  { label: 'Rajasthan', value: 'RJ' },
+  { label: 'Sikkim', value: 'SK' },
+  { label: 'Tamil Nadu', value: 'TN' },
+  { label: 'Telangana', value: 'TS' },
+  { label: 'Tripura', value: 'TR' },
+  { label: 'Uttar Pradesh', value: 'UP' },
+  { label: 'Uttarakhand', value: 'UK' },
+  { label: 'West Bengal', value: 'WB' },
+];
 
-## 1. Accessibility Specification
+Autocomplete is a **Layer 2 (Pattern)** component — it composes a `Layer 1 Input` and a `Layer 1 Dropdown` into a unified predictive search experience. As the user types, the option list filters in real time and results are announced to screen readers via `aria-live`.
+
+## 1. Interactive Playground
+
+<Playground column bg="container">
+  <div style={{ width: '100%', maxWidth: '420px' }}>
+    <Autocomplete
+      client:load
+      label="State (Outlined)"
+      placeholder="Type to search states…"
+      variant="outlined"
+      options={STATES}
+      helperText="Default outlined variant"
+      fullWidth
+    />
+  </div>
+</Playground>
+
+## 2. Variants
+
+Three visual treatments to fit different surface contexts.
+
+### Outlined
+
+The default. Clear border ring on all sides — ideal for forms on neutral backgrounds.
+
+<Playground column bg="container">
+  <div style={{ width: '100%', maxWidth: '420px' }}>
+    <Autocomplete
+      client:load
+      label="Search State"
+      placeholder="Type to search…"
+      variant="outlined"
+      options={STATES}
+      fullWidth
+    />
+  </div>
+</Playground>
+
+### Filled
+
+Filled surface with no border at rest — stands out on white canvas backgrounds.
+
+<Playground column bg="container">
+  <div style={{ width: '100%', maxWidth: '420px' }}>
+    <Autocomplete
+      client:load
+      label="Search State"
+      placeholder="Type to search…"
+      variant="filled"
+      options={STATES}
+      fullWidth
+    />
+  </div>
+</Playground>
+
+### Underline
+
+Minimal — only a bottom border. Use in dense layouts or alongside primary content where a full box would feel heavy.
+
+<Playground column bg="container">
+  <div style={{ width: '100%', maxWidth: '420px' }}>
+    <Autocomplete
+      client:load
+      label="Search State"
+      placeholder="Type to search…"
+      variant="underline"
+      options={STATES}
+      fullWidth
+    />
+  </div>
+</Playground>
+
+## 3. Sizes
+
+<Playground column bg="container">
+  <div style={{ width: '100%', maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <Autocomplete
+      client:load
+      label="Small (sm)"
+      placeholder="Type to search…"
+      size="sm"
+      options={STATES}
+      fullWidth
+    />
+    <Autocomplete
+      client:load
+      label="Medium (md) — default"
+      placeholder="Type to search…"
+      size="md"
+      options={STATES}
+      fullWidth
+    />
+    <Autocomplete
+      client:load
+      label="Large (lg)"
+      placeholder="Type to search…"
+      size="lg"
+      options={STATES}
+      fullWidth
+    />
+  </div>
+</Playground>
+
+## 4. States
+
+<Playground column bg="container">
+  <div style={{ width: '100%', maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <Autocomplete
+      client:load
+      label="With helper text"
+      placeholder="Type to search…"
+      options={STATES}
+      helperText="Select the state where the incident occurred."
+      fullWidth
+    />
+    <Autocomplete
+      client:load
+      label="Error state"
+      placeholder="Type to search…"
+      options={STATES}
+      error="Please select a valid state."
+      fullWidth
+    />
+    <Autocomplete
+      client:load
+      label="Disabled"
+      placeholder="Disabled field"
+      options={STATES}
+      disabled
+      fullWidth
+    />
+  </div>
+</Playground>
+
+## 5. With Descriptions
+
+Options can carry a short description line below the label — useful for codes, categories, or location subtitles.
+
+<Playground column bg="container">
+  <div style={{ width: '100%', maxWidth: '420px' }}>
+    <Autocomplete
+      client:load
+      label="State with Code"
+      placeholder="Type to search…"
+      options={STATES.map(s => ({ ...s, description: `State Code: ${s.value}` }))}
+      fullWidth
+    />
+  </div>
+</Playground>
+
+## 6. Accessibility Specification
 
 | Attribute | Requirement | Detail |
 | :--- | :--- | :--- |
@@ -23,109 +204,45 @@ Autocomplete is a **Layer 2 (Pattern)** component — it composes a `Layer 1 Inp
 | **Live region** | `aria-live="polite"` on results count | Announces "3 results found" after each keystroke. |
 | **Touch target** | 44px input height minimum | Standard input sizing applies. |
 
-## 2. Token Binding
+## 7. Token Binding
 
 <TokenMapping tokens={[
-  { element: 'input border (default)', token: '--nir-color-border-default', value: '#e6e2de', description: 'cream-400 resting border on input.' },
-  { element: 'input border (focus)', token: '--nir-color-primary-default', value: '#083459', description: 'navy-600 when input is focused.' },
+  { element: 'input border (outlined, default)', token: '--nir-color-border-default', value: '#c8c2bb', description: 'Resting border.' },
+  { element: 'input border (focus)', token: '--nir-color-primary-default', value: '#083459', description: 'navy-600 when focused.' },
   { element: 'input border (error)', token: '--nir-color-feedback-error-default', value: '#bc3737', description: 'red-500 on validation error.' },
-  { element: 'input background', token: '--nir-color-surface-container', value: '#fcfcfc', description: 'cream-100 input fill.' },
+  { element: 'filled surface', token: '--nir-color-surface-container', value: '#f0ece8', description: 'Filled variant resting background.' },
   { element: 'input text', token: '--nir-color-text-default', value: '#010f2a', description: 'navy-900 user-typed text.' },
-  { element: 'placeholder text', token: '--nir-color-text-placeholder', value: '#8298aa', description: 'navy-200 before typing.' },
-  { element: 'clear icon', token: '--nir-color-text-secondary', value: '#23313c', description: 'ink-600 ✕ icon to clear typed text.' },
-  { element: 'suggestions background', token: '--nir-color-surface-container', value: '#fcfcfc', description: 'cream-100 suggestion list panel.' },
-  { element: 'suggestion hover', token: '--nir-color-interaction-hover-overlay', value: 'rgba(0,0,0,0.04)', description: '4% black tint on hover.' },
-  { element: 'suggestion active', token: '--nir-color-primary-subtle', value: '#e6edf3', description: 'navy-50 on keyboard-active item.' },
-  { element: 'match highlight bg', token: '--nir-color-primary-muted', value: '#ced6de', description: 'navy-100 background on matched text fragment.' },
-  { element: 'live region', token: 'aria-live="polite"', value: 'polite', description: 'Announces count of filtered results after each keystroke.' },
-  { element: 'min-height', token: 'none — 44px', value: '44px', description: 'WCAG 2.5.8 — input trigger height.' },
+  { element: 'placeholder', token: '--nir-color-text-placeholder', value: '#8298aa', description: 'Hint text before typing.' },
+  { element: 'suggestion active bg', token: '--nir-color-primary-subtle', value: '#e6edf3', description: 'navy-50 on keyboard-active item.' },
+  { element: 'match highlight', token: 'hardcoded #dde8f2', value: '#dde8f2', description: 'Background behind matched text fragment.' },
 ]} />
 
-## 3. Interactive Playground
-
-<Playground column bg="container">
-  <div style={{ width: '100%', maxWidth: '420px' }}>
-    <Autocomplete
-      client:load
-      label="State"
-      placeholder="Type to search states…"
-      options={[
-        { label: 'Andhra Pradesh', value: 'AP' },
-        { label: 'Arunachal Pradesh', value: 'AR' },
-        { label: 'Assam', value: 'AS' },
-        { label: 'Bihar', value: 'BR' },
-        { label: 'Chhattisgarh', value: 'CG' },
-        { label: 'Delhi', value: 'DL' },
-        { label: 'Goa', value: 'GA' },
-        { label: 'Gujarat', value: 'GJ' },
-        { label: 'Haryana', value: 'HR' },
-        { label: 'Himachal Pradesh', value: 'HP' },
-        { label: 'Jharkhand', value: 'JH' },
-        { label: 'Karnataka', value: 'KA' },
-        { label: 'Kerala', value: 'KL' },
-        { label: 'Madhya Pradesh', value: 'MP' },
-        { label: 'Maharashtra', value: 'MH' },
-        { label: 'Manipur', value: 'MN' },
-        { label: 'Meghalaya', value: 'ML' },
-        { label: 'Mizoram', value: 'MZ' },
-        { label: 'Nagaland', value: 'NL' },
-        { label: 'Odisha', value: 'OR' },
-        { label: 'Punjab', value: 'PB' },
-        { label: 'Rajasthan', value: 'RJ' },
-        { label: 'Sikkim', value: 'SK' },
-        { label: 'Tamil Nadu', value: 'TN' },
-        { label: 'Telangana', value: 'TS' },
-        { label: 'Tripura', value: 'TR' },
-        { label: 'Uttar Pradesh', value: 'UP' },
-        { label: 'Uttarakhand', value: 'UK' },
-        { label: 'West Bengal', value: 'WB' },
-      ]}
-      fullWidth
-    />
-  </div>
-</Playground>
-
-## 4. Component Anatomy
-
-```
-┌─ label ──────────────────────────────────┐
-│ State                                    │
-├──────────────────────────────────────────┤
-│ [🔍]  User typed text…             [×]  │  ← input field
-└──────────────────────────────────────────┘
-  ┌──────────────────────────────────────┐
-  │  ─── 4 results ─────────────────     │  ← aria-live region
-  │  Tamil Nadu                          │
-  │  Telangana  ← highlighted match      │
-  │  Tripura                             │
-  │  Uttarakhand                         │
-  └──────────────────────────────────────┘
-```
-
-## 5. Engineering Implementation
+## 8. Engineering Implementation
 
 <Tabs>
   <TabItem label="React">
     ```tsx
     import { Autocomplete } from '@nirman/components';
 
-    // The component handles filtering, aria-live, keyboard nav automatically
+    // Uncontrolled — component manages its own input state
     <Autocomplete
       label="State"
       placeholder="Type to search…"
+      variant="outlined"   // "outlined" | "filled" | "underline"
+      size="md"            // "sm" | "md" | "lg"
       options={states.map(s => ({ label: s.name, value: s.code }))}
-      onChange={(selected) => setSelectedState(selected.value)}
       helperText="Select the state where the incident occurred"
+      fullWidth
     />
 
-    // Async options (for large datasets — fetched from API as user types)
+    // Controlled — parent owns the selected value
+    const [state, setState] = useState<string | null>(null);
     <Autocomplete
-      label="District"
-      placeholder="Search by district name…"
-      loadOptions={async (query) => {
-        const results = await searchDistricts(query);
-        return results.map(d => ({ label: d.name, value: d.code }));
-      }}
+      label="State"
+      options={states.map(s => ({ label: s.name, value: s.code }))}
+      value={state ?? undefined}
+      onChange={(val) => setState(val)}
+      fullWidth
     />
     ```
   </TabItem>
@@ -133,7 +250,6 @@ Autocomplete is a **Layer 2 (Pattern)** component — it composes a `Layer 1 Inp
     ```swift
     import NirmaanTokens
 
-    // iOS 16+ — native searchable modifier
     NavigationView {
         List(filteredStates) { state in
             Text(state.name)
@@ -179,7 +295,6 @@ Autocomplete is a **Layer 2 (Pattern)** component — it composes a `Layer 1 Inp
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = NirmaanTheme.spacing.touchTarget)
         )
-
         ExposedDropdownMenu(
             expanded = filtered.isNotEmpty() && query.isNotEmpty(),
             onDismissRequest = { query = "" }

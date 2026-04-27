@@ -11,7 +11,7 @@ interface AutocompleteProps {
     label: string;
     /** All available options */
     options: AutocompleteOption[];
-    /** Currently selected value */
+    /** Currently selected value (controlled) */
     value?: string;
     /** Change handler (called with value string or null when cleared) */
     onChange?: (value: string | null) => void;
@@ -21,6 +21,8 @@ interface AutocompleteProps {
     helperText?: string;
     /** Error message */
     error?: string;
+    /** Visual variant */
+    variant?: 'outlined' | 'filled' | 'underline';
     /** Size */
     size?: 'sm' | 'md' | 'lg';
     /** Full width */
@@ -35,6 +37,8 @@ interface AutocompleteProps {
     name?: string;
     /** Message when no matches found */
     noResultsText?: string;
+    /** Show a clear (×) button when there is typed text */
+    clearable?: boolean;
 }
 /**
  * nir-e-autocomplete — Type-to-search with suggestion list.
@@ -44,7 +48,7 @@ interface AutocompleteProps {
  * - Arrow keys navigate, Enter selects, Escape closes
  * - Filtered results announced via aria-live
  */
-declare function Autocomplete({ label, options, value, onChange, placeholder, helperText, error, size, fullWidth, disabled, minChars, maxResults, name, noResultsText, }: AutocompleteProps): react_jsx_runtime.JSX.Element;
+declare function Autocomplete({ label, options, value, onChange, placeholder, helperText, error, variant, size, fullWidth, disabled, minChars, maxResults, name, noResultsText, clearable, }: AutocompleteProps): react_jsx_runtime.JSX.Element;
 declare namespace Autocomplete {
     var displayName: string;
 }
@@ -303,4 +307,75 @@ declare function NirmanProvider({ children, defaultTheme, defaultDensity, defaul
  */
 declare function useNirman(): NirmanContextType;
 
-export { Autocomplete, type AutocompleteOption, type AutocompleteProps, Button, type ButtonProps, Checkbox, type CheckboxProps, Dropdown, type DropdownOption, type DropdownProps, Input, type InputProps, type NirBrand, type NirDensity, type NirTheme, type NirmanContextType, NirmanProvider, type NirmanProviderProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Toggle, type ToggleProps, useNirman };
+interface LoginTemplateProps {
+    /** Logo element to render at the top */
+    logo?: React.ReactNode;
+    /** Heading title */
+    title?: string;
+    /** Subtitle text below the title */
+    subtitle?: string;
+    /** Callback when login form is submitted */
+    onLogin?: (email: string, password: string, remember: boolean) => void;
+    /** Callback for 'Forgot Password' link */
+    onForgotPassword?: () => void;
+    /** Callback for 'Sign Up' link */
+    onSignUp?: () => void;
+    /** Whether the login action is currently loading */
+    isLoading?: boolean;
+}
+/**
+ * nir-t-login — Standard Authentication Page Template.
+ * Fully composed using Nirmaan UI layer 1 elements.
+ */
+declare function LoginTemplate({ logo, title, subtitle, onLogin, onForgotPassword, onSignUp, isLoading, }: LoginTemplateProps): react_jsx_runtime.JSX.Element;
+
+interface SettingsTemplateProps {
+    /** Page title */
+    title?: string;
+    /** Subtitle text */
+    subtitle?: string;
+    /** Initial profile data */
+    initialData?: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        timezone: string;
+        marketingEmails: boolean;
+        securityAlerts: boolean;
+    };
+    /** Timezone options for the autocomplete */
+    timezoneOptions?: AutocompleteOption[];
+    /** Callback when the save button is clicked */
+    onSave?: (data: any) => void;
+    /** Loading state for the save button */
+    isSaving?: boolean;
+}
+/**
+ * nir-t-settings — Standard Settings/Profile Page Template.
+ * Composes Input, Autocomplete, Toggle, and Button elements into a common dashboard layout.
+ */
+declare function SettingsTemplate({ title, subtitle, initialData, timezoneOptions, onSave, isSaving, }: SettingsTemplateProps): react_jsx_runtime.JSX.Element;
+
+interface EmptyStateTemplateProps {
+    /** Graphic or icon to render in the center */
+    graphic?: React.ReactNode;
+    /** Main heading */
+    title: string;
+    /** Description text */
+    description?: string;
+    /** Text for the primary action button */
+    actionText?: string;
+    /** Callback for the primary action button */
+    onAction?: () => void;
+    /** Optional secondary action text */
+    secondaryActionText?: string;
+    /** Callback for the secondary action button */
+    onSecondaryAction?: () => void;
+}
+/**
+ * nir-t-empty-state — Standard Empty State / Onboarding Template.
+ * Used for zero-data states, success screens, or initial onboarding.
+ */
+declare function EmptyStateTemplate({ graphic, title, description, actionText, onAction, secondaryActionText, onSecondaryAction, }: EmptyStateTemplateProps): react_jsx_runtime.JSX.Element;
+
+export { Autocomplete, type AutocompleteOption, type AutocompleteProps, Button, type ButtonProps, Checkbox, type CheckboxProps, Dropdown, type DropdownOption, type DropdownProps, EmptyStateTemplate, type EmptyStateTemplateProps, Input, type InputProps, LoginTemplate, type LoginTemplateProps, type NirBrand, type NirDensity, type NirTheme, type NirmanContextType, NirmanProvider, type NirmanProviderProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, SettingsTemplate, type SettingsTemplateProps, Toggle, type ToggleProps, useNirman };

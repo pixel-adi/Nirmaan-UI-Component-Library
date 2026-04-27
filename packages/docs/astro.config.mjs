@@ -51,8 +51,17 @@ export default defineConfig({
 				{
 					label: 'Components',
 					autogenerate: { directory: 'components' }
+				},
+				{
+					label: 'Page Templates',
+					autogenerate: { directory: 'templates' }
 				}
 			],
 		}),
 	],
+	vite: {
+		optimizeDeps: {
+			include: ['react', 'react-dom', 'react-dom/client']
+		}
+	}
 });
