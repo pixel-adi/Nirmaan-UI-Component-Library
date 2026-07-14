@@ -24,16 +24,16 @@
   --nir-color-ink-700: #1a252e;
   --nir-color-ink-800: #111a21;
   --nir-color-ink-900: #0a1015;
-  --nir-color-cream-50: #fef6ee; /** Matches existing surface/base */
-  --nir-color-cream-100: #fcfcfc; /** Matches existing surface/container + secondary/base */
-  --nir-color-cream-200: #f7f3ef;
-  --nir-color-cream-300: #f0ebe5;
-  --nir-color-cream-400: #e6e2de; /** Matches existing surface/container-stroke */
-  --nir-color-cream-500: #d4cfc9;
-  --nir-color-cream-600: #b8b2ab;
-  --nir-color-cream-700: #8a847e;
-  --nir-color-cream-800: #5c5854;
-  --nir-color-cream-900: #2e2c2a;
+  --nir-color-cream-50: #ffffff; /** Pure white background */
+  --nir-color-cream-100: #f4f7fc; /** Ice-blue tint for containers and secondary bases */
+  --nir-color-cream-200: #e8edf6; /** Light blue-gray */
+  --nir-color-cream-300: #d8e2f3; /** Soft divider blue-gray */
+  --nir-color-cream-400: #c9d5ea; /** Border gray */
+  --nir-color-cream-500: #b0c2de;
+  --nir-color-cream-600: #90a8c9;
+  --nir-color-cream-700: #607ca4;
+  --nir-color-cream-800: #40587c;
+  --nir-color-cream-900: #203454;
   --nir-color-neutral-0: #ffffff; /** Pure white */
   --nir-color-neutral-50: #fcfcfc;
   --nir-color-neutral-100: #f5f5f5;

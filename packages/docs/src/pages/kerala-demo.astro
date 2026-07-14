@@ -1,0 +1,72 @@
+---
+import { KeralaTemplate } from '@nirman/components';
+import '../../../../packages/tokens/build/css/primitives.css';
+import '../../../../packages/tokens/build/css/light.css';
+import '../../../../packages/tokens/build/css/dark.css';
+import '../../../../packages/tokens/build/css/high-contrast.css';
+import '../../../../packages/tokens/build/css/themes/state-kerala.css';
+import '../../../../packages/components/dist/index.css';
+---
+
+<!DOCTYPE html>
+<html lang="en" data-brand="kl" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Government of Kerala Portal Redesign — Full Preview</title>
+    
+    <!-- Google Fonts for Noto Sans, Noto Serif, and Noto Sans Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
+      }
+      
+      /* Mapping stylesheet for kl brand overrides to semantic variables */
+      [data-brand="kl"] {
+        --nir-color-primary-default: var(--nir-light-color-primary-default);
+        --nir-color-primary-hover: var(--nir-light-color-primary-hover);
+        --nir-color-primary-active: var(--nir-light-color-primary-active);
+        --nir-color-primary-subtle: var(--nir-light-color-primary-subtle);
+        --nir-color-primary-muted: var(--nir-light-color-primary-muted);
+        --nir-color-primary-on-primary: var(--nir-light-color-primary-on-primary);
+        --nir-color-accent-default: var(--nir-light-color-accent-default);
+        --nir-color-accent-hover: var(--nir-light-color-accent-hover);
+        --nir-color-accent-subtle: var(--nir-light-color-accent-subtle);
+        --nir-color-accent-on-accent: var(--nir-light-color-accent-on-accent);
+        --nir-color-secondary-default: var(--nir-light-color-secondary-default);
+        --nir-color-secondary-stroke: var(--nir-light-color-secondary-stroke);
+        --nir-color-secondary-on-secondary: var(--nir-light-color-secondary-on-secondary);
+        --nir-color-surface-default: var(--nir-light-color-surface-default);
+        --nir-color-surface-container: var(--nir-light-color-surface-container);
+      }
+      
+      [data-brand="kl"][data-theme="dark"] {
+        --nir-color-primary-default: var(--nir-dark-color-primary-default);
+        --nir-color-primary-hover: var(--nir-dark-color-primary-hover);
+        --nir-color-primary-active: var(--nir-dark-color-primary-active);
+        --nir-color-primary-subtle: var(--nir-dark-color-primary-subtle);
+        --nir-color-primary-muted: var(--nir-dark-color-primary-muted);
+        --nir-color-primary-on-primary: var(--nir-dark-color-primary-on-primary);
+        --nir-color-accent-default: var(--nir-dark-color-accent-default);
+        --nir-color-accent-hover: var(--nir-dark-color-accent-hover);
+        --nir-color-accent-subtle: var(--nir-dark-color-accent-subtle);
+        --nir-color-accent-on-accent: var(--nir-dark-color-accent-on-accent);
+        --nir-color-secondary-default: var(--nir-dark-color-secondary-default);
+        --nir-color-secondary-stroke: var(--nir-dark-color-secondary-stroke);
+        --nir-color-secondary-on-secondary: var(--nir-dark-color-secondary-on-secondary);
+        --nir-color-surface-default: var(--nir-dark-color-surface-default);
+        --nir-color-surface-container: var(--nir-dark-color-surface-container);
+      }
+    </style>
+  </head>
+  <body>
+    <KeralaTemplate client:load />
+  </body>
+</html>

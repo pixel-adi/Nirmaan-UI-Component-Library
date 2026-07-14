@@ -23,3 +23,9 @@ export { SettingsTemplate } from './templates/SettingsTemplate/SettingsTemplate'
 export type { SettingsTemplateProps } from './templates/SettingsTemplate/SettingsTemplate';
 export { EmptyStateTemplate } from './templates/EmptyStateTemplate/EmptyStateTemplate';
 export type { EmptyStateTemplateProps } from './templates/EmptyStateTemplate/EmptyStateTemplate';
+export { PfrdaTemplate } from './templates/PfrdaTemplate/PfrdaTemplate';
+export type { PfrdaTemplateProps } from './templates/PfrdaTemplate/PfrdaTemplate';
+export { EducationTemplate } from './templates/EducationTemplate/EducationTemplate';
+export type { EducationTemplateProps } from './templates/EducationTemplate/EducationTemplate';
+export { KeralaTemplate } from './templates/KeralaTemplate/KeralaTemplate';
+export type { KeralaTemplateProps } from './templates/KeralaTemplate/KeralaTemplate';

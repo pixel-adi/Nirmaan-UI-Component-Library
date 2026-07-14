@@ -18,6 +18,11 @@ export default defineConfig({
 				'../../packages/tokens/build/css/primitives.css',
 				// Tier 2 — Semantic mappings (--nir-color-primary-default, etc.)
 				'../../packages/tokens/build/css/light.css',
+				// Brand themes (Central Govt, Kerala, Tamil Nadu, UP)
+				'../../packages/tokens/build/css/themes/central-govt.css',
+				'../../packages/tokens/build/css/themes/state-kerala.css',
+				'../../packages/tokens/build/css/themes/state-tamilnadu.css',
+				'../../packages/tokens/build/css/themes/state-up.css',
 				// Component styles (Button, Input, Checkbox, Toggle, etc.)
 				'../../packages/components/dist/index.css',
 			],

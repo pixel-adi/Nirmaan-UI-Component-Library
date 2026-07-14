@@ -33,17 +33,17 @@
     },
 
     "cream": {
-      "$description": "Surface and background range. Base: #FEF6EE",
-      "50":  { "$value": "#FEF6EE", "$type": "color", "$description": "Matches existing surface/base" },
-      "100": { "$value": "#FCFCFC", "$type": "color", "$description": "Matches existing surface/container + secondary/base" },
-      "200": { "$value": "#F7F3EF", "$type": "color" },
-      "300": { "$value": "#F0EBE5", "$type": "color" },
-      "400": { "$value": "#E6E2DE", "$type": "color", "$description": "Matches existing surface/container-stroke" },
-      "500": { "$value": "#D4CFC9", "$type": "color" },
-      "600": { "$value": "#B8B2AB", "$type": "color" },
-      "700": { "$value": "#8A847E", "$type": "color" },
-      "800": { "$value": "#5C5854", "$type": "color" },
-      "900": { "$value": "#2E2C2A", "$type": "color" }
+      "$description": "Surface and background range (Modernized to white/ice-blue). Base: #FFFFFF",
+      "50":  { "$value": "#FFFFFF", "$type": "color", "$description": "Pure white background" },
+      "100": { "$value": "#F4F7FC", "$type": "color", "$description": "Ice-blue tint for containers and secondary bases" },
+      "200": { "$value": "#E8EDF6", "$type": "color", "$description": "Light blue-gray" },
+      "300": { "$value": "#D8E2F3", "$type": "color", "$description": "Soft divider blue-gray" },
+      "400": { "$value": "#C9D5EA", "$type": "color", "$description": "Border gray" },
+      "500": { "$value": "#B0C2DE", "$type": "color" },
+      "600": { "$value": "#90A8C9", "$type": "color" },
+      "700": { "$value": "#607CA4", "$type": "color" },
+      "800": { "$value": "#40587C", "$type": "color" },
+      "900": { "$value": "#203454", "$type": "color" }
     },
 
     "neutral": {

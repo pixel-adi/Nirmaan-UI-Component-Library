@@ -1,0 +1,64 @@
+---
+title: Ministry of Education Portal Redesign
+description: A high-fidelity, GIGW 3.0 compliant Ministry of Education portal landing page built using the Nirmaan UI design system.
+---
+
+import { EducationTemplate } from '@nirman/components';
+import Playground from '../../../components/Playground.astro';
+
+The `EducationTemplate` is a complete, high-fidelity template showcasing a comprehensive redesign of the official **Ministry of Education (MoE)** portal of the Government of India. 
+
+It demonstrates how Nirmaan's multi-government token override system applies **Central Government (GOI)** branding (Ashoka National Blue and Saffron) dynamically to interactive components.
+
+:::tip[Full-Screen Preview]
+To view this government portal redesign full-screen without sidebars or frame restrictions:
+👉 **[Open Standalone Redesign in New Tab](/education-demo)**
+:::
+
+## 1. Interactive Preview
+
+This live preview showcases the fully responsive Ministry portal. It includes an interactive **Initiatives Bento Grid**, a **Searchable Announcements Desk**, an **Active Video Player simulation**, and support for dark mode / high contrast.
+
+<Playground align="start" bg="container">
+  <div style={{ width: '100%', margin: '0 auto', border: '1px solid var(--sl-color-hairline)', borderRadius: '12px', overflow: 'hidden' }}>
+    <EducationTemplate client:load />
+  </div>
+</Playground>
+
+## 2. Core Redesign Accomplishments
+
+This template reimagines traditional government layouts using modern design system guidelines:
+
+- **WCAG 2.2 / GIGW 3.0 Compliance:** Interactive elements satisfy the 44×44px minimum touch target size. All text elements feature compliant contrast (≥ 4.5:1 ratio) for readability.
+- **National Government Brand:** Uses `data-brand="goi"` to resolve primary assets to Ashoka National Blue (`#0B3D91`) and accent assets to Saffron (`#FF9933`).
+- **Interactive Multimedia Gallery:** Built-in simulated video player that lets users experience an address player with progress-bar intervals, play/pause controls, and time display.
+- **Auto-Play Carousel Slider:** Showcases high-impact banners representing digital learning portals (SWAYAM) and policy frameworks (NEP 2020).
+- **Local Accessibility Bar:** Users can scale text up to `A++` (1.25x scaling) and toggle contrast modes directly from the utility header.
+
+## 3. Developer Implementation
+
+To use this template in your portal application, import it directly from the components package:
+
+```tsx
+import { EducationTemplate } from '@nirman/components';
+
+function EducationPage() {
+  return (
+    <EducationTemplate />
+  );
+}
+
+export default EducationPage;
+```
+
+## 4. Composition & API
+
+The template is fully constructed from modular **Layer 1** (Elements) and **Layer 2** (Providers) of the Nirmaan UI Component Library:
+
+| Component | Layer | Usage in Education Redesign |
+| :--- | :--- | :--- |
+| `NirmanProvider` | Layer 2 | Orchestrates theme, contrast, and density updates. |
+| `Button` | Layer 1 | Primary action CTAs for course exploration and policy reading. |
+| `Dropdown` | Layer 1 | Header language switcher resolving English and Hindi. |
+| `Toggle` | Layer 1 | Switches density modes between Compact and Default. |
+| `Input` | Layer 1 | High-contrast search box for filtering latest announcements. |

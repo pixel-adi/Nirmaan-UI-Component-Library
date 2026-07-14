@@ -1,5 +1,4 @@
 
-
 > @nirman/components@1.0.0 build /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/components
 > tsup src/index.ts --format esm,cjs --dts
 
@@ -11,17 +10,17 @@ CLI Target: es2020
 CLI Cleaning output folder
 ESM Build start
 CJS Build start
-ESM dist/index.css     36.80 KB
-ESM dist/index.css.map 61.78 KB
-ESM dist/index.mjs     28.89 KB
-ESM dist/index.mjs.map 65.69 KB
-ESM ⚡️ Build success in 121ms
-CJS dist/index.css     36.80 KB
-CJS dist/index.css.map 61.78 KB
-CJS dist/index.js      30.17 KB
-CJS dist/index.js.map  65.74 KB
-CJS ⚡️ Build success in 121ms
 DTS Build start
-DTS ⚡️ Build success in 844ms
-DTS dist/index.d.mts 9.75 KB
-DTS dist/index.d.ts  9.75 KB
+ESM dist/index.css     129.00 KB
+ESM dist/index.css.map 219.72 KB
+ESM dist/index.mjs     137.85 KB
+ESM dist/index.mjs.map 258.43 KB
+ESM ⚡️ Build success in 240ms
+CJS dist/index.css     129.00 KB
+CJS dist/index.css.map 219.72 KB
+CJS dist/index.js      147.18 KB
+CJS dist/index.js.map  258.51 KB
+CJS ⚡️ Build success in 240ms
+DTS ⚡️ Build success in 1440ms
+DTS dist/index.d.mts 13.75 KB
+DTS dist/index.d.ts  13.75 KB

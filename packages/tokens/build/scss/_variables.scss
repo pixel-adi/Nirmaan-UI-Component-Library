@@ -22,16 +22,16 @@ $nir-color-ink-600: #23313c; // Matches existing surface/on-container
 $nir-color-ink-700: #1a252e;
 $nir-color-ink-800: #111a21;
 $nir-color-ink-900: #0a1015;
-$nir-color-cream-50: #fef6ee; // Matches existing surface/base
-$nir-color-cream-100: #fcfcfc; // Matches existing surface/container + secondary/base
-$nir-color-cream-200: #f7f3ef;
-$nir-color-cream-300: #f0ebe5;
-$nir-color-cream-400: #e6e2de; // Matches existing surface/container-stroke
-$nir-color-cream-500: #d4cfc9;
-$nir-color-cream-600: #b8b2ab;
-$nir-color-cream-700: #8a847e;
-$nir-color-cream-800: #5c5854;
-$nir-color-cream-900: #2e2c2a;
+$nir-color-cream-50: #ffffff; // Pure white background
+$nir-color-cream-100: #f4f7fc; // Ice-blue tint for containers and secondary bases
+$nir-color-cream-200: #e8edf6; // Light blue-gray
+$nir-color-cream-300: #d8e2f3; // Soft divider blue-gray
+$nir-color-cream-400: #c9d5ea; // Border gray
+$nir-color-cream-500: #b0c2de;
+$nir-color-cream-600: #90a8c9;
+$nir-color-cream-700: #607ca4;
+$nir-color-cream-800: #40587c;
+$nir-color-cream-900: #203454;
 $nir-color-neutral-0: #ffffff; // Pure white
 $nir-color-neutral-50: #fcfcfc;
 $nir-color-neutral-100: #f5f5f5;
@@ -106,62 +106,62 @@ $nir-color-primary-hover: #062a48;
 $nir-color-primary-active: #041e34;
 $nir-color-primary-subtle: #e6edf3;
 $nir-color-primary-muted: #ced6de; // #CED6DE
-$nir-color-primary-on-primary: #fcfcfc; // #FCFCFC
-$nir-color-secondary-default: #fcfcfc; // #FCFCFC
+$nir-color-primary-on-primary: #f4f7fc; // #FCFCFC
+$nir-color-secondary-default: #f4f7fc; // #FCFCFC
 $nir-color-secondary-stroke: #083459; // #083459
 $nir-color-secondary-on-secondary: #083459; // #083459
-$nir-color-surface-default: #fef6ee; // #FEF6EE
-$nir-color-surface-container: #fcfcfc; // #FCFCFC
-$nir-color-surface-container-stroke: #e6e2de; // #E6E2DE
+$nir-color-surface-default: #ffffff; // #FEF6EE
+$nir-color-surface-container: #f4f7fc; // #FCFCFC
+$nir-color-surface-container-stroke: #c9d5ea; // #E6E2DE
 $nir-color-surface-container-light: #8298aa; // #8298AA
 $nir-color-surface-overlay: rgba(0, 0, 0, 0.5);
 $nir-color-text-default: #010f2a; // #010F2A
 $nir-color-text-secondary: #23313c; // #23313C
 $nir-color-text-tertiary: #647685;
 $nir-color-text-placeholder: #8298aa; // #8298AA
-$nir-color-text-disabled: #b8b2ab;
-$nir-color-text-inverse: #fcfcfc;
-$nir-color-text-on-color: #fcfcfc;
+$nir-color-text-disabled: #90a8c9;
+$nir-color-text-inverse: #f4f7fc;
+$nir-color-text-on-color: #f4f7fc;
 $nir-color-text-link: #092de2; // #092DE2
 $nir-color-text-link-visited: #6b21a8;
-$nir-color-border-default: #e6e2de; // #E6E2DE
+$nir-color-border-default: #c9d5ea; // #E6E2DE
 $nir-color-border-strong: #8298aa; // #8298AA
 $nir-color-border-focus: #083459; // #083459
-$nir-color-border-disabled: #e6e2de;
+$nir-color-border-disabled: #c9d5ea;
 $nir-color-border-error: #bc3737; // FIX: Input error border — #BC3737
 $nir-color-border-success: #18941c; // FIX: Input success border — #18941C
 $nir-color-border-warning: #fab401; // FIX: Input warning border — #FAB401
 $nir-color-icon-default: #23313c;
 $nir-color-icon-secondary: #8298aa;
-$nir-color-icon-disabled: #b8b2ab;
-$nir-color-icon-inverse: #fcfcfc;
-$nir-color-icon-on-color: #fcfcfc;
+$nir-color-icon-disabled: #90a8c9;
+$nir-color-icon-inverse: #f4f7fc;
+$nir-color-icon-on-color: #f4f7fc;
 $nir-color-feedback-error-default: #bc3737; // #BC3737
 $nir-color-feedback-error-subtle: #efd5d5; // #EFD5D5
 $nir-color-feedback-error-text: #bc3737; // #BC3737
 $nir-color-feedback-error-border: #e5abab;
-$nir-color-feedback-error-on: #fcfcfc;
+$nir-color-feedback-error-on: #f4f7fc;
 $nir-color-feedback-success-default: #18941c; // #18941C
 $nir-color-feedback-success-subtle: #cee7cf; // #CEE7CF
 $nir-color-feedback-success-text: #005a03; // #005A03
 $nir-color-feedback-success-border: #9dd09f;
-$nir-color-feedback-success-on: #fcfcfc;
+$nir-color-feedback-success-on: #f4f7fc;
 $nir-color-feedback-warning-default: #fab401; // #FAB401
 $nir-color-feedback-warning-subtle: #ffefc6; // #FFEFC6
 $nir-color-feedback-warning-text: #d18f00; // #D18F00
 $nir-color-feedback-warning-border: #ffe082;
-$nir-color-feedback-warning-on: #fcfcfc;
+$nir-color-feedback-warning-on: #f4f7fc;
 $nir-color-feedback-info-default: #083459; // #083459
 $nir-color-feedback-info-subtle: #ccd4dc;
 $nir-color-feedback-info-text: #083459;
 $nir-color-feedback-info-border: #ced6de;
-$nir-color-feedback-info-on: #fcfcfc;
+$nir-color-feedback-info-on: #f4f7fc;
 $nir-color-interaction-focus-ring: #083459;
 $nir-color-interaction-selected-bg: #e6edf3;
 $nir-color-interaction-hover-overlay: rgba(0, 0, 0, 0.04);
 $nir-color-interaction-active-overlay: rgba(0, 0, 0, 0.08);
-$nir-color-interaction-disabled-bg: #f0ebe5;
-$nir-color-interaction-disabled-text: #b8b2ab;
+$nir-color-interaction-disabled-bg: #d8e2f3;
+$nir-color-interaction-disabled-text: #90a8c9;
 $nir-spacing-0: 0px;
 $nir-spacing-1: 4px;
 $nir-spacing-2: 8px;

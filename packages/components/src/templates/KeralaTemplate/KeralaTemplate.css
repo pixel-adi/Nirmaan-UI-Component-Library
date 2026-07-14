@@ -1,0 +1,1047 @@
+/* ═══════════════════════════════════════════════════════
+   KeralaTemplate.css — Government of Kerala Portal
+   ═══════════════════════════════════════════════════════ */
+
+.nir-t-kl {
+  width: 100%;
+  min-height: 100vh;
+  /* Dynamically tint surface to very light green-tinted surface */
+  background-color: var(--nir-color-surface-default, #f7fbf9);
+  color: var(--nir-color-text-default, #010f2a);
+  font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
+  line-height: var(--nir-font-line-height-body, 1.5);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.nir-t-kl *,
+.nir-t-kl *::before,
+.nir-t-kl *::after {
+  box-sizing: border-box;
+}
+
+/* ── Typography Enforcements ── */
+.nir-t-kl h1,
+.nir-t-kl h2,
+.nir-t-kl h3,
+.nir-t-kl h4,
+.nir-t-kl h5,
+.nir-t-kl h6,
+.nir-t-kl__org-en,
+.nir-t-kl__carousel-title,
+.nir-t-kl__section-title,
+.nir-t-kl__service-title,
+.nir-t-kl__video-title {
+  font-family: 'Noto Serif', Georgia, 'Times New Roman', serif !important;
+  color: var(--nir-color-text-default, #010f2a);
+}
+
+.nir-t-kl__top-bar,
+.nir-t-kl__nav,
+.nir-t-kl__service-dept,
+.nir-t-kl__update-meta,
+.nir-t-kl__update-title,
+.nir-t-kl__order-footer,
+.nir-t-kl__video-active-sign,
+.nir-t-kl__player-time,
+.nir-t-kl__footer,
+.nir-t-kl__footer-title,
+.nir-t-kl__footer-links a,
+.nir-t-kl__lang-dropdown * {
+  font-family: 'Noto Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+/* ── 1. Top Government Ribbon Bar ─────────────────────── */
+.nir-t-kl__top-bar {
+  background: var(--nir-color-surface-container, #ffffff);
+  border-bottom: 1px solid var(--nir-color-border-default, #c9d5ea);
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+}
+
+.nir-t-kl__top-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--nir-spacing-2, 8px) var(--nir-spacing-4, 16px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nir-spacing-2, 8px);
+}
+
+.nir-t-kl__gov-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-2, 8px);
+  font-weight: var(--nir-font-weight-medium, 500);
+}
+
+.nir-t-kl__flag-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nir-color-accent-default, #C5A600); /* Kerala Gold */
+}
+
+.nir-t-kl__top-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__a11y-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-2, 8px);
+  border-right: 1px solid var(--nir-color-border-default, #c9d5ea);
+  padding-right: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__a11y-btn {
+  background: none;
+  border: 1px solid var(--nir-color-border-default, #c9d5ea);
+  border-radius: var(--nir-radius-sm, 4px);
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-default, #010f2a);
+  background-color: var(--nir-color-surface-default, #fff);
+  transition: all var(--nir-duration-150, 150ms) ease;
+}
+
+.nir-t-kl__a11y-btn:hover {
+  background-color: var(--nir-color-primary-subtle, #e6f5ee);
+  border-color: var(--nir-color-primary-default, #006B3F);
+}
+
+.nir-t-kl__a11y-btn--active {
+  background-color: var(--nir-color-primary-default, #006B3F);
+  color: var(--nir-color-primary-on-primary, #fff);
+  border-color: var(--nir-color-primary-default, #006B3F);
+}
+
+.nir-t-kl__lang-dropdown {
+  min-width: 125px;
+}
+
+.nir-t-kl__lang-dropdown .nir-e-dropdown {
+  margin: 0;
+}
+
+.nir-t-kl__lang-dropdown .nir-e-dropdown__label {
+  display: none !important;
+}
+
+.nir-t-kl__lang-dropdown .nir-e-dropdown__trigger {
+  min-height: 32px !important;
+  padding: 2px 8px !important;
+  font-size: 12px !important;
+  background-color: #ffffff !important;
+  border-color: var(--nir-color-border-default, #c9d5ea) !important;
+}
+
+/* ── 2. Identity Header ─────────────────────────────────── */
+.nir-t-kl__header {
+  background: var(--nir-color-surface-default, #f7fbf9);
+  padding: var(--nir-spacing-4, 16px) 0;
+  border-bottom: 1px solid var(--nir-color-border-default, #c9d5ea);
+}
+
+.nir-t-kl__header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__logo-block {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__emblem {
+  width: 54px;
+  height: auto;
+  color: var(--nir-color-primary-default, #006B3F);
+  flex-shrink: 0;
+}
+
+.nir-t-kl__title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nir-t-kl__org-hi {
+  font-size: var(--nir-font-size-md, 16px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-primary-default, #006B3F);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.nir-t-kl__org-en {
+  font-size: var(--nir-font-size-lg, 18px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-default, #010f2a);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.nir-t-kl__org-tagline {
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  margin: 2px 0 0 0;
+}
+
+.nir-t-kl__portal-badge {
+  background: var(--nir-color-primary-default, #006B3F);
+  border: 1px solid var(--nir-color-primary-default, #006B3F);
+  color: #ffffff;
+  border-radius: var(--nir-radius-full, 9999px);
+  padding: var(--nir-spacing-1, 4px) var(--nir-spacing-3, 12px);
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── 3. Navigation Bar ─────────────────────────────── */
+.nir-t-kl__nav {
+  background: var(--nir-color-primary-default, #006B3F);
+  color: var(--nir-color-primary-on-primary, #fff);
+  box-shadow: 0 4px 12px rgba(0, 107, 63, 0.15);
+}
+
+.nir-t-kl__nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.nir-t-kl__nav-link {
+  display: block;
+  padding: var(--nir-spacing-4, 16px) var(--nir-spacing-5, 20px);
+  color: var(--nir-color-primary-on-primary, #fff);
+  text-decoration: none;
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-semibold, 600);
+  white-space: nowrap;
+  transition: background-color var(--nir-duration-150, 150ms) ease;
+}
+
+.nir-t-kl__nav-link:hover,
+.nir-t-kl__nav-link--active {
+  background-color: var(--nir-color-primary-hover, #005a35);
+}
+
+.nir-t-kl__nav-actions {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nir-t-kl__nav-actions .nir-e-toggle__label {
+  color: #ffffff !important;
+  font-size: var(--nir-font-size-xs, 12px) !important;
+}
+
+/* ── 4. Interactive Hero Carousel ────────────────────── */
+.nir-t-kl__carousel {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-color: #05140b;
+  overflow: hidden;
+}
+
+.nir-t-kl__carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.nir-t-kl__carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+}
+
+.nir-t-kl__carousel-slide--active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.nir-t-kl__carousel-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-6, 24px);
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__carousel-title {
+  font-size: clamp(30px, 4.8vw, 48px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  line-height: 1.15;
+  margin: 0;
+  color: #ffffff !important;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.nir-t-kl__carousel-tagline {
+  font-size: var(--nir-font-size-lg, 18px);
+  line-height: 1.6;
+  max-width: 680px;
+  opacity: 0.95;
+  margin: 0;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.nir-t-kl__carousel-actions {
+  display: flex;
+  gap: var(--nir-spacing-4, 16px);
+  margin-top: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__carousel-actions .nir-e-button--primary {
+  background-color: var(--nir-color-accent-default, #c5a600) !important;
+  color: var(--nir-color-accent-on-accent, #1a1500) !important;
+  border-color: var(--nir-color-accent-default, #c5a600) !important;
+}
+
+.nir-t-kl__carousel-actions .nir-e-button--primary:hover {
+  background-color: var(--nir-color-accent-hover, #a68b00) !important;
+}
+
+.nir-t-kl__carousel-indicators {
+  position: absolute;
+  bottom: var(--nir-spacing-6, 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--nir-spacing-3, 12px);
+  z-index: 10;
+}
+
+.nir-t-kl__carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--nir-duration-200, 200ms) ease;
+}
+
+.nir-t-kl__carousel-dot--active {
+  background-color: var(--nir-color-accent-default, #c5a600);
+  transform: scale(1.2);
+}
+
+/* ── 5. e-Sevanam Services finder ────────────────────────── */
+.nir-t-kl__services-section {
+  padding: var(--nir-spacing-10, 40px) 0;
+  background-color: var(--nir-color-surface-default, #f7fbf9);
+}
+
+.nir-t-kl__services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__section-title {
+  font-size: var(--nir-font-size-2xl, 24px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-default, #010f2a) !important;
+  margin: 0 0 var(--nir-spacing-6, 24px) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-3, 12px);
+}
+
+.nir-t-kl__section-indicator {
+  width: 4px;
+  height: 24px;
+  background: var(--nir-color-primary-default, #006B3F);
+  border-radius: var(--nir-radius-sm, 2px);
+}
+
+.nir-t-kl__services-search-row {
+  max-width: 600px;
+  margin-bottom: var(--nir-spacing-6, 24px);
+}
+
+.nir-t-kl__services-search-row .nir-e-input__label {
+  display: none !important;
+}
+
+.nir-t-kl__services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--nir-spacing-6, 24px);
+}
+
+@media (max-width: 900px) {
+  .nir-t-kl__services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .nir-t-kl__services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nir-t-kl__service-card {
+  background: var(--nir-color-surface-container, #ffffff);
+  border: 1px solid var(--nir-color-border-default, #c9d5ea);
+  border-radius: var(--nir-radius-xl, 12px);
+  padding: var(--nir-spacing-5, 20px);
+  display: flex;
+  gap: var(--nir-spacing-4, 16px);
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 107, 63, 0.02);
+  transition: all var(--nir-duration-200, 200ms) ease;
+}
+
+.nir-t-kl__service-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--nir-color-primary-default, #006B3F);
+  box-shadow: 0 8px 16px rgba(0, 107, 63, 0.08);
+}
+
+.nir-t-kl__service-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--nir-color-primary-subtle, #e6f5ee);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.nir-t-kl__service-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nir-t-kl__service-title {
+  font-size: var(--nir-font-size-sm, 14px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-primary-default, #006B3F) !important;
+  margin: 0;
+}
+
+.nir-t-kl__service-dept {
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+}
+
+.nir-t-kl__empty-message {
+  grid-column: span 4;
+  text-align: center;
+  padding: var(--nir-spacing-8, 32px);
+  color: var(--nir-color-text-secondary, #5f7382);
+}
+
+/* ── 6. Updates & Media Section ─────────────────────────── */
+.nir-t-kl__updates-section {
+  padding: var(--nir-spacing-10, 40px) 0;
+  background-color: var(--nir-color-surface-container, #ffffff);
+  border-top: 1px solid var(--nir-color-border-default, #c9d5ea);
+}
+
+.nir-t-kl__updates-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__updates-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--nir-spacing-10, 40px);
+}
+
+@media (max-width: 900px) {
+  .nir-t-kl__updates-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nir-t-kl__tabs-bar {
+  display: flex;
+  border-bottom: 2px solid #d0d7e2;
+  margin-bottom: var(--nir-spacing-4, 16px);
+  overflow-x: auto;
+}
+
+.nir-t-kl__tab-trigger {
+  background: none;
+  border: none;
+  padding: var(--nir-spacing-3, 12px) var(--nir-spacing-4, 16px);
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-semibold, 600);
+  color: var(--nir-color-text-secondary, #5f7382);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all var(--nir-duration-150, 150ms) ease;
+  white-space: nowrap;
+  margin-bottom: -2px;
+}
+
+.nir-t-kl__tab-trigger:hover {
+  color: var(--nir-color-primary-default, #006B3F);
+}
+
+.nir-t-kl__tab-trigger--active {
+  color: var(--nir-color-primary-default, #006B3F);
+  border-bottom-color: var(--nir-color-primary-default, #006B3F);
+}
+
+.nir-t-kl__search-box-row {
+  margin-bottom: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__search-box-row .nir-e-input__label {
+  display: none !important;
+}
+
+.nir-t-kl__orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-3, 12px);
+}
+
+.nir-t-kl__order-card {
+  background-color: var(--nir-color-surface-default, #f7fbf9);
+  border: 1px solid var(--nir-color-border-default, #c9d5ea);
+  border-radius: var(--nir-radius-lg, 8px);
+  padding: var(--nir-spacing-4, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-2, 8px);
+  transition: all 0.2s ease;
+}
+
+.nir-t-kl__order-card:hover {
+  border-color: var(--nir-color-primary-default, #006B3F);
+  box-shadow: 0 4px 12px rgba(0, 107, 63, 0.06);
+}
+
+.nir-t-kl__order-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nir-spacing-2, 8px);
+}
+
+.nir-t-kl__order-date {
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+}
+
+.nir-t-kl__order-badge {
+  font-size: 10px;
+  font-weight: var(--nir-font-weight-bold, 700);
+  background-color: var(--nir-color-primary-subtle, #e6f5ee);
+  color: var(--nir-color-primary-default, #006B3F);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #b8e5d1;
+}
+
+.nir-t-kl__new-tag {
+  background-color: #d32f2f;
+  color: #ffffff;
+  font-size: 8px;
+  font-weight: var(--nir-font-weight-bold, 700);
+  padding: 1px 4px;
+  border-radius: 2px;
+  animation: pulse-kl 2s infinite;
+}
+
+@keyframes pulse-kl {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.nir-t-kl__order-title {
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-semibold, 600);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.nir-t-kl__order-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nir-t-kl__order-title a:hover {
+  color: var(--nir-color-primary-default, #006B3F);
+  text-decoration: underline;
+}
+
+.nir-t-kl__order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  border-top: 1px dashed var(--nir-color-border-default, #c9d5ea);
+  padding-top: var(--nir-spacing-2, 8px);
+  margin-top: var(--nir-spacing-1, 4px);
+}
+
+.nir-t-kl__order-dl-btn {
+  background: none;
+  border: none;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-primary-default, #006B3F);
+  cursor: pointer;
+  padding: 0;
+}
+
+.nir-t-kl__order-dl-btn:hover {
+  text-decoration: underline;
+}
+
+/* Simulated Video Player */
+.nir-t-kl__video-card {
+  background: var(--nir-color-surface-default, #f7fbf9);
+  border: 1px solid var(--nir-color-border-default, #c9d5ea);
+  border-radius: var(--nir-radius-xl, 12px);
+  padding: var(--nir-spacing-4, 16px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+  display: flex;
+  flex-direction: column;
+}
+
+.nir-t-kl__player-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  background-color: #000000;
+  border-radius: var(--nir-radius-lg, 8px);
+  overflow: hidden;
+}
+
+.nir-t-kl__video-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nir-t-kl__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--nir-color-accent-default, #c5a600);
+  color: var(--nir-color-accent-on-accent, #1a1500);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  transition: all var(--nir-duration-150, 150ms) ease;
+}
+
+.nir-t-kl__play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: var(--nir-color-accent-hover, #a68b00);
+}
+
+.nir-t-kl__play-icon {
+  width: 22px;
+  height: 22px;
+  margin-left: 4px;
+}
+
+.nir-t-kl__player-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nir-t-kl__video-active-sign {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: rgba(0,0,0,0.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: #ffffff;
+}
+
+.nir-t-kl__live-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #d32f2f;
+  animation: pulse-kl 1s infinite alternate;
+}
+
+.nir-t-kl__pause-btn {
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nir-t-kl__pause-btn:hover {
+  background-color: rgba(255,255,255,0.4);
+}
+
+.nir-t-kl__pause-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.nir-t-kl__player-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-3, 12px);
+  padding: var(--nir-spacing-2, 8px) 0;
+  border-bottom: 1px solid var(--nir-color-border-default, #c9d5ea);
+  margin-bottom: var(--nir-spacing-3, 12px);
+}
+
+.nir-t-kl__player-time {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--nir-color-text-secondary, #5f7382);
+}
+
+.nir-t-kl__progress-bg {
+  flex: 1;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.nir-t-kl__progress-fill {
+  height: 100%;
+  background-color: var(--nir-color-accent-default, #c5a600);
+  border-radius: 3px;
+  transition: width 0.6s linear;
+}
+
+.nir-t-kl__video-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-1, 4px);
+}
+
+.nir-t-kl__video-title {
+  font-size: var(--nir-font-size-md, 16px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  margin: 0;
+  color: var(--nir-color-primary-default, #006B3F) !important;
+}
+
+.nir-t-kl__video-desc-txt {
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Photos Grid Alternative */
+.nir-t-kl__photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-kl__photo-card {
+  border: 1px solid var(--nir-color-border-default, #c9d5ea);
+  border-radius: var(--nir-radius-lg, 8px);
+  overflow: hidden;
+  background-color: var(--nir-color-surface-container, #ffffff);
+  display: flex;
+  flex-direction: column;
+}
+
+.nir-t-kl__photo-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.nir-t-kl__photo-label {
+  padding: 8px var(--nir-spacing-3, 12px);
+  font-size: 11px;
+  font-weight: var(--nir-font-weight-semibold, 600);
+  color: var(--nir-color-text-secondary, #5f7382);
+  border-top: 1px solid var(--nir-color-border-default, #c9d5ea);
+}
+
+/* ── 7. Footer ── */
+.nir-t-kl__footer {
+  background-color: #05140b; /* Deep Kerala Forest Green-Black */
+  color: rgba(255, 255, 255, 0.75);
+  padding: var(--nir-spacing-10, 40px) 0 var(--nir-spacing-6, 24px) 0;
+  border-top: 4px solid var(--nir-color-accent-default, #c5a600);
+}
+
+.nir-t-kl__footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-8, 32px);
+}
+
+.nir-t-kl__footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--nir-spacing-6, 24px);
+}
+
+@media (max-width: 768px) {
+  .nir-t-kl__footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .nir-t-kl__footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nir-t-kl__footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-3, 12px);
+}
+
+.nir-t-kl__footer-title {
+  color: #ffffff !important;
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nir-t-kl__footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-2, 8px);
+}
+
+.nir-t-kl__footer-links a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: var(--nir-font-size-sm, 14px);
+  transition: color var(--nir-duration-150, 150ms) ease;
+}
+
+.nir-t-kl__footer-links a:hover {
+  color: var(--nir-color-accent-default, #c5a600);
+}
+
+.nir-t-kl__footer-about {
+  font-size: var(--nir-font-size-xs, 12px);
+  line-height: 1.6;
+}
+
+.nir-t-kl__footer-meta {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--nir-spacing-6, 24px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nir-spacing-4, 16px);
+  font-size: var(--nir-font-size-xs, 12px);
+}
+
+.nir-t-kl__footer-compliance {
+  display: flex;
+  gap: var(--nir-spacing-4, 16px);
+  align-items: center;
+}
+
+.nir-t-kl__compliance-badge {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 4px 10px;
+  border-radius: var(--nir-radius-sm, 4px);
+  font-size: 10px;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: #ffffff;
+}
+
+/* ── Theme & Contrast Overrides for Dark / High-Contrast Modes ── */
+[data-theme="dark"] .nir-t-kl,
+[data-theme="high-contrast"] .nir-t-kl {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  color: var(--nir-color-text-default, #ffffff);
+}
+
+[data-theme="dark"] .nir-t-kl__header,
+[data-theme="high-contrast"] .nir-t-kl__header {
+  background-color: var(--nir-color-surface-default, #010f2a);
+}
+
+[data-theme="dark"] .nir-t-kl__services-section,
+[data-theme="high-contrast"] .nir-t-kl__services-section {
+  background-color: var(--nir-color-surface-container, #041e34);
+}
+
+[data-theme="dark"] .nir-t-kl__service-card,
+[data-theme="high-contrast"] .nir-t-kl__service-card {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  border-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-kl__service-card:hover,
+[data-theme="high-contrast"] .nir-t-kl__service-card:hover {
+  background-color: var(--nir-color-surface-container, #041e34);
+  border-color: var(--nir-color-primary-default, #006B3F);
+}
+
+[data-theme="dark"] .nir-t-kl__updates-section,
+[data-theme="high-contrast"] .nir-t-kl__updates-section {
+  background-color: var(--nir-color-surface-container, #041e34);
+  border-top-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-kl__order-card,
+[data-theme="high-contrast"] .nir-t-kl__order-card {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  border-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-kl__video-card,
+[data-theme="high-contrast"] .nir-t-kl__video-card {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  border-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-kl__photo-card,
+[data-theme="high-contrast"] .nir-t-kl__photo-card {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  border-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-kl__tab-trigger,
+[data-theme="high-contrast"] .nir-t-kl__tab-trigger {
+  color: var(--nir-color-text-secondary, #b8c0c7);
+}
+
+[data-theme="dark"] .nir-t-kl__tab-trigger--active,
+[data-theme="high-contrast"] .nir-t-kl__tab-trigger--active {
+  color: var(--nir-color-primary-default, #fff);
+  border-bottom-color: var(--nir-color-primary-default, #fff);
+}
+
+/* ── Accessibility Text Scaling Controls ── */
+.nir-t-kl-wrapper .nir-t-kl--text-lg {
+  --nir-font-size-xs: 14px !important;
+  --nir-font-size-sm: 16px !important;
+  --nir-font-size-base: 18px !important;
+  --nir-font-size-md: 18px !important;
+  --nir-font-size-lg: 20px !important;
+  --nir-font-size-xl: 22px !important;
+  --nir-font-size-2xl: 26px !important;
+  --nir-font-size-3xl: 32px !important;
+  --nir-font-size-4xl: 38px !important;
+  --nir-font-size-5xl: 50px !important;
+}
+
+.nir-t-kl-wrapper .nir-t-kl--text-xl {
+  --nir-font-size-xs: 16px !important;
+  --nir-font-size-sm: 18px !important;
+  --nir-font-size-base: 20px !important;
+  --nir-font-size-md: 20px !important;
+  --nir-font-size-lg: 22px !important;
+  --nir-font-size-xl: 24px !important;
+  --nir-font-size-2xl: 28px !important;
+  --nir-font-size-3xl: 34px !important;
+  --nir-font-size-4xl: 40px !important;
+  --nir-font-size-5xl: 52px !important;
+}
+
+.nir-t-kl--text-lg .nir-t-kl__compliance-badge,
+.nir-t-kl--text-lg .nir-t-kl__photo-label {
+  font-size: 12px !important;
+}
+
+.nir-t-kl--text-xl .nir-t-kl__compliance-badge,
+.nir-t-kl--text-xl .nir-t-kl__photo-label {
+  font-size: 14px !important;
+}

@@ -1,22 +1,57 @@
 
-
 > @nirman/docs@0.1.0 build /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/docs
 > astro build
 
-11:31:45 [vite] Re-optimizing dependencies because lockfile has changed
-11:31:45 [content] Syncing content
-11:31:45 [content] Synced content
-11:31:45 [types] Generated 399ms
-11:31:45 [build] output: "static"
-11:31:45 [build] mode: "static"
-11:31:45 [build] directory: /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/docs/dist/
-11:31:45 [build] Collecting build info...
-11:31:45 [build] ✓ Completed in 484ms.
-11:31:45 [build] Building static entrypoints...
-[2K[1G11:31:46 [ERROR] [vite] ✗ Build failed in 1.08s
-[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1GCould not resolve "../../../../components/Playground.astro" from "src/content/docs/components/button.mdx"
-file: /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/docs/src/content/docs/components/button.mdx
-  Stack trace:
-    at getRollupError (file:///Users/itsadi/Desktop/Nirmaan%20UI%20Component%20Library/node_modules/.pnpm/rollup@4.60.1/node_modules/rollup/dist/es/shared/parseAst.js:406:41)
-    at ModuleLoader.handleInvalidResolvedId (file:///Users/itsadi/Desktop/Nirmaan%20UI%20Component%20Library/node_modules/.pnpm/rollup@4.60.1/node_modules/rollup/dist/es/shared/node-entry.js:22106:24)
- ELIFECYCLE  Command failed with exit code 1.
+15:53:26 [content] Syncing content
+15:53:26 [content] Synced content
+15:53:26 [types] Generated 358ms
+15:53:26 [build] output: "static"
+15:53:26 [build] mode: "static"
+15:53:26 [build] directory: /Users/itsadi/Desktop/Nirmaan UI Component Library/packages/docs/dist/
+15:53:26 [build] Collecting build info...
+15:53:26 [build] ✓ Completed in 459ms.
+15:53:26 [build] Building static entrypoints...
+15:53:29 [vite] ✓ built in 3.05s
+15:53:29 [vite] ✓ built in 320ms
+15:53:29 [build] Rearranging server assets...
+
+ generating static routes 
+Entry docs → 404 was not found.
+15:53:29   ├─ /404.html (+13ms) 
+15:53:29   ├─ /education-demo/index.html (+7ms) 
+15:53:29   ├─ /kerala-demo/index.html (+2ms) 
+15:53:29   ├─ /pfrda-demo/index.html (+2ms) 
+15:53:29   ├─ /components/autocomplete/index.html (+34ms) 
+15:53:29   ├─ /components/button/index.html (+10ms) 
+15:53:29   ├─ /components/checkbox/index.html (+9ms) 
+15:53:29   ├─ /components/dropdown/index.html (+11ms) 
+15:53:29   ├─ /components/input/index.html (+8ms) 
+15:53:29   ├─ /components/radio/index.html (+13ms) 
+15:53:29   ├─ /components/toggle/index.html (+8ms) 
+15:53:29   ├─ /foundations/accessibility/index.html (+4ms) 
+15:53:29   ├─ /foundations/pipeline/index.html (+4ms) 
+15:53:29   ├─ /foundations/primitives/index.html (+4ms) 
+15:53:29   ├─ /foundations/semantics/index.html (+5ms) 
+15:53:29   ├─ /foundations/themes/index.html (+4ms) 
+15:53:29   ├─ /foundations/typography/index.html (+3ms) 
+15:53:29   ├─ /getting-started/designer/index.html (+6ms) 
+15:53:29   ├─ /getting-started/developer/index.html (+5ms) 
+15:53:29   ├─ /getting-started/introduction/index.html (+3ms) 
+15:53:29   ├─ /getting-started/setup/index.html (+9ms) 
+15:53:29   ├─ /icons/usage/index.html (+5ms) 
+15:53:29   ├─ /index.html (+3ms) 
+15:53:29   ├─ /templates/education/index.html (+3ms) 
+15:53:29   ├─ /templates/empty-state/index.html (+3ms) 
+15:53:29   ├─ /templates/kerala/index.html (+7ms) 
+15:53:30   ├─ /templates/login/index.html (+4ms) 
+15:53:30   ├─ /templates/pfrda/index.html (+3ms) 
+15:53:30   ├─ /templates/settings/index.html (+3ms) 
+15:53:30 ✓ Completed in 248ms.
+
+15:53:30 [build] ✓ Completed in 3.67s.
+15:53:30 [starlight:pagefind] Building search index with Pagefind...
+15:53:30 [starlight:pagefind] Found 29 HTML files.
+15:53:30 [starlight:pagefind] Finished building search index in 70ms.
+15:53:30 [WARN] [@astrojs/sitemap] The Sitemap integration requires the `site` astro.config option. Skipping.
+15:53:30 [build] 29 page(s) built in 4.21s
+15:53:30 [build] Complete!

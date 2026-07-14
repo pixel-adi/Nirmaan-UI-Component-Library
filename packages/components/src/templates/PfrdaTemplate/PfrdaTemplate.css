@@ -1,0 +1,1149 @@
+/* ═══════════════════════════════════════════════════════
+   PfrdaTemplate.css — PFRDA Connect Redesign Template
+   ═══════════════════════════════════════════════════════ */
+
+.nir-t-pfrda {
+  width: 100%;
+  min-height: 100vh;
+  /* Premium visual upgrade: pure white page background with modern neutrals */
+  background-color: #ffffff;
+  color: var(--nir-color-text-default, #010f2a);
+  font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
+  line-height: var(--nir-font-line-height-body, 1.5);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.nir-t-pfrda *,
+.nir-t-pfrda *::before,
+.nir-t-pfrda *::after {
+  box-sizing: border-box;
+}
+
+/* ── Typography Enforcements ── */
+.nir-t-pfrda h1,
+.nir-t-pfrda h2,
+.nir-t-pfrda h3,
+.nir-t-pfrda h4,
+.nir-t-pfrda h5,
+.nir-t-pfrda h6,
+.nir-t-pfrda__org-en,
+.nir-t-pfrda__hero-heading,
+.nir-t-pfrda__section-title,
+.nir-t-pfrda__scheme-title,
+.nir-t-pfrda__corner-title {
+  font-family: 'Noto Serif', Georgia, 'Times New Roman', serif !important;
+  color: var(--nir-color-text-default, #010f2a);
+}
+
+.nir-t-pfrda__top-bar,
+.nir-t-pfrda__nav,
+.nir-t-pfrda__calc-card,
+.nir-t-pfrda__bento-lbl,
+.nir-t-pfrda__bento-val,
+.nir-t-pfrda__bento-desc,
+.nir-t-pfrda__circular-date-badge,
+.nir-t-pfrda__circular-meta,
+.nir-t-pfrda__circular-title,
+.nir-t-pfrda__footer,
+.nir-t-pfrda__footer-title,
+.nir-t-pfrda__footer-links a,
+.nir-t-pfrda__lang-dropdown * {
+  font-family: 'Noto Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+/* ── 1. Accessibility & Language Top Bar ─────────────────── */
+.nir-t-pfrda__top-bar {
+  background: var(--nir-color-surface-container, #f8f6f3);
+  border-bottom: 1px solid var(--nir-color-border-default, #e2e5e8);
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+}
+
+.nir-t-pfrda__top-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--nir-spacing-2, 8px) var(--nir-spacing-4, 16px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nir-spacing-2, 8px);
+}
+
+.nir-t-pfrda__gov-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-2, 8px);
+  font-weight: var(--nir-font-weight-medium, 500);
+}
+
+.nir-t-pfrda__flag-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nir-color-accent-default, #FF9933);
+}
+
+.nir-t-pfrda__top-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__a11y-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-2, 8px);
+  border-right: 1px solid var(--nir-color-border-default, #e2e5e8);
+  padding-right: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__a11y-btn {
+  background: none;
+  border: 1px solid var(--nir-color-border-default, #e2e5e8);
+  border-radius: var(--nir-radius-sm, 4px);
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-default, #010f2a);
+  background-color: var(--nir-color-surface-default, #fff);
+  transition: all var(--nir-duration-150, 150ms) var(--nir-easing-standard, ease);
+}
+
+.nir-t-pfrda__a11y-btn:hover {
+  background-color: var(--nir-color-primary-subtle, #e8edf6);
+  border-color: var(--nir-color-primary-default, #0b3d91);
+}
+
+.nir-t-pfrda__a11y-btn--active {
+  background-color: var(--nir-color-primary-default, #0b3d91);
+  color: var(--nir-color-primary-on-primary, #fff);
+  border-color: var(--nir-color-primary-default, #0b3d91);
+}
+
+/* Nirmaan Dropdown inside header */
+.nir-t-pfrda__lang-dropdown {
+  min-width: 120px;
+}
+
+.nir-t-pfrda__lang-dropdown .nir-e-dropdown {
+  margin: 0;
+}
+
+.nir-t-pfrda__lang-dropdown .nir-e-dropdown__label {
+  display: none !important; /* Hide label for compact header */
+}
+
+.nir-t-pfrda__lang-dropdown .nir-e-dropdown__trigger {
+  min-height: 32px !important;
+  padding: 2px 8px !important;
+  font-size: 12px !important;
+  background-color: #ffffff !important;
+  border-color: var(--nir-color-border-default, #e2e5e8) !important;
+}
+
+/* ── 2. Branding Header ─────────────────────────────────── */
+.nir-t-pfrda__header {
+  background: #ffffff;
+  padding: var(--nir-spacing-4, 16px) 0;
+  border-bottom: 1px solid var(--nir-color-border-default, #e2e5e8);
+}
+
+.nir-t-pfrda__header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__logo-block {
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__emblem {
+  width: 50px;
+  height: auto;
+  flex-shrink: 0;
+  display: block;
+}
+
+.nir-t-pfrda__title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nir-t-pfrda__org-hi {
+  font-size: var(--nir-font-size-md, 16px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-primary-default, #0b3d91);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.nir-t-pfrda__org-en {
+  font-size: var(--nir-font-size-lg, 18px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-default, #010f2a);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.nir-t-pfrda__org-tagline {
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  margin: 2px 0 0 0;
+}
+
+/* High contrast badge: Navy background + white text */
+.nir-t-pfrda__portal-badge {
+  background: var(--nir-color-primary-default, #0b3d91);
+  border: 1px solid var(--nir-color-primary-default, #0b3d91);
+  color: #ffffff;
+  border-radius: var(--nir-radius-full, 9999px);
+  padding: var(--nir-spacing-1, 4px) var(--nir-spacing-3, 12px);
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── 3. Main Navigation Bar ─────────────────────────────── */
+.nir-t-pfrda__nav {
+  background: var(--nir-color-primary-default, #0b3d91);
+  color: var(--nir-color-primary-on-primary, #fff);
+  box-shadow: 0 4px 12px rgba(11, 61, 145, 0.15);
+}
+
+.nir-t-pfrda__nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.nir-t-pfrda__nav-item {
+  position: relative;
+}
+
+.nir-t-pfrda__nav-link {
+  display: block;
+  padding: var(--nir-spacing-4, 16px) var(--nir-spacing-5, 20px);
+  color: var(--nir-color-primary-on-primary, #fff);
+  text-decoration: none;
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-semibold, 600);
+  white-space: nowrap;
+  transition: background-color var(--nir-duration-150, 150ms) var(--nir-easing-standard, ease);
+}
+
+.nir-t-pfrda__nav-link:hover,
+.nir-t-pfrda__nav-link--active {
+  background-color: var(--nir-color-primary-hover, #092f73);
+}
+
+.nir-t-pfrda__nav-actions {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nir-t-pfrda__nav-actions .nir-e-toggle {
+  margin: 0;
+}
+
+.nir-t-pfrda__nav-actions .nir-e-toggle__label {
+  color: #ffffff !important;
+  font-size: var(--nir-font-size-xs, 12px) !important;
+}
+
+/* ── 4. Hero & Pension Calculator Banner ──────────────────── */
+.nir-t-pfrda__hero-section {
+  background: linear-gradient(135deg, var(--nir-color-primary-default, #0b3d91) 0%, #062354 100%);
+  color: #ffffff;
+  padding: var(--nir-spacing-14, 56px) 0;
+  position: relative;
+  box-shadow: inset 0 -10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.nir-t-pfrda__hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--nir-spacing-10, 40px);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .nir-t-pfrda__hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--nir-spacing-8, 32px);
+  }
+}
+
+.nir-t-pfrda__hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-6, 24px);
+}
+
+.nir-t-pfrda__hero-heading {
+  font-size: clamp(30px, 4.5vw, 44px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  line-height: 1.2;
+  margin: 0;
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.nir-t-pfrda__hero-tagline-text {
+  font-size: var(--nir-font-size-md, 16px);
+  line-height: 1.6;
+  opacity: 0.95;
+  margin: 0;
+}
+
+.nir-t-pfrda__hero-ctas {
+  display: flex;
+  gap: var(--nir-spacing-4, 16px);
+  flex-wrap: wrap;
+}
+
+/* Saffron outline secondary button override */
+.nir-t-pfrda__hero-ctas .nir-e-button--secondary {
+  border-color: var(--nir-color-accent-default, #ff9933) !important;
+  color: var(--nir-color-accent-default, #ff9933) !important;
+}
+
+.nir-t-pfrda__hero-ctas .nir-e-button--secondary:hover {
+  background-color: rgba(255, 153, 51, 0.1) !important;
+}
+
+/* Nirmaan UI Input search bar styling */
+.nir-t-pfrda__hero-search-row {
+  max-width: 540px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: var(--nir-radius-lg, 8px);
+  padding: 6px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-2, 8px);
+}
+
+.nir-t-pfrda__hero-search-input-comp {
+  flex: 1;
+  margin: 0;
+}
+
+.nir-t-pfrda__hero-search-input-comp .nir-e-input__label {
+  display: none !important; /* Hide label visually */
+}
+
+.nir-t-pfrda__hero-search-input-comp .nir-e-input__field-wrapper {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.nir-t-pfrda__hero-search-input-comp .nir-e-input__field {
+  color: #ffffff !important;
+  padding: 0 var(--nir-spacing-2, 8px) !important;
+  height: 36px !important;
+  font-size: 14px !important;
+}
+
+.nir-t-pfrda__hero-search-input-comp .nir-e-input__field::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Glassmorphic Pension Calculator Card */
+.nir-t-pfrda__calc-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  border-radius: var(--nir-radius-xl, 12px);
+  padding: var(--nir-spacing-6, 24px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.nir-t-pfrda__calc-title {
+  font-size: var(--nir-font-size-lg, 18px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  margin: 0 0 var(--nir-spacing-4, 16px) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-2, 8px);
+  color: #ffffff !important;
+}
+
+.nir-t-pfrda__calc-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-4, 16px);
+}
+
+/* Side-by-side slider and text input styling */
+.nir-t-pfrda__calc-field-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--nir-spacing-4, 16px);
+  width: 100%;
+}
+
+.nir-t-pfrda__calc-slider-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-1, 4px);
+}
+
+.nir-t-pfrda__calc-slider-label {
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-medium, 500);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.nir-t-pfrda__calc-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  outline: none;
+  margin: 14px 0;
+}
+
+.nir-t-pfrda__calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--nir-color-accent-default, #ff9933);
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  transition: transform var(--nir-duration-100, 100ms) ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.nir-t-pfrda__calc-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Style for Nirmaan Input component inside Calculator */
+.nir-t-pfrda__calc-num-input {
+  width: 100px;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.nir-t-pfrda__calc-num-input .nir-e-input__label {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: var(--nir-font-size-xs, 12px) !important;
+  margin-bottom: 4px !important;
+}
+
+.nir-t-pfrda__calc-num-input .nir-e-input__field-wrapper {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+}
+
+.nir-t-pfrda__calc-num-input .nir-e-input__field {
+  color: #ffffff !important;
+  text-align: center;
+  height: 32px !important;
+  font-size: 14px !important;
+}
+
+.nir-t-pfrda__calc-num-input .nir-e-input__field:focus {
+  border-color: var(--nir-color-accent-default, #ff9933) !important;
+}
+
+.nir-t-pfrda__calc-results {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--nir-radius-lg, 8px);
+  padding: var(--nir-spacing-4, 16px);
+  margin-top: var(--nir-spacing-2, 8px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-3, 12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nir-t-pfrda__calc-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nir-t-pfrda__calc-result-lbl {
+  font-size: var(--nir-font-size-xs, 12px);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* High contrast gold numbers on dark card for readability */
+.nir-t-pfrda__calc-result-val {
+  font-family: var(--nir-font-family-mono, monospace);
+  font-size: var(--nir-font-size-md, 16px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: #ffffff;
+}
+
+.nir-t-pfrda__calc-result-val--large {
+  font-size: var(--nir-font-size-xl, 20px);
+  color: #FFD700 !important; /* Premium High Contrast Gold */
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+/* ── 5. Bento Stats Dashboard ───────────────────────────── */
+.nir-t-pfrda__bento-section {
+  padding: var(--nir-spacing-10, 40px) 0;
+  /* Premium visual upgrade: modern, clean ice-blue/gray backdrop */
+  background-color: #f4f7fc;
+  border-top: 1px solid #e1e7f0;
+  border-bottom: 1px solid #e1e7f0;
+}
+
+.nir-t-pfrda__bento-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__section-title {
+  font-size: var(--nir-font-size-2xl, 24px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-default, #010f2a) !important;
+  margin: 0 0 var(--nir-spacing-6, 24px) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--nir-spacing-3, 12px);
+}
+
+.nir-t-pfrda__section-indicator {
+  width: 4px;
+  height: 24px;
+  background: var(--nir-color-primary-default, #0b3d91);
+  border-radius: var(--nir-radius-sm, 2px);
+}
+
+.nir-t-pfrda__bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--nir-spacing-6, 24px);
+}
+
+@media (max-width: 768px) {
+  .nir-t-pfrda__bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nir-t-pfrda__bento-card {
+  background: #ffffff;
+  border: 1px solid #d0d7e2;
+  border-radius: var(--nir-radius-xl, 12px);
+  padding: var(--nir-spacing-6, 24px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(8, 52, 89, 0.04);
+  transition: transform var(--nir-duration-200, 200ms) var(--nir-easing-standard, ease), box-shadow var(--nir-duration-200, 200ms) var(--nir-easing-standard, ease);
+}
+
+.nir-t-pfrda__bento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(8, 52, 89, 0.1);
+  border-color: var(--nir-color-primary-default, #0b3d91);
+}
+
+.nir-t-pfrda__bento-card--large {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .nir-t-pfrda__bento-card--large {
+    grid-column: span 1;
+  }
+}
+
+.nir-t-pfrda__bento-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__bento-lbl {
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-text-secondary, #5f7382);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nir-t-pfrda__bento-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--nir-color-primary-subtle, #e8edf6);
+  color: var(--nir-color-primary-default, #0b3d91);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nir-t-pfrda__bento-val-group {
+  display: flex;
+  align-items: baseline;
+  gap: var(--nir-spacing-2, 8px);
+}
+
+.nir-t-pfrda__bento-val {
+  font-size: var(--nir-font-size-3xl, 30px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-primary-default, #0b3d91); /* Deep blue for numbers to look bright and sharp */
+  margin: 0;
+}
+
+/* Green trend tag with 4.5:1 compliant contrast (#0B6A04 green on #E8F5E9 bg) */
+.nir-t-pfrda__bento-trend {
+  font-size: var(--nir-font-size-xs, 12px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: #0B6A04; 
+  background-color: #E8F5E9;
+  padding: 4px 8px;
+  border-radius: var(--nir-radius-sm, 4px);
+  border: 1px solid #C8E6C9;
+}
+
+.nir-t-pfrda__bento-desc {
+  font-size: var(--nir-font-size-sm, 14px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  margin: var(--nir-spacing-2, 8px) 0 0 0;
+  line-height: 1.5;
+}
+
+/* ── 6. Schemes Compartment ─────────────────────────────── */
+.nir-t-pfrda__schemes-section {
+  padding: var(--nir-spacing-10, 40px) 0;
+  background-color: #ffffff;
+}
+
+.nir-t-pfrda__schemes-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__schemes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--nir-spacing-8, 32px);
+}
+
+@media (max-width: 768px) {
+  .nir-t-pfrda__schemes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nir-t-pfrda__scheme-card {
+  border: 1px solid #d0d7e2;
+  border-radius: var(--nir-radius-xl, 12px);
+  padding: var(--nir-spacing-6, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-4, 16px);
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(8, 52, 89, 0.02);
+  transition: all 0.2s ease;
+}
+
+.nir-t-pfrda__scheme-card:hover {
+  border-color: var(--nir-color-primary-default, #0b3d91);
+  box-shadow: 0 8px 20px rgba(8, 52, 89, 0.06);
+}
+
+.nir-t-pfrda__scheme-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.nir-t-pfrda__scheme-card--nps::before {
+  background-color: var(--nir-color-primary-default, #0b3d91);
+}
+
+.nir-t-pfrda__scheme-card--apy::before {
+  background-color: var(--nir-color-accent-default, #ff9933);
+}
+
+.nir-t-pfrda__scheme-title {
+  font-size: var(--nir-font-size-xl, 20px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: var(--nir-color-primary-default, #0b3d91) !important; /* Bold blue titles */
+  margin: 0;
+}
+
+.nir-t-pfrda__scheme-desc {
+  font-size: var(--nir-font-size-sm, 14px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.nir-t-pfrda__scheme-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-2, 8px);
+  margin: 0;
+  padding: 0 0 0 var(--nir-spacing-4, 16px);
+  font-size: var(--nir-font-size-sm, 14px);
+  color: var(--nir-color-text-default, #010f2a);
+}
+
+.nir-t-pfrda__scheme-features li {
+  line-height: 1.6;
+}
+
+.nir-t-pfrda__scheme-actions {
+  display: flex;
+  gap: var(--nir-spacing-3, 12px);
+  margin-top: auto;
+}
+
+/* ── 7. Latest Updates & Tab Selector ────────────────────── */
+.nir-t-pfrda__updates-section {
+  padding: var(--nir-spacing-10, 40px) 0;
+  background-color: #f4f7fc; /* Ice blue/gray background */
+  border-top: 1px solid #e1e7f0;
+}
+
+.nir-t-pfrda__updates-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+}
+
+.nir-t-pfrda__updates-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--nir-spacing-8, 32px);
+}
+
+@media (max-width: 900px) {
+  .nir-t-pfrda__updates-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nir-t-pfrda__tabs-bar {
+  display: flex;
+  border-bottom: 2px solid #d0d7e2;
+  margin-bottom: var(--nir-spacing-4, 16px);
+  overflow-x: auto;
+}
+
+.nir-t-pfrda__tab-trigger {
+  background: none;
+  border: none;
+  padding: var(--nir-spacing-3, 12px) var(--nir-spacing-5, 20px);
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-semibold, 600);
+  color: var(--nir-color-text-secondary, #5f7382);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all var(--nir-duration-150, 150ms) var(--nir-easing-standard, ease);
+  white-space: nowrap;
+  margin-bottom: -2px;
+}
+
+.nir-t-pfrda__tab-trigger:hover {
+  color: var(--nir-color-primary-default, #0b3d91);
+}
+
+.nir-t-pfrda__tab-trigger--active {
+  color: var(--nir-color-primary-default, #0b3d91);
+  border-bottom-color: var(--nir-color-primary-default, #0b3d91);
+}
+
+.nir-t-pfrda__circulars-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-3, 12px);
+}
+
+.nir-t-pfrda__circular-card {
+  background-color: #ffffff;
+  border: 1px solid #d0d7e2;
+  border-radius: var(--nir-radius-lg, 8px);
+  padding: var(--nir-spacing-4, 16px);
+  display: flex;
+  gap: var(--nir-spacing-4, 16px);
+  align-items: flex-start;
+  transition: all var(--nir-duration-150, 150ms) ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.nir-t-pfrda__circular-card:hover {
+  border-color: var(--nir-color-primary-default, #0b3d91);
+  box-shadow: 0 4px 12px rgba(8, 52, 89, 0.08);
+}
+
+.nir-t-pfrda__circular-date-badge {
+  background-color: var(--nir-color-primary-subtle, #e8edf6);
+  color: var(--nir-color-primary-default, #0b3d91);
+  border-radius: var(--nir-radius-md, 6px);
+  padding: var(--nir-spacing-2, 8px);
+  text-align: center;
+  min-width: 60px;
+  flex-shrink: 0;
+  border: 1px solid #c9d5ea;
+}
+
+.nir-t-pfrda__circular-day {
+  font-size: var(--nir-font-size-lg, 18px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  display: block;
+}
+
+.nir-t-pfrda__circular-month {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: var(--nir-font-weight-bold, 700);
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.nir-t-pfrda__circular-content {
+  flex: 1;
+}
+
+.nir-t-pfrda__circular-meta {
+  display: flex;
+  gap: var(--nir-spacing-3, 12px);
+  font-size: var(--nir-font-size-xs, 12px);
+  color: var(--nir-color-text-secondary, #5f7382);
+  margin-bottom: var(--nir-spacing-1, 4px);
+}
+
+/* Saffron label text made darker for AA contrast compliance (#C25E00 orange on white) */
+.nir-t-pfrda__circular-tag {
+  color: #C25E00;
+  font-weight: var(--nir-font-weight-bold, 700);
+}
+
+.nir-t-pfrda__circular-title {
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-semibold, 600);
+  margin: 0;
+  color: var(--nir-color-text-default, #010f2a);
+  line-height: 1.4;
+}
+
+.nir-t-pfrda__circular-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nir-t-pfrda__circular-title a:hover {
+  color: var(--nir-color-primary-default, #0b3d91);
+  text-decoration: underline;
+}
+
+.nir-t-pfrda__circular-download-btn {
+  background: none;
+  border: none;
+  color: var(--nir-color-primary-default, #0b3d91);
+  cursor: pointer;
+  padding: var(--nir-spacing-2, 8px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.nir-t-pfrda__circular-download-btn:hover {
+  background-color: var(--nir-color-primary-subtle, #e8edf6);
+}
+
+/* Quick Corner links on updates section */
+.nir-t-pfrda__corner-card {
+  background: #ffffff;
+  border: 1px solid #d0d7e2;
+  border-radius: var(--nir-radius-xl, 12px);
+  padding: var(--nir-spacing-6, 24px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.nir-t-pfrda__corner-title {
+  font-size: var(--nir-font-size-lg, 18px) !important;
+  font-weight: var(--nir-font-weight-bold, 700);
+  margin: 0 0 var(--nir-spacing-4, 16px) 0;
+  color: var(--nir-color-primary-default, #0b3d91) !important;
+}
+
+.nir-t-pfrda__corner-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-3, 12px);
+}
+
+.nir-t-pfrda__corner-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--nir-spacing-3, 12px) var(--nir-spacing-4, 16px);
+  background-color: #f4f7fc;
+  border: 1px solid #d0d7e2;
+  border-radius: var(--nir-radius-md, 6px);
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-semibold, 600);
+  color: var(--nir-color-text-default, #010f2a);
+  text-decoration: none;
+  transition: all var(--nir-duration-150, 150ms) ease;
+}
+
+.nir-t-pfrda__corner-link:hover {
+  border-color: var(--nir-color-primary-default, #0b3d91);
+  background-color: var(--nir-color-primary-subtle, #e8edf6);
+  color: var(--nir-color-primary-default, #0b3d91);
+}
+
+/* ── 8. Government Footer ────────────────────────────────── */
+.nir-t-pfrda__footer {
+  background-color: #0b1c33; /* Deep solid navy for premium footer */
+  color: rgba(255, 255, 255, 0.75);
+  padding: var(--nir-spacing-10, 40px) 0 var(--nir-spacing-6, 24px) 0;
+  border-top: 4px solid var(--nir-color-accent-default, #ff9933);
+}
+
+.nir-t-pfrda__footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nir-spacing-4, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-8, 32px);
+}
+
+.nir-t-pfrda__footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--nir-spacing-6, 24px);
+}
+
+@media (max-width: 768px) {
+  .nir-t-pfrda__footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .nir-t-pfrda__footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nir-t-pfrda__footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-3, 12px);
+}
+
+.nir-t-pfrda__footer-title {
+  color: #ffffff !important;
+  font-size: var(--nir-font-size-sm, 14px);
+  font-weight: var(--nir-font-weight-bold, 700);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nir-t-pfrda__footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nir-spacing-2, 8px);
+}
+
+.nir-t-pfrda__footer-links a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: var(--nir-font-size-sm, 14px);
+  transition: color var(--nir-duration-150, 150ms) ease;
+}
+
+.nir-t-pfrda__footer-links a:hover {
+  color: var(--nir-color-accent-default, #ff9933);
+}
+
+.nir-t-pfrda__footer-about {
+  font-size: var(--nir-font-size-xs, 12px);
+  line-height: 1.6;
+}
+
+.nir-t-pfrda__footer-meta {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--nir-spacing-6, 24px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nir-spacing-4, 16px);
+  font-size: var(--nir-font-size-xs, 12px);
+}
+
+.nir-t-pfrda__footer-compliance {
+  display: flex;
+  gap: var(--nir-spacing-4, 16px);
+  align-items: center;
+}
+
+.nir-t-pfrda__compliance-badge {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 4px 10px;
+  border-radius: var(--nir-radius-sm, 4px);
+  font-size: 10px;
+  font-weight: var(--nir-font-weight-bold, 700);
+  color: #ffffff;
+}
+
+/* ── Theme & Contrast Overrides for Dark / High-Contrast Modes ── */
+[data-theme="dark"] .nir-t-pfrda,
+[data-theme="high-contrast"] .nir-t-pfrda {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  color: var(--nir-color-text-default, #ffffff);
+}
+
+[data-theme="dark"] .nir-t-pfrda__header,
+[data-theme="high-contrast"] .nir-t-pfrda__header {
+  background-color: var(--nir-color-surface-default, #010f2a);
+}
+
+[data-theme="dark"] .nir-t-pfrda__bento-section,
+[data-theme="high-contrast"] .nir-t-pfrda__bento-section {
+  background-color: var(--nir-color-surface-container, #041e34);
+  border-top-color: var(--nir-color-border-default, #c9d5ea);
+  border-bottom-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-pfrda__bento-card,
+[data-theme="high-contrast"] .nir-t-pfrda__bento-card {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  border-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-pfrda__bento-card:hover,
+[data-theme="high-contrast"] .nir-t-pfrda__bento-card:hover {
+  background-color: var(--nir-color-surface-container, #041e34);
+  border-color: var(--nir-color-primary-default, #0b3d91);
+}
+
+[data-theme="dark"] .nir-t-pfrda__updates-section,
+[data-theme="high-contrast"] .nir-t-pfrda__updates-section {
+  background-color: var(--nir-color-surface-container, #041e34);
+  border-top-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-pfrda__circular-card,
+[data-theme="high-contrast"] .nir-t-pfrda__circular-card {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  border-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-pfrda__corner-card,
+[data-theme="high-contrast"] .nir-t-pfrda__corner-card {
+  background-color: var(--nir-color-surface-default, #010f2a);
+  border-color: var(--nir-color-border-default, #c9d5ea);
+}
+
+[data-theme="dark"] .nir-t-pfrda__corner-link,
+[data-theme="high-contrast"] .nir-t-pfrda__corner-link {
+  background-color: var(--nir-color-surface-container, #041e34);
+  border-color: var(--nir-color-border-default, #c9d5ea);
+  color: var(--nir-color-text-default, #ffffff);
+}
+
+[data-theme="dark"] .nir-t-pfrda__tab-trigger,
+[data-theme="high-contrast"] .nir-t-pfrda__tab-trigger {
+  color: var(--nir-color-text-secondary, #b8c0c7);
+}
+
+[data-theme="dark"] .nir-t-pfrda__tab-trigger--active,
+[data-theme="high-contrast"] .nir-t-pfrda__tab-trigger--active {
+  color: var(--nir-color-primary-default, #fff);
+  border-bottom-color: var(--nir-color-primary-default, #fff);
+}
+
+/* ── Accessibility Text Scaling Controls ── */
+.nir-t-pfrda-wrapper .nir-t-pfrda--text-lg {
+  --nir-font-size-xs: 14px !important;
+  --nir-font-size-sm: 16px !important;
+  --nir-font-size-base: 18px !important;
+  --nir-font-size-md: 18px !important;
+  --nir-font-size-lg: 20px !important;
+  --nir-font-size-xl: 22px !important;
+  --nir-font-size-2xl: 26px !important;
+  --nir-font-size-3xl: 32px !important;
+  --nir-font-size-4xl: 38px !important;
+  --nir-font-size-5xl: 50px !important;
+}
+
+.nir-t-pfrda-wrapper .nir-t-pfrda--text-xl {
+  --nir-font-size-xs: 16px !important;
+  --nir-font-size-sm: 18px !important;
+  --nir-font-size-base: 20px !important;
+  --nir-font-size-md: 20px !important;
+  --nir-font-size-lg: 22px !important;
+  --nir-font-size-xl: 24px !important;
+  --nir-font-size-2xl: 28px !important;
+  --nir-font-size-3xl: 34px !important;
+  --nir-font-size-4xl: 40px !important;
+  --nir-font-size-5xl: 52px !important;
+}
+
+.nir-t-pfrda--text-lg .nir-t-pfrda__bento-lbl,
+.nir-t-pfrda--text-lg .nir-t-pfrda__compliance-badge {
+  font-size: 12px !important;
+}
+
+.nir-t-pfrda--text-xl .nir-t-pfrda__bento-lbl,
+.nir-t-pfrda--text-xl .nir-t-pfrda__compliance-badge {
+  font-size: 14px !important;
+}
+

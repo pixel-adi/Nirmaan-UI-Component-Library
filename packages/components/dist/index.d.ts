@@ -378,4 +378,34 @@ interface EmptyStateTemplateProps {
  */
 declare function EmptyStateTemplate({ graphic, title, description, actionText, onAction, secondaryActionText, onSecondaryAction, }: EmptyStateTemplateProps): react_jsx_runtime.JSX.Element;
 
-export { Autocomplete, type AutocompleteOption, type AutocompleteProps, Button, type ButtonProps, Checkbox, type CheckboxProps, Dropdown, type DropdownOption, type DropdownProps, EmptyStateTemplate, type EmptyStateTemplateProps, Input, type InputProps, LoginTemplate, type LoginTemplateProps, type NirBrand, type NirDensity, type NirTheme, type NirmanContextType, NirmanProvider, type NirmanProviderProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, SettingsTemplate, type SettingsTemplateProps, Toggle, type ToggleProps, useNirman };
+interface PfrdaTemplateProps {
+    /** Title override */
+    title?: string;
+}
+/**
+ * PfrdaTemplate — Redesigned PFRDA CONNECT Portal Page Template.
+ * Fully styled using Nirmaan UI Layer 1 elements and Central Government token overrides.
+ */
+declare function PfrdaTemplate(props: PfrdaTemplateProps): react_jsx_runtime.JSX.Element;
+
+interface EducationTemplateProps {
+    /** Title override */
+    title?: string;
+}
+/**
+ * EducationTemplate — Redesigned Ministry of Education Portal Page Template.
+ * Fully styled using Nirmaan UI components and GIGW 3.0 standards.
+ */
+declare function EducationTemplate(props: EducationTemplateProps): react_jsx_runtime.JSX.Element;
+
+interface KeralaTemplateProps {
+    /** Title override */
+    title?: string;
+}
+/**
+ * KeralaTemplate — Redesigned Government of Kerala State Portal Page Template.
+ * Dynamically themed via data-brand="kl" with Forest Green and Gold.
+ */
+declare function KeralaTemplate(props: KeralaTemplateProps): react_jsx_runtime.JSX.Element;
+
+export { Autocomplete, type AutocompleteOption, type AutocompleteProps, Button, type ButtonProps, Checkbox, type CheckboxProps, Dropdown, type DropdownOption, type DropdownProps, EducationTemplate, type EducationTemplateProps, EmptyStateTemplate, type EmptyStateTemplateProps, Input, type InputProps, KeralaTemplate, type KeralaTemplateProps, LoginTemplate, type LoginTemplateProps, type NirBrand, type NirDensity, type NirTheme, type NirmanContextType, NirmanProvider, type NirmanProviderProps, PfrdaTemplate, type PfrdaTemplateProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, SettingsTemplate, type SettingsTemplateProps, Toggle, type ToggleProps, useNirman };

@@ -1,0 +1,62 @@
+---
+title: PFRDA Portal Redesign
+description: A high-fidelity, GIGW 3.0 compliant Indian Government pension portal template built using the Nirmaan UI design system.
+---
+
+import { PfrdaTemplate } from '@nirman/components';
+import Playground from '../../../components/Playground.astro';
+
+The `PfrdaTemplate` is a complete, high-fidelity landing page template showcasing a comprehensive redesign of the official **Pension Fund Regulatory and Development Authority (PFRDA)** portal of India. 
+
+It demonstrates how Nirmaan's multi-government token override system applies **Central Government (GOI)** branding (National Blue and Saffron) dynamically.
+
+:::tip[Full-Screen Preview]
+To view this government portal redesign full-screen without sidebars or frame restrictions:
+👉 **[Open Standalone Redesign in New Tab](/pfrda-demo)**
+:::
+
+## 1. Interactive Preview
+
+This live preview showcases the fully responsive government dashboard. It includes an interactive **Pension Estimator**, accessibility text resize selectors, a real-time circular search filter, and support for dark mode / high contrast.
+
+<Playground align="start" bg="container">
+  <div style={{ width: '100%', margin: '0 auto', border: '1px solid var(--sl-color-hairline)', borderRadius: '12px', overflow: 'hidden' }}>
+    <PfrdaTemplate client:load />
+  </div>
+</Playground>
+
+## 2. Core Redesign Accomplishments
+
+This template reimagines traditional government layouts using modern design system guidelines:
+
+- **WCAG 2.2 / GIGW 3.0 Compliance:** Interactive elements satisfy the 44×44px minimum touch target size. High-contrast themes are baked directly into the semantic layer.
+- **National Government Brand:** Uses `data-brand="goi"` to resolve primary assets to Ashoka National Blue (`#0B3D91`) and accent assets to Saffron (`#FF9933`).
+- **Interactive Pension Estimator:** Formulated according to Indian NPS rules (40% minimum annuity allocation, 6% annual returns estimate) using custom range sliders and reactive state.
+- **Local Accessibility Bar:** Users can scale text up to `A++` (1.25x scaling) and toggle contrast modes directly from the utility header.
+
+## 3. Developer Implementation
+
+To use this template in your portal application, import it directly from the components package:
+
+```tsx
+import { PfrdaTemplate } from '@nirman/components';
+
+function PortalPage() {
+  return (
+    <PfrdaTemplate />
+  );
+}
+
+export default PortalPage;
+```
+
+## 4. Composition & API
+
+The template is fully constructed from modular **Layer 1** (Elements) and **Layer 2** (Providers) of the Nirmaan UI Component Library:
+
+| Component | Layer | Usage in PFRDA Redesign |
+| :--- | :--- | :--- |
+| `NirmanProvider` | Layer 2 | Orchestrates theme, contrast, and density updates. |
+| `Button` | Layer 1 | CTAs for NPS Registration and circular downloads. |
+| `Toggle` | Layer 1 | Switches density modes between Compact and Default. |
+| `Input` | Layer 1 | Standard circular search boxes and pension contribution inputs. |

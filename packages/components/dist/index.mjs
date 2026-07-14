@@ -1099,7 +1099,1665 @@ function EmptyStateTemplate({
     ] })
   ] }) });
 }
+var AshokaEmblem = () => /* @__PURE__ */ jsxs("svg", { className: "nir-t-pfrda__emblem", viewBox: "0 0 100 150", fill: "currentColor", children: [
+  /* @__PURE__ */ jsx("path", { d: "M50 10 C53 10 55 12 55 15 C55 18 53 20 50 20 C47 20 45 18 45 15 C45 12 47 10 50 10 Z" }),
+  /* @__PURE__ */ jsx("path", { d: "M40 22 L60 22 L58 35 L42 35 Z" }),
+  /* @__PURE__ */ jsx("path", { d: "M38 37 C38 37 42 45 50 45 C58 45 62 37 62 37 L65 75 L35 75 Z" }),
+  /* @__PURE__ */ jsx("rect", { x: "42", y: "77", width: "16", height: "50", rx: "2" }),
+  /* @__PURE__ */ jsx("path", { d: "M30 128 L70 128 L68 135 L32 135 Z" }),
+  /* @__PURE__ */ jsx("circle", { cx: "50", cy: "102", r: "6", stroke: "currentColor", strokeWidth: "1", fill: "none" }),
+  /* @__PURE__ */ jsx("line", { x1: "50", y1: "96", x2: "50", y2: "108", stroke: "currentColor", strokeWidth: "1" }),
+  /* @__PURE__ */ jsx("line", { x1: "44", y1: "102", x2: "56", y2: "102", stroke: "currentColor", strokeWidth: "1" })
+] });
+function PfrdaPortalInner({ title }) {
+  const { theme, setTheme, density, setDensity } = useNirman();
+  const [textSize, setTextSize] = useState("normal");
+  const [lang, setLang] = useState("en");
+  const [age, setAge] = useState(30);
+  const [contribution, setContribution] = useState(5e3);
+  const [expectedReturn, setExpectedReturn] = useState(10);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("all");
+  const circulars = useMemo(() => [
+    {
+      id: "1",
+      day: "12",
+      month: "Jul",
+      category: "nps",
+      tag: "NPS",
+      title: "Revision of processing fees for online transactions via Netbanking and UPI payment gateways.",
+      ref: "PFRDA/2026/07/NPS-04"
+    },
+    {
+      id: "2",
+      day: "08",
+      month: "Jul",
+      category: "apy",
+      tag: "APY",
+      title: "APY subscriber onboarding guidelines and performance metrics for Regional Rural Banks (RRBs).",
+      ref: "PFRDA/2026/07/APY-02"
+    },
+    {
+      id: "3",
+      day: "05",
+      month: "Jul",
+      category: "regs",
+      tag: "Regulations",
+      title: "Pension Fund Regulatory and Development Authority (Point of Presence) Amendment Regulations, 2026.",
+      ref: "PFRDA/2026/REG/03"
+    },
+    {
+      id: "4",
+      day: "28",
+      month: "Jun",
+      category: "nps",
+      tag: "NPS",
+      title: "Standard Operating Procedure (SOP) for processing partial withdrawals under National Pension System.",
+      ref: "PFRDA/2026/06/NPS-18"
+    },
+    {
+      id: "5",
+      day: "20",
+      month: "regs",
+      tag: "Regulations",
+      title: "Guidelines on cybersecurity framework and cyber resilience measures for Pension Fund Managers.",
+      ref: "PFRDA/2026/REG/02"
+    }
+  ], []);
+  const filteredCirculars = useMemo(() => {
+    return circulars.filter((item) => {
+      const matchesTab = activeTab === "all" || item.category === activeTab;
+      const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.ref.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesTab && matchesSearch;
+    });
+  }, [circulars, activeTab, searchQuery]);
+  const calcResults = useMemo(() => {
+    const yearsToRetire = Math.max(0, 60 - age);
+    const months = yearsToRetire * 12;
+    const monthlyRate = expectedReturn / 100 / 12;
+    let accumulatedCorpus = 0;
+    if (months > 0 && monthlyRate > 0) {
+      accumulatedCorpus = contribution * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+    } else if (months > 0) {
+      accumulatedCorpus = contribution * months;
+    }
+    const annuityCorpus = accumulatedCorpus * 0.4;
+    const lumpSum = accumulatedCorpus * 0.6;
+    const estimatedPension = annuityCorpus * 0.06 / 12;
+    const formatCurrency = (val) => {
+      if (val >= 1e7) {
+        return `\u20B9${(val / 1e7).toFixed(2)} Cr`;
+      }
+      if (val >= 1e5) {
+        return `\u20B9${(val / 1e5).toFixed(2)} Lakh`;
+      }
+      return `\u20B9${Math.round(val).toLocaleString("en-IN")}`;
+    };
+    return {
+      corpus: formatCurrency(accumulatedCorpus),
+      pension: formatCurrency(estimatedPension),
+      lumpsum: formatCurrency(lumpSum),
+      rawCorpus: accumulatedCorpus
+    };
+  }, [age, contribution, expectedReturn]);
+  const textScaleClass = textSize === "large" ? "nir-t-pfrda--text-lg" : textSize === "largest" ? "nir-t-pfrda--text-xl" : "";
+  return /* @__PURE__ */ jsxs("div", { className: `nir-t-pfrda ${textScaleClass}`, lang, children: [
+    /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__top-bar", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__top-bar-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__gov-identity", children: [
+        /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__flag-dot" }),
+        /* @__PURE__ */ jsx("span", { children: "\u092D\u093E\u0930\u0924 \u0938\u0930\u0915\u093E\u0930 | GOVERNMENT OF INDIA" })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__top-actions", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__a11y-controls", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-pfrda__a11y-btn ${textSize === "normal" ? "nir-t-pfrda__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("normal"),
+              title: "Normal text size",
+              "aria-label": "Normal text size",
+              children: "A"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-pfrda__a11y-btn ${textSize === "large" ? "nir-t-pfrda__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("large"),
+              title: "Large text size",
+              "aria-label": "Large text size",
+              children: "A+"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-pfrda__a11y-btn ${textSize === "largest" ? "nir-t-pfrda__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("largest"),
+              title: "Extra large text size",
+              "aria-label": "Extra large text size",
+              children: "A++"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-pfrda__a11y-btn ${theme === "light" ? "nir-t-pfrda__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("light"),
+              title: "Light Theme",
+              children: "Light"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-pfrda__a11y-btn ${theme === "dark" ? "nir-t-pfrda__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("dark"),
+              title: "Dark Theme",
+              children: "Dark"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-pfrda__a11y-btn ${theme === "high-contrast" ? "nir-t-pfrda__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("high-contrast"),
+              title: "High Contrast Theme",
+              children: "Contrast"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__lang-dropdown", children: /* @__PURE__ */ jsx(
+          Dropdown,
+          {
+            label: "Language Select",
+            placeholder: "Select Language",
+            options: [
+              { value: "en", label: "English" },
+              { value: "hi", label: "\u0939\u093F\u0928\u094D\u0926\u0940" }
+            ],
+            value: lang,
+            onChange: (val) => setLang(val),
+            size: "sm"
+          }
+        ) })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx("header", { className: "nir-t-pfrda__header", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__header-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__logo-block", children: [
+        /* @__PURE__ */ jsx(AshokaEmblem, {}),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__title-group", children: [
+          /* @__PURE__ */ jsx("h1", { className: "nir-t-pfrda__org-hi", children: "\u092A\u0947\u0902\u0936\u0928 \u0928\u093F\u0927\u093F \u0935\u093F\u0928\u093F\u092F\u093E\u092E\u0915 \u0914\u0930 \u0935\u093F\u0915\u093E\u0938 \u092A\u094D\u0930\u093E\u0927\u093F\u0915\u0930\u0923" }),
+          /* @__PURE__ */ jsx("h2", { className: "nir-t-pfrda__org-en", children: "Pension Fund Regulatory and Development Authority" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__org-tagline", children: "Nirmaan UI Compliant Portal \u2022 GIGW 3.0 Standard" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__portal-badge", children: "PFRDA CONNECT" }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("nav", { className: "nir-t-pfrda__nav", "aria-label": "Primary Portal Navigation", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__nav-inner", children: [
+      /* @__PURE__ */ jsxs("ul", { className: "nir-t-pfrda__nav-list", children: [
+        /* @__PURE__ */ jsx("li", { className: "nir-t-pfrda__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-pfrda__nav-link nir-t-pfrda__nav-link--active", children: "Home" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-pfrda__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-pfrda__nav-link", children: "About PFRDA" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-pfrda__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-pfrda__nav-link", children: "Pension Schemes" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-pfrda__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-pfrda__nav-link", children: "Subscriber Corner" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-pfrda__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-pfrda__nav-link", children: "Regulatory Framework" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-pfrda__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-pfrda__nav-link", children: "Knowledge Center" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-pfrda__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-pfrda__nav-link", children: "Contact" }) })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__nav-actions", children: /* @__PURE__ */ jsx(
+        Toggle,
+        {
+          label: "Compact Density",
+          checked: density === "compact",
+          onChange: (e) => setDensity(e.target.checked ? "compact" : "default")
+        }
+      ) })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "nir-t-pfrda__hero-section", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__hero-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__hero-content", children: [
+        /* @__PURE__ */ jsx("h3", { className: "nir-t-pfrda__hero-heading", children: "Securing Your Golden Years with Trusted Pensions" }),
+        /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__hero-tagline-text", children: "PFRDA regulates and promotes the Indian pension sector, ensuring security, transparency, and robust retirement wealth accumulation for a self-reliant, pension-secure India." }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__hero-ctas", children: [
+          /* @__PURE__ */ jsx(Button, { variant: "primary", size: "lg", onClick: () => alert("Redirecting to NPS registration portal..."), children: "Register for NPS" }),
+          /* @__PURE__ */ jsx(Button, { variant: "secondary", size: "lg", style: { color: "#ffffff", borderColor: "#ffffff" }, onClick: () => alert("Redirecting to contribution gate..."), children: "Contribute Online" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__hero-search-row", children: [
+          /* @__PURE__ */ jsx(
+            Input,
+            {
+              label: "Search circulars, regulations, guidelines...",
+              placeholder: "Search circulars, regulations, guidelines...",
+              className: "nir-t-pfrda__hero-search-input-comp",
+              value: searchQuery,
+              onChange: (e) => setSearchQuery(e.target.value),
+              "aria-label": "Search PFRDA circulars",
+              fullWidth: true
+            }
+          ),
+          /* @__PURE__ */ jsx(Button, { variant: "primary", size: "md", onClick: () => alert(`Searching for "${searchQuery}"`), children: "Search" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-card", children: [
+        /* @__PURE__ */ jsxs("h4", { className: "nir-t-pfrda__calc-title", children: [
+          /* @__PURE__ */ jsx("svg", { width: "18", height: "18", fill: "currentColor", viewBox: "0 0 24 24", "aria-hidden": "true", children: /* @__PURE__ */ jsx("path", { d: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2zm0 8H7v-2h10v2z" }) }),
+          "NPS Pension Estimator"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-form", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-field-row", children: [
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-slider-group", children: [
+              /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__calc-slider-label", children: /* @__PURE__ */ jsx("span", { children: "Current Age (Years)" }) }),
+              /* @__PURE__ */ jsx(
+                "input",
+                {
+                  type: "range",
+                  min: "18",
+                  max: "60",
+                  value: age,
+                  onChange: (e) => setAge(parseInt(e.target.value) || 18),
+                  className: "nir-t-pfrda__calc-slider",
+                  "aria-label": "Current Age Slider"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsx(
+              Input,
+              {
+                type: "number",
+                label: "Age",
+                min: "18",
+                max: "60",
+                value: age.toString(),
+                onChange: (e) => {
+                  const val = parseInt(e.target.value);
+                  if (val >= 18 && val <= 60) setAge(val);
+                  else if (e.target.value === "") setAge(18);
+                },
+                className: "nir-t-pfrda__calc-num-input",
+                size: "sm"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-field-row", children: [
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-slider-group", children: [
+              /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__calc-slider-label", children: /* @__PURE__ */ jsx("span", { children: "Monthly Contribution (\u20B9)" }) }),
+              /* @__PURE__ */ jsx(
+                "input",
+                {
+                  type: "range",
+                  min: "500",
+                  max: "15000",
+                  step: "500",
+                  value: contribution,
+                  onChange: (e) => setContribution(parseInt(e.target.value) || 500),
+                  className: "nir-t-pfrda__calc-slider",
+                  "aria-label": "Monthly Contribution Slider"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsx(
+              Input,
+              {
+                type: "number",
+                label: "Amount (\u20B9)",
+                min: "500",
+                max: "100000",
+                step: "500",
+                value: contribution.toString(),
+                onChange: (e) => {
+                  const val = parseInt(e.target.value);
+                  if (val >= 0) setContribution(val);
+                },
+                className: "nir-t-pfrda__calc-num-input",
+                size: "sm"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-field-row", children: [
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-slider-group", children: [
+              /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__calc-slider-label", children: /* @__PURE__ */ jsx("span", { children: "Expected Returns (%)" }) }),
+              /* @__PURE__ */ jsx(
+                "input",
+                {
+                  type: "range",
+                  min: "5",
+                  max: "15",
+                  step: "0.5",
+                  value: expectedReturn,
+                  onChange: (e) => setExpectedReturn(parseFloat(e.target.value) || 5),
+                  className: "nir-t-pfrda__calc-slider",
+                  "aria-label": "Expected Returns Slider"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsx(
+              Input,
+              {
+                type: "number",
+                label: "Returns (%)",
+                min: "5",
+                max: "25",
+                step: "0.1",
+                value: expectedReturn.toString(),
+                onChange: (e) => {
+                  const val = parseFloat(e.target.value);
+                  if (val >= 0) setExpectedReturn(val);
+                },
+                className: "nir-t-pfrda__calc-num-input",
+                size: "sm"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-results", children: [
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-result-item", children: [
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__calc-result-lbl", children: "Accumulated Corpus (at Age 60)" }),
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__calc-result-val", children: calcResults.corpus })
+            ] }),
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-result-item", children: [
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__calc-result-lbl", children: "Estimated Monthly Pension" }),
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__calc-result-val nir-t-pfrda__calc-result-val--large", children: calcResults.pension })
+            ] }),
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__calc-result-item", children: [
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__calc-result-lbl", children: "Lumpsum Withdrawal (60%)" }),
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__calc-result-val", children: calcResults.lumpsum })
+            ] })
+          ] })
+        ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "nir-t-pfrda__bento-section", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-inner", children: [
+      /* @__PURE__ */ jsxs("h3", { className: "nir-t-pfrda__section-title", children: [
+        /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__section-indicator" }),
+        "National Pension Sector at a Glance"
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-grid", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-card nir-t-pfrda__bento-card--large", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-card-header", children: [
+            /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__bento-lbl", children: "Assets Under Management (AUM)" }),
+            /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__bento-icon-box", children: /* @__PURE__ */ jsx("svg", { width: "20", height: "20", fill: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ jsx("path", { d: "M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z" }) }) })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-val-group", children: [
+              /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__bento-val", children: "\u20B911.23 Lakh Crore" }),
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__bento-trend", children: "+21.4% YoY" })
+            ] }),
+            /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__bento-desc", children: "Total assets held under NPS, APY and government sector schemes, reflecting massive growth and trust in the regulatory framework." })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-card", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-card-header", children: [
+            /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__bento-lbl", children: "NPS Subscribers" }),
+            /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__bento-icon-box", children: /* @__PURE__ */ jsx("svg", { width: "20", height: "20", fill: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ jsx("path", { d: "M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" }) }) })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__bento-val-group", children: /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__bento-val", children: "6.84 Crore" }) }),
+            /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__bento-desc", children: "Subscribers across Central/State Government, Corporate, and All Citizens models." })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-card", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-card-header", children: [
+            /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__bento-lbl", children: "Atal Pension Yojana" }),
+            /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__bento-icon-box", children: /* @__PURE__ */ jsx("svg", { width: "20", height: "20", fill: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ jsx("path", { d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" }) }) })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-val-group", children: [
+              /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__bento-val", children: "5.29 Crore" }),
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__bento-trend", children: "+14.2%" })
+            ] }),
+            /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__bento-desc", children: "Providing guaranteed pensions for citizens working in India's unorganized sector." })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-card nir-t-pfrda__bento-card--large", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__bento-card-header", children: [
+            /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__bento-lbl", children: "Registered Intermediaries" }),
+            /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__bento-icon-box", children: /* @__PURE__ */ jsx("svg", { width: "20", height: "20", fill: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ jsx("path", { d: "M12 7V3H2v18h20V7H12zm-6 12H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm10 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z" }) }) })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__bento-val-group", children: /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__bento-val", children: "11 PFMs \u2022 78 POPs" }) }),
+            /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__bento-desc", children: "Regulated Pension Fund Managers, Trustee Banks, Points of Presence, and Custodians operating under strict guidelines to preserve capital and deliver optimal returns." })
+          ] })
+        ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "nir-t-pfrda__schemes-section", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__schemes-inner", children: [
+      /* @__PURE__ */ jsxs("h3", { className: "nir-t-pfrda__section-title", children: [
+        /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__section-indicator" }),
+        "Choosing the Right Pension Scheme"
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__schemes-grid", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__scheme-card nir-t-pfrda__scheme-card--nps", children: [
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-pfrda__scheme-title", children: "National Pension System (NPS)" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__scheme-desc", children: "A flexible, market-linked, voluntary defined contribution scheme designed to enable systematic savings and secure retirement wealth." }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-pfrda__scheme-features", children: [
+            /* @__PURE__ */ jsx("li", { children: "Available to all Indian citizens aged 18 to 75 years." }),
+            /* @__PURE__ */ jsx("li", { children: "Choice of active choice or auto choice asset allocation (Equity, Corporate Debt, Gov Securities)." }),
+            /* @__PURE__ */ jsx("li", { children: "Additional tax benefit under Sec 80CCD(1B) up to \u20B950,000." }),
+            /* @__PURE__ */ jsx("li", { children: "Low cost structure with highly regulated fund managers." })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__scheme-actions", children: [
+            /* @__PURE__ */ jsx(Button, { variant: "primary", onClick: () => alert("Opening NPS details..."), children: "Learn More" }),
+            /* @__PURE__ */ jsx(Button, { variant: "ghost", onClick: () => alert("Opening NPS FAQ..."), children: "FAQ" })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__scheme-card nir-t-pfrda__scheme-card--apy", children: [
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-pfrda__scheme-title", children: "Atal Pension Yojana (APY)" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__scheme-desc", children: "A government-guaranteed pension scheme targeting workers in the unorganized sector to prevent financial vulnerability in old age." }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-pfrda__scheme-features", children: [
+            /* @__PURE__ */ jsx("li", { children: "Open to Indian citizens aged 18 to 40 years." }),
+            /* @__PURE__ */ jsx("li", { children: "Guaranteed minimum pension options: \u20B91,000, \u20B92,000, \u20B93,000, \u20B94,000, or \u20B95,000 per month." }),
+            /* @__PURE__ */ jsx("li", { children: "Pension begins at age 60; spouse receives pension after death." }),
+            /* @__PURE__ */ jsx("li", { children: "Subsidized government co-contributions for eligible members." })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__scheme-actions", children: [
+            /* @__PURE__ */ jsx(Button, { variant: "primary", onClick: () => alert("Opening APY details..."), children: "Learn More" }),
+            /* @__PURE__ */ jsx(Button, { variant: "ghost", onClick: () => alert("Opening APY FAQ..."), children: "FAQ" })
+          ] })
+        ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "nir-t-pfrda__updates-section", children: /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__updates-inner", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__updates-layout", children: [
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsxs("h3", { className: "nir-t-pfrda__section-title", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__section-indicator" }),
+          "Latest Circulars & Notifications"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__tabs-bar", role: "tablist", "aria-label": "Circular categories", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": activeTab === "all",
+              className: `nir-t-pfrda__tab-trigger ${activeTab === "all" ? "nir-t-pfrda__tab-trigger--active" : ""}`,
+              onClick: () => setActiveTab("all"),
+              children: "All Circulars"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": activeTab === "nps",
+              className: `nir-t-pfrda__tab-trigger ${activeTab === "nps" ? "nir-t-pfrda__tab-trigger--active" : ""}`,
+              onClick: () => setActiveTab("nps"),
+              children: "NPS Updates"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": activeTab === "apy",
+              className: `nir-t-pfrda__tab-trigger ${activeTab === "apy" ? "nir-t-pfrda__tab-trigger--active" : ""}`,
+              onClick: () => setActiveTab("apy"),
+              children: "APY Updates"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": activeTab === "regs",
+              className: `nir-t-pfrda__tab-trigger ${activeTab === "regs" ? "nir-t-pfrda__tab-trigger--active" : ""}`,
+              onClick: () => setActiveTab("regs"),
+              children: "Regulations"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: "nir-t-pfrda__circulars-list", children: filteredCirculars.length > 0 ? filteredCirculars.map((item) => /* @__PURE__ */ jsxs("article", { className: "nir-t-pfrda__circular-card", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__circular-date-badge", "aria-hidden": "true", children: [
+            /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__circular-day", children: item.day }),
+            /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__circular-month", children: item.month })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__circular-content", children: [
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__circular-meta", children: [
+              /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__circular-tag", children: item.tag }),
+              /* @__PURE__ */ jsxs("span", { children: [
+                "Reference: ",
+                item.ref
+              ] })
+            ] }),
+            /* @__PURE__ */ jsx("h4", { className: "nir-t-pfrda__circular-title", children: /* @__PURE__ */ jsx("a", { href: "#", onClick: (e) => {
+              e.preventDefault();
+              alert(`Downloading circular ${item.ref}...`);
+            }, children: item.title }) })
+          ] }),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: "nir-t-pfrda__circular-download-btn",
+              title: "Download PDF document",
+              "aria-label": `Download PDF for circular ${item.ref}`,
+              onClick: () => alert(`Downloading circular ${item.ref}...`),
+              children: /* @__PURE__ */ jsx("svg", { width: "18", height: "18", fill: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ jsx("path", { d: "M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" }) })
+            }
+          )
+        ] }, item.id)) : /* @__PURE__ */ jsx("p", { style: { textAlign: "center", padding: "24px 0", color: "var(--nir-color-text-secondary)" }, children: "No circulars found matching your search." }) })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsxs("h3", { className: "nir-t-pfrda__section-title", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__section-indicator" }),
+          "Grievance & Redressal"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__corner-card", children: [
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-pfrda__corner-title", children: "Quick Portals" }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__corner-links", children: [
+            /* @__PURE__ */ jsxs("a", { href: "#", className: "nir-t-pfrda__corner-link", onClick: (e) => {
+              e.preventDefault();
+              alert("Opening NPS Trust Portal...");
+            }, children: [
+              /* @__PURE__ */ jsx("span", { children: "NPS Trust Website" }),
+              /* @__PURE__ */ jsx("span", { children: "\u2192" })
+            ] }),
+            /* @__PURE__ */ jsxs("a", { href: "#", className: "nir-t-pfrda__corner-link", onClick: (e) => {
+              e.preventDefault();
+              alert("Opening Grievance Portal...");
+            }, children: [
+              /* @__PURE__ */ jsx("span", { children: "Lodge Grievance (CGMS)" }),
+              /* @__PURE__ */ jsx("span", { children: "\u2192" })
+            ] }),
+            /* @__PURE__ */ jsxs("a", { href: "#", className: "nir-t-pfrda__corner-link", onClick: (e) => {
+              e.preventDefault();
+              alert("Opening CRA Login Portal...");
+            }, children: [
+              /* @__PURE__ */ jsx("span", { children: "CRA Account Login" }),
+              /* @__PURE__ */ jsx("span", { children: "\u2192" })
+            ] }),
+            /* @__PURE__ */ jsxs("a", { href: "#", className: "nir-t-pfrda__corner-link", onClick: (e) => {
+              e.preventDefault();
+              alert("Opening NPS Ki Pathshala...");
+            }, children: [
+              /* @__PURE__ */ jsx("span", { children: "NPS Ki Pathshala (Awareness)" }),
+              /* @__PURE__ */ jsx("span", { children: "\u2192" })
+            ] })
+          ] })
+        ] })
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ jsx("footer", { className: "nir-t-pfrda__footer", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__footer-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__footer-grid", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-pfrda__footer-title", children: "PFRDA REGULATORY" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-pfrda__footer-about", children: "The Pension Fund Regulatory and Development Authority is the statutory regulatory body established by the Government of India to promote, regulate, and ensure the orderly growth of pension schemes." })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-pfrda__footer-title", children: "IMPORTANT SCHEMES" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-pfrda__footer-links", children: [
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "National Pension System (NPS)" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Atal Pension Yojana (APY)" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Corporate Pension Models" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Government NPS Contributions" }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-pfrda__footer-title", children: "RESOURCE CENTRE" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-pfrda__footer-links", children: [
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "PFRDA Acts & Regulations" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Guidelines & Master Circulars" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Public Disclosures & Tenders" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "RTI Act Disclosures" }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-pfrda__footer-title", children: "HELPLINE SUPPORT" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-pfrda__footer-links", children: [
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "Toll-Free (NPS):" }),
+              " ",
+              /* @__PURE__ */ jsx("a", { href: "tel:1800110708", children: "1800 110 708" })
+            ] }),
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "Toll-Free (APY):" }),
+              " ",
+              /* @__PURE__ */ jsx("a", { href: "tel:1800110069", children: "1800 110 069" })
+            ] }),
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "Email Helpdesk:" }),
+              " ",
+              /* @__PURE__ */ jsx("a", { href: "mailto:helpdesk@pfrda.org.in", children: "helpdesk@pfrda.org.in" })
+            ] })
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__footer-meta", children: [
+        /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("span", { children: "\xA9 2026 Pension Fund Regulatory and Development Authority. All Rights Reserved." }) }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-pfrda__footer-compliance", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__compliance-badge", children: "GIGW 3.0 COMPLIANT" }),
+          /* @__PURE__ */ jsx("span", { className: "nir-t-pfrda__compliance-badge", children: "WCAG AAA ACCESSIBILITY" }),
+          /* @__PURE__ */ jsx("a", { href: "#", style: { color: "rgba(255,255,255,0.7)", marginLeft: "16px" }, onClick: (e) => {
+            e.preventDefault();
+            alert("Website Policies loaded.");
+          }, children: "Website Policies" })
+        ] })
+      ] })
+    ] }) })
+  ] });
+}
+function PfrdaTemplate(props) {
+  const [containerRef, setContainerRef] = useState(null);
+  return /* @__PURE__ */ jsx("div", { ref: setContainerRef, className: "nir-t-pfrda-wrapper", style: { width: "100%" }, children: containerRef && /* @__PURE__ */ jsx(NirmanProvider, { defaultBrand: "goi", defaultTheme: "light", rootElement: containerRef, children: /* @__PURE__ */ jsx(PfrdaPortalInner, { ...props }) }) });
+}
+var AshokaEmblem2 = () => /* @__PURE__ */ jsxs("svg", { className: "nir-t-edu__emblem", viewBox: "0 0 100 150", fill: "currentColor", "aria-hidden": "true", children: [
+  /* @__PURE__ */ jsx("path", { d: "M50 10 C53 10 55 12 55 15 C55 18 53 20 50 20 C47 20 45 18 45 15 C45 12 47 10 50 10 Z" }),
+  /* @__PURE__ */ jsx("path", { d: "M40 22 L60 22 L58 35 L42 35 Z" }),
+  /* @__PURE__ */ jsx("path", { d: "M38 37 C38 37 42 45 50 45 C58 45 62 37 62 37 L65 75 L35 75 Z" }),
+  /* @__PURE__ */ jsx("rect", { x: "42", y: "77", width: "16", height: "50", rx: "2" }),
+  /* @__PURE__ */ jsx("path", { d: "M30 128 L70 128 L68 135 L32 135 Z" }),
+  /* @__PURE__ */ jsx("circle", { cx: "50", cy: "102", r: "6", stroke: "currentColor", strokeWidth: "1", fill: "none" }),
+  /* @__PURE__ */ jsx("line", { x1: "50", y1: "96", x2: "50", y2: "108", stroke: "currentColor", strokeWidth: "1" }),
+  /* @__PURE__ */ jsx("line", { x1: "44", y1: "102", x2: "56", y2: "102", stroke: "currentColor", strokeWidth: "1" })
+] });
+function EducationPortalInner({ title }) {
+  const { theme, setTheme, density, setDensity } = useNirman();
+  const [textSize, setTextSize] = useState("normal");
+  const [lang, setLang] = useState("en");
+  const [activeSlide, setActiveSlide] = useState(0);
+  const slides = useMemo(() => [
+    {
+      id: 0,
+      image: "/assets/education/banner-swayam.png",
+      title: "SWAYAM: Free Online Learning Platform",
+      tagline: "Access high-quality education from premium Indian faculties anywhere, anytime. Onboarding and course registrations are open for 2026.",
+      cta1: "Explore Courses",
+      cta2: "Watch Intro Video"
+    },
+    {
+      id: 1,
+      image: "/assets/education/banner-nep.png",
+      title: "National Education Policy 2020",
+      tagline: "Transforming the school and higher education ecosystem of India to be equitable, vibrant, and aligned with global standards.",
+      cta1: "Read NEP Policy",
+      cta2: "Implementation Progress"
+    }
+  ], []);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 6e3);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+  const [galleryTab, setGalleryTab] = useState("video");
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(35);
+  const [newsQuery, setNewsQuery] = useState("");
+  const [newsCategory, setNewsCategory] = useState("all");
+  const updatesList = useMemo(() => [
+    {
+      id: "1",
+      date: "14 Jul 2026",
+      category: "announcements",
+      label: "Announcement",
+      title: "Applications invited for National Teachers Award 2026. Last date for submission extended.",
+      link: "#",
+      isNew: true
+    },
+    {
+      id: "2",
+      date: "10 Jul 2026",
+      category: "school",
+      label: "School Education",
+      title: "Guidelines on digital literacy integration in PM SHRI Schools for the academic session 2026-27.",
+      link: "#",
+      isNew: true
+    },
+    {
+      id: "3",
+      date: "08 Jul 2026",
+      category: "higher",
+      label: "Higher Education",
+      title: "Implementation scheme for Indian Knowledge Systems (IKS) courses in technical institutions.",
+      link: "#"
+    },
+    {
+      id: "4",
+      date: "05 Jul 2026",
+      category: "announcements",
+      label: "Announcement",
+      title: "SWAYAM semester-end exam schedule released for July-December courses.",
+      link: "#"
+    },
+    {
+      id: "5",
+      date: "29 Jun 2026",
+      category: "higher",
+      label: "Higher Education",
+      title: "AISHE (All India Survey on Higher Education) report released for 2024-2025. Key trends inside.",
+      link: "#"
+    }
+  ], []);
+  const filteredUpdates = useMemo(() => {
+    return updatesList.filter((item) => {
+      const matchesCategory = newsCategory === "all" || item.category === newsCategory;
+      const matchesSearch = item.title.toLowerCase().includes(newsQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [updatesList, newsCategory, newsQuery]);
+  useEffect(() => {
+    let playTimer;
+    if (isVideoPlaying) {
+      playTimer = setInterval(() => {
+        setVideoProgress((prev) => prev >= 100 ? 0 : prev + 1);
+      }, 500);
+    }
+    return () => clearInterval(playTimer);
+  }, [isVideoPlaying]);
+  const textScaleClass = textSize === "large" ? "nir-t-edu--text-lg" : textSize === "largest" ? "nir-t-edu--text-xl" : "";
+  return /* @__PURE__ */ jsxs("div", { className: `nir-t-edu ${textScaleClass}`, lang, children: [
+    /* @__PURE__ */ jsx("div", { className: "nir-t-edu__top-bar", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__top-bar-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__gov-identity", children: [
+        /* @__PURE__ */ jsx("span", { className: "nir-t-edu__flag-dot" }),
+        /* @__PURE__ */ jsx("span", { children: "\u0936\u093F\u0915\u094D\u0937\u093E \u092E\u0902\u0924\u094D\u0930\u093E\u0932\u092F | MINISTRY OF EDUCATION" })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__top-actions", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__a11y-controls", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-edu__a11y-btn ${textSize === "normal" ? "nir-t-edu__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("normal"),
+              title: "Normal text size",
+              "aria-label": "Normal text size",
+              children: "A"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-edu__a11y-btn ${textSize === "large" ? "nir-t-edu__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("large"),
+              title: "Large text size",
+              "aria-label": "Large text size",
+              children: "A+"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-edu__a11y-btn ${textSize === "largest" ? "nir-t-edu__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("largest"),
+              title: "Extra large text size",
+              "aria-label": "Extra large text size",
+              children: "A++"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-edu__a11y-btn ${theme === "light" ? "nir-t-edu__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("light"),
+              title: "Light Theme",
+              children: "Light"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-edu__a11y-btn ${theme === "dark" ? "nir-t-edu__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("dark"),
+              title: "Dark Theme",
+              children: "Dark"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-edu__a11y-btn ${theme === "high-contrast" ? "nir-t-edu__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("high-contrast"),
+              title: "High Contrast Theme",
+              children: "Contrast"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: "nir-t-edu__lang-dropdown", children: /* @__PURE__ */ jsx(
+          Dropdown,
+          {
+            label: "Language Select",
+            placeholder: "Select Language",
+            options: [
+              { value: "en", label: "English" },
+              { value: "hi", label: "\u0939\u093F\u0928\u094D\u0926\u0940" }
+            ],
+            value: lang,
+            onChange: (val) => setLang(val),
+            size: "sm"
+          }
+        ) })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx("header", { className: "nir-t-edu__header", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__header-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__logo-block", children: [
+        /* @__PURE__ */ jsx(AshokaEmblem2, {}),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__title-group", children: [
+          /* @__PURE__ */ jsx("h1", { className: "nir-t-edu__org-hi", children: "\u0936\u093F\u0915\u094D\u0937\u093E \u092E\u0902\u0924\u094D\u0930\u093E\u0932\u092F" }),
+          /* @__PURE__ */ jsx("h2", { className: "nir-t-edu__org-en", children: "Ministry of Education" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-edu__org-tagline", children: "Department of School Education & Literacy \u2022 Department of Higher Education" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("span", { className: "nir-t-edu__portal-badge", children: "NEP 2020 ALIGNED" }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("nav", { className: "nir-t-edu__nav", "aria-label": "Primary Portal Navigation", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__nav-inner", children: [
+      /* @__PURE__ */ jsxs("ul", { className: "nir-t-edu__nav-list", children: [
+        /* @__PURE__ */ jsx("li", { className: "nir-t-edu__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__nav-link nir-t-edu__nav-link--active", children: "Home" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-edu__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__nav-link", children: "About MoE" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-edu__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__nav-link", children: "School Education" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-edu__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__nav-link", children: "Higher Education" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-edu__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__nav-link", children: "Policy & Reforms" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-edu__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__nav-link", children: "Media Center" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-edu__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__nav-link", children: "Documents" }) })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: "nir-t-edu__nav-actions", children: /* @__PURE__ */ jsx(
+        Toggle,
+        {
+          label: "Compact Density",
+          checked: density === "compact",
+          onChange: (e) => setDensity(e.target.checked ? "compact" : "default")
+        }
+      ) })
+    ] }) }),
+    /* @__PURE__ */ jsxs("section", { className: "nir-t-edu__carousel", "aria-label": "Educational Highlights Carousel", children: [
+      /* @__PURE__ */ jsx("div", { className: "nir-t-edu__carousel-wrapper", children: slides.map((slide, idx) => /* @__PURE__ */ jsx(
+        "div",
+        {
+          className: `nir-t-edu__carousel-slide ${idx === activeSlide ? "nir-t-edu__carousel-slide--active" : ""}`,
+          style: { backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${slide.image})` },
+          children: /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__carousel-content", children: [
+            /* @__PURE__ */ jsx("h3", { className: "nir-t-edu__carousel-title", children: slide.title }),
+            /* @__PURE__ */ jsx("p", { className: "nir-t-edu__carousel-tagline", children: slide.tagline }),
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__carousel-actions", children: [
+              /* @__PURE__ */ jsx(Button, { variant: "primary", size: "lg", onClick: () => alert(`Redirecting to: ${slide.title}`), children: slide.cta1 }),
+              /* @__PURE__ */ jsx(Button, { variant: "secondary", size: "lg", style: { color: "#ffffff", borderColor: "#ffffff" }, onClick: () => alert("Launching multimedia details..."), children: slide.cta2 })
+            ] })
+          ] })
+        },
+        slide.id
+      )) }),
+      /* @__PURE__ */ jsx("div", { className: "nir-t-edu__carousel-indicators", children: slides.map((_, idx) => /* @__PURE__ */ jsx(
+        "button",
+        {
+          className: `nir-t-edu__carousel-dot ${idx === activeSlide ? "nir-t-edu__carousel-dot--active" : ""}`,
+          onClick: () => setActiveSlide(idx),
+          "aria-label": `Go to slide ${idx + 1}`
+        },
+        idx
+      )) })
+    ] }),
+    /* @__PURE__ */ jsx("section", { className: "nir-t-edu__bento-section", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__bento-inner", children: [
+      /* @__PURE__ */ jsxs("h3", { className: "nir-t-edu__section-title", children: [
+        /* @__PURE__ */ jsx("span", { className: "nir-t-edu__section-indicator" }),
+        "National Educational Initiatives & Portals"
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__bento-grid", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__bento-card", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-edu__bento-lbl", children: "Digital Learning" }),
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-edu__bento-card-title", children: "SWAYAM Portal" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-edu__bento-desc", children: "Integrated platform for online courses offering high quality education mapped to curriculum of school & higher education." }),
+          /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__bento-link", onClick: (e) => {
+            e.preventDefault();
+            alert("Redirecting to SWAYAM trust portal...");
+          }, children: "Register on SWAYAM \u2192" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__bento-card", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-edu__bento-lbl", children: "School Education" }),
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-edu__bento-card-title", children: "DIKSHA Digital Infrastructure" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-edu__bento-desc", children: "National digital infrastructure for teachers, hosting rich interactive learning content in multiple languages." }),
+          /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__bento-link", onClick: (e) => {
+            e.preventDefault();
+            alert("Redirecting to DIKSHA digital page...");
+          }, children: "Access Study Material \u2192" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__bento-card", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-edu__bento-lbl", children: "Student Welfare" }),
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-edu__bento-card-title", children: "National Scholarship Portal" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-edu__bento-desc", children: "Single unified solution for student registration, scheme eligibility checks, processing, and direct benefit payout." }),
+          /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__bento-link", onClick: (e) => {
+            e.preventDefault();
+            alert("Opening NSP Scholarship portal...");
+          }, children: "Check Scheme Status \u2192" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__bento-card", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-edu__bento-lbl", children: "Data & Reports" }),
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-edu__bento-card-title", children: "AISHE Portal" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-edu__bento-desc", children: "All India Survey on Higher Education. Collects statistics on higher education institutions to formulate policy parameters." }),
+          /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-edu__bento-link", onClick: (e) => {
+            e.preventDefault();
+            alert("Opening AISHE report page...");
+          }, children: "View Census Surveys \u2192" })
+        ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "nir-t-edu__updates-section", children: /* @__PURE__ */ jsx("div", { className: "nir-t-edu__updates-inner", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__updates-layout", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__news-column", children: [
+        /* @__PURE__ */ jsxs("h3", { className: "nir-t-edu__section-title", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-edu__section-indicator" }),
+          "Announcements & Notifications"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__tabs-bar", role: "tablist", "aria-label": "Announcements categories", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": newsCategory === "all",
+              className: `nir-t-edu__tab-trigger ${newsCategory === "all" ? "nir-t-edu__tab-trigger--active" : ""}`,
+              onClick: () => setNewsCategory("all"),
+              children: "All News"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": newsCategory === "announcements",
+              className: `nir-t-edu__tab-trigger ${newsCategory === "announcements" ? "nir-t-edu__tab-trigger--active" : ""}`,
+              onClick: () => setNewsCategory("announcements"),
+              children: "Announcements"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": newsCategory === "school",
+              className: `nir-t-edu__tab-trigger ${newsCategory === "school" ? "nir-t-edu__tab-trigger--active" : ""}`,
+              onClick: () => setNewsCategory("school"),
+              children: "School Education"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": newsCategory === "higher",
+              className: `nir-t-edu__tab-trigger ${newsCategory === "higher" ? "nir-t-edu__tab-trigger--active" : ""}`,
+              onClick: () => setNewsCategory("higher"),
+              children: "Higher Education"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: "nir-t-edu__search-box-row", children: /* @__PURE__ */ jsx(
+          Input,
+          {
+            label: "Search Announcements",
+            placeholder: "Filter by keyword...",
+            value: newsQuery,
+            onChange: (e) => setNewsQuery(e.target.value),
+            size: "sm",
+            fullWidth: true
+          }
+        ) }),
+        /* @__PURE__ */ jsx("div", { className: "nir-t-edu__updates-list", children: filteredUpdates.length > 0 ? filteredUpdates.map((item) => /* @__PURE__ */ jsxs("article", { className: "nir-t-edu__update-card", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__update-meta", children: [
+            /* @__PURE__ */ jsx("span", { className: "nir-t-edu__update-date", children: item.date }),
+            /* @__PURE__ */ jsx("span", { className: "nir-t-edu__update-badge", children: item.label }),
+            item.isNew && /* @__PURE__ */ jsx("span", { className: "nir-t-edu__new-tag", children: "NEW" })
+          ] }),
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-edu__update-title", children: /* @__PURE__ */ jsx("a", { href: item.link, onClick: (e) => {
+            e.preventDefault();
+            alert(`Redirecting to document download for: ${item.title}`);
+          }, children: item.title }) })
+        ] }, item.id)) : /* @__PURE__ */ jsx("p", { className: "nir-t-edu__empty-message", children: "No matches found for your filter criteria." }) })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__media-column", children: [
+        /* @__PURE__ */ jsxs("h3", { className: "nir-t-edu__section-title", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-edu__section-indicator" }),
+          "Ministry Media Corner"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__tabs-bar", role: "tablist", "aria-label": "Media Corner Switcher", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": galleryTab === "video",
+              className: `nir-t-edu__tab-trigger ${galleryTab === "video" ? "nir-t-edu__tab-trigger--active" : ""}`,
+              onClick: () => setGalleryTab("video"),
+              children: "Video Address"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": galleryTab === "photos",
+              className: `nir-t-edu__tab-trigger ${galleryTab === "photos" ? "nir-t-edu__tab-trigger--active" : ""}`,
+              onClick: () => setGalleryTab("photos"),
+              children: "Recent Events Photo Grid"
+            }
+          )
+        ] }),
+        galleryTab === "video" ? /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__video-card", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__player-container", children: [
+            /* @__PURE__ */ jsx(
+              "img",
+              {
+                src: "/assets/education/video-thumbnail.png",
+                alt: "Ministry conference video address preview",
+                className: "nir-t-edu__video-thumb"
+              }
+            ),
+            !isVideoPlaying ? /* @__PURE__ */ jsx(
+              "button",
+              {
+                className: "nir-t-edu__play-btn",
+                onClick: () => setIsVideoPlaying(true),
+                "aria-label": "Play video address",
+                children: /* @__PURE__ */ jsx("svg", { className: "nir-t-edu__play-icon", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M8 5v14l11-7z" }) })
+              }
+            ) : /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__player-overlay", children: [
+              /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__video-active-sign", children: [
+                /* @__PURE__ */ jsx("span", { className: "nir-t-edu__live-pulse" }),
+                /* @__PURE__ */ jsx("span", { children: "PLAYING MOE CONCLAVE VIDEO" })
+              ] }),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: "nir-t-edu__pause-btn",
+                  onClick: () => setIsVideoPlaying(false),
+                  "aria-label": "Pause video address",
+                  children: /* @__PURE__ */ jsx("svg", { className: "nir-t-edu__pause-icon", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M6 19h4V5H6v14zm8-14v14h4V5h-4z" }) })
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__player-controls", children: [
+            /* @__PURE__ */ jsxs("span", { className: "nir-t-edu__player-time", children: [
+              isVideoPlaying ? `00:${videoProgress.toString().padStart(2, "0")}` : "00:00",
+              " / 01:25"
+            ] }),
+            /* @__PURE__ */ jsx("div", { className: "nir-t-edu__progress-bg", children: /* @__PURE__ */ jsx(
+              "div",
+              {
+                className: "nir-t-edu__progress-fill",
+                style: { width: `${isVideoPlaying ? videoProgress : 0}%` }
+              }
+            ) })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__video-info", children: [
+            /* @__PURE__ */ jsx("h4", { className: "nir-t-edu__video-title", children: "National Education Summit: Digital Integration" }),
+            /* @__PURE__ */ jsx("p", { className: "nir-t-edu__video-desc-txt", children: "Address by the Union Cabinet Minister on the adoption of high-tech digital classrooms and rural connectivity." })
+          ] })
+        ] }) : /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__photo-grid", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__photo-card", children: [
+            /* @__PURE__ */ jsx("img", { src: "/assets/education/banner-swayam.png", alt: "Students in Library" }),
+            /* @__PURE__ */ jsx("span", { className: "nir-t-edu__photo-label", children: "Digital Campuses initiative" })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__photo-card", children: [
+            /* @__PURE__ */ jsx("img", { src: "/assets/education/banner-nep.png", alt: "Classroom learning" }),
+            /* @__PURE__ */ jsx("span", { className: "nir-t-edu__photo-label", children: "NEP 2020 rural models" })
+          ] })
+        ] })
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ jsx("footer", { className: "nir-t-edu__footer", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__footer-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__footer-grid", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-edu__footer-title", children: "Ministry Profile" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-edu__footer-about", children: "The Ministry of Education regulates, finances, and builds educational infrastructure across primary, secondary, and higher educational institutions in India." })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-edu__footer-title", children: "Higher Education Portals" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-edu__footer-links", children: [
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "UGC Website" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "AICTE Portal" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "SWAYAM Online learning" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "AISHE statistics" }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-edu__footer-title", children: "Schooling Programs" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-edu__footer-links", children: [
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "DIKSHA framework" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "PM SHRI school models" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "NIPUN Bharat guidelines" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "National Teacher awards" }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-edu__footer-title", children: "Support Desk" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-edu__footer-links", children: [
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "National Toll-Free:" }),
+              " 1800-116-200"
+            ] }),
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "Scholarship Desk:" }),
+              " 0120-6619540"
+            ] }),
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "Email Helpdesk:" }),
+              " support-moe@gov.in"
+            ] })
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__footer-meta", children: [
+        /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("span", { children: "\xA9 2026 Ministry of Education, Government of India. All Rights Reserved." }) }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-edu__footer-compliance", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-edu__compliance-badge", children: "GIGW 3.0 COMPLIANT" }),
+          /* @__PURE__ */ jsx("span", { className: "nir-t-edu__compliance-badge", children: "WCAG AAA ACCESSIBILITY" }),
+          /* @__PURE__ */ jsx("a", { href: "#", style: { color: "rgba(255,255,255,0.7)", marginLeft: "16px" }, onClick: (e) => {
+            e.preventDefault();
+            alert("Website Policies loaded.");
+          }, children: "Website Policies" })
+        ] })
+      ] })
+    ] }) })
+  ] });
+}
+function EducationTemplate(props) {
+  const [containerRef, setContainerRef] = useState(null);
+  return /* @__PURE__ */ jsx("div", { ref: setContainerRef, className: "nir-t-edu-wrapper", style: { width: "100%" }, children: containerRef && /* @__PURE__ */ jsx(NirmanProvider, { defaultBrand: "goi", defaultTheme: "light", rootElement: containerRef, children: /* @__PURE__ */ jsx(EducationPortalInner, { ...props }) }) });
+}
+var KeralaEmblem = () => /* @__PURE__ */ jsxs("svg", { className: "nir-t-kl__emblem", viewBox: "0 0 100 100", fill: "currentColor", "aria-hidden": "true", children: [
+  /* @__PURE__ */ jsx("circle", { cx: "50", cy: "50", r: "45", stroke: "currentColor", strokeWidth: "2", fill: "none" }),
+  /* @__PURE__ */ jsx("path", { d: "M22 65 C22 55, 30 45, 40 45 C42 45, 44 46, 44 48 C44 52, 34 54, 34 65 L22 65 Z" }),
+  /* @__PURE__ */ jsx("path", { d: "M78 65 C78 55, 70 45, 60 45 C58 45, 56 46, 56 48 C56 52, 66 54, 66 65 L78 65 Z" }),
+  /* @__PURE__ */ jsx("path", { d: "M46 55 C46 52, 48 50, 50 50 C52 50, 54 52, 54 55 C54 60, 46 60, 46 55 Z" }),
+  /* @__PURE__ */ jsx("path", { d: "M42 62 L58 62 L55 70 L45 70 Z" }),
+  /* @__PURE__ */ jsx("path", { d: "M40 75 L60 75 L58 80 L42 80 Z" })
+] });
+function KeralaPortalInner({ title }) {
+  const { theme, setTheme, density, setDensity } = useNirman();
+  const [textSize, setTextSize] = useState("normal");
+  const [lang, setLang] = useState("ml");
+  const [activeSlide, setActiveSlide] = useState(0);
+  const slides = useMemo(() => [
+    {
+      id: 0,
+      image: "/assets/kerala/banner-services.png",
+      title: "e-Sevanam: Single Window Service Portal",
+      tagline: "Access over 900+ citizen services online. Apply for certificates, make utility payments, and track applications from Akshaya Centers.",
+      cta1: "Login to e-Sevanam",
+      cta2: "Find Akshaya Center"
+    },
+    {
+      id: 1,
+      image: "/assets/kerala/banner-tourism.png",
+      title: "Kerala Tourism: God's Own Country",
+      tagline: "Experience the pristine beaches, serene backwaters, and rich heritage of Kerala. Explore destination guidelines for 2026.",
+      cta1: "Plan Your Trip",
+      cta2: "Watch Virtual Tour"
+    }
+  ], []);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 6500);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+  const [serviceQuery, setServiceQuery] = useState("");
+  const services = useMemo(() => [
+    { id: "s1", icon: "\u{1F4DD}", name: "Income Certificate", dept: "Revenue" },
+    { id: "s2", icon: "\u{1F3E0}", name: "Building Permit", dept: "LSGD (Local Bodies)" },
+    { id: "s3", icon: "\u{1F4BC}", name: "Panchayat License", dept: "Panchayat" },
+    { id: "s4", icon: "\u{1F464}", name: "One Time Registration", dept: "KPSC" },
+    { id: "s5", icon: "\u{1F476}", name: "Birth & Death Registry", dept: "Health" },
+    { id: "s6", icon: "\u26A1", name: "KSEB Electricity Bills", dept: "KSEB Power" },
+    { id: "s7", icon: "\u{1F6B0}", name: "KWA Water Bill Payment", dept: "Water Authority" },
+    { id: "s8", icon: "\u{1F69C}", name: "Land Tax (e-Land)", dept: "Revenue" }
+  ], []);
+  const filteredServices = useMemo(() => {
+    return services.filter((s) => s.name.toLowerCase().includes(serviceQuery.toLowerCase()) || s.dept.toLowerCase().includes(serviceQuery.toLowerCase()));
+  }, [services, serviceQuery]);
+  const [goCategory, setGoCategory] = useState("all");
+  const [goQuery, setGoQuery] = useState("");
+  const governmentOrders = useMemo(() => [
+    {
+      id: "go-1",
+      date: "14 Jul 2026",
+      number: "G.O.(P) No. 42/2026/GAD",
+      category: "gad",
+      label: "Gen Administration",
+      title: "Declaration of public holidays in the state of Kerala for the calendar year 2027.",
+      isNew: true
+    },
+    {
+      id: "go-2",
+      date: "12 Jul 2026",
+      number: "G.O.(Rt) No. 1024/2026/Fin",
+      category: "finance",
+      label: "Finance Department",
+      title: "Sanctioning of funds for modernizing digital infrastructure in Grama Panchayats.",
+      isNew: true
+    },
+    {
+      id: "go-3",
+      date: "09 Jul 2026",
+      number: "G.O.(Rt) No. 784/2026/HWD",
+      category: "health",
+      label: "Health & Family Welfare",
+      title: "Guidelines on deployment of mobile medical teams under the e-Health mission.",
+      isNew: false
+    },
+    {
+      id: "go-4",
+      date: "06 Jul 2026",
+      number: "G.O.(P) No. 39/2026/Fin",
+      category: "finance",
+      label: "Finance Department",
+      title: "Revision of interest rates on treasury savings bank accounts and fixed deposits.",
+      isNew: false
+    },
+    {
+      id: "go-5",
+      date: "28 Jun 2026",
+      number: "G.O.(Rt) No. 642/2026/GAD",
+      category: "gad",
+      label: "Gen Administration",
+      title: "Reconstitution of administrative panels for local self government development projects.",
+      isNew: false
+    }
+  ], []);
+  const filteredGOs = useMemo(() => {
+    return governmentOrders.filter((go) => {
+      const matchesCategory = goCategory === "all" || go.category === goCategory;
+      const matchesSearch = go.title.toLowerCase().includes(goQuery.toLowerCase()) || go.number.toLowerCase().includes(goQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [governmentOrders, goCategory, goQuery]);
+  const [galleryTab, setGalleryTab] = useState("video");
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(15);
+  useEffect(() => {
+    let playTimer;
+    if (isVideoPlaying) {
+      playTimer = setInterval(() => {
+        setVideoProgress((prev) => prev >= 100 ? 0 : prev + 1);
+      }, 600);
+    }
+    return () => clearInterval(playTimer);
+  }, [isVideoPlaying]);
+  const textScaleClass = textSize === "large" ? "nir-t-kl--text-lg" : textSize === "largest" ? "nir-t-kl--text-xl" : "";
+  return /* @__PURE__ */ jsxs("div", { className: `nir-t-kl ${textScaleClass}`, lang, children: [
+    /* @__PURE__ */ jsx("div", { className: "nir-t-kl__top-bar", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__top-bar-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__gov-identity", children: [
+        /* @__PURE__ */ jsx("span", { className: "nir-t-kl__flag-dot" }),
+        /* @__PURE__ */ jsx("span", { children: "\u0D15\u0D47\u0D30\u0D33 \u0D38\u0D7C\u0D15\u0D4D\u0D15\u0D3E\u0D7C | GOVERNMENT OF KERALA" })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__top-actions", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__a11y-controls", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-kl__a11y-btn ${textSize === "normal" ? "nir-t-kl__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("normal"),
+              title: "Normal text size",
+              "aria-label": "Normal text size",
+              children: "A"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-kl__a11y-btn ${textSize === "large" ? "nir-t-kl__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("large"),
+              title: "Large text size",
+              "aria-label": "Large text size",
+              children: "A+"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-kl__a11y-btn ${textSize === "largest" ? "nir-t-kl__a11y-btn--active" : ""}`,
+              onClick: () => setTextSize("largest"),
+              title: "Extra large text size",
+              "aria-label": "Extra large text size",
+              children: "A++"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-kl__a11y-btn ${theme === "light" ? "nir-t-kl__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("light"),
+              title: "Light Theme",
+              children: "Light"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-kl__a11y-btn ${theme === "dark" ? "nir-t-kl__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("dark"),
+              title: "Dark Theme",
+              children: "Dark"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: `nir-t-kl__a11y-btn ${theme === "high-contrast" ? "nir-t-kl__a11y-btn--active" : ""}`,
+              onClick: () => setTheme("high-contrast"),
+              title: "High Contrast Theme",
+              children: "Contrast"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: "nir-t-kl__lang-dropdown", children: /* @__PURE__ */ jsx(
+          Dropdown,
+          {
+            label: "Language Select",
+            placeholder: "Select Language",
+            options: [
+              { value: "ml", label: "\u0D2E\u0D32\u0D2F\u0D3E\u0D33\u0D02 (Malayalam)" },
+              { value: "en", label: "English" }
+            ],
+            value: lang,
+            onChange: (val) => setLang(val),
+            size: "sm"
+          }
+        ) })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx("header", { className: "nir-t-kl__header", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__header-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__logo-block", children: [
+        /* @__PURE__ */ jsx(KeralaEmblem, {}),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__title-group", children: [
+          /* @__PURE__ */ jsx("h1", { className: "nir-t-kl__org-hi", children: "\u0D15\u0D47\u0D30\u0D33 \u0D38\u0D7C\u0D15\u0D4D\u0D15\u0D3E\u0D7C" }),
+          /* @__PURE__ */ jsx("h2", { className: "nir-t-kl__org-en", children: "Government of Kerala" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-kl__org-tagline", children: "Official State Portal \u2022 Nirmaan UI State Theme" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("span", { className: "nir-t-kl__portal-badge", children: "e-Sevanam Certified" }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("nav", { className: "nir-t-kl__nav", "aria-label": "Primary Portal Navigation", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__nav-inner", children: [
+      /* @__PURE__ */ jsxs("ul", { className: "nir-t-kl__nav-list", children: [
+        /* @__PURE__ */ jsx("li", { className: "nir-t-kl__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-kl__nav-link nir-t-kl__nav-link--active", children: "Home" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-kl__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-kl__nav-link", children: "About Kerala" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-kl__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-kl__nav-link", children: "Departments" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-kl__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-kl__nav-link", children: "Government Orders (GOs)" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-kl__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-kl__nav-link", children: "Citizen Services" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-kl__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-kl__nav-link", children: "Media Center" }) }),
+        /* @__PURE__ */ jsx("li", { className: "nir-t-kl__nav-item", children: /* @__PURE__ */ jsx("a", { href: "#", className: "nir-t-kl__nav-link", children: "Contact" }) })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: "nir-t-kl__nav-actions", children: /* @__PURE__ */ jsx(
+        Toggle,
+        {
+          label: "Compact Density",
+          checked: density === "compact",
+          onChange: (e) => setDensity(e.target.checked ? "compact" : "default")
+        }
+      ) })
+    ] }) }),
+    /* @__PURE__ */ jsxs("section", { className: "nir-t-kl__carousel", "aria-label": "State Highlights Carousel", children: [
+      /* @__PURE__ */ jsx("div", { className: "nir-t-kl__carousel-wrapper", children: slides.map((slide, idx) => /* @__PURE__ */ jsx(
+        "div",
+        {
+          className: `nir-t-kl__carousel-slide ${idx === activeSlide ? "nir-t-kl__carousel-slide--active" : ""}`,
+          style: { backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.65)), url(${slide.image})` },
+          children: /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__carousel-content", children: [
+            /* @__PURE__ */ jsx("h3", { className: "nir-t-kl__carousel-title", children: slide.title }),
+            /* @__PURE__ */ jsx("p", { className: "nir-t-kl__carousel-tagline", children: slide.tagline }),
+            /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__carousel-actions", children: [
+              /* @__PURE__ */ jsx(Button, { variant: "primary", size: "lg", onClick: () => alert(`Redirecting to: ${slide.title}`), children: slide.cta1 }),
+              /* @__PURE__ */ jsx(Button, { variant: "secondary", size: "lg", style: { color: "#ffffff", borderColor: "#ffffff" }, onClick: () => alert("Launching details..."), children: slide.cta2 })
+            ] })
+          ] })
+        },
+        slide.id
+      )) }),
+      /* @__PURE__ */ jsx("div", { className: "nir-t-kl__carousel-indicators", children: slides.map((_, idx) => /* @__PURE__ */ jsx(
+        "button",
+        {
+          className: `nir-t-kl__carousel-dot ${idx === activeSlide ? "nir-t-kl__carousel-dot--active" : ""}`,
+          onClick: () => setActiveSlide(idx),
+          "aria-label": `Go to slide ${idx + 1}`
+        },
+        idx
+      )) })
+    ] }),
+    /* @__PURE__ */ jsx("section", { className: "nir-t-kl__services-section", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__services-inner", children: [
+      /* @__PURE__ */ jsxs("h3", { className: "nir-t-kl__section-title", children: [
+        /* @__PURE__ */ jsx("span", { className: "nir-t-kl__section-indicator" }),
+        "e-Sevanam Citizen Services Finder"
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: "nir-t-kl__services-search-row", children: /* @__PURE__ */ jsx(
+        Input,
+        {
+          label: "Search Services",
+          placeholder: "Search by certificate name or department (e.g. Income, Revenue, KSEB)...",
+          value: serviceQuery,
+          onChange: (e) => setServiceQuery(e.target.value),
+          fullWidth: true
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: "nir-t-kl__services-grid", children: filteredServices.length > 0 ? filteredServices.map((service) => /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__service-card", onClick: () => alert(`Redirecting to e-Sevanam portal for: ${service.name}`), children: [
+        /* @__PURE__ */ jsx("div", { className: "nir-t-kl__service-icon", children: service.icon }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__service-info", children: [
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-kl__service-title", children: service.name }),
+          /* @__PURE__ */ jsxs("span", { className: "nir-t-kl__service-dept", children: [
+            service.dept,
+            " Department"
+          ] })
+        ] })
+      ] }, service.id)) : /* @__PURE__ */ jsx("p", { className: "nir-t-kl__empty-message", children: "No services found matching your keyword. Please try a different query." }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("section", { className: "nir-t-kl__updates-section", children: /* @__PURE__ */ jsx("div", { className: "nir-t-kl__updates-inner", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__updates-layout", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__orders-column", children: [
+        /* @__PURE__ */ jsxs("h3", { className: "nir-t-kl__section-title", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-kl__section-indicator" }),
+          "Latest Government Orders & Circulars"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__tabs-bar", role: "tablist", "aria-label": "GO categories", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": goCategory === "all",
+              className: `nir-t-kl__tab-trigger ${goCategory === "all" ? "nir-t-kl__tab-trigger--active" : ""}`,
+              onClick: () => setGoCategory("all"),
+              children: "All GOs"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": goCategory === "gad",
+              className: `nir-t-kl__tab-trigger ${goCategory === "gad" ? "nir-t-kl__tab-trigger--active" : ""}`,
+              onClick: () => setGoCategory("gad"),
+              children: "General Administration"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": goCategory === "finance",
+              className: `nir-t-kl__tab-trigger ${goCategory === "finance" ? "nir-t-kl__tab-trigger--active" : ""}`,
+              onClick: () => setGoCategory("finance"),
+              children: "Finance"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": goCategory === "health",
+              className: `nir-t-kl__tab-trigger ${goCategory === "health" ? "nir-t-kl__tab-trigger--active" : ""}`,
+              onClick: () => setGoCategory("health"),
+              children: "Health"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: "nir-t-kl__search-box-row", children: /* @__PURE__ */ jsx(
+          Input,
+          {
+            label: "Search Government Orders",
+            placeholder: "Filter by G.O. number or title keyword...",
+            value: goQuery,
+            onChange: (e) => setGoQuery(e.target.value),
+            size: "sm",
+            fullWidth: true
+          }
+        ) }),
+        /* @__PURE__ */ jsx("div", { className: "nir-t-kl__orders-list", children: filteredGOs.length > 0 ? filteredGOs.map((go) => /* @__PURE__ */ jsxs("article", { className: "nir-t-kl__order-card", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__order-meta", children: [
+            /* @__PURE__ */ jsx("span", { className: "nir-t-kl__order-date", children: go.date }),
+            /* @__PURE__ */ jsx("span", { className: "nir-t-kl__order-badge", children: go.label }),
+            go.isNew && /* @__PURE__ */ jsx("span", { className: "nir-t-kl__new-tag", children: "NEW" })
+          ] }),
+          /* @__PURE__ */ jsx("h4", { className: "nir-t-kl__order-title", children: /* @__PURE__ */ jsx("a", { href: "#", onClick: (e) => {
+            e.preventDefault();
+            alert(`Downloading G.O. PDF: ${go.number}`);
+          }, children: go.title }) }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__order-footer", children: [
+            /* @__PURE__ */ jsxs("span", { children: [
+              "Paper ID: ",
+              go.number
+            ] }),
+            /* @__PURE__ */ jsx("button", { className: "nir-t-kl__order-dl-btn", onClick: () => alert(`Downloading: ${go.number}`), children: "Download (PDF)" })
+          ] })
+        ] }, go.id)) : /* @__PURE__ */ jsx("p", { className: "nir-t-kl__empty-message", children: "No government orders match your filter criteria." }) })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__media-column", children: [
+        /* @__PURE__ */ jsxs("h3", { className: "nir-t-kl__section-title", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-kl__section-indicator" }),
+          "State Media Desk"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__tabs-bar", role: "tablist", "aria-label": "Media tab switcher", children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": galleryTab === "video",
+              className: `nir-t-kl__tab-trigger ${galleryTab === "video" ? "nir-t-kl__tab-trigger--active" : ""}`,
+              onClick: () => setGalleryTab("video"),
+              children: "Conclave Video"
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              role: "tab",
+              "aria-selected": galleryTab === "photos",
+              className: `nir-t-kl__tab-trigger ${galleryTab === "photos" ? "nir-t-kl__tab-trigger--active" : ""}`,
+              onClick: () => setGalleryTab("photos"),
+              children: "Scenic Photo Gallery"
+            }
+          )
+        ] }),
+        galleryTab === "video" ? /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__video-card", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__player-container", children: [
+            /* @__PURE__ */ jsx(
+              "img",
+              {
+                src: "/assets/kerala/video-thumbnail.png",
+                alt: "Kerala conclave video thumbnail",
+                className: "nir-t-kl__video-thumb"
+              }
+            ),
+            !isVideoPlaying ? /* @__PURE__ */ jsx(
+              "button",
+              {
+                className: "nir-t-kl__play-btn",
+                onClick: () => setIsVideoPlaying(true),
+                "aria-label": "Play conclave presentation",
+                children: /* @__PURE__ */ jsx("svg", { className: "nir-t-kl__play-icon", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M8 5v14l11-7z" }) })
+              }
+            ) : /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__player-overlay", children: [
+              /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__video-active-sign", children: [
+                /* @__PURE__ */ jsx("span", { className: "nir-t-kl__live-pulse" }),
+                /* @__PURE__ */ jsx("span", { children: "PLAYING KERALA CONCLAVE" })
+              ] }),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: "nir-t-kl__pause-btn",
+                  onClick: () => setIsVideoPlaying(false),
+                  "aria-label": "Pause presentation",
+                  children: /* @__PURE__ */ jsx("svg", { className: "nir-t-kl__pause-icon", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M6 19h4V5H6v14zm8-14v14h4V5h-4z" }) })
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__player-controls", children: [
+            /* @__PURE__ */ jsxs("span", { className: "nir-t-kl__player-time", children: [
+              isVideoPlaying ? `00:${videoProgress.toString().padStart(2, "0")}` : "00:00",
+              " / 01:40"
+            ] }),
+            /* @__PURE__ */ jsx("div", { className: "nir-t-kl__progress-bg", children: /* @__PURE__ */ jsx(
+              "div",
+              {
+                className: "nir-t-kl__progress-fill",
+                style: { width: `${isVideoPlaying ? videoProgress : 0}%` }
+              }
+            ) })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__video-info", children: [
+            /* @__PURE__ */ jsx("h4", { className: "nir-t-kl__video-title", children: "Kerala Developmental Conclave: Clean Energy" }),
+            /* @__PURE__ */ jsx("p", { className: "nir-t-kl__video-desc-txt", children: "Highlights of state initiatives targeting solar grids, wind farming, and high-speed rural fiber networks." })
+          ] })
+        ] }) : /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__photo-grid", children: [
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__photo-card", children: [
+            /* @__PURE__ */ jsx("img", { src: "/assets/kerala/banner-tourism.png", alt: "Kerala Houseboat sailing" }),
+            /* @__PURE__ */ jsx("span", { className: "nir-t-kl__photo-label", children: "Alappuzha Backwaters Cruise" })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__photo-card", children: [
+            /* @__PURE__ */ jsx("img", { src: "/assets/kerala/banner-services.png", alt: "Citizen Services Portal map" }),
+            /* @__PURE__ */ jsx("span", { className: "nir-t-kl__photo-label", children: "e-Sevanam digital dashboard" })
+          ] })
+        ] })
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ jsx("footer", { className: "nir-t-kl__footer", children: /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__footer-inner", children: [
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__footer-grid", children: [
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-kl__footer-title", children: "State Profile" }),
+          /* @__PURE__ */ jsx("p", { className: "nir-t-kl__footer-about", children: "The official state portal of the Government of Kerala. Providing transparent information, quick link access to public services, and official orders." })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-kl__footer-title", children: "Citizen Helpdesk" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-kl__footer-links", children: [
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "e-Sevanam Portal" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Akshaya Service Centers" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "CM Grievance Cell" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Utility bill gates" }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-kl__footer-title", children: "Departments" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-kl__footer-links", children: [
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Revenue & Land Records" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Health & Family Welfare" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "Local Self Government" }) }),
+            /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: "#", children: "General Administration" }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__footer-col", children: [
+          /* @__PURE__ */ jsx("h5", { className: "nir-t-kl__footer-title", children: "helplines" }),
+          /* @__PURE__ */ jsxs("ul", { className: "nir-t-kl__footer-links", children: [
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "Citizen Call Center:" }),
+              " 155300 (Toll-Free)"
+            ] }),
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "District Helpdesk:" }),
+              " 0471-2335522"
+            ] }),
+            /* @__PURE__ */ jsxs("li", { children: [
+              /* @__PURE__ */ jsx("span", { children: "Email Assistance:" }),
+              " stateportal.itsd@kerala.gov.in"
+            ] })
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__footer-meta", children: [
+        /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("span", { children: "\xA9 2026 Government of Kerala. Managed by IT Department & National Informatics Centre." }) }),
+        /* @__PURE__ */ jsxs("div", { className: "nir-t-kl__footer-compliance", children: [
+          /* @__PURE__ */ jsx("span", { className: "nir-t-kl__compliance-badge", children: "GIGW 3.0 COMPLIANT" }),
+          /* @__PURE__ */ jsx("span", { className: "nir-t-kl__compliance-badge", children: "WCAG AAA ACCESSIBILITY" }),
+          /* @__PURE__ */ jsx("a", { href: "#", style: { color: "rgba(255,255,255,0.7)", marginLeft: "16px" }, onClick: (e) => {
+            e.preventDefault();
+            alert("Website Policies loaded.");
+          }, children: "Website Policies" })
+        ] })
+      ] })
+    ] }) })
+  ] });
+}
+function KeralaTemplate(props) {
+  const [containerRef, setContainerRef] = useState(null);
+  return /* @__PURE__ */ jsx("div", { ref: setContainerRef, className: "nir-t-kl-wrapper", style: { width: "100%" }, children: containerRef && /* @__PURE__ */ jsx(NirmanProvider, { defaultBrand: "kl", defaultTheme: "light", rootElement: containerRef, children: /* @__PURE__ */ jsx(KeralaPortalInner, { ...props }) }) });
+}
 
-export { Autocomplete, Button, Checkbox, Dropdown, EmptyStateTemplate, Input, LoginTemplate, NirmanProvider, Radio, RadioGroup, SettingsTemplate, Toggle, useNirman };
+export { Autocomplete, Button, Checkbox, Dropdown, EducationTemplate, EmptyStateTemplate, Input, KeralaTemplate, LoginTemplate, NirmanProvider, PfrdaTemplate, Radio, RadioGroup, SettingsTemplate, Toggle, useNirman };
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map

@@ -1,0 +1,65 @@
+---
+title: Government of Kerala Portal Redesign
+description: A high-fidelity, GIGW 3.0 compliant State Government portal landing page built using the Nirmaan UI design system.
+---
+
+import { KeralaTemplate } from '@nirman/components';
+import Playground from '../../../components/Playground.astro';
+
+The `KeralaTemplate` is a complete, high-fidelity template showcasing a comprehensive redesign of the official **Government of Kerala** state portal. 
+
+It demonstrates how Nirmaan's multi-government token override system applies **State Government (KL)** branding (Forest Green and Gold) dynamically to interactive components.
+
+:::tip[Full-Screen Preview]
+To view this state government portal redesign full-screen without sidebars or frame restrictions:
+👉 **[Open Standalone Redesign in New Tab](/kerala-demo)**
+:::
+
+## 1. Interactive Preview
+
+This live preview showcases the fully responsive state portal. It includes an interactive **e-Sevanam Services Finder**, a **Searchable Government Orders (GOs) Desk**, a **Media Conclave Video simulation**, and support for dark mode / high contrast.
+
+<Playground align="start" bg="container">
+  <div style={{ width: '100%', margin: '0 auto', border: '1px solid var(--sl-color-hairline)', borderRadius: '12px', overflow: 'hidden' }}>
+    <KeralaTemplate client:load />
+  </div>
+</Playground>
+
+## 2. Core Redesign Accomplishments
+
+This template reimagines traditional state layouts using modern design system guidelines:
+
+- **WCAG 2.2 / GIGW 3.0 Compliance:** Interactive elements satisfy the 44×44px minimum touch target size. All text elements feature compliant contrast (≥ 4.5:1 ratio) for readability.
+- **State Government Brand:** Uses `data-brand="kl"` to resolve primary assets to State Forest Green (`#006B3F`) and accent assets to Gold (`#C5A600`).
+- **Interactive e-Sevanam Services Finder:** A keyword search block that dynamically filters a grid of citizen services (e.g. Income Certificate, Building Permit, KSEB Bill Payment).
+- **Simulated Video Player:** Built-in simulated player that lets users experience a developmental conclave address with progress-bar intervals and play/pause controls.
+- **Auto-Play Carousel Slider:** Showcases high-impact banners representing digital citizen services (e-Sevanam) and state tourism (God's Own Country).
+- **Local Accessibility Bar:** Users can scale text up to `A++` (1.25x scaling) and toggle contrast modes directly from the utility header.
+
+## 3. Developer Implementation
+
+To use this template in your state portal application, import it directly from the components package:
+
+```tsx
+import { KeralaTemplate } from '@nirman/components';
+
+function KeralaStatePage() {
+  return (
+    <KeralaTemplate />
+  );
+}
+
+export default KeralaStatePage;
+```
+
+## 4. Composition & API
+
+The template is fully constructed from modular **Layer 1** (Elements) and **Layer 2** (Providers) of the Nirmaan UI Component Library:
+
+| Component | Layer | Usage in Kerala Redesign |
+| :--- | :--- | :--- |
+| `NirmanProvider` | Layer 2 | Orchestrates theme, contrast, and density updates. |
+| `Button` | Layer 1 | Primary action CTAs for logging into e-Sevanam and trip planning. |
+| `Dropdown` | Layer 1 | Header language switcher resolving English and Malayalam. |
+| `Toggle` | Layer 1 | Switches density modes between Compact and Default. |
+| `Input` | Layer 1 | High-contrast search box for filtering citizen services and government orders. |
